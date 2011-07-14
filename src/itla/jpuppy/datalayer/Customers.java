@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 @Entity
-public class Clients implements Serializable {
+public class Customers implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
