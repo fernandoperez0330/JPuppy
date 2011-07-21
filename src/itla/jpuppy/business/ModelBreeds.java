@@ -1,47 +1,47 @@
 package itla.jpuppy.business;
 
-import itla.jpuppy.datalayer.Patients;
+import itla.jpuppy.datalayer.Breeds;
 import java.util.List;
 
-public class ModelPatients implements GeneralModel {
+public class ModelBreeds implements GeneralModel {
 
     private QueryManager queryManager;
 
-    public ModelPatients() {
+    public ModelBreeds() {
         queryManager = new QueryManager();
     }
 
-    private Patients searchPatient( String id ) {
+    private Breeds searchBreeds(int id) {
         //EntityManager entityManager=EntityManagerCreator.getInstanceEM();
         //EntityManager temp = entityManager.find( );
         //return temp;
         return null;
     }
 
-    public List<Patients> searchAllPatient(String name) {
-        //return queryManager.searchPatients(name);
+    public List<Breeds> searchAllBreeds(String name) {
+        //return queryManager.searchBreeds(name);
         return null;
     }
 
     @Override
     public boolean insertObject(Object object) {
-        //Patients g = ( Patients ) object
+        //Breeds g = ( Breeds ) object
         //queryManager.save( g )
         return true;
     }
 
     @Override
     public boolean updateObject(Object object) {
-        //Patients g = ( Patients ) object
+        //Breeds g = ( Breeds ) object
         //queryManager.update( g )
         return true;
     }
 
     @Override
     public boolean deleteObject(Object object) {
-        //Patients g = ( Patients )object
-        //Patients temp
-        //temp= this.serachPatients(g.getId());
+        //Breeds g = ( Breeds )object
+        //Breeds temp
+        //temp= this.serachBreeds(g.getId());
         //queryManager.deleteObject( temp )
         return true;
     }

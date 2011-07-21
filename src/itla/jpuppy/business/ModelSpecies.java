@@ -1,47 +1,47 @@
 package itla.jpuppy.business;
 
-import itla.jpuppy.datalayer.Patients;
+import itla.jpuppy.datalayer.Species;
 import java.util.List;
 
-public class ModelPatients implements GeneralModel {
+public class ModelSpecies implements GeneralModel {
 
     private QueryManager queryManager;
 
-    public ModelPatients() {
+    public ModelSpecies() {
         queryManager = new QueryManager();
     }
 
-    private Patients searchPatient( String id ) {
+    private Species searchSpecies(int id) {
         //EntityManager entityManager=EntityManagerCreator.getInstanceEM();
         //EntityManager temp = entityManager.find( );
         //return temp;
         return null;
     }
 
-    public List<Patients> searchAllPatient(String name) {
-        //return queryManager.searchPatients(name);
+    public List<Species> searchAllSpecies(String name) {
+        //return queryManager.searchSpecies(name);
         return null;
     }
 
     @Override
     public boolean insertObject(Object object) {
-        //Patients g = ( Patients ) object
+        //Species g = ( Species ) object
         //queryManager.save( g )
         return true;
     }
 
     @Override
     public boolean updateObject(Object object) {
-        //Patients g = ( Patients ) object
+        //Species g = ( Species ) object
         //queryManager.update( g )
         return true;
     }
 
     @Override
     public boolean deleteObject(Object object) {
-        //Patients g = ( Patients )object
-        //Patients temp
-        //temp= this.serachPatients(g.getId());
+        //Species g = ( Species )object
+        //Species temp
+        //temp= this.serachSpecies(g.getId());
         //queryManager.deleteObject( temp )
         return true;
     }
