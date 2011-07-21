@@ -18,7 +18,7 @@ public class ModelPatients implements GeneralModel {
         return null;
     }
 
-    public List<Patients> searchAllPatient(String name) {
+    public List<Patients> searchAllPatientByName(String name) {
         //return queryManager.searchPatients(name);
         return null;
     }

@@ -25,7 +25,7 @@ public class ModelCustomers implements GeneralModel{
          //return temp;
         return null;
     }
-     public List<Customers> searchAllCustomer( String name ){
+     public List<Customers> searchAllCustomerByName( String name ){
          //return queryManager.searchCustomer(name);
         return null;
      }

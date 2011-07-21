@@ -26,7 +26,7 @@ public class ModelUsers implements GeneralModel {
          //return temp;
         return null;
     }
-    public List<Users> searchAllUser( String name ){
+    public List<Users> searchAllUserByName( String name ){
         //return queryManager.searchUser(name);
         return null;
     }

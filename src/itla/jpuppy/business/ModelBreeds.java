@@ -18,7 +18,7 @@ public class ModelBreeds implements GeneralModel {
         return null;
     }
 
-    public List<Breeds> searchAllBreeds(String name) {
+    public List<Breeds> searchAllBreedsByName(String name) {
         //return queryManager.searchBreeds(name);
         return null;
     }
