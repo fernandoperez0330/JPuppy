@@ -3,11 +3,14 @@ package itla.jpuppy.datalayer;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
@@ -16,88 +19,83 @@ public class Customers implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @Column(length = 30, nullable = false)
-    private String nombre;
-    @Column(length = 30, nullable = false)
-    private String apellido;
+    private int customersId;
+    @Column(length = 30,nullable=false)
+    private String name;
+    @Column(length = 30,nullable=false)
+    private String lastname;
     @Column(length = 12)
-    private String telefono;
+    private String telephone;
     @Column(length = 12)
-    private String celular;
+    private String cellphone;
     @Column(length = 50)
-    private String direcion;
+    private String address;
     @Column(length = 20)
-    private String ciudad;
+    private String city;
     @Column(length = 40)
     private String mail;
     @Column(length = 255)
-    private String nota;
+    private String notes;
+    @Lob @Basic(fetch= FetchType.LAZY) 
+    private byte[] image;
     @OneToMany
-    private List<Patients> pacientes;
+    private List<Patients> patients;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechaRegistro;
+    private Date sysDate;
     @Column(nullable = false)
-    private boolean estado;
+    private boolean custormersState;
 
-    public String getApellido() {
-        return apellido;
+    public boolean isCustormersState() {
+        return custormersState;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setCustormersState(boolean custormersState) {
+        this.custormersState = custormersState;
     }
 
-    public String getCelular() {
-        return celular;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setCelular(String celular) {
-        this.celular = celular;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
-    public String getCiudad() {
-        return ciudad;
+    
+    public int getCustomersId() {
+        return customersId;
     }
 
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
+    public String getAddress() {
+        return address;
     }
 
-    public String getDirecion() {
-        return direcion;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public void setDirecion(String direcion) {
-        this.direcion = direcion;
+    public String getCellphone() {
+        return cellphone;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public String getCity() {
+        return city;
     }
 
-    public Date getFechaRegistro() {
-        return fechaRegistro;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
+    public String getLastname() {
+        return lastname;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public List<Patients> getPacientes() {
-        return pacientes;
-    }
-
-    public void setPacientes(List<Patients> pacientes) {
-        this.pacientes = pacientes;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getMail() {
@@ -108,29 +106,46 @@ public class Customers implements Serializable {
         this.mail = mail;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNota() {
-        return nota;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setNota(String nota) {
-        this.nota = nota;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public List<Patients> getPatients() {
+        return patients;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setPatients(List<Patients> patients) {
+        this.patients = patients;
     }
 
+    public Date getSysDate() {
+        return sysDate;
+    }
+
+    public void setSysDate(Date sysDate) {
+        this.sysDate = sysDate;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+    
+    
 }
 

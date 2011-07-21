@@ -4,82 +4,104 @@
  */
 package itla.jpuppy.datalayer;
 
-import java.awt.Image;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-public class Patients implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+public class Patients extends Breeds implements Serializable {
+    
+    @Column(length = 15, nullable=false, unique=true)
+    private String patientsId;
     @Column(length = 30, nullable=false)
-    private String nombre;
+    private String name;
     @ManyToOne
-    private Customers dueño;
-    //private Raza raza;
+    private Customers owner;
     @Column(length = 255)
-    private String notas;
+    private String notes;
     @Temporal(TemporalType.DATE)
-    private Date fechaNacimiento;
-    @Transient
-    private Image imagen;
+    private Date birthDate;
+    @Lob @Basic(fetch= FetchType.LAZY)
+    private byte[] image;
     @Temporal(TemporalType.DATE)
-    private Date ultimaVisita;
+    private Date lastVisit;
     @Transient
-    private String drUltimaVisita;//Dr en Medico.Class
+    private String doctorLastVisit;
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
+    public String getPatientsId() {
+        return patientsId;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setPatientsId(String patientsId) {
+        this.patientsId = patientsId;
+    }
+    
+    
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public int getId() {
-        return id;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+    
+    public String getDoctorLastVisit() {
+        return doctorLastVisit;
     }
 
-    public Image getImagen() {
-        return imagen;
+    public void setDoctorLastVisit(String doctorLastVisit) {
+        this.doctorLastVisit = doctorLastVisit;
     }
 
-    public void setImagen(Image imagen) {
-        this.imagen = imagen;
+    public byte[] getImage() {
+        return image;
     }
 
-    public String getNombre() {
-        return nombre;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public Date getLastVisit() {
+        return lastVisit;
     }
 
-    public String getNotas() {
-        return notas;
+    public void setLastVisit(Date lastVisit) {
+        this.lastVisit = lastVisit;
     }
 
-    public void setNotas(String notas) {
-        this.notas = notas;
+    public String getName() {
+        return name;
     }
 
-    /*public Raza getRaza() {
-        return raza;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setRaza(Raza raza) {
-        this.raza = raza;
-    }*/
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public Customers getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Customers owner) {
+        this.owner = owner;
+    }
+
+    /*
+     * 
+     */
 }

@@ -15,65 +15,66 @@ import javax.persistence.Id;
 public class Users implements Serializable {
     @Id 
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    private int userId;
     
     @Column(length=30,nullable=false)
-    private String nombre;
+    private String name;
     
     @Column(length=30,nullable=false)
-    private String apellido;
+    private String lastname;
     
     @Column(length=12)
-    private String telefono;
+    private String telephone;
     
     @Column(length=12)
-    private String celular;
+    private String cellphone;
     
     @Column(length=30,nullable=false)
-    private String tipoUsuario;
+    private String typeUser;
 
-    public String getApellido() {
-        return apellido;
+    public int getUserId() {
+        return userId;
+    }
+    
+    public String getCellphone() {
+        return cellphone;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone;
     }
 
-    public String getCelular() {
-        return celular;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setCelular(String celular) {
-        this.celular = celular;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public int getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public String getNombre() {
-        return nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public String getTypeUser() {
+        return typeUser;
     }
 
-    public String getTipoUsuario() {
-        return tipoUsuario;
+    public void setTypeUser(String typeUser) {
+        this.typeUser = typeUser;
     }
 
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
     
 }

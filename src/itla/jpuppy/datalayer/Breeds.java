@@ -2,44 +2,42 @@ package itla.jpuppy.datalayer;
 
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 
 @Entity
-public class Breeds implements Serializable{
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+public class Breeds extends Species implements Serializable{
     
-    @Column(length=30,nullable=false)
-    private String nombre;
+    @Column(length=30,nullable=false,unique=true)
+    private String breedsName;
     
-    @ManyToOne
-    private Species especie;
-
-    public Species getEspecie() {
-        return especie;
-    }
-
-    public void setEspecie(Species especie) {
-        this.especie = especie;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    private int height;
     
-    
+    private int width;
+
+    public String getBreedsName() {
+        return breedsName;
+    }
+
+    public void setBreedsName(String name) {
+        this.breedsName = name;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+      
 }
