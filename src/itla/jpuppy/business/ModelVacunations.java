@@ -8,6 +8,6 @@ package itla.jpuppy.business;
  *
  * @author Fernando
  */
-public class Vacunations {
+public class ModelVacunations {
     
 }
