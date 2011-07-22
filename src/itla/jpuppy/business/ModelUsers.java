@@ -2,11 +2,12 @@ package itla.jpuppy.business;
 
 import itla.jpuppy.datalayer.*;
 import java.util.List;
-
+import javax.persistence.EntityManager;
 
 public class ModelUsers implements GeneralModel {
 
     private QueryManager queryManager;
+    private Object g;
 
     public ModelUsers() {
 
@@ -21,37 +22,30 @@ public class ModelUsers implements GeneralModel {
     }
 
     private Users searchUser(int id) {
-        //EntityManager entityManager=EntityManagerCreator.getInstanceEM();
-        //EntityManager temp = entityManager.find( );
-         //return temp;
-        return null;
+        EntityManager entityManager = EntityManagerCreator.getInstanceEM();
+        Users temp = entityManager.find(Users.class, id);
+        return temp;
     }
-    public List<Users> searchAllUserByName( String name ){
-        //return queryManager.searchUser(name);
-        return null;
+
+    public List<Users> searchAllUserByName(String name) {
+        return queryManager.searchUser(name);
     }
 
     @Override
     public boolean deleteObject(Object object) {
-        return true;
-        //User g = ( Users ) object
-        //Users temp;
-        //temp= this.serachUser(g.getId);
-        //queryManager.deleteObject( temp )
+        Users g = (Users) object;
+        return queryManager.deleteObject(g);
 
     }
 
     @Override
     public boolean updateObject(Object object) {
-        //User g = ( Users ) object
-        //queryManager.update( user )
-        return true;
+        Users g = (Users) object;
+        return queryManager.updateObject(g);
     }
 
     @Override
     public boolean insertObject(Object object) {
-        //User g = ( Users ) object
-        //queryManager.save( g )
-        return true;
+        return queryManager.saveObject(g);
     }
 }

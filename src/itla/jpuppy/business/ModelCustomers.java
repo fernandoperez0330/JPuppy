@@ -1,58 +1,42 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package itla.jpuppy.business;
 
 import itla.jpuppy.datalayer.Customers;
 import java.util.List;
+import javax.persistence.EntityManager;
 
-/**
- *
- * @author Fernando
- */
-public class ModelCustomers implements GeneralModel{
+public class ModelCustomers implements GeneralModel {
 
     private QueryManager queryManager;
-    
+
     public ModelCustomers() {
         queryManager = new QueryManager();
     }
 
-     private Customers searchCustomer( int id) {
-        //EntityManager entityManager=EntityManagerCreator.getInstanceEM();
-        //EntityManager temp = entityManager.find( );
-         //return temp;
-        return null;
+    private Customers searchCustomer(int id) {
+        EntityManager entityManager = EntityManagerCreator.getInstanceEM();
+        Customers temp = entityManager.find(Customers.class, id);
+        return temp;
     }
-     public List<Customers> searchAllCustomerByName( String name ){
-         //return queryManager.searchCustomer(name);
-        return null;
-     }
-     
+
+    public List<Customers> searchAllCustomerByName(String name) {
+        return queryManager.searchCustomer(name);
+    }
+
     @Override
     public boolean insertObject(Object object) {
-        //Customer g = ( Customer ) object
-        //queryManager.save( g )
-        return true;
+        Customers g = ( Customers ) object;
+        return queryManager.saveObject( g );
     }
 
     @Override
     public boolean updateObject(Object object) {
-        //Customer g = ( Customer ) object
-        //queryManager.update( g )
-        return true;
+        Customers g = ( Customers ) object;
+        return queryManager.updateObject( g );
     }
 
     @Override
     public boolean deleteObject(Object object) {
-        //Customer g = ( Customer )object
-        //Customer temp
-        //temp= this.serachCustomer(g.getId());
-        //queryManager.deleteObject( temp )
-        return true;
+        Customers g = ( Customers )object;
+        return queryManager.deleteObject( g );
     }
-    
-    
-     
 }
