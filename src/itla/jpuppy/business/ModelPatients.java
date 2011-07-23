@@ -12,16 +12,27 @@ public class ModelPatients implements GeneralModel {
         queryManager = new QueryManager();
     }
 
-    private Patients searchPatient( String id ) {
-        EntityManager entityManager = EntityManagerCreator.getInstanceEM();
-        Patients temp = entityManager.find(Patients.class, id);
+    //Este metodo todavia no estas totalmente definido , se necesita especificar si id seria unico
+    
+    public Patients searchPatient( String patientsId ) {
+        
+        List<Patients> listPatients = queryManager.searchPatient(patientsId);
+        Patients temp =null;
+        for( Patients p : listPatients ){
+            if( p.getPatientsId().equals(patientsId))
+                temp = p;
+        }
         return temp;
     }
 
+    // retorna lista de patient para autocomplete
+    
     public List<Patients> searchAllPatientByName(String name) {
         return queryManager.searchPatient(name);
     }
 
+    //Metodos comunes a todos los modelos , se llama el correspondiente de  queryManager
+    
     @Override
     public boolean insertObject(Object object) {
         Patients g = ( Patients ) object;      

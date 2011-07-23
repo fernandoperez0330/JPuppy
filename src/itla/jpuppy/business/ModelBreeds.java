@@ -3,7 +3,7 @@ package itla.jpuppy.business;
 import itla.jpuppy.datalayer.Breeds;
 import java.util.List;
 
-//Incompleta
+
 public class ModelBreeds implements GeneralModel {
 
     private QueryManager queryManager;
@@ -12,17 +12,25 @@ public class ModelBreeds implements GeneralModel {
         queryManager = new QueryManager();
     }
 
-    private Breeds searchBreeds(int id) {
-        //EntityManager entityManager=EntityManagerCreator.getInstanceEM();
-        //EntityManager temp = entityManager.find( );
-        //return temp;
-        return null;
+    // Este metodo al igual que el de Patients no esta total definido , la misma situacion de patient
+   public Breeds searchBreeds( String breedsName ) {
+        List<Breeds> listBreeds = queryManager.searchBreeds( breedsName );
+        Breeds temp=null;
+        for( Breeds b : listBreeds ){
+            if( b.getBreedsName().equals(breedsName))
+                temp =b;
+        }
+        return temp;
     }
 
+   // retorna lista de patient para autocomplete
+   
     public List<Breeds> searchAllBreedsByName(String name) {
         return queryManager.searchBreeds(name);
     }
 
+    //Metodos comunes a todos los modelos , se llama el correspondiente de  queryManager
+    
     @Override
     public boolean insertObject(Object object) {
         Breeds g = (Breeds) object;

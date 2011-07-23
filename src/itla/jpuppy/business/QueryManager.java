@@ -46,6 +46,9 @@ public class QueryManager {
                     }
         return state;
     }
+    
+    //Metodos Disponibles para autocomplete en busqueda
+    
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     public List<Users> searchUser(String name) {
@@ -60,8 +63,8 @@ public class QueryManager {
     }
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
-    public List<Patients> searchPatient(String name) {
-         List<Patients> listPatients =  entityManager.createQuery("SELECT a FROM Patients a WHERE a.name LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
+    public List<Patients> searchPatient(String patientsId) {
+         List<Patients> listPatients =  entityManager.createQuery("SELECT a FROM Patients a WHERE a.patientsId LIKE :nameToFind").setParameter("nameToFind", patientsId).getResultList();
         return listPatients;
     }
 
