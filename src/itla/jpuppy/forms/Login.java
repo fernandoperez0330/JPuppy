@@ -1,5 +1,111 @@
 package itla.jpuppy.forms;
+import itla.jpuppy.controllers.ControllerUsers;
+import itla.jpuppy.utils.Background;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 public class Login {
+    private Background background;
+    private JLabel title;
+    private JLabel lbUserName;
+    private JLabel lbPassword;
+    public JTextField txtUsers;
+    public JTextField txtPassword;
+    public JButton btnEnter;
+    public JButton btnExit;
+    private JFrame fLogin;
+    private JLabel image;
+    private static Login login;
+    
+    public Login() {
+        
+        fLogin = new JFrame();
+        background = new Background("src/itla/jpuppy/resources/puppyPic.jpg");
+        background.setLayout(null);
+        //componentes
+        title = new JLabel("Sistema de Veterinaria JPuppy");
+        lbUserName= new JLabel("USUARIO");
+        lbPassword = new JLabel("CONTRASEÑA");
+        txtUsers= new JTextField("");
+        txtPassword= new JTextField();
+        btnEnter = new JButton("ENTRAR");
+        btnExit = new JButton("SALIR");
+        background.setSize(400, 200);
+        Font fuente= new Font("Monospaced", Font.BOLD, 22);
+        title.setFont(fuente);
+        image = new JLabel();
+
+        //Border donde va el logo
+        Border border = LineBorder.createGrayLineBorder();
+        image.setBorder(border);
+        
+        //seteo de posicion
+        image.setBounds(25, 70, 80, 80);
+        title.setBounds(30,18,500,30);
+        txtUsers.setBounds(210, 75, 150, 30);
+        txtPassword.setBounds(210, 120, 150, 30);
+        lbUserName.setBounds(120, 65, 60, 50);
+        lbPassword.setBounds(120, 110, 80, 50);
+        btnEnter.setBounds(165, 170, 100, 30);
+        btnExit.setBounds(260, 170, 100, 30);
+        btnEnter.setName("btnLogin");
+        btnExit.setName("btnExit");
+
+        //agregando los actionListener a los botones del login
+        btnEnter.addActionListener(new ControllerUsers());
+        btnExit.addActionListener(new ControllerUsers());
+        
+        //agregando los diferentes componentes al panel con imagen llamado background
+        background.add(title);
+        background.add(lbUserName);
+        background.add(lbPassword);
+        background.add(txtUsers);
+        background.add(txtPassword);
+        background.add(btnEnter);
+        background.add(btnExit);
+        background.add(image);
+        background.setBorder(new LineBorder(Color.red));
+        }
+
+        //metodo para mostrar el Login
+        public void showLogin(){
+        fLogin.getContentPane().add(background,"Center");
+        fLogin.add(background);
+        fLogin.setSize(450,230);
+        fLogin.setLocationRelativeTo(null);
+        fLogin.setUndecorated(true);
+        fLogin.setVisible(true);
+        }
+        //metodo para cerrar el login
+        public void closeLogin(){
+        fLogin.dispose();
+        }
+        //metodo para tener valor del JTextField Usuario
+        public String getTxtUsers() {
+        return txtUsers.getText();
+        }
+        //metodo para tener valor del JTextField de contraseña
+        public String getTxtPassword() {
+        return txtPassword.getText();
+        }
+
+        //metodo para obtener la instacia de Login
+        public synchronized static  Login getInstance() {
+        if (login == null) {
+            login = new Login();
+        }
+        return login;
+        }
+
+        
+
+        
+
     
 }
