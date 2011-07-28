@@ -10,6 +10,9 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -17,11 +20,12 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-public class Patients extends Breeds implements Serializable {
-    
-    @Column(length = 15, nullable=false, unique=true)
-    private String patientsId;
-    @Column(length = 30, nullable=false)
+public class Patients implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long patientsId;
+    @Column(length = 30, nullable = false)
     private String name;
     @ManyToOne
     private Customers owner;
@@ -29,22 +33,27 @@ public class Patients extends Breeds implements Serializable {
     private String notes;
     @Temporal(TemporalType.DATE)
     private Date birthDate;
-    @Lob @Basic(fetch= FetchType.LAZY)
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     private byte[] image;
     @Temporal(TemporalType.DATE)
     private Date lastVisit;
     @Transient
     private String doctorLastVisit;
 
-    public String getPatientsId() {
-        return patientsId;
+    public Patients() {
     }
 
-    public void setPatientsId(String patientsId) {
-        this.patientsId = patientsId;
+    public Patients(String name, Customers owner, String notes, Date birthDate, byte[] image, Date lastVisit, String doctorLastVisit) {
+        this.name = name;
+        this.owner = owner;
+        this.notes = notes;
+        this.birthDate = birthDate;
+        this.image = image;
+        this.lastVisit = lastVisit;
+        this.doctorLastVisit = doctorLastVisit;
     }
-    
-    
+
     public Date getBirthDate() {
         return birthDate;
     }
@@ -52,7 +61,7 @@ public class Patients extends Breeds implements Serializable {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
-    
+
     public String getDoctorLastVisit() {
         return doctorLastVisit;
     }
@@ -101,7 +110,13 @@ public class Patients extends Breeds implements Serializable {
         this.owner = owner;
     }
 
-    /*
-     * 
-     */
+    public long getPatientsId() {
+        return patientsId;
+    }
+
+    public void setPatientsId(long patientsId) {
+        this.patientsId = patientsId;
+    }
+    
+    
 }

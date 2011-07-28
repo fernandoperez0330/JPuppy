@@ -19,7 +19,7 @@ public class ModelPatients implements GeneralModel {
         List<Patients> listPatients = queryManager.searchPatient(patientsId);
         Patients temp =null;
         for( Patients p : listPatients ){
-            if( p.getPatientsId().equals(patientsId))
+            //if( p.getPatientsId().equals(patientsId)) //Aki Error
                 temp = p;
         }
         return temp;

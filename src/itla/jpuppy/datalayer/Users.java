@@ -13,29 +13,46 @@ import javax.persistence.Id;
 
 @Entity
 public class Users implements Serializable {
-    @Id 
-    @GeneratedValue(strategy= GenerationType.AUTO)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
-    
-    @Column(length=30,nullable=false)
+    @Column(length = 30)
+    private String username;
+    @Column(length = 30)
+    private String password;
+    @Column(length = 30, nullable = false)
     private String name;
-    
-    @Column(length=30,nullable=false)
+    @Column(length = 30, nullable = false)
     private String lastname;
-    
-    @Column(length=12)
+    @Column(length = 12)
     private String telephone;
-    
-    @Column(length=12)
+    @Column(length = 12)
     private String cellphone;
-    
-    @Column(length=30,nullable=false)
+    @Column(length = 30, nullable = false)
     private String typeUser;
 
-    public int getUserId() {
-        return userId;
+    public Users() {
     }
-    
+
+    public Users(String username,String name, String lastname, String password, String telephone, String cellphone, String typeUser) {
+        this.name = name;
+        this.lastname = lastname;
+        this.password = password;
+        this.telephone = telephone;
+        this.cellphone = cellphone;
+        this.typeUser = typeUser;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getCellphone() {
         return cellphone;
     }
@@ -60,6 +77,14 @@ public class Users implements Serializable {
         this.name = name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getTelephone() {
         return telephone;
     }
@@ -76,5 +101,11 @@ public class Users implements Serializable {
         this.typeUser = typeUser;
     }
 
-    
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }
