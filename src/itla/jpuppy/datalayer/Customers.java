@@ -20,9 +20,9 @@ public class Customers implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int customersId;
-    @Column(length = 30,nullable=false)
+    @Column(length = 30, nullable = false)
     private String name;
-    @Column(length = 30,nullable=false)
+    @Column(length = 30, nullable = false)
     private String lastname;
     @Column(length = 12)
     private String telephone;
@@ -36,7 +36,8 @@ public class Customers implements Serializable {
     private String mail;
     @Column(length = 255)
     private String notes;
-    @Lob @Basic(fetch= FetchType.LAZY) 
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     private byte[] image;
     @OneToMany
     private List<Patients> patients;
@@ -45,25 +46,22 @@ public class Customers implements Serializable {
     @Column(nullable = false)
     private boolean custormersState;
 
-    public boolean isCustormersState() {
-        return custormersState;
+    public Customers() {
     }
 
-    public void setCustormersState(boolean custormersState) {
-        this.custormersState = custormersState;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
+    public Customers(String name, String lastname, String telephone, String cellphone, String address, String city, String mail, String notes, byte[] image, List<Patients> patients, Date sysDate, boolean custormersState) {
+        this.name = name;
+        this.lastname = lastname;
+        this.telephone = telephone;
+        this.cellphone = cellphone;
+        this.address = address;
+        this.city = city;
+        this.mail = mail;
+        this.notes = notes;
         this.image = image;
-    }
-
-    
-    public int getCustomersId() {
-        return customersId;
+        this.patients = patients;
+        this.sysDate = sysDate;
+        this.custormersState = custormersState;
     }
 
     public String getAddress() {
@@ -88,6 +86,30 @@ public class Customers implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public int getCustomersId() {
+        return customersId;
+    }
+
+    public void setCustomersId(int customersId) {
+        this.customersId = customersId;
+    }
+
+    public boolean isCustormersState() {
+        return custormersState;
+    }
+
+    public void setCustormersState(boolean custormersState) {
+        this.custormersState = custormersState;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public String getLastname() {
@@ -145,7 +167,4 @@ public class Customers implements Serializable {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-    
-    
 }
-

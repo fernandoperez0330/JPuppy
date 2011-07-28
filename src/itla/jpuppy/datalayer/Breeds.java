@@ -3,40 +3,73 @@ package itla.jpuppy.datalayer;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Breeds extends Species implements Serializable{
-    
-    @Column(length=30,nullable=false,unique=true)
+public class Breeds implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long breedsId;
+    @Column(length = 30, nullable = false, unique = true)
     private String breedsName;
-    
-    private int height;
-    
-    private int width;
+    @ManyToOne
+    private Species specie;
+    private double height;
+    private double width;
+
+    public Breeds() {
+    }
+
+    public Breeds(String breedsName, Species specie, double height, double width) {
+        this.breedsName = breedsName;
+        this.specie = specie;
+        this.height = height;
+        this.width = width;
+    }
+
+    public long getBreedsId() {
+        return breedsId;
+    }
+
+    public void setBreedsId(long breedsId) {
+        this.breedsId = breedsId;
+    }
 
     public String getBreedsName() {
         return breedsName;
     }
 
-    public void setBreedsName(String name) {
-        this.breedsName = name;
+    public void setBreedsName(String breedsName) {
+        this.breedsName = breedsName;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
-    public int getWidth() {
+    public Species getSpecie() {
+        return specie;
+    }
+
+    public void setSpecie(Species specie) {
+        this.specie = specie;
+    }
+
+    public double getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(double width) {
         this.width = width;
     }
-      
+    
+    
 }
