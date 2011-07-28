@@ -55,8 +55,8 @@ public class Login implements FrameOption{
         lbPassword.setBounds(120, 110, 80, 50);
         btnEnter.setBounds(165, 170, 100, 30);
         btnExit.setBounds(260, 170, 100, 30);
-        btnEnter.setName("btnLogin");
-        btnExit.setName("btnExit");
+        btnEnter.setName("Login.btnLogin");
+        btnExit.setName("Login.btnExit");
         //instancia del Controlador
         ControllerUsers mainControl= new ControllerUsers(this);
         //agregando los actionListener a los botones del login
