@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-public class Login {
+public class Login implements FrameOption{
     private Background background;
     private JLabel title;
     private JLabel lbUserName;
@@ -56,10 +56,11 @@ public class Login {
         btnExit.setBounds(260, 170, 100, 30);
         btnEnter.setName("btnLogin");
         btnExit.setName("btnExit");
-
+        //instancia del Controlador
+        ControllerUsers mainControl= new ControllerUsers(this);
         //agregando los actionListener a los botones del login
-        btnEnter.addActionListener(new ControllerUsers());
-        btnExit.addActionListener(new ControllerUsers());
+        btnEnter.addActionListener(mainControl);
+        btnExit.addActionListener(mainControl);
         
         //agregando los diferentes componentes al panel con imagen llamado background
         background.add(title);
@@ -73,20 +74,7 @@ public class Login {
         background.setBorder(new LineBorder(Color.red));
         }
 
-        //metodo para mostrar el Login
-        public void showLogin(){
-        fLogin.getContentPane().add(background,"Center");
-        fLogin.add(background);
-        fLogin.setSize(450,230);
-        fLogin.setLocationRelativeTo(null);
-        fLogin.setUndecorated(true);
-        fLogin.setVisible(true);
-        }
-        //metodo para cerrar el login
-        public void closeLogin(){
-        fLogin.dispose();
-        }
-        //metodo para tener valor del JTextField Usuario
+            //metodo para tener valor del JTextField Usuario
         public String getTxtUsers() {
         return txtUsers.getText();
         }
@@ -102,6 +90,21 @@ public class Login {
         }
         return login;
         }
+
+    @Override
+    public void showFrame() {
+        fLogin.getContentPane().add(background,"Center");
+        fLogin.add(background);
+        fLogin.setSize(450,230);
+        fLogin.setLocationRelativeTo(null);
+        fLogin.setUndecorated(true);
+        fLogin.setVisible(true);
+    }
+
+    @Override
+    public void closeFrame() {
+    fLogin.dispose();
+    }
 
         
 
