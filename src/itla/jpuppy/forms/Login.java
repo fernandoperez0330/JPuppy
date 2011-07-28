@@ -58,10 +58,11 @@ public class Login implements FrameOption{
         btnEnter.setName("Login.btnLogin");
         btnExit.setName("Login.btnExit");
         //instancia del Controlador
-        ControllerUsers mainControl= new ControllerUsers(this);
+        ControllerUsers mainControl = new ControllerUsers(this);
         //agregando los actionListener a los botones del login
         btnEnter.addActionListener(mainControl);
         btnExit.addActionListener(mainControl);
+        txtPassword.addKeyListener(mainControl);
         
         //agregando los diferentes componentes al panel con imagen llamado background
         background.add(title);
