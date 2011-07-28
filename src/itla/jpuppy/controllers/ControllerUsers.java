@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 public class ControllerUsers implements ActionListener {
 
     Login login = null;
+    //Home home = null;
     //actionPerformed para los botones del Login
     public ControllerUsers(Login login){
         this.login = login;
@@ -21,16 +22,15 @@ public class ControllerUsers implements ActionListener {
         JButton comando = (JButton) e.getSource();
         if (comando.getName().equals("Login.btnLogin")) {
             //pasandole los parametros al metodo validateUser de la clase ModelUsers
-            boolean validate= ModelUsers.validateUser(login.getTxtUsers(), login.getTxtPassword());
-            if(validate){
+            System.out.println(login.getTxtPassword());
+            //boolean validate= ModelUsers.validateUser(login.getTxtUsers(),login.getTxtPassword());
+            //if(validate){
                 //cerrando el Login para mostrar el siguiente
-                login.closeFrame();
-                
-                
-            }else{
+               // login.closeFrame();
+            //}else{
                 //
-                JOptionPane.showMessageDialog(null,"Error: Nombre de usuario y contrasena incorrecta");
-            }
+               // JOptionPane.showMessageDialog(null,"Error: Nombre de usuario y contrasena incorrecta");
+           // }
         } else if (comando.getName().equals("Login.btnExit")) {
             login.closeFrame();
         }

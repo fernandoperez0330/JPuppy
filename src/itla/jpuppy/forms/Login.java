@@ -81,7 +81,8 @@ public class Login implements FrameOption{
         }
         //metodo para tener valor del JTextField de contraseña
         public String getTxtPassword() {
-        return txtPassword.getText();
+            String password = new String(txtPassword.getPassword());
+            return password;
         }
 
         //metodo para obtener la instacia de Login
