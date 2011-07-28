@@ -6,6 +6,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -16,7 +17,7 @@ public class Login implements FrameOption{
     private JLabel lbUserName;
     private JLabel lbPassword;
     public JTextField txtUsers;
-    public JTextField txtPassword;
+    public JPasswordField txtPassword;
     public JButton btnEnter;
     public JButton btnExit;
     private JFrame fLogin;
@@ -33,7 +34,7 @@ public class Login implements FrameOption{
         lbUserName= new JLabel("USUARIO");
         lbPassword = new JLabel("CONTRASEÑA");
         txtUsers= new JTextField("");
-        txtPassword= new JTextField();
+        txtPassword= new JPasswordField();
         btnEnter = new JButton("ENTRAR");
         btnExit = new JButton("SALIR");
         background.setSize(400, 200);
