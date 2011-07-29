@@ -1,6 +1,7 @@
 package itla.jpuppy.controllers;
 
 import itla.jpuppy.business.ModelUsers;
+import itla.jpuppy.forms.HomeFrame;
 import itla.jpuppy.forms.Login;
 import itla.jpuppy.utils.EncryptText;
 import java.awt.event.ActionEvent;
@@ -35,6 +36,7 @@ public class ControllerUsers implements ActionListener, KeyListener {
             System.out.println("Funciona");
             //cerrando el Login para mostrar el siguiente
             login.closeFrame();
+            new HomeFrame().showFrame();
         } else {
             JOptionPane.showMessageDialog(null, "Error: Nombre de usuario y contrasena incorrecta");
         }
