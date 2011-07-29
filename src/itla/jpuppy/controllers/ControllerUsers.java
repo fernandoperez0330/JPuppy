@@ -4,6 +4,7 @@ import itla.jpuppy.business.ModelUsers;
 import itla.jpuppy.forms.HomeFrame;
 import itla.jpuppy.forms.Login;
 import itla.jpuppy.utils.EncryptText;
+import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -26,29 +27,32 @@ public class ControllerUsers implements ActionListener, KeyListener {
         //pasandole los parametros al metodo validateUser de la clase ModelUsers
         boolean validate = false;
         try {
-            validate = ModelUsers.validateUser(login.getTxtUsers(), login.getTxtPassword());
+             
+           validate = new ModelUsers().validateUser( name,password );
+    
         } catch (Exception exc) {
             //System.out.println(EncryptText.md5(login.getTxtPassword()));
-            exc.printStackTrace();
+           // exc.printStackTrace();
             //System.out.println("Catch");
         }
         if (validate) {
-            System.out.println("Funciona");
+            //System.out.println("Funciona");
             //cerrando el Login para mostrar el siguiente
             login.closeFrame();
             new HomeFrame().showFrame();
         } else {
             JOptionPane.showMessageDialog(null, "Error: Nombre de usuario y contrasena incorrecta");
+            validate = false;
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         //evaluando cual boton fue pulsado y que debe realizar
-        JButton comando = (JButton) e.getSource();
-        if (comando.getName().equals("Login.btnLogin")) {
+        String comando = e.getActionCommand();
+        if (comando.equals(login.getBotonEnterString())) {
             checkLogin(login.getTxtUsers(), login.getTxtPassword());
-        } else if (comando.getName().equals("Login.btnExit")) {
+        } else if (comando.equals(login.getBotonExitString())) {
             login.closeFrame();
         }
     }
@@ -59,9 +63,8 @@ public class ControllerUsers implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //System.out.println("Captura el evento ENTER");
-
         if (e.getKeyCode() == 10) {
+            
             checkLogin(login.getTxtUsers(), login.getTxtPassword());
         }
     }

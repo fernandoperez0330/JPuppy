@@ -13,29 +13,24 @@ public class ModelUsers implements GeneralModel {
         queryManager = new QueryManager();
     }
 
-    public static boolean validateUser(String name, String password) {
-       
-        return true;
-        // boolean status = false;
+    public boolean validateUser(String name, String password) {
+        boolean status = false;
+        Users user = null;
         //Busca el usuario por nombre
-        //try{
-            //Users user = queryManager.searchUser(name);
-            //queryManager.searchUser();
-        //}catch(Exception exct){
-           // exct.printStackTrace();
-        //}
-        
-        //System.out.println(name);
-        //Compara el pass dado con el pass del usuario retornado
-        /*
-        if (user.getPassword().equals(password)) {
-            status = true;
-        } else {
-            status = false;
+        try {
+            user = queryManager.searchUser(name,password);
+            
+          
+        } catch (Exception exct) {
+           
         }
-         *
-         */
-        //return false;
+
+       
+
+        if (user.getPassword().hashCode()==password.hashCode())
+            status = true;
+       
+        return status;
     }
 
     //retorna un objeto especifico tipo Users cuando se llame debe cargarse el Id desde generalVariableID del paquete util
@@ -43,6 +38,8 @@ public class ModelUsers implements GeneralModel {
     public Users searchUser(int id) {
         EntityManager entityManager = EntityManagerCreator.getInstanceEM();
         Users temp = entityManager.find(Users.class, id);
+       entityManager.close();
+       
         return temp;
     }
 

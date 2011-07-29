@@ -6,8 +6,8 @@ import javax.persistence.Persistence;
 
 public class EntityManagerCreator {
 
-    private static EntityManager em;
-    private static EntityManagerFactory emf;
+    private static EntityManager em=null;
+    private static EntityManagerFactory emf=null;
     private static String puName = "JPuppyPU";
 
     private EntityManagerCreator() {
@@ -21,6 +21,7 @@ public class EntityManagerCreator {
         }
         return em;
     }
+
 
     public static EntityManagerFactory getEmf() {
         return emf;

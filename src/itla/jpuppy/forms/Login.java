@@ -57,8 +57,7 @@ public class Login implements FrameOption {
         lbPassword.setBounds(120, 110, 80, 50);
         btnEnter.setBounds(165, 170, 100, 30);
         btnExit.setBounds(260, 170, 100, 30);
-        btnEnter.setName("Login.btnLogin");
-        btnExit.setName("Login.btnExit");
+        
 
         //instancia del Controlador
         ControllerUsers mainControl = new ControllerUsers(this);
@@ -82,15 +81,23 @@ public class Login implements FrameOption {
 
     //metodo para tener valor del JTextField Usuario
     public String getTxtUsers() {
+        
         return txtUsers.getText();
     }
     //metodo para tener valor del JTextField de contraseña
 
     public String getTxtPassword() {
-        String password = new String(txtPassword.getPassword());
-        return password;
+       
+       return  txtPassword.getText();
+       
     }
 
+    public String getBotonEnterString(){
+        return btnEnter.getActionCommand();
+    }
+     public String getBotonExitString(){
+        return btnExit.getActionCommand();
+    }
     //metodo para obtener la instacia de Login
     public synchronized static Login getInstance() {
         if (login == null) {
