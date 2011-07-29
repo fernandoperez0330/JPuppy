@@ -14,14 +14,16 @@ public class ModelUsers implements GeneralModel {
     }
 
     public static boolean validateUser(String name, String password) {
-       // boolean status = false;
+       
+        return true;
+        // boolean status = false;
         //Busca el usuario por nombre
-        try{
+        //try{
             //Users user = queryManager.searchUser(name);
-            queryManager.searchUser();
-        }catch(Exception exct){
-            exct.printStackTrace();
-        }
+            //queryManager.searchUser();
+        //}catch(Exception exct){
+           // exct.printStackTrace();
+        //}
         
         //System.out.println(name);
         //Compara el pass dado con el pass del usuario retornado
@@ -33,7 +35,7 @@ public class ModelUsers implements GeneralModel {
         }
          *
          */
-        return false;
+        //return false;
     }
 
     //retorna un objeto especifico tipo Users cuando se llame debe cargarse el Id desde generalVariableID del paquete util
