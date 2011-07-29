@@ -19,7 +19,6 @@ public class Users implements Serializable {
     private int userId;
     @Column(length = 30)
     private String username;
-    @Column(length = 30)
     private String password;
     @Column(length = 30, nullable = false)
     private String name;
@@ -29,7 +28,7 @@ public class Users implements Serializable {
     private String telephone;
     @Column(length = 12)
     private String cellphone;
-    @Column(length = 30, nullable = false)
+    @Column(length = 30)
     private String typeUser;
 
     public Users() {

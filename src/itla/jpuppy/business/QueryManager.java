@@ -51,9 +51,28 @@ public class QueryManager {
         return state;
     }
 
+    public static Users searchUser(){
+        System.out.println((EntityManagerCreator.getInstanceEM().createQuery("SELECT a FROM users a").getResultList().size()));
+        return null;
+    }
+
+    public static Users searchUser(String name, String a) {
+        //Users user = (Users) entityManager.createQuery("SELECT a FROM Users a WHERE a.username == :nameToFind").setParameter("nameToField", name).getSingleResult();
+        //Users user = null;
+        System.out.println("Pena");
+        try {
+            //user = (Users) entityManager.createQuery("SELECT a FROM users a").getResultList();
+            //System.out.println(((Users)entityManager.createQuery("SELECT a FROM users a").getResultList().get(1)).getLastname());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
+
     //Metodos Disponibles para autocomplete en busqueda
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    public List<Users> searchUser(String name) {
+    public List<Users> searchUsers(String name) {
         List<Users> listUsers = entityManager.createQuery("SELECT a FROM Users a WHERE a.name LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
         return listUsers;
     }
@@ -87,5 +106,4 @@ public class QueryManager {
     protected void finalize() {
         entityManager.close();
     }
-
 }
