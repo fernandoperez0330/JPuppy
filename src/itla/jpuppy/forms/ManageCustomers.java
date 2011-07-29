@@ -1,6 +1,5 @@
 package itla.jpuppy.forms;
 import java.awt.Frame;
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -16,15 +15,14 @@ import java.awt.Frame;
  *
  * @author Adderly
  */
-public class ManageUsers extends javax.swing.JDialog implements FrameOption{
+public class ManageCustomers extends javax.swing.JDialog implements FrameOption {
 
-    public ManageUsers(Frame owner, boolean modal) {
+    public ManageCustomers(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Manage Users");
         this.setResizable(false);
-        
     }
 
    
@@ -40,17 +38,19 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        TxtFieldNombreUsuario = new javax.swing.JTextField();
+        TxtFieldNombre = new javax.swing.JTextField();
+        TxtFieldTelefono = new javax.swing.JTextField();
         TxtFieldApellido = new javax.swing.JTextField();
-        TxtFieldPassword = new javax.swing.JTextField();
-        TxtFieldName = new javax.swing.JTextField();
+        TxtFieldCelular = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        TxtFieldCelular = new javax.swing.JTextField();
-        TxtFieldTelefono = new javax.swing.JTextField();
-        jRadioButtonAdministrador = new javax.swing.JRadioButton();
-        jRadioButtonOperador = new javax.swing.JRadioButton();
+        jLabel8 = new javax.swing.JLabel();
+        TxtFieldCiudad = new javax.swing.JTextField();
+        TxtFieldMail = new javax.swing.JTextField();
+        TxtFieldDireccion = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaNota = new javax.swing.JTextArea();
         pnButtons = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -63,63 +63,61 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
         setTitle("CrudEntities");
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel1.setText("Nombre de usario.:");
+        jLabel1.setText("Nombre.:");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel2.setText("Password.:");
+        jLabel2.setText("Celular.:");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel3.setText("Nombre.:");
+        jLabel3.setText("Apellido.:");
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel4.setText("Apellido.:");
+        jLabel4.setText("Telefono.:");
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel5.setText("Telefono.:");
+        jLabel5.setText("Direccion.:");
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel6.setText("Tipo de usuario.:");
+        jLabel6.setText("Ciudad.:");
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel7.setText("Celular.:");
+        jLabel7.setText("Nota.:");
 
-        jRadioButtonAdministrador.setFont(new java.awt.Font("Arial", 1, 14));
-        jRadioButtonAdministrador.setText("Administrador");
-        jRadioButtonAdministrador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonAdministradorActionPerformed(evt);
-            }
-        });
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 14));
+        jLabel8.setText("Mail.:");
 
-        jRadioButtonOperador.setFont(new java.awt.Font("Arial", 1, 14));
-        jRadioButtonOperador.setText("Operador");
+        jTextAreaNota.setColumns(20);
+        jTextAreaNota.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaNota);
 
         javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
         pnFields.setLayout(pnFieldsLayout);
         pnFieldsLayout.setHorizontalGroup(
             pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnFieldsLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(40, 40, 40)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
+                    .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)))
+                    .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel7))
                     .addComponent(jLabel5)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel6))
                 .addGap(85, 85, 85)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxtFieldNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addComponent(TxtFieldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addComponent(TxtFieldApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addComponent(TxtFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addComponent(TxtFieldTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addComponent(TxtFieldCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addGroup(pnFieldsLayout.createSequentialGroup()
-                        .addComponent(jRadioButtonAdministrador)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButtonOperador)))
+                    .addComponent(TxtFieldMail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                    .addComponent(TxtFieldCiudad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                    .addComponent(TxtFieldDireccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                    .addComponent(TxtFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                    .addComponent(TxtFieldApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                    .addComponent(TxtFieldTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                    .addComponent(TxtFieldCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnFieldsLayout.setVerticalGroup(
@@ -128,33 +126,39 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
                 .addContainerGap()
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(TxtFieldNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TxtFieldCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(TxtFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(TxtFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtFieldCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jRadioButtonAdministrador)
-                    .addComponent(jRadioButtonOperador))
-                .addContainerGap(61, Short.MAX_VALUE))
+                    .addComponent(TxtFieldCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnFieldsLayout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabel7))
+                    .addGroup(pnFieldsLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TxtFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
@@ -204,7 +208,7 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
                         .addContainerGap()
                         .addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
+                        .addGap(150, 150, 150)
                         .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -213,9 +217,9 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93)
+                .addGap(18, 18, 18)
                 .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -229,17 +233,13 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
         // TODO add your handling code here:
 }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void jRadioButtonAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAdministradorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonAdministradorActionPerformed
-
     /**
     * @param args the command line arguments
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManageUsers(null,true).setVisible(true);
+                new ManageCustomers(null,true).setVisible(true);
             }
         });
     }
@@ -247,9 +247,10 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TxtFieldApellido;
     private javax.swing.JTextField TxtFieldCelular;
-    private javax.swing.JTextField TxtFieldName;
-    private javax.swing.JTextField TxtFieldNombreUsuario;
-    private javax.swing.JTextField TxtFieldPassword;
+    private javax.swing.JTextField TxtFieldCiudad;
+    private javax.swing.JTextField TxtFieldDireccion;
+    private javax.swing.JTextField TxtFieldMail;
+    private javax.swing.JTextField TxtFieldNombre;
     private javax.swing.JTextField TxtFieldTelefono;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
@@ -264,8 +265,9 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JRadioButton jRadioButtonAdministrador;
-    private javax.swing.JRadioButton jRadioButtonOperador;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextAreaNota;
     private javax.swing.JPanel pnButtons;
     private javax.swing.JPanel pnFields;
     // End of variables declaration//GEN-END:variables

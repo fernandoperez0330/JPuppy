@@ -1,6 +1,5 @@
 package itla.jpuppy.forms;
 import java.awt.Frame;
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -16,15 +15,14 @@ import java.awt.Frame;
  *
  * @author Adderly
  */
-public class ManageUsers extends javax.swing.JDialog implements FrameOption{
+public class ManageSpecies extends javax.swing.JDialog implements FrameOption{
 
-    public ManageUsers(Frame owner, boolean modal) {
+    public ManageSpecies(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Manage Users");
         this.setResizable(false);
-        
     }
 
    
@@ -38,19 +36,8 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
         pnFields = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        TxtFieldNombreUsuario = new javax.swing.JTextField();
-        TxtFieldApellido = new javax.swing.JTextField();
-        TxtFieldPassword = new javax.swing.JTextField();
-        TxtFieldName = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        TxtFieldCelular = new javax.swing.JTextField();
-        TxtFieldTelefono = new javax.swing.JTextField();
-        jRadioButtonAdministrador = new javax.swing.JRadioButton();
-        jRadioButtonOperador = new javax.swing.JRadioButton();
+        TxtFieldEspecie = new javax.swing.JTextField();
+        jComboBoxNameBreeds = new javax.swing.JComboBox();
         pnButtons = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -63,36 +50,12 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
         setTitle("CrudEntities");
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel1.setText("Nombre de usario.:");
+        jLabel1.setText("Nombre de la raza.:");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel2.setText("Password.:");
+        jLabel2.setText("Nombre de la especie.:");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel3.setText("Nombre.:");
-
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel4.setText("Apellido.:");
-
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel5.setText("Telefono.:");
-
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel6.setText("Tipo de usuario.:");
-
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel7.setText("Celular.:");
-
-        jRadioButtonAdministrador.setFont(new java.awt.Font("Arial", 1, 14));
-        jRadioButtonAdministrador.setText("Administrador");
-        jRadioButtonAdministrador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonAdministradorActionPerformed(evt);
-            }
-        });
-
-        jRadioButtonOperador.setFont(new java.awt.Font("Arial", 1, 14));
-        jRadioButtonOperador.setText("Operador");
+        jComboBoxNameBreeds.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
         pnFields.setLayout(pnFieldsLayout);
@@ -101,25 +64,12 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
             .addGroup(pnFieldsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
                 .addGap(85, 85, 85)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxtFieldNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addComponent(TxtFieldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addComponent(TxtFieldApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addComponent(TxtFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addComponent(TxtFieldTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addComponent(TxtFieldCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addGroup(pnFieldsLayout.createSequentialGroup()
-                        .addComponent(jRadioButtonAdministrador)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButtonOperador)))
+                    .addComponent(jComboBoxNameBreeds, 0, 356, Short.MAX_VALUE)
+                    .addComponent(TxtFieldEspecie, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnFieldsLayout.setVerticalGroup(
@@ -128,33 +78,12 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
                 .addContainerGap()
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(TxtFieldNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxNameBreeds, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(TxtFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(TxtFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtFieldCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jRadioButtonAdministrador)
-                    .addComponent(jRadioButtonOperador))
-                .addContainerGap(61, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(TxtFieldEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
@@ -198,24 +127,28 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 880, Short.MAX_VALUE)
+            .addGap(0, 880, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(144, 144, 144))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 652, Short.MAX_VALUE)
+            .addGap(0, 652, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(93, 93, 93)
                 .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         pack();
@@ -229,43 +162,28 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
         // TODO add your handling code here:
 }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void jRadioButtonAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAdministradorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonAdministradorActionPerformed
-
     /**
     * @param args the command line arguments
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManageUsers(null,true).setVisible(true);
+                new ManageSpecies(null,true).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TxtFieldApellido;
-    private javax.swing.JTextField TxtFieldCelular;
-    private javax.swing.JTextField TxtFieldName;
-    private javax.swing.JTextField TxtFieldNombreUsuario;
-    private javax.swing.JTextField TxtFieldPassword;
-    private javax.swing.JTextField TxtFieldTelefono;
+    private javax.swing.JTextField TxtFieldEspecie;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox jComboBoxNameBreeds;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JRadioButton jRadioButtonAdministrador;
-    private javax.swing.JRadioButton jRadioButtonOperador;
     private javax.swing.JPanel pnButtons;
     private javax.swing.JPanel pnFields;
     // End of variables declaration//GEN-END:variables
