@@ -10,5 +10,5 @@ package itla.jpuppy.utils;
  * @author Administrator
  */
 public enum enumAppointmentStatus {
-    
+    ACTIVE,CANCELED,POSPUSED,NOTASISTED
 }

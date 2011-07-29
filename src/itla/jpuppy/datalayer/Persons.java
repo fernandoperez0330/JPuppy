@@ -5,13 +5,11 @@
 
 package itla.jpuppy.datalayer;
 
-import itla.jpuppy.utils.enumPersonPhone;
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,18 +27,39 @@ public abstract class Persons implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long personId;
-    @Column(length = 30,nullable= true, unique=false)
+    @Column(length = 30,nullable= false, unique=false)
     private String name;
     private String lastName;
     private String cedula;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateRegistered;
-    @Enumerated(EnumType.STRING)
-    private enumPersonPhone phone;
+   @Column(length = 12)
+    private String telephone;
+    @Column(length = 12)
+    private String cellphone;
     @Column(length = 100)
     private String note;
     private String city;
     private String email;
+    private Boolean status;
+
+    public Persons(){}
+
+    public Persons(Long personId, String name, String lastName, String cedula, Date dateRegistered, String telephone, String cellphone, String note, String city, String email, Boolean status) {
+        this.personId = personId;
+        this.name = name;
+        this.lastName = lastName;
+        this.cedula = cedula;
+        this.dateRegistered = dateRegistered;
+        this.telephone = telephone;
+        this.cellphone = cellphone;
+        this.note = note;
+        this.city = city;
+        this.email = email;
+        this.status = status;
+    }
+
+    
 
     public String getCedula() {
         return cedula;
@@ -48,6 +67,14 @@ public abstract class Persons implements Serializable {
 
     public void setCedula(String cedula) {
         this.cedula = cedula;
+    }
+
+    public String getCellphone() {
+        return cellphone;
+    }
+
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone;
     }
 
     public String getCity() {
@@ -106,14 +133,6 @@ public abstract class Persons implements Serializable {
         this.personId = personId;
     }
 
-    public enumPersonPhone getPhone() {
-        return phone;
-    }
-
-    public void setPhone(enumPersonPhone phone) {
-        this.phone = phone;
-    }
-
     public Boolean getStatus() {
         return status;
     }
@@ -121,7 +140,19 @@ public abstract class Persons implements Serializable {
     public void setStatus(Boolean status) {
         this.status = status;
     }
-    private Boolean status;
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+    
+    
+
+   
+    
 
     
 }

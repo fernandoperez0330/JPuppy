@@ -6,6 +6,7 @@ package itla.jpuppy.datalayer;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -40,6 +42,8 @@ public class Patients implements Serializable {
     private Date lastVisit;
     @Transient
     private String doctorLastVisit;
+    @OneToMany
+    private List<Appointments> patient;
 
     public Patients() {
     }
