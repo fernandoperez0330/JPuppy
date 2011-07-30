@@ -7,9 +7,10 @@ import javax.persistence.EntityManager;
 public class ModelPatients implements GeneralModel {
 
     private QueryManager queryManager;
-
+    private Patients patient;
     public ModelPatients() {
         queryManager = new QueryManager();
+        patient = new Patients();
     }
 
     //Este metodo todavia no estas totalmente definido , se necesita especificar si id seria unico
@@ -49,5 +50,9 @@ public class ModelPatients implements GeneralModel {
     public boolean deleteObject(Object object) {
         Patients g = ( Patients )object;
         return queryManager.deleteObject( g );
+    }
+    
+    public Patients getPatient(){
+        return patient;
     }
 }

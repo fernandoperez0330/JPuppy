@@ -51,6 +51,8 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
 
         mnubHome = new javax.swing.JMenuBar();
         mnuAdministrator = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         mnuVentas = new javax.swing.JMenu();
         mnuUsuarios = new javax.swing.JMenu();
         mnuAcerca = new javax.swing.JMenu();
@@ -61,6 +63,18 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
         setResizable(false);
 
         mnuAdministrator.setText("Administrador");
+
+        jMenuItem1.setText("Clientes");
+        mnuAdministrator.add(jMenuItem1);
+
+        jMenuItem2.setText("Pacientes");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        mnuAdministrator.add(jMenuItem2);
+
         mnubHome.add(mnuAdministrator);
 
         mnuVentas.setText("Ventas");
@@ -91,7 +105,16 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        ManagePatients managePatients = new ManagePatients(this,true);
+        managePatients.showFrame();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu mnuAcerca;
     private javax.swing.JMenu mnuAdministrator;
     private javax.swing.JMenu mnuUsuarios;
