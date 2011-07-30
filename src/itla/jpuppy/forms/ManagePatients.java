@@ -1,4 +1,5 @@
 package itla.jpuppy.forms;
+import itla.jpuppy.controllers.ControllerPatients;
 import java.awt.Frame;
 /*
  * To change this template, choose Tools | Templates
@@ -20,6 +21,8 @@ public class ManagePatients extends javax.swing.JDialog implements FrameOption {
     public ManagePatients(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
+        ControllerPatients cp = new ControllerPatients(this);
+         setController(cp);
         this.setLocationRelativeTo(null);
         this.setTitle("Manage Users");
         this.setResizable(false);
@@ -89,12 +92,9 @@ public class ManagePatients extends javax.swing.JDialog implements FrameOption {
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
-                    .addGroup(pnFieldsLayout.createSequentialGroup()
-                        .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
                     .addComponent(jLabel4))
                 .addGap(56, 56, 56)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -138,39 +138,41 @@ public class ManagePatients extends javax.swing.JDialog implements FrameOption {
 
         pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
 
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/add.png"))); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/add.png"));
         btnAdd.setFocusable(false);
         btnAdd.setMaximumSize(new java.awt.Dimension(50, 50));
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
+        btnAdd.setName("add"); // NOI18N
+        btnAdd.setOpaque(false);
         pnButtons.add(btnAdd);
 
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/edit.png"))); // NOI18N
+        btnUpdate.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/edit.png"));
         btnUpdate.setFocusable(false);
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
+        btnUpdate.setName("update"); // NOI18N
         pnButtons.add(btnUpdate);
 
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/find.png"))); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/find.png"));
         btnSearch.setFocusable(false);
+        btnSearch.setName("search"); // NOI18N
         pnButtons.add(btnSearch);
 
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/save.png"))); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/save.png"));
         btnSave.setFocusable(false);
+        btnSave.setName("save"); // NOI18N
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
         pnButtons.add(btnSave);
 
-        btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/remove.png"))); // NOI18N
+        btnRemove.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/remove.png"));
         btnRemove.setFocusable(false);
+        btnRemove.setName("remove"); // NOI18N
         pnButtons.add(btnRemove);
 
-        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/cancel.png"))); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/cancel.png"));
         btnCancel.setFocusable(false);
+        btnCancel.setName("cancel"); // NOI18N
         pnButtons.add(btnCancel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -200,24 +202,14 @@ public class ManagePatients extends javax.swing.JDialog implements FrameOption {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-}//GEN-LAST:event_btnAddActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-}//GEN-LAST:event_btnUpdateActionPerformed
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
     * @param args the command line arguments
     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ManagePatients(null,true).setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TxtFieldCumpleano;
@@ -252,5 +244,103 @@ public class ManagePatients extends javax.swing.JDialog implements FrameOption {
     public void closeFrame() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    /**
+     * @return the TxtFieldCumpleano
+     */
+    public javax.swing.JTextField getTxtFieldCumpleano() {
+        return TxtFieldCumpleano;
+    }
+
+    /**
+     * @param TxtFieldCumpleano the TxtFieldCumpleano to set
+     */
+    public void setTxtFieldCumpleano(javax.swing.JTextField TxtFieldCumpleano) {
+        this.TxtFieldCumpleano = TxtFieldCumpleano;
+    }
+
+    /**
+     * @return the TxtFieldDueno
+     */
+    public javax.swing.JTextField getTxtFieldDueno() {
+        return TxtFieldDueno;
+    }
+
+    /**
+     * @param TxtFieldDueno the TxtFieldDueno to set
+     */
+    public void setTxtFieldDueno(javax.swing.JTextField TxtFieldDueno) {
+        this.TxtFieldDueno = TxtFieldDueno;
+    }
+
+    /**
+     * @return the TxtFieldNombre
+     */
+    public javax.swing.JTextField getTxtFieldNombre() {
+        return TxtFieldNombre;
+    }
+
+    /**
+     * @param TxtFieldNombre the TxtFieldNombre to set
+     */
+    public void setTxtFieldNombre(javax.swing.JTextField TxtFieldNombre) {
+        this.TxtFieldNombre = TxtFieldNombre;
+    }
+
+    /**
+     * @return the TxtFieldUltimaVisita
+     */
+    public javax.swing.JTextField getTxtFieldUltimaVisita() {
+        return TxtFieldUltimaVisita;
+    }
+
+    /**
+     * @param TxtFieldUltimaVisita the TxtFieldUltimaVisita to set
+     */
+    public void setTxtFieldUltimaVisita(javax.swing.JTextField TxtFieldUltimaVisita) {
+        this.TxtFieldUltimaVisita = TxtFieldUltimaVisita;
+    }
+
+    /**
+     * @return the TxtFieldUltimaVisitaDoctor
+     */
+    public javax.swing.JTextField getTxtFieldUltimaVisitaDoctor() {
+        return TxtFieldUltimaVisitaDoctor;
+    }
+
+    /**
+     * @param TxtFieldUltimaVisitaDoctor the TxtFieldUltimaVisitaDoctor to set
+     */
+    public void setTxtFieldUltimaVisitaDoctor(javax.swing.JTextField TxtFieldUltimaVisitaDoctor) {
+        this.TxtFieldUltimaVisitaDoctor = TxtFieldUltimaVisitaDoctor;
+    }
+
+  
+   
+
+    /**
+     * @return the jTextAreNota
+     */
+    public javax.swing.JTextArea getjTextAreNota() {
+        return jTextAreNota;
+    }
+
+    /**
+     * @param jTextAreNota the jTextAreNota to set
+     */
+    public void setjTextAreNota(javax.swing.JTextArea jTextAreNota) {
+        this.jTextAreNota = jTextAreNota;
+    }
+
+    private void setController(ControllerPatients cp) {
+         btnAdd.addActionListener(cp);
+        btnUpdate.addActionListener(cp);
+        btnSearch.addActionListener(cp);
+        btnSave.addActionListener(cp);
+        btnRemove.addActionListener(cp);
+        btnCancel.addActionListener(cp);
+    }
+
+
 
 }
