@@ -7,7 +7,7 @@ import itla.jpuppy.datalayer.Customers;
  * @author Jordhano
  */
 public class SearchingCtrlCustomers implements SearchingControl {
-
+//new String[] {"Id","Name","Lastname","City"}
     @Override
     public Object getValueAt(Object x, int y) {
         Customers temp = (Customers) x;

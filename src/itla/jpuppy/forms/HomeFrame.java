@@ -8,11 +8,14 @@
  *
  * Created on Jul 28, 2011, 8:07:30 PM
  */
-
 package itla.jpuppy.forms;
 
+import itla.jpuppy.datalayer.Customers;
+import itla.jpuppy.models.SearchingCtrlCustomers;
+import itla.jpuppy.models.SearchingModel;
 import itla.jpuppy.utils.Background;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import javax.swing.JPanel;
 
 /**
@@ -22,41 +25,58 @@ import javax.swing.JPanel;
 public class HomeFrame extends javax.swing.JFrame implements FrameOption {
 
     /** Creates new form JHomeFrame */
+    private JPanel background;
+    private JPanel searching;
+    private SearchingModel<Customers> modelSearching;
+    private SearchingCtrlCustomers ctrlCustormers;
+
     public HomeFrame() {
         initComponents();
+        background = new Background("src/itla/jpuppy/resources/logoJPuppy.png");
+        background.setBounds(0, 0, this.getWidth(), this.getHeight());
+        modelSearching = new SearchingModel<Customers>(new String[] {"Id","Name","Lastname","City"},new SearchingCtrlCustomers());
+        searching = new JSearching(modelSearching);
+        this.add(background);
+        background.setLayout(new FlowLayout());
+        background.add(searching);
+        this.setTitle("JPuppy: Sistema de veterinaria");
+        this.setIconImage(HomeFrame.icon.getImage());
+        this.setPreferredSize(new Dimension(700, 700));
+        this.setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        mnubHome = new javax.swing.JMenuBar();
+        mnuAdministrator = new javax.swing.JMenu();
+        mnuVentas = new javax.swing.JMenu();
+        mnuUsuarios = new javax.swing.JMenu();
+        mnuAcerca = new javax.swing.JMenu();
+        mnuiAcerca = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("JPuppy"); // NOI18N
         setResizable(false);
 
-        jMenu1.setText("Administrador");
-        jMenuBar1.add(jMenu1);
+        mnuAdministrator.setText("Administrador");
+        mnubHome.add(mnuAdministrator);
 
-        jMenu2.setText("Ventas");
-        jMenuBar1.add(jMenu2);
+        mnuVentas.setText("Ventas");
+        mnubHome.add(mnuVentas);
 
-        jMenu3.setText("Usuarios");
-        jMenuBar1.add(jMenu3);
+        mnuUsuarios.setText("Usuarios");
+        mnubHome.add(mnuUsuarios);
 
-        jMenu4.setText("Ayuda");
+        mnuAcerca.setText("Ayuda");
 
-        jMenuItem1.setText("Acerca de...");
-        jMenu4.add(jMenuItem1);
+        mnuiAcerca.setText("Acerca de...");
+        mnuAcerca.add(mnuiAcerca);
 
-        jMenuBar1.add(jMenu4);
+        mnubHome.add(mnuAcerca);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(mnubHome);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,27 +91,17 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu mnuAcerca;
+    private javax.swing.JMenu mnuAdministrator;
+    private javax.swing.JMenu mnuUsuarios;
+    private javax.swing.JMenu mnuVentas;
+    private javax.swing.JMenuBar mnubHome;
+    private javax.swing.JMenuItem mnuiAcerca;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void showFrame() {
-        JPanel background = new Background("src/itla/jpuppy/resources/logoJPuppy.png");
-        background.setBounds(0, 0, this.getWidth(),this.getHeight());
-        this.add(background);
-        this.setTitle("JPuppy: Sistema de veterinaria");
-        this.setIconImage(HomeFrame.icon.getImage());
-        this.setPreferredSize(new Dimension(700,700));
-        this.setLocationRelativeTo(null);
-        this.setExtendedState(MAXIMIZED_BOTH);
         this.setVisible(true);
     }
 
@@ -99,5 +109,4 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
     public void closeFrame() {
         this.setVisible(false);
     }
-
 }

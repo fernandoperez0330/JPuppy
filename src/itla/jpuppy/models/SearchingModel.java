@@ -1,5 +1,6 @@
 package itla.jpuppy.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -16,6 +17,12 @@ public class SearchingModel<T> extends AbstractTableModel {
     public SearchingModel(String [] heads, SearchingControl search) {
         this.heads = heads;
         this.search = search;
+        elements = new ArrayList<T>();
+    }
+    
+    @Override
+    public String getColumnName(int x) {
+        return heads[x];
     }
   
     @Override
