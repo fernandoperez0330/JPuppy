@@ -16,6 +16,8 @@ import java.awt.Frame;
  *
  * @author Adderly
  */
+
+
 public class ManagePatients extends javax.swing.JDialog implements FrameOption {
 
     public ManagePatients(Frame owner, boolean modal) {
