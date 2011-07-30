@@ -18,18 +18,16 @@ public class ModelUsers implements GeneralModel {
         Users user = null;
         //Busca el usuario por nombre
         try {
-            user = queryManager.searchUser(name,password);
-            
-          
+            user = queryManager.searchUserValidated(name, password);
         } catch (Exception exct) {
-           
+        }
+        
+        System.out.println(name + "  " + password);
+        
+        if (user.getPassword().hashCode() == password.hashCode()) {
+            status = true;
         }
 
-       
-
-        if (user.getPassword().hashCode()==password.hashCode())
-            status = true;
-       
         return status;
     }
 
@@ -38,8 +36,8 @@ public class ModelUsers implements GeneralModel {
     public Users searchUser(int id) {
         EntityManager entityManager = EntityManagerCreator.getInstanceEM();
         Users temp = entityManager.find(Users.class, id);
-       entityManager.close();
-       
+        entityManager.close();
+
         return temp;
     }
 
@@ -47,7 +45,7 @@ public class ModelUsers implements GeneralModel {
     public List<Users> searchAllUserByName(String name) {
         return queryManager.searchUsers(name);
     }
-//Metodos comunes a todos los modelos , se llama el correspondiente de  queryManager
+    //Metodos comunes a todos los modelos , se llama el correspondiente de  queryManager
 
     @Override
     public boolean deleteObject(Object object) {

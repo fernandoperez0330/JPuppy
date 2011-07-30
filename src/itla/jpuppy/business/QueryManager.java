@@ -51,12 +51,11 @@ public class QueryManager {
         return state;
     }
 
-    public Users searchUser(String name , String password ) {
-        Users user=null;
-        try{
-        user = (Users) entityManager.createQuery("SELECT a FROM Users a WHERE a.username = :nameToFind and a.password = :password").setParameter("nameToFind", name).setParameter("password", password).getSingleResult();
-        }catch(Exception e){
-            
+    public Users searchUserValidated(String name, String password) {
+        Users user = null;
+        try {
+            user = (Users) entityManager.createQuery("SELECT a FROM Users a WHERE a.username = :nameToFind and a.password = :password").setParameter("nameToFind", name).setParameter("password", password).getSingleResult();
+        } catch (Exception e) {
         }
         return user;
     }

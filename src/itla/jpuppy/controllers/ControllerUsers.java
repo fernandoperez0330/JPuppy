@@ -4,12 +4,10 @@ import itla.jpuppy.business.ModelUsers;
 import itla.jpuppy.forms.HomeFrame;
 import itla.jpuppy.forms.Login;
 import itla.jpuppy.utils.EncryptText;
-import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 public class ControllerUsers implements ActionListener, KeyListener {
@@ -28,7 +26,7 @@ public class ControllerUsers implements ActionListener, KeyListener {
         boolean validate = false;
         try {
              
-           validate = new ModelUsers().validateUser( name,password );
+           validate = new ModelUsers().validateUser( name , EncryptText.md5(password));
     
         } catch (Exception exc) {
             //System.out.println(EncryptText.md5(login.getTxtPassword()));

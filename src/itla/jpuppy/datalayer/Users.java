@@ -1,16 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package itla.jpuppy.datalayer;
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Entity
 public class Users extends Persons implements Serializable {
@@ -37,7 +30,6 @@ public class Users extends Persons implements Serializable {
         this.password = password;
         this.typeUser = typeUser;
     }
-    
 
     public String getPassword() {
         return password;
@@ -62,6 +54,4 @@ public class Users extends Persons implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-
-   
 }
