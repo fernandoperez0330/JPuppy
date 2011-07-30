@@ -10,7 +10,6 @@
     <class>itla.jpuppy.datalayer.Persons</class>
     <class>itla.jpuppy.datalayer.Employees</class>
     <class>itla.jpuppy.datalayer.Doctor</class>
-    <class>itla.jpuppy.datalayer.Clients</class>
     <class>itla.jpuppy.datalayer.Appointments</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpuppydb"/>
