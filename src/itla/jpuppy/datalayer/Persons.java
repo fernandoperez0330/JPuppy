@@ -2,9 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package itla.jpuppy.datalayer;
-
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,31 +20,44 @@ import javax.persistence.Temporal;
  * @author Administrator
  */
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Persons implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long personId;
-    @Column(length = 30,nullable= false, unique=false)
+    @Column(length = 30, nullable = false, unique = false)
     private String name;
+    @Column(length = 30, nullable = false, unique = false)
     private String lastName;
+    @Column(length = 30, unique = true)
     private String cedula;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateRegistered;
-   @Column(length = 12)
+    @Column(length = 12)
     private String telephone;
     @Column(length = 12)
     private String cellphone;
-    @Column(length = 100)
+    @Column(length = 255)
     private String note;
+    @Column(length = 30)
     private String city;
+    @Column(length = 50)
+    private String address;
+    @Column(length = 100)
     private String email;
     private Boolean status;
 
-    public Persons(){}
+    public Persons() {
+    }
 
-    public Persons(Long personId, String name, String lastName, String cedula, Date dateRegistered, String telephone, String cellphone, String note, String city, String email, Boolean status) {
-        this.personId = personId;
+    public Persons(String name, String lastName, String cedula) {
+        this.name = name;
+        this.lastName = lastName;
+        this.cedula = cedula;
+    }
+
+    public Persons(String name, String lastName, String cedula, Date dateRegistered, String telephone, String cellphone, String note, String city, String email, String address, Boolean status) {
         this.name = name;
         this.lastName = lastName;
         this.cedula = cedula;
@@ -56,10 +67,9 @@ public abstract class Persons implements Serializable {
         this.note = note;
         this.city = city;
         this.email = email;
+        this.address = address;
         this.status = status;
     }
-
-    
 
     public String getCedula() {
         return cedula;
@@ -148,11 +158,12 @@ public abstract class Persons implements Serializable {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-    
-    
 
-   
-    
+    public String getAddress() {
+        return address;
+    }
 
-    
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

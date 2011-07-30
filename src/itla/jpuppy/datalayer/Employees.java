@@ -6,6 +6,7 @@
 package itla.jpuppy.datalayer;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -16,21 +17,27 @@ import javax.persistence.Entity;
 @Entity
 public class Employees extends Persons implements Serializable{
     
-    @Column
-    private String position;
+    @Column(nullable=false)
+    private String jobPosition;
     
     public Employees(){}
 
-    public Employees(String position) {
-        this.position = position;
+    public Employees(String name, String lastName, String cedula, String jobPosition) {
+        super(name, lastName, cedula);
+        this.jobPosition = jobPosition;
+    }
+
+    public Employees(String name, String lastName, String cedula, Date dateRegistered, String telephone, String cellphone, String note, String city, String email, String address, Boolean status, String jobPosition) {
+        super(name, lastName, cedula, dateRegistered, telephone, cellphone, note, city, email, address, status);
+        this.jobPosition = jobPosition;
     }
 
     public String getPosition() {
-        return position;
+        return jobPosition;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setPosition(String jobPosition) {
+        this.jobPosition = jobPosition;
     }
     
     

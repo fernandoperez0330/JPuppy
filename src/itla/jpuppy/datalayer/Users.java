@@ -5,6 +5,7 @@
 package itla.jpuppy.datalayer;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,11 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Users implements Serializable {
+public class Users extends Persons implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int userId;
     @Column(length = 30)
     private String username;
     private String password;
@@ -26,13 +24,20 @@ public class Users implements Serializable {
     public Users() {
     }
 
-    public Users(int userId, String username, String password, String typeUser) {
-        this.userId = userId;
+    public Users(String name, String lastName, String cedula, String username, String password, String typeUser) {
+        super(name, lastName, cedula);
         this.username = username;
         this.password = password;
         this.typeUser = typeUser;
     }
 
+    public Users(String name, String lastName, String cedula, Date dateRegistered, String telephone, String cellphone, String note, String city, String email, String address, Boolean status, String username, String password, String typeUser) {
+        super(name, lastName, cedula, dateRegistered, telephone, cellphone, note, city, email, address, status);
+        this.username = username;
+        this.password = password;
+        this.typeUser = typeUser;
+    }
+    
 
     public String getPassword() {
         return password;
@@ -48,14 +53,6 @@ public class Users implements Serializable {
 
     public void setTypeUser(String typeUser) {
         this.typeUser = typeUser;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getUsername() {

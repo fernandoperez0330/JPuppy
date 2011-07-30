@@ -29,6 +29,7 @@ public class Patients implements Serializable {
     private long patientsId;
     @Column(length = 30, nullable = false)
     private String name;
+    
     @ManyToOne
     private Customers owner;
     @Column(length = 255)

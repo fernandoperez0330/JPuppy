@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package itla.jpuppy.datalayer;
 
 import java.io.Serializable;
@@ -16,18 +15,25 @@ import javax.persistence.OneToMany;
  * @author Administrator
  */
 @Entity
-public class Doctor extends Employees implements Serializable{
-    
-    @Column 
-    private String speciality;
+public class Doctor extends Employees implements Serializable {
 
+    private String speciality;
     @OneToMany
     private List<Appointments> appointments;
 
-    public Doctor(String speciality, List<Appointments> appointments) {
-        this.speciality = speciality;
-        this.appointments = appointments;
+    public Doctor() {
     }
+
+    public Doctor(String name, String lastName, String cedula, String jobPosition) {
+        super(name, lastName, cedula, jobPosition);
+    }
+
+    public Doctor(String name, String lastName, String cedula, String jobPosition, String speciality) {
+        super(name, lastName, cedula, jobPosition);
+        this.speciality = speciality;
+    }
+
+    
 
     public List<Appointments> getAppointments() {
         return appointments;
@@ -37,9 +43,6 @@ public class Doctor extends Employees implements Serializable{
         this.appointments = appointments;
     }
 
-    public Doctor() {
-    }
-    
     public String getSpeciality() {
         return speciality;
     }
