@@ -160,11 +160,6 @@ public class ManagePatients extends javax.swing.JDialog implements FrameOption {
         btnSave.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/save.png"));
         btnSave.setFocusable(false);
         btnSave.setName("save"); // NOI18N
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
         pnButtons.add(btnSave);
 
         btnRemove.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/remove.png"));
@@ -197,16 +192,12 @@ public class ManagePatients extends javax.swing.JDialog implements FrameOption {
                 .addContainerGap()
                 .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
     * @param args the command line arguments

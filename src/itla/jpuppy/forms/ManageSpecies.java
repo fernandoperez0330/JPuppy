@@ -1,5 +1,8 @@
 package itla.jpuppy.forms;
+import itla.jpuppy.controllers.ControllerSpecies;
 import java.awt.Frame;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -20,9 +23,21 @@ public class ManageSpecies extends javax.swing.JDialog implements FrameOption{
     public ManageSpecies(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
+        ControllerSpecies cs = new ControllerSpecies(this);
+        setController(cs);
         this.setLocationRelativeTo(null);
         this.setTitle("Manage Users");
         this.setResizable(false);
+    }
+
+     public void setController(ControllerSpecies cs)
+    {
+         btnAdd.addActionListener(cs);
+        btnUpdate.addActionListener(cs);
+        btnSearch.addActionListener(cs);
+        btnSave.addActionListener(cs);
+        btnRemove.addActionListener(cs);
+        btnCancel.addActionListener(cs);
     }
 
    
@@ -52,7 +67,7 @@ public class ManageSpecies extends javax.swing.JDialog implements FrameOption{
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel1.setText("Nombre de la raza.:");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14));
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Nombre de la especie.:");
 
         jComboBoxNameBreeds.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -62,10 +77,13 @@ public class ManageSpecies extends javax.swing.JDialog implements FrameOption{
         pnFieldsLayout.setHorizontalGroup(
             pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnFieldsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnFieldsLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel1))
+                    .addGroup(pnFieldsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)))
                 .addGap(85, 85, 85)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBoxNameBreeds, 0, 356, Short.MAX_VALUE)
@@ -81,54 +99,48 @@ public class ManageSpecies extends javax.swing.JDialog implements FrameOption{
                     .addComponent(jComboBoxNameBreeds, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(TxtFieldEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtFieldEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
 
         pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
 
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/add.png"))); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon("src\\itla\\jpuppy\\resources\\add.png"));
         btnAdd.setFocusable(false);
         btnAdd.setMaximumSize(new java.awt.Dimension(50, 50));
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
+        btnAdd.setName("add"); // NOI18N
         pnButtons.add(btnAdd);
 
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/edit.png"))); // NOI18N
+        btnUpdate.setIcon(new javax.swing.ImageIcon("src\\itla\\jpuppy\\resources\\edit.png"));
         btnUpdate.setFocusable(false);
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
+        btnUpdate.setName("update"); // NOI18N
         pnButtons.add(btnUpdate);
 
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/find.png"))); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon("src\\itla\\jpuppy\\resources\\find.png"));
         btnSearch.setFocusable(false);
+        btnSearch.setName("search"); // NOI18N
         pnButtons.add(btnSearch);
 
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/save.png"))); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon("src\\itla\\jpuppy\\resources\\save.png"));
         btnSave.setFocusable(false);
+        btnSave.setName("save"); // NOI18N
         pnButtons.add(btnSave);
 
-        btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/remove.png"))); // NOI18N
+        btnRemove.setIcon(new javax.swing.ImageIcon("src\\itla\\jpuppy\\resources\\remove.png"));
         btnRemove.setFocusable(false);
+        btnRemove.setName("remove"); // NOI18N
         pnButtons.add(btnRemove);
 
-        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/cancel.png"))); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon("src\\itla\\jpuppy\\resources\\cancel.png"));
         btnCancel.setFocusable(false);
+        btnCancel.setName("cancel"); // NOI18N
         pnButtons.add(btnCancel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 880, Short.MAX_VALUE)
-            .addGap(0, 880, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,8 +153,6 @@ public class ManageSpecies extends javax.swing.JDialog implements FrameOption{
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 652, Short.MAX_VALUE)
-            .addGap(0, 652, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,24 +164,26 @@ public class ManageSpecies extends javax.swing.JDialog implements FrameOption{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-}//GEN-LAST:event_btnAddActionPerformed
+    public JTextField getTxtFieldEspecie() {
+        return TxtFieldEspecie;
+    }
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-}//GEN-LAST:event_btnUpdateActionPerformed
+    public void setTxtFieldEspecie(JTextField TxtFieldEspecie) {
+        this.TxtFieldEspecie = TxtFieldEspecie;
+    }
+
+    public JComboBox getjComboBoxNameBreeds() {
+        return jComboBoxNameBreeds;
+    }
+
+    public void setjComboBoxNameBreeds(JComboBox jComboBoxNameBreeds) {
+        this.jComboBoxNameBreeds = jComboBoxNameBreeds;
+    }
 
     /**
     * @param args the command line arguments
     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ManageSpecies(null,true).setVisible(true);
-            }
-        });
-    }
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TxtFieldEspecie;
@@ -197,5 +209,7 @@ public class ManageSpecies extends javax.swing.JDialog implements FrameOption{
     public void closeFrame() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+
 
 }
