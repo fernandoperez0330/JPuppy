@@ -1,253 +1,342 @@
 package itla.jpuppy.forms;
+
 import itla.jpuppy.controllers.ControllerPatients;
 import java.awt.Frame;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
-/*
- * NewJFrame.java
- *
- * Created on Jul 25, 2011, 1:32:21 AM
- */
+public class ManagePatients extends JDialog implements FrameOption {
+    
+    private JPanel pnFields;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel jLabel3;
+    private JLabel jLabel4;
+    private JTextField TxtFieldNombre;
+    private JTextField TxtFieldDueno;
+    //id del cliente propietario del paciente
+    private int idDueno;
 
-/**
- *
- * @author Adderly
- */
+    public JTextField getTxtFieldUltimaVisita() {
+        return TxtFieldUltimaVisita;
+    }
 
+    public void setTxtFieldUltimaVisita(JTextField TxtFieldUltimaVisita) {
+        this.TxtFieldUltimaVisita = TxtFieldUltimaVisita;
+    }
 
-public class ManagePatients extends javax.swing.JDialog implements FrameOption {
+    public int getIdDueno() {
+        return idDueno;
+    }
 
+    public void setIdDueno(int idDueno) {
+        this.idDueno = idDueno;
+    }
+    private JTextField TxtFieldCumpleano;
+    private JScrollPane jScrollPane1;
+    private JTextArea jTextAreNota;
+    private JLabel jLabel5;
+    private JLabel jLabel6;
+    private JTextField TxtFieldUltimaVisita;
+    private JTextField TxtFieldUltimaVisitaDoctor;
+    private JPanel pnButtons;
+    private JButton btnAdd;
+    private JButton btnUpdate;
+    private JButton btnSearch;
+    private JButton btnSave;
+    private JButton btnRemove;
+    private JButton btnCancel;
+    private JTable jTable1;
+    //controlador
+    private ControllerPatients Controller = new ControllerPatients(this);
+    
+    
+    
     //constructor cuando es para mostrar el administrador
     public ManagePatients(Frame owner, boolean modal) {
         super(owner, modal);
-        initComponents();
+        this.setIconImage(FrameOption.icon.getImage());
+        initComponents(1);
         ControllerPatients cp = new ControllerPatients(this);
-        setController(cp);
+        setController(cp, 1);
         this.setLocationRelativeTo(null);
         this.setTitle("Lista de pacientes");
         this.setResizable(false);
     }
-    
-    public ManagePatients(Frame owner, boolean modal,boolean flagManage){
+
+    public ManagePatients(Frame owner, boolean modal, boolean flagManage) {
         super(owner, modal);
-        initComponents();
+        this.setIconImage(FrameOption.icon.getImage());
+        initComponents(2);
         ControllerPatients cp = new ControllerPatients(this);
-        setController(cp);
+        setController(cp, 2);
         this.setLocationRelativeTo(null);
         this.setTitle("Agregar paciente nuevo");
         this.setResizable(false);
     }
-    
-    public ManagePatients(Frame owner, boolean modal,boolean flagManage,int patientId){
+
+    public ManagePatients(Frame owner, boolean modal, boolean flagManage, int patientId) {
         super(owner, modal);
-        initComponents();
+        this.setIconImage(FrameOption.icon.getImage());
+        initComponents(3);
         ControllerPatients cp = new ControllerPatients(this);
-        setController(cp);
+        setController(cp, 3);
         this.setLocationRelativeTo(null);
         this.setTitle("Modificar paciente");
         this.setResizable(false);
     }
+    
 
-   
+    private void initComponents(int state) {
 
-    /** Creates new form NewJFrame */
+        switch (state) {
+            //cuando es para agregar un nuevo paciente
+            case 2:
+                pnFields = new JPanel();
+                jLabel1 = new JLabel();
+                jLabel2 = new JLabel();
+                jLabel3 = new JLabel();
+                jLabel4 = new JLabel();
+                TxtFieldNombre = new JTextField();
+                TxtFieldDueno = new JTextField();
+                TxtFieldCumpleano = new JTextField();
+                jScrollPane1 = new JScrollPane();
+                jTextAreNota = new JTextArea();
+                jLabel5 = new JLabel();
+                jLabel6 = new JLabel();
+                TxtFieldUltimaVisita = new JTextField();
+                TxtFieldUltimaVisitaDoctor = new JTextField();
+                pnButtons = new JPanel();
+                btnSave = new JButton();
+                btnCancel = new JButton();
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+                setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        pnFields = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        TxtFieldNombre = new javax.swing.JTextField();
-        TxtFieldDueno = new javax.swing.JTextField();
-        TxtFieldCumpleano = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextAreNota = new javax.swing.JTextArea();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        TxtFieldUltimaVisita = new javax.swing.JTextField();
-        TxtFieldUltimaVisitaDoctor = new javax.swing.JTextField();
-        pnButtons = new javax.swing.JPanel();
-        btnAdd = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
-        btnSearch = new javax.swing.JButton();
-        btnSave = new javax.swing.JButton();
-        btnRemove = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
+                jLabel1.setFont(new java.awt.Font("Arial", 1, 14));
+                jLabel1.setText("Nombre.:");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("CrudEntities");
+                jLabel2.setFont(new java.awt.Font("Arial", 1, 14));
+                jLabel2.setText("Dueño.:");
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel1.setText("Nombre.:");
+                jLabel3.setFont(new java.awt.Font("Arial", 1, 14));
+                jLabel3.setText("Cumpleaño.:");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel2.setText("Dueño.:");
+                jLabel4.setFont(new java.awt.Font("Arial", 1, 14));
+                jLabel4.setText("Nota.:");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel3.setText("Cumpleaño.:");
+                jTextAreNota.setColumns(20);
+                jTextAreNota.setRows(5);
+                jScrollPane1.setViewportView(jTextAreNota);
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel4.setText("Nota.:");
+                jLabel5.setFont(new java.awt.Font("Arial", 1, 14));
+                jLabel5.setText("Ultima Visita.:");
 
-        jTextAreNota.setColumns(20);
-        jTextAreNota.setRows(5);
-        jScrollPane1.setViewportView(jTextAreNota);
+                jLabel6.setFont(new java.awt.Font("Arial", 1, 14));
+                jLabel6.setText("Ultima Visita del doctor.:");
 
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel5.setText("Ultima Visita.:");
+                javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
+                pnFields.setLayout(pnFieldsLayout);
+                pnFieldsLayout.setHorizontalGroup(
+                        pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(pnFieldsLayout.createSequentialGroup().addContainerGap().addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(jLabel5).addComponent(jLabel6).addComponent(jLabel2).addComponent(jLabel3).addComponent(jLabel1).addComponent(jLabel4)).addGap(56, 56, 56).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE).addComponent(TxtFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE).addComponent(TxtFieldDueno, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE).addComponent(TxtFieldCumpleano, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE).addComponent(TxtFieldUltimaVisita, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE).addComponent(TxtFieldUltimaVisitaDoctor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)).addContainerGap()));
+                pnFieldsLayout.setVerticalGroup(
+                        pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(pnFieldsLayout.createSequentialGroup().addContainerGap().addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(TxtFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel1)).addGap(18, 18, 18).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(TxtFieldDueno, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel2)).addGap(18, 18, 18).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(TxtFieldCumpleano, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel3)).addGap(15, 15, 15).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(TxtFieldUltimaVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel5)).addGap(18, 18, 18).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(TxtFieldUltimaVisitaDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel6)).addGap(18, 18, 18).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel4)).addGap(27, 27, 27)));
 
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel6.setText("Ultima Visita del doctor.:");
+                pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
 
-        javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
-        pnFields.setLayout(pnFieldsLayout);
-        pnFieldsLayout.setHorizontalGroup(
-            pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnFieldsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4))
-                .addGap(56, 56, 56)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
-                    .addComponent(TxtFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
-                    .addComponent(TxtFieldDueno, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
-                    .addComponent(TxtFieldCumpleano, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
-                    .addComponent(TxtFieldUltimaVisita, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
-                    .addComponent(TxtFieldUltimaVisitaDoctor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        pnFieldsLayout.setVerticalGroup(
-            pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnFieldsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtFieldDueno, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtFieldCumpleano, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(15, 15, 15)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtFieldUltimaVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtFieldUltimaVisitaDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(27, 27, 27))
-        );
 
-        pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
+                btnSave.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/save.png"));
+                btnSave.setFocusable(false);
+                btnSave.setName("save"); // NOI18N
+                pnButtons.add(btnSave);
 
-        btnAdd.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/add.png"));
-        btnAdd.setFocusable(false);
-        btnAdd.setMaximumSize(new java.awt.Dimension(50, 50));
-        btnAdd.setName("add"); // NOI18N
-        btnAdd.setOpaque(false);
-        pnButtons.add(btnAdd);
 
-        btnUpdate.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/edit.png"));
-        btnUpdate.setFocusable(false);
-        btnUpdate.setName("update"); // NOI18N
-        pnButtons.add(btnUpdate);
+                btnCancel.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/cancel.png"));
+                btnCancel.setFocusable(false);
+                btnCancel.setName("cancel"); // NOI18N
+                pnButtons.add(btnCancel);
 
-        btnSearch.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/find.png"));
-        btnSearch.setFocusable(false);
-        btnSearch.setName("search"); // NOI18N
-        pnButtons.add(btnSearch);
+                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+                getContentPane().setLayout(layout);
+                layout.setHorizontalGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)).addGroup(layout.createSequentialGroup().addGap(113, 113, 113).addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))).addContainerGap()));
+                layout.setVerticalGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE).addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(47, 47, 47)));
 
-        btnSave.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/save.png"));
-        btnSave.setFocusable(false);
-        btnSave.setName("save"); // NOI18N
-        pnButtons.add(btnSave);
+                pack();
+                break;
+            //cuando es para modificar un paciente
+            case 3:
 
-        btnRemove.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/remove.png"));
-        btnRemove.setFocusable(false);
-        btnRemove.setName("remove"); // NOI18N
-        pnButtons.add(btnRemove);
+                break;
+            //cuando es para listar los pacientes
+            default:
+                pnFields = new JPanel();
+                jScrollPane1 = new JScrollPane();
+                jTable1 = new JTable();
+                pnButtons = new JPanel();
+                btnAdd = new JButton();
+                btnUpdate = new JButton();
+                btnSearch = new JButton();
+                btnRemove = new JButton();
 
-        btnCancel.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/cancel.png"));
-        btnCancel.setFocusable(false);
-        btnCancel.setName("cancel"); // NOI18N
-        pnButtons.add(btnCancel);
+                setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+                //asignar la lista de pacientes a la tabla
+                jTable1.setModel(Controller.getTableModelPatients());
+                jScrollPane1.setViewportView(jTable1);
+                pnFieldsLayout = new GroupLayout(pnFields);
+                pnFields.setLayout(pnFieldsLayout);
+                pnFieldsLayout.setHorizontalGroup(
+                        pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE));
+                pnFieldsLayout.setVerticalGroup(
+                        pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
-        );
+                pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+                btnAdd.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/add.png"));
+                btnAdd.setFocusable(false);
+                btnAdd.setMaximumSize(new java.awt.Dimension(50, 50));
+                btnAdd.setName("add"); // NOI18N
+                btnAdd.setOpaque(false);
+                pnButtons.add(btnAdd);
 
-    /**
-    * @param args the command line arguments
-    */
-   
+                btnUpdate.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/edit.png"));
+                btnUpdate.setFocusable(false);
+                btnUpdate.setName("update"); // NOI18N
+                pnButtons.add(btnUpdate);
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TxtFieldCumpleano;
-    private javax.swing.JTextField TxtFieldDueno;
-    private javax.swing.JTextField TxtFieldNombre;
-    private javax.swing.JTextField TxtFieldUltimaVisita;
-    private javax.swing.JTextField TxtFieldUltimaVisitaDoctor;
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnRemove;
-    private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnUpdate;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextAreNota;
-    private javax.swing.JPanel pnButtons;
-    private javax.swing.JPanel pnFields;
-    // End of variables declaration//GEN-END:variables
+                btnSearch.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/find.png"));
+                btnSearch.setFocusable(false);
+                btnSearch.setName("search"); // NOI18N
+                pnButtons.add(btnSearch);
+
+                btnRemove.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/remove.png"));
+                btnRemove.setFocusable(false);
+                btnRemove.setName("remove"); // NOI18N
+                pnButtons.add(btnRemove);
+
+                layout = new GroupLayout(getContentPane());
+                getContentPane().setLayout(layout);
+                layout.setHorizontalGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)).addGroup(layout.createSequentialGroup().addGap(113, 113, 113).addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))).addContainerGap()));
+                layout.setVerticalGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE).addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(47, 47, 47)));
+
+                pack();
+                break;
+        }
+    }
+
+    public JTextField getTxtFieldCumpleano() {
+        return TxtFieldCumpleano;
+    }
+
+    public void setTxtFieldCumpleano(JTextField TxtFieldCumpleano) {
+        this.TxtFieldCumpleano = TxtFieldCumpleano;
+    }
+
+    public JTextField getTxtFieldDueno() {
+        return TxtFieldDueno;
+    }
+
+    public void setTxtFieldDueno(JTextField TxtFieldDueno) {
+        this.TxtFieldDueno = TxtFieldDueno;
+    }
+
+    public JTextField getTxtFieldNombre() {
+        return TxtFieldNombre;
+    }
+
+    public void setTxtFieldNombre(JTextField TxtFieldNombre) {
+        this.TxtFieldNombre = TxtFieldNombre;
+    }
+
+    public JTextField getTxtFieldUltimaVisitaDoctor() {
+        return TxtFieldUltimaVisitaDoctor;
+    }
+
+    public void setTxtFieldUltimaVisitaDoctor(JTextField TxtFieldUltimaVisitaDoctor) {
+        this.TxtFieldUltimaVisitaDoctor = TxtFieldUltimaVisitaDoctor;
+    }
+
+    public JButton getBtnAdd() {
+        return btnAdd;
+    }
+
+    public void setBtnAdd(JButton btnAdd) {
+        this.btnAdd = btnAdd;
+    }
+
+    public JButton getBtnCancel() {
+        return btnCancel;
+    }
+
+    public void setBtnCancel(JButton btnCancel) {
+        this.btnCancel = btnCancel;
+    }
+
+    public JButton getBtnRemove() {
+        return btnRemove;
+    }
+
+    public void setBtnRemove(JButton btnRemove) {
+        this.btnRemove = btnRemove;
+    }
+
+    public JButton getBtnSave() {
+        return btnSave;
+    }
+
+    public void setBtnSave(JButton btnSave) {
+        this.btnSave = btnSave;
+    }
+
+    public JButton getBtnSearch() {
+        return btnSearch;
+    }
+
+    public void setBtnSearch(JButton btnSearch) {
+        this.btnSearch = btnSearch;
+    }
+
+    public JButton getBtnUpdate() {
+        return btnUpdate;
+    }
+
+    public void setBtnUpdate(JButton btnUpdate) {
+        this.btnUpdate = btnUpdate;
+    }
+
+    private void setController(ControllerPatients cp, int state) {
+        switch (state) {
+            //cuando es para agregar un nuevo paciente
+            case 2:
+                btnSave.addActionListener(cp);
+                btnCancel.addActionListener(cp);
+                break;
+            //cuando es para modificar un paciente
+            case 3:
+                //btnSave.addActionListener(cp);
+                //btnCancel.addActionListener(cp);
+                break;
+            //cuando es para listar los pacientes
+            default:
+                btnAdd.addActionListener(cp);
+                btnUpdate.addActionListener(cp);
+                btnSearch.addActionListener(cp);
+                btnRemove.addActionListener(cp);
+                //btnSave.addActionListener(cp);
+                //btnCancel.addActionListener(cp);
+                break;
+        }
+    }
 
     @Override
     public void showFrame() {
@@ -257,101 +346,5 @@ public class ManagePatients extends javax.swing.JDialog implements FrameOption {
     @Override
     public void closeFrame() {
         this.setVisible(false);
-    }
-
-    /**
-     * @return the TxtFieldCumpleano
-     */
-    public javax.swing.JTextField getTxtFieldCumpleano() {
-        return TxtFieldCumpleano;
-    }
-
-    /**
-     * @param TxtFieldCumpleano the TxtFieldCumpleano to set
-     */
-    public void setTxtFieldCumpleano(javax.swing.JTextField TxtFieldCumpleano) {
-        this.TxtFieldCumpleano = TxtFieldCumpleano;
-    }
-
-    /**
-     * @return the TxtFieldDueno
-     */
-    public javax.swing.JTextField getTxtFieldDueno() {
-        return TxtFieldDueno;
-    }
-
-    /**
-     * @param TxtFieldDueno the TxtFieldDueno to set
-     */
-    public void setTxtFieldDueno(javax.swing.JTextField TxtFieldDueno) {
-        this.TxtFieldDueno = TxtFieldDueno;
-    }
-
-    /**
-     * @return the TxtFieldNombre
-     */
-    public javax.swing.JTextField getTxtFieldNombre() {
-        return TxtFieldNombre;
-    }
-
-    /**
-     * @param TxtFieldNombre the TxtFieldNombre to set
-     */
-    public void setTxtFieldNombre(javax.swing.JTextField TxtFieldNombre) {
-        this.TxtFieldNombre = TxtFieldNombre;
-    }
-
-    /**
-     * @return the TxtFieldUltimaVisita
-     */
-    public javax.swing.JTextField getTxtFieldUltimaVisita() {
-        return TxtFieldUltimaVisita;
-    }
-
-    /**
-     * @param TxtFieldUltimaVisita the TxtFieldUltimaVisita to set
-     */
-    public void setTxtFieldUltimaVisita(javax.swing.JTextField TxtFieldUltimaVisita) {
-        this.TxtFieldUltimaVisita = TxtFieldUltimaVisita;
-    }
-
-    /**
-     * @return the TxtFieldUltimaVisitaDoctor
-     */
-    public javax.swing.JTextField getTxtFieldUltimaVisitaDoctor() {
-        return TxtFieldUltimaVisitaDoctor;
-    }
-
-    /**
-     * @param TxtFieldUltimaVisitaDoctor the TxtFieldUltimaVisitaDoctor to set
-     */
-    public void setTxtFieldUltimaVisitaDoctor(javax.swing.JTextField TxtFieldUltimaVisitaDoctor) {
-        this.TxtFieldUltimaVisitaDoctor = TxtFieldUltimaVisitaDoctor;
-    }
-
-  
-   
-
-    /**
-     * @return the jTextAreNota
-     */
-    public javax.swing.JTextArea getjTextAreNota() {
-        return jTextAreNota;
-    }
-
-    /**
-     * @param jTextAreNota the jTextAreNota to set
-     */
-    public void setjTextAreNota(javax.swing.JTextArea jTextAreNota) {
-        this.jTextAreNota = jTextAreNota;
-    }
-
-    private void setController(ControllerPatients cp) {
-        btnAdd.addActionListener(cp);
-        btnUpdate.addActionListener(cp);
-        btnSearch.addActionListener(cp);
-        btnSave.addActionListener(cp);
-        btnRemove.addActionListener(cp);
-        btnCancel.addActionListener(cp);
     }
 }
