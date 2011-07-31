@@ -37,7 +37,7 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
 
     public HomeFrame() {
         initComponents();
-        background = new Background("src/itla/jpuppy/resources/logoJPuppy.png");
+        background = new Background("src/itla/jpuppy/resources/Vet.jpg");
         background.setBounds(0, 0, this.getWidth(), this.getHeight());
         modelSearching = new SearchingModel<Customers>(new String[]{"Id", "Name", "Lastname", "City"}, new SearchingCtrlCustomers());
         searching = new JSearching(modelSearching);

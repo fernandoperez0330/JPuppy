@@ -1,6 +1,7 @@
 package itla.jpuppy.forms;
 
 import itla.jpuppy.controllers.ControllerSpecies;
+import java.awt.Frame;
 import javax.swing.JComboBox;
 import javax.swing.*;
 import javax.swing.JTextField;
@@ -10,9 +11,8 @@ import javax.swing.JTextField;
  */
 public class ManageSpecies extends JDialog implements FrameOption {
 
-    public ManageSpecies() {
-        //public ManageSpecies(Frame owner, boolean modal) {
-        //super(owner, modal);
+    public ManageSpecies(Frame owner, boolean modal) {
+        super(owner, modal);
         initComponents();
         ControllerSpecies cs = new ControllerSpecies(this);
 

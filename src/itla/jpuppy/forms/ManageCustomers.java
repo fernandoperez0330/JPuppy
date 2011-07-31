@@ -21,7 +21,7 @@ public class ManageCustomers extends javax.swing.JDialog implements FrameOption 
         super(owner, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setTitle("Manage Users");
+        this.setTitle("Manage Customers");
         this.setResizable(false);
     }
 
