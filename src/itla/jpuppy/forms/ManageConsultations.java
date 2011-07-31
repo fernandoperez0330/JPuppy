@@ -1,5 +1,5 @@
 package itla.jpuppy.forms;
-import itla.jpuppy.controllers.ControllerConsultations;
+//import itla.jpuppy.controllers.ControllerConsultations;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -9,14 +9,14 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
     public ManageConsultations(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ControllerConsultations controlConsultations = new ControllerConsultations();
+        //ControllerConsultations controlConsultations = new ControllerConsultations();
 
-        btnAddConsultations.addActionListener(controlConsultations);
+/*        btnAddConsultations.addActionListener(controlConsultations);
         btnCancelConsultations.addActionListener(controlConsultations);
         btnRemoveConsultations.addActionListener(controlConsultations);
         btnSaveConsultations.addActionListener(controlConsultations);
         btnSearchConsultations.addActionListener(controlConsultations);
-        btnUpdateConsultations.addActionListener(controlConsultations);
+        btnUpdateConsultations.addActionListener(controlConsultations);*/
         btnAddConsultations.setActionCommand("addConsultation");
         btnCancelConsultations.setActionCommand("cancelConsultation");
         btnRemoveConsultations.setActionCommand("removeConsultation");
@@ -282,13 +282,13 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
     // End of variables declaration//GEN-END:variables
 
     //Demas getters y setters
-    public JComboBox getCbBeginDateConsultations() {
+   /* public JComboBox getCbBeginDateConsultations() {
         return cbBeginDateConsultations;
     }
 
     public void setCbBeginDateConsultations(JComboBox cbBeginDateConsultations) {
         this.cbBeginDateConsultations = cbBeginDateConsultations;
-    }
+    }*/
 
     public JComboBox getCbCustomerConsultations() {
         return cbCustomerConsultations;
@@ -297,14 +297,14 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
     public void setCbCustomerConsultations(JComboBox cbCustomerConsultations) {
         this.cbCustomerConsultations = cbCustomerConsultations;
     }
-
+ /*
     public JComboBox getCbEndDateConsultations() {
         return cbEndDateConsultations;
     }
 
     public void setCbEndDateConsultations(JComboBox cbEndDateConsultations) {
         this.cbEndDateConsultations = cbEndDateConsultations;
-    }
+    } */
 
     public JComboBox getCbPatientConsultations() {
         return cbPatientConsultations;

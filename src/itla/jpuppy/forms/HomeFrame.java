@@ -253,4 +253,15 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
     public void closeFrame() {
         this.setVisible(false);
     }
+    
+    
+    private void unload() {
+        mdlCustomers.getQueryManager().getEntityManager().close();
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        unload();
+    }
 }

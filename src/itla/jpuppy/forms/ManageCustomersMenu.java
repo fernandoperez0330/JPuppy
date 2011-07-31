@@ -6,6 +6,7 @@ import itla.jpuppy.datalayer.Customers;
 import itla.jpuppy.models.SearchingCtrlCustomers;
 import itla.jpuppy.models.SearchingModel;
 import java.awt.Frame;
+import javax.swing.JButton;
 
 public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOption {
 
@@ -44,6 +45,11 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
 
     private void setListener() {
         searching.getTxtSearch().addKeyListener(ctrlCustormersEntity);
+        searching.getTblResult().addMouseListener(ctrlCustormersEntity);
+
+        btnAdd.addActionListener(ctrlCustormersEntity);
+        btnRemove.addActionListener(ctrlCustormersEntity);
+        btnUpdate.addActionListener(ctrlCustormersEntity);
     }
 
     /** Creates new form NewJFrame */
@@ -65,6 +71,7 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
         btnAdd.setFocusable(false);
         btnAdd.setMaximumSize(new java.awt.Dimension(50, 50));
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
@@ -74,6 +81,7 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/edit.png"))); // NOI18N
         btnUpdate.setFocusable(false);
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
             }
@@ -87,37 +95,39 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 877, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 877, Short.MAX_VALUE).addContainerGap()));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(526, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(526, Short.MAX_VALUE)));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-}//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-}//GEN-LAST:event_btnUpdateActionPerformed
+    }//GEN-LAST:event_btnUpdateActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JPanel pnButtons;
-    // End of variables declaration//GEN-END:variables
 
+    public JButton getBtnAdd() {
+        return btnAdd;
+    }
+
+    public JButton getBtnRemove() {
+        return btnRemove;
+    }
+
+    public JButton getBtnUpdate() {
+        return btnUpdate;
+    }
+
+    // End of variables declaration//GEN-END:variables
     @Override
     public void showFrame() {
         this.setVisible(true);
@@ -127,7 +137,8 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
     public void closeFrame() {
         this.setVisible(false);
     }
-    private void unload(){
+
+    private void unload() {
         mdlCustomers.getQueryManager().getEntityManager().close();
     }
 
@@ -136,7 +147,4 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
         super.dispose();
         unload();
     }
-    
-    
-    
 }

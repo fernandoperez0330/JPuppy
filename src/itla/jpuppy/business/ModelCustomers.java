@@ -19,7 +19,7 @@ public class ModelCustomers implements GeneralModel {
     //retorna un objeto especifico tipo Customer cuando se llame debe cargarse el Id desde generalVariableID del paquete util
     //los datos se le asignan cuando el usuario selecciona un cliente  del table
     
-    public Customers searchCustomer(int id) {
+    public Customers searchCustomer(long id) {
         EntityManager entityManager = EntityManagerCreator.getInstanceEM();
         Customers temp = entityManager.find(Customers.class, id);
         return temp;

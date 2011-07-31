@@ -3,6 +3,7 @@ package itla.jpuppy.business;
 import itla.jpuppy.datalayer.*;
 import java.util.List;
 import javax.persistence.EntityManager;
+import org.w3c.dom.events.Event;
 
 public class QueryManager {
 
@@ -33,11 +34,14 @@ public class QueryManager {
 
     public boolean deleteObject(Object object) {
         boolean state = true;
+        
         entityManager.getTransaction().begin();
         try {
             entityManager.remove(object);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
             state = false;
         }
         return state;
