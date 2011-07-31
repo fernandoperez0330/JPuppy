@@ -5,6 +5,7 @@ import itla.jpuppy.business.ModelPatients;
 import itla.jpuppy.datalayer.Customers;
 import itla.jpuppy.datalayer.Patients;
 import itla.jpuppy.forms.ManagePatients;
+import itla.jpuppy.forms.SearchCustomer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -81,7 +82,9 @@ public class ControllerPatients extends Controller implements ActionListener {
                     JOptionPane.showMessageDialog(managePatients, MSG_ERROR_SUCCESSFULL);
                 }
             }
-        } else if (nameButtonPressed.equals("cancel")) {
+        }else if (nameButtonPressed.equals("searchCustomer")){
+            new SearchCustomer(null,true).showFrame();
+        }else if (nameButtonPressed.equals("cancel")) {
             int respond = JOptionPane.showConfirmDialog(null, "Desea Cancelar esta transaccion?", "Cancelar", JOptionPane.OK_CANCEL_OPTION);
             if (respond == 0) {
                 this.managePatients.closeFrame();

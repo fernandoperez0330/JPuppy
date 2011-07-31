@@ -1,6 +1,7 @@
 package itla.jpuppy.forms;
 
 import itla.jpuppy.controllers.ControllerPatients;
+import java.awt.Font;
 import java.awt.Frame;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -24,22 +25,6 @@ public class ManagePatients extends JDialog implements FrameOption {
     private JTextField TxtFieldDueno;
     //id del cliente propietario del paciente
     private int idDueno;
-
-    public JTextField getTxtFieldUltimaVisita() {
-        return TxtFieldUltimaVisita;
-    }
-
-    public void setTxtFieldUltimaVisita(JTextField TxtFieldUltimaVisita) {
-        this.TxtFieldUltimaVisita = TxtFieldUltimaVisita;
-    }
-
-    public int getIdDueno() {
-        return idDueno;
-    }
-
-    public void setIdDueno(int idDueno) {
-        this.idDueno = idDueno;
-    }
     private JTextField TxtFieldCumpleano;
     private JScrollPane jScrollPane1;
     private JTextArea jTextAreNota;
@@ -54,6 +39,7 @@ public class ManagePatients extends JDialog implements FrameOption {
     private JButton btnSave;
     private JButton btnRemove;
     private JButton btnCancel;
+    private JButton btnSearchCustomer;
     private JTable jTable1;
     //controlador
     private ControllerPatients Controller = new ControllerPatients(this);
@@ -90,6 +76,7 @@ public class ManagePatients extends JDialog implements FrameOption {
         ControllerPatients cp = new ControllerPatients(this);
         setController(cp, 3);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.setTitle("Modificar paciente");
         this.setResizable(false);
     }
@@ -117,6 +104,7 @@ public class ManagePatients extends JDialog implements FrameOption {
                 pnButtons = new JPanel();
                 btnSave = new JButton();
                 btnCancel = new JButton();
+                btnSearchCustomer = new JButton();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -136,18 +124,18 @@ public class ManagePatients extends JDialog implements FrameOption {
                 jTextAreNota.setRows(5);
                 jScrollPane1.setViewportView(jTextAreNota);
 
-                jLabel5.setFont(new java.awt.Font("Arial", 1, 14));
+                jLabel5.setFont(new Font("Arial", 1, 14));
                 jLabel5.setText("Ultima Visita.:");
 
-                jLabel6.setFont(new java.awt.Font("Arial", 1, 14));
+                jLabel6.setFont(new Font("Arial", 1, 14));
                 jLabel6.setText("Ultima Visita del doctor.:");
 
-                javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
+                 javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
                 pnFields.setLayout(pnFieldsLayout);
                 pnFieldsLayout.setHorizontalGroup(
-                        pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(pnFieldsLayout.createSequentialGroup().addContainerGap().addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(jLabel5).addComponent(jLabel6).addComponent(jLabel2).addComponent(jLabel3).addComponent(jLabel1).addComponent(jLabel4)).addGap(56, 56, 56).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE).addComponent(TxtFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE).addComponent(TxtFieldDueno, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE).addComponent(TxtFieldCumpleano, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE).addComponent(TxtFieldUltimaVisita, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE).addComponent(TxtFieldUltimaVisitaDoctor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)).addContainerGap()));
+                        pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(pnFieldsLayout.createSequentialGroup().addContainerGap().addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(jLabel5).addComponent(jLabel6).addComponent(jLabel2).addComponent(jLabel3).addComponent(jLabel1).addComponent(jLabel4)).addGap(56, 56, 56).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE).addComponent(TxtFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE).addComponent(TxtFieldCumpleano, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE).addComponent(TxtFieldUltimaVisita, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE).addComponent(TxtFieldUltimaVisitaDoctor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE).addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnFieldsLayout.createSequentialGroup().addComponent(TxtFieldDueno, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(btnSearchCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))).addContainerGap()));
                 pnFieldsLayout.setVerticalGroup(
-                        pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(pnFieldsLayout.createSequentialGroup().addContainerGap().addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(TxtFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel1)).addGap(18, 18, 18).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(TxtFieldDueno, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel2)).addGap(18, 18, 18).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(TxtFieldCumpleano, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel3)).addGap(15, 15, 15).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(TxtFieldUltimaVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel5)).addGap(18, 18, 18).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(TxtFieldUltimaVisitaDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel6)).addGap(18, 18, 18).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel4)).addGap(27, 27, 27)));
+                        pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(pnFieldsLayout.createSequentialGroup().addContainerGap().addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(TxtFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel1)).addGap(18, 18, 18).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addComponent(btnSearchCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(TxtFieldDueno, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE).addComponent(jLabel2))).addGap(18, 18, 18).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(TxtFieldCumpleano, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel3)).addGap(15, 15, 15).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(TxtFieldUltimaVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel5)).addGap(18, 18, 18).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(TxtFieldUltimaVisitaDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel6)).addGap(18, 18, 18).addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(jLabel4)).addGap(27, 27, 27)));
 
                 pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
 
@@ -162,6 +150,11 @@ public class ManagePatients extends JDialog implements FrameOption {
                 btnCancel.setFocusable(false);
                 btnCancel.setName("cancel"); // NOI18N
                 pnButtons.add(btnCancel);
+                
+                btnSearchCustomer.setName("searchCustomer");
+                btnSearchCustomer.setText("Buscar cliente");
+                
+                TxtFieldDueno.setEnabled(false);
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -232,6 +225,22 @@ public class ManagePatients extends JDialog implements FrameOption {
                 pack();
                 break;
         }
+    }
+    
+    public JTextField getTxtFieldUltimaVisita() {
+        return TxtFieldUltimaVisita;
+    }
+
+    public void setTxtFieldUltimaVisita(JTextField TxtFieldUltimaVisita) {
+        this.TxtFieldUltimaVisita = TxtFieldUltimaVisita;
+    }
+
+    public int getIdDueno() {
+        return idDueno;
+    }
+
+    public void setIdDueno(int idDueno) {
+        this.idDueno = idDueno;
     }
 
     public JTextField getTxtFieldCumpleano() {
@@ -320,6 +329,7 @@ public class ManagePatients extends JDialog implements FrameOption {
             case 2:
                 btnSave.addActionListener(cp);
                 btnCancel.addActionListener(cp);
+                btnSearchCustomer.addActionListener(cp);
                 break;
             //cuando es para modificar un paciente
             case 3:
