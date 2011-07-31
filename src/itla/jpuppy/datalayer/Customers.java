@@ -19,6 +19,11 @@ public class Customers extends Persons implements Serializable {
         super(name, lastName, cedula);
     }
 
+    public Customers(String name, String lastName, String cedula, String city) {
+        super(name, lastName, cedula);
+        super.setCity(city);
+    }
+
     public Customers(String name, String lastName, String cedula, List<Patients> patients) {
         super(name, lastName, cedula);
         this.patients = patients;

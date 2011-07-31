@@ -18,9 +18,9 @@ public abstract class Persons implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long personId;
-    @Column(length = 30, nullable = false, unique = false)
+    @Column(length = 30, nullable = false)
     private String name;
-    @Column(length = 30, nullable = false, unique = false)
+    @Column(length = 30, nullable = false)
     private String lastName;
     @Column(length = 30, unique = true)
     private String cedula;
