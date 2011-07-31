@@ -163,7 +163,7 @@ public class ManageCustomers extends javax.swing.JDialog implements FrameOption 
 
         pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
 
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/add.png"))); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/add.png"))); // NOI18N
         btnAdd.setFocusable(false);
         btnAdd.setMaximumSize(new java.awt.Dimension(50, 50));
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +173,7 @@ public class ManageCustomers extends javax.swing.JDialog implements FrameOption 
         });
         pnButtons.add(btnAdd);
 
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/edit.png"))); // NOI18N
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/edit.png"))); // NOI18N
         btnUpdate.setFocusable(false);
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,19 +182,19 @@ public class ManageCustomers extends javax.swing.JDialog implements FrameOption 
         });
         pnButtons.add(btnUpdate);
 
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/find.png"))); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/find.png"))); // NOI18N
         btnSearch.setFocusable(false);
         pnButtons.add(btnSearch);
 
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/save.png"))); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/save.png"))); // NOI18N
         btnSave.setFocusable(false);
         pnButtons.add(btnSave);
 
-        btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/remove.png"))); // NOI18N
+        btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/remove.png"))); // NOI18N
         btnRemove.setFocusable(false);
         pnButtons.add(btnRemove);
 
-        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/cancel.png"))); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancel.png"))); // NOI18N
         btnCancel.setFocusable(false);
         pnButtons.add(btnCancel);
 
@@ -233,16 +233,6 @@ public class ManageCustomers extends javax.swing.JDialog implements FrameOption 
         // TODO add your handling code here:
 }//GEN-LAST:event_btnUpdateActionPerformed
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ManageCustomers(null,true).setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TxtFieldApellido;
@@ -274,12 +264,12 @@ public class ManageCustomers extends javax.swing.JDialog implements FrameOption 
 
     @Override
     public void showFrame() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.setVisible(true);
     }
 
     @Override
     public void closeFrame() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.setVisible(false);
     }
 
 }

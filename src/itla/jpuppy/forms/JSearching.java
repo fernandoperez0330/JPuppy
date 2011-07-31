@@ -11,6 +11,7 @@
 package itla.jpuppy.forms;
 
 import itla.jpuppy.models.SearchingModel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -25,9 +26,16 @@ public class JSearching extends javax.swing.JPanel {
         initComponents();
         this.model = model;
         tblResult.setModel(model);
+        txtSearch.setName("txtSearch");
+    }
+    
+
+    public JTextField getTxtSearch() {
+        return txtSearch;
     }
 
-   
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

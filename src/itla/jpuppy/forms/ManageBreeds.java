@@ -23,15 +23,15 @@ public class ManageBreeds extends javax.swing.JDialog implements FrameOption{
     public ManageBreeds(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
-        ControllerBreeds cb = new ControllerBreeds(this);
+        /*ControllerBreeds cb = new ControllerBreeds(this);
         setController(cb);
         this.setLocationRelativeTo(null);
         this.setTitle("Manage Users");
-        this.setResizable(false);
+        this.setResizable(false);*/
     }
 
    
-    public void setController(ControllerBreeds cb)
+    /*public void setController(ControllerBreeds cb)
     {
         btnAdd.addActionListener(cb);
         btnUpdate.addActionListener(cb);
@@ -39,7 +39,7 @@ public class ManageBreeds extends javax.swing.JDialog implements FrameOption{
         btnSave.addActionListener(cb);
         btnRemove.addActionListener(cb);
         btnCancel.addActionListener(cb);
-    }
+    }*/
     /** Creates new form NewJFrame */
 
     @SuppressWarnings("unchecked")

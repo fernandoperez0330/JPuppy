@@ -13,6 +13,7 @@ public class Customers extends Persons implements Serializable {
     private List<Patients> patients;
 
     public Customers() {
+       
     }
 
     public Customers(String name, String lastName, String cedula) {
