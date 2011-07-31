@@ -1,54 +1,64 @@
 package itla.jpuppy.forms;
+
 import itla.jpuppy.controllers.ControllerSpecies;
-import java.awt.Frame;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
+import javax.swing.*;
 import javax.swing.JTextField;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * NewJFrame.java
- *
- * Created on Jul 25, 2011, 1:32:21 AM
- */
-
 /**
  *
  * @author Adderly
  */
-public class ManageSpecies extends JFrame implements FrameOption{
+public class ManageSpecies extends JDialog implements FrameOption {
 
     public ManageSpecies() {
-    //public ManageSpecies(Frame owner, boolean modal) {
+        //public ManageSpecies(Frame owner, boolean modal) {
         //super(owner, modal);
         initComponents();
         ControllerSpecies cs = new ControllerSpecies(this);
-        
+
         btnAdd.addActionListener(cs);
         btnAdd.setActionCommand("Add");
         btnUpdate.addActionListener(cs);
+        btnUpdate.setActionCommand("Update");
         btnSearch.addActionListener(cs);
+        btnSearch.setActionCommand("Search");
         btnSave.addActionListener(cs);
+        btnSave.setActionCommand("Save");
         btnRemove.addActionListener(cs);
+        btnRemove.setActionCommand("Remove");
         btnCancel.addActionListener(cs);
+        btnCancel.setActionCommand("Cancel");
         this.setLocationRelativeTo(null);
         this.setTitle("Manage Species");
         this.setResizable(false);
     }
-     
-     public String getActionCommandAdd(){
-         return btnAdd.getActionCommand();
-     }
-     public String getActionCommandUpd(){
-         return btnUpdate.getActionCommand();
-     }
-   
+
+    //Acceso a los Actions Commands de los botones
+    public String getActionCommandAdd() {
+        return btnAdd.getActionCommand();
+    }
+
+    public String getActionCommandUpd() {
+        return btnUpdate.getActionCommand();
+    }
+
+    public String getActionCommandSearch() {
+        return btnSearch.getActionCommand();
+    }
+
+    public String getActionCommandSave() {
+        return btnSave.getActionCommand();
+    }
+
+    public String getActionCommandRemove() {
+        return btnRemove.getActionCommand();
+    }
+
+    public String getActionCommandCancel() {
+        return btnCancel.getActionCommand();
+    }
 
     /** Creates new form NewJFrame */
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -184,12 +194,9 @@ public class ManageSpecies extends JFrame implements FrameOption{
     public void setjComboBoxNameBreeds(JComboBox jComboBoxNameBreeds) {
         this.jComboBoxNameBreeds = jComboBoxNameBreeds;
     }
-
     /**
-    * @param args the command line arguments
-    */
-  
-
+     * @param args the command line arguments
+     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TxtFieldEspecie;
     private javax.swing.JButton btnAdd;
@@ -214,7 +221,4 @@ public class ManageSpecies extends JFrame implements FrameOption{
     public void closeFrame() {
         this.dispose();
     }
-
-
-
 }
