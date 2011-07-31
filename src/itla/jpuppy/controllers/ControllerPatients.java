@@ -10,8 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.List;
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
 
 public class ControllerPatients extends Controller implements ActionListener {
@@ -41,6 +44,17 @@ public class ControllerPatients extends Controller implements ActionListener {
             tableModel.addRow(rows);
         }
         return tableModel;
+    }
+    
+    public DefaultListModel getModelCustomerbyName(String name){
+        DefaultListModel listModel = new DefaultListModel();
+        List<Customers> arrPatients = modelCustomer.searchAllCustomerByName(name); 
+        for (Customers customer: arrPatients){
+            listModel.addElement(Long.toString(customer.getPersonId()));
+            listModel.addElement(customer.getName());
+        }
+        //listModel.addElement(name);
+        return listModel;
     }
 
     @Override
@@ -83,7 +97,7 @@ public class ControllerPatients extends Controller implements ActionListener {
                 }
             }
         }else if (nameButtonPressed.equals("searchCustomer")){
-            new SearchCustomer(null,true).showFrame();
+            new SearchCustomer(this.managePatients,true).showFrame();
         }else if (nameButtonPressed.equals("cancel")) {
             int respond = JOptionPane.showConfirmDialog(null, "Desea Cancelar esta transaccion?", "Cancelar", JOptionPane.OK_CANCEL_OPTION);
             if (respond == 0) {

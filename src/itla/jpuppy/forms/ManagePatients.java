@@ -44,8 +44,6 @@ public class ManagePatients extends JDialog implements FrameOption {
     //controlador
     private ControllerPatients Controller = new ControllerPatients(this);
     
-    
-    
     //constructor cuando es para mostrar el administrador
     public ManagePatients(Frame owner, boolean modal) {
         super(owner, modal);
@@ -347,6 +345,15 @@ public class ManagePatients extends JDialog implements FrameOption {
                 break;
         }
     }
+    
+    public ControllerPatients getController() {
+        return Controller;
+    }
+
+    public void setController(ControllerPatients Controller) {
+        this.Controller = Controller;
+    }
+    
 
     @Override
     public void showFrame() {
