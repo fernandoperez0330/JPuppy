@@ -20,13 +20,34 @@ import java.awt.Frame;
 
 public class ManagePatients extends javax.swing.JDialog implements FrameOption {
 
+    //constructor cuando es para mostrar el administrador
     public ManagePatients(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
         ControllerPatients cp = new ControllerPatients(this);
-         setController(cp);
+        setController(cp);
         this.setLocationRelativeTo(null);
-        this.setTitle("Manage Users");
+        this.setTitle("Lista de pacientes");
+        this.setResizable(false);
+    }
+    
+    public ManagePatients(Frame owner, boolean modal,boolean flagManage){
+        super(owner, modal);
+        initComponents();
+        ControllerPatients cp = new ControllerPatients(this);
+        setController(cp);
+        this.setLocationRelativeTo(null);
+        this.setTitle("Agregar paciente nuevo");
+        this.setResizable(false);
+    }
+    
+    public ManagePatients(Frame owner, boolean modal,boolean flagManage,int patientId){
+        super(owner, modal);
+        initComponents();
+        ControllerPatients cp = new ControllerPatients(this);
+        setController(cp);
+        this.setLocationRelativeTo(null);
+        this.setTitle("Modificar paciente");
         this.setResizable(false);
     }
 
@@ -235,7 +256,7 @@ public class ManagePatients extends javax.swing.JDialog implements FrameOption {
 
     @Override
     public void closeFrame() {
-        this.dispose();
+        this.setVisible(false);
     }
 
     /**
@@ -326,14 +347,11 @@ public class ManagePatients extends javax.swing.JDialog implements FrameOption {
     }
 
     private void setController(ControllerPatients cp) {
-         btnAdd.addActionListener(cp);
+        btnAdd.addActionListener(cp);
         btnUpdate.addActionListener(cp);
         btnSearch.addActionListener(cp);
         btnSave.addActionListener(cp);
         btnRemove.addActionListener(cp);
         btnCancel.addActionListener(cp);
     }
-
-
-
 }

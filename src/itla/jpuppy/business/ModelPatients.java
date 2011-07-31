@@ -1,15 +1,16 @@
 package itla.jpuppy.business;
 
+import itla.jpuppy.datalayer.Customers;
 import itla.jpuppy.datalayer.Patients;
 import java.util.List;
-import javax.persistence.EntityManager;
 
 public class ModelPatients implements GeneralModel {
 
     private QueryManager queryManager;
-
+    private Patients patient;
     public ModelPatients() {
         queryManager = new QueryManager();
+        patient = new Patients();
     }
 
     //Este metodo todavia no estas totalmente definido , se necesita especificar si id seria unico
@@ -50,4 +51,15 @@ public class ModelPatients implements GeneralModel {
         Patients g = ( Patients )object;
         return queryManager.deleteObject( g );
     }
+    
+    public Patients getPatient(){
+        return patient;
+    }
+    
+    //metodo para buscar un cliente por el id del paciente
+    public Customers getCustomerbyPatientId(int id){
+        return new Customers();
+    } 
+    
+    
 }
