@@ -1,6 +1,7 @@
 package itla.jpuppy.forms;
 
 
+import itla.jpuppy.controllers.ControllerBreeds;
 import java.awt.Frame;
 /*
  * To change this template, choose Tools | Templates
@@ -22,14 +23,23 @@ public class ManageBreeds extends javax.swing.JDialog implements FrameOption{
     public ManageBreeds(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
-       
+        ControllerBreeds cb = new ControllerBreeds(this);
+        setController(cb);
         this.setLocationRelativeTo(null);
         this.setTitle("Manage Users");
         this.setResizable(false);
     }
 
    
-
+    public void setController(ControllerBreeds cb)
+    {
+        btnAdd.addActionListener(cb);
+        btnUpdate.addActionListener(cb);
+        btnSearch.addActionListener(cb);
+        btnSave.addActionListener(cb);
+        btnRemove.addActionListener(cb);
+        btnCancel.addActionListener(cb);
+    }
     /** Creates new form NewJFrame */
 
     @SuppressWarnings("unchecked")
@@ -111,39 +121,35 @@ public class ManageBreeds extends javax.swing.JDialog implements FrameOption{
 
         pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
 
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/add.png"))); // NOI18N
+        btnAdd.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/add.png"));
         btnAdd.setFocusable(false);
         btnAdd.setMaximumSize(new java.awt.Dimension(50, 50));
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
+        btnAdd.setName("add"); // NOI18N
         pnButtons.add(btnAdd);
 
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/edit.png"))); // NOI18N
+        btnUpdate.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/edit.png"));
         btnUpdate.setFocusable(false);
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
+        btnUpdate.setName("update"); // NOI18N
         pnButtons.add(btnUpdate);
 
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/find.png"))); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/find.png"));
         btnSearch.setFocusable(false);
+        btnSearch.setName("search"); // NOI18N
         pnButtons.add(btnSearch);
 
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/save.png"))); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/save.png"));
         btnSave.setFocusable(false);
+        btnSave.setName("save"); // NOI18N
         pnButtons.add(btnSave);
 
-        btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/remove.png"))); // NOI18N
+        btnRemove.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/remove.png"));
         btnRemove.setFocusable(false);
+        btnRemove.setName("remove"); // NOI18N
         pnButtons.add(btnRemove);
 
-        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/image/cancel.png"))); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/cancel.png"));
         btnCancel.setFocusable(false);
+        btnCancel.setName("cancel"); // NOI18N
         pnButtons.add(btnCancel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -173,24 +179,10 @@ public class ManageBreeds extends javax.swing.JDialog implements FrameOption{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-}//GEN-LAST:event_btnUpdateActionPerformed
-
     /**
     * @param args the command line arguments
     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ManageBreeds(null,true).setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TxtFieldAltura;
@@ -213,12 +205,12 @@ public class ManageBreeds extends javax.swing.JDialog implements FrameOption{
 
     @Override
     public void showFrame() {
-        throw new UnsupportedOperationException("Not supported yet.");
+       this.setVisible(true);
     }
 
     @Override
     public void closeFrame() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.dispose();
     }
 
 }

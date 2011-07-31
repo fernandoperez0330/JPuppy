@@ -230,12 +230,12 @@ public class ManagePatients extends javax.swing.JDialog implements FrameOption {
 
     @Override
     public void showFrame() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.setVisible(true);
     }
 
     @Override
     public void closeFrame() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.dispose();
     }
 
     /**

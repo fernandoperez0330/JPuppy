@@ -26,7 +26,7 @@ public class ManageSpecies extends javax.swing.JDialog implements FrameOption{
         ControllerSpecies cs = new ControllerSpecies(this);
         setController(cs);
         this.setLocationRelativeTo(null);
-        this.setTitle("Manage Users");
+        this.setTitle("Manage Species");
         this.setResizable(false);
     }
 
@@ -202,12 +202,12 @@ public class ManageSpecies extends javax.swing.JDialog implements FrameOption{
 
     @Override
     public void showFrame() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.setVisible(true);
     }
 
     @Override
     public void closeFrame() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.dispose();
     }
 
 
