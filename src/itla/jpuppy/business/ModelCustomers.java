@@ -17,7 +17,7 @@ public class ModelCustomers implements GeneralModel {
     
     public Customers searchCustomer(int id) {
         EntityManager entityManager = EntityManagerCreator.getInstanceEM();
-        Customers temp = entityManager.find(Customers.class, id);
+        Customers temp = entityManager.find(Customers.class,(long) id);
         return temp;
     }
 

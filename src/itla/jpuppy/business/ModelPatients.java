@@ -1,8 +1,8 @@
 package itla.jpuppy.business;
 
+import itla.jpuppy.datalayer.Customers;
 import itla.jpuppy.datalayer.Patients;
 import java.util.List;
-import javax.persistence.EntityManager;
 
 public class ModelPatients implements GeneralModel {
 
@@ -55,4 +55,11 @@ public class ModelPatients implements GeneralModel {
     public Patients getPatient(){
         return patient;
     }
+    
+    //metodo para buscar un cliente por el id del paciente
+    public Customers getCustomerbyPatientId(int id){
+        return new Customers();
+    } 
+    
+    
 }
