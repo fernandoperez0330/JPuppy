@@ -12,6 +12,10 @@ public class QueryManager {
         entityManager = EntityManagerCreator.getInstanceEM();
     }
 
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
     public boolean saveObject(Object object) {
         boolean status;
 

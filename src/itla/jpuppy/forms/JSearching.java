@@ -11,6 +11,7 @@
 package itla.jpuppy.forms;
 
 import itla.jpuppy.models.SearchingModel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
@@ -34,6 +35,11 @@ public class JSearching extends javax.swing.JPanel {
         return txtSearch;
     }
 
+    public JTable getTblResult() {
+        return tblResult;
+    }
+    
+    
     
     
     @SuppressWarnings("unchecked")

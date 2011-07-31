@@ -6,7 +6,8 @@ package itla.jpuppy.controllers;
 
 import itla.jpuppy.forms.HomeFrame;
 import itla.jpuppy.forms.ManageBreeds;
-import itla.jpuppy.forms.ManageCustomers;
+import itla.jpuppy.forms.ManageCustomersEdit;
+import itla.jpuppy.forms.ManageCustomersMenu;
 import itla.jpuppy.forms.ManagePatients;
 import itla.jpuppy.forms.ManageSpecies;
 import itla.jpuppy.forms.ManageUsers;
@@ -51,7 +52,8 @@ public class ControllerHome implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         //Menu administrator
         if (e.getSource().equals(home.getMnuiCustomers())){
-            new ManageCustomers(home, true).showFrame();
+            //new ManageCustomersEdit(home, true).showFrame();
+            new ManageCustomersMenu(home, true).showFrame();
         }
         
         if (e.getSource().equals(home.getMnuiPatients())){

@@ -10,37 +10,28 @@ package itla.jpuppy.utils;
  */
 public class GeneralVaribleID {
     
-    private int USerId;
-    private int CustomerID;
-    private int specieId;
-    {
+    private static long USerId;
+    private static long CustomerID;
+    
+    public GeneralVaribleID(){
         USerId=0;
         CustomerID=0;
-        specieId=0;
     }
 
-    public int getCustomerID() {
+    public static long getCustomerID() {
         return CustomerID;
     }
 
-    public void setCustomerID(int CustomerID) {
-        this.CustomerID = CustomerID;
+    public void setCustomerID(long CustomerID) {
+        GeneralVaribleID.CustomerID = CustomerID;
     }
 
-    public int getUSerId() {
+    public long getUSerId() {
         return USerId;
     }
 
     public void setUSerId(int USerId) {
-        this.USerId = USerId;
-    }
-
-    public int getSpecieId() {
-        return specieId;
-    }
-
-    public void setSpecieId(int specieId) {
-        this.specieId = specieId;
+        GeneralVaribleID.USerId = USerId;
     }
     
 }
