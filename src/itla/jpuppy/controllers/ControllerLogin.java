@@ -13,28 +13,22 @@ import javax.swing.JOptionPane;
 public class ControllerLogin implements ActionListener, KeyListener {
 
     Login login = null;
-    //Home home = null;
-    //actionPerformed para los botones del Login
 
     public ControllerLogin(Login login) {
         this.login = login;
     }
 
     public void checkLogin(String name, String password) {
-        //System.out.println("Funciona");
         //pasandole los parametros al metodo validateUser de la clase ModelUsers
         boolean validate = false;
         try {
-             
-           validate = new ModelUsers().validateUser( name , EncryptText.md5(password));
-    
+
+            validate = new ModelUsers().validateUser(name, EncryptText.md5(password));
+
         } catch (Exception exc) {
-            //System.out.println(EncryptText.md5(login.getTxtPassword()));
-           // exc.printStackTrace();
-            //System.out.println("Catch");
+            // exc.printStackTrace();
         }
         if (validate) {
-            //System.out.println("Funciona");
             //cerrando el Login para mostrar el siguiente
             login.closeFrame();
             new HomeFrame().showFrame();
@@ -62,7 +56,7 @@ public class ControllerLogin implements ActionListener, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == 10) {
-            
+
             checkLogin(login.getTxtUsers(), login.getTxtPassword());
         }
     }

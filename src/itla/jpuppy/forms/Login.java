@@ -59,7 +59,7 @@ public class Login implements FrameOption {
         btnExit.setBounds(260, 170, 100, 30);
         
 
-        //instancia del Controlador
+        //Instancia del Controlador
         ControllerLogin mainControl = new ControllerLogin(this);
 
         //agregando los actionListener a los botones del login
