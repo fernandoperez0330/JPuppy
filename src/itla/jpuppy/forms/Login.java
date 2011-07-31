@@ -1,6 +1,6 @@
 package itla.jpuppy.forms;
 
-import itla.jpuppy.controllers.ControllerUsers;
+import itla.jpuppy.controllers.ControllerLogin;
 import itla.jpuppy.utils.Background;
 import java.awt.Color;
 import java.awt.Font;
@@ -60,7 +60,7 @@ public class Login implements FrameOption {
         
 
         //instancia del Controlador
-        ControllerUsers mainControl = new ControllerUsers(this);
+        ControllerLogin mainControl = new ControllerLogin(this);
 
         //agregando los actionListener a los botones del login
         btnEnter.addActionListener(mainControl);
