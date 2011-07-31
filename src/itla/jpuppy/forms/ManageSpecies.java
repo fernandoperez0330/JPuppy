@@ -2,6 +2,7 @@ package itla.jpuppy.forms;
 import itla.jpuppy.controllers.ControllerSpecies;
 import java.awt.Frame;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 /*
  * To change this template, choose Tools | Templates
@@ -18,28 +19,32 @@ import javax.swing.JTextField;
  *
  * @author Adderly
  */
-public class ManageSpecies extends javax.swing.JDialog implements FrameOption{
+public class ManageSpecies extends JFrame implements FrameOption{
 
-    public ManageSpecies(Frame owner, boolean modal) {
-        super(owner, modal);
+    public ManageSpecies() {
+    //public ManageSpecies(Frame owner, boolean modal) {
+        //super(owner, modal);
         initComponents();
         ControllerSpecies cs = new ControllerSpecies(this);
-        setController(cs);
-        this.setLocationRelativeTo(null);
-        this.setTitle("Manage Species");
-        this.setResizable(false);
-    }
-
-     public void setController(ControllerSpecies cs)
-    {
-         btnAdd.addActionListener(cs);
+        
+        btnAdd.addActionListener(cs);
+        btnAdd.setActionCommand("Add");
         btnUpdate.addActionListener(cs);
         btnSearch.addActionListener(cs);
         btnSave.addActionListener(cs);
         btnRemove.addActionListener(cs);
         btnCancel.addActionListener(cs);
+        this.setLocationRelativeTo(null);
+        this.setTitle("Manage Species");
+        this.setResizable(false);
     }
-
+     
+     public String getActionCommandAdd(){
+         return btnAdd.getActionCommand();
+     }
+     public String getActionCommandUpd(){
+         return btnUpdate.getActionCommand();
+     }
    
 
     /** Creates new form NewJFrame */
