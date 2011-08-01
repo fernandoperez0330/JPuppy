@@ -1,6 +1,7 @@
 package itla.jpuppy.forms;
 
 import itla.jpuppy.controllers.ControllerSpecies;
+import itla.jpuppy.models.BreedsTableModel;
 import java.awt.Frame;
 import javax.swing.JComboBox;
 import javax.swing.*;
@@ -27,6 +28,8 @@ public class ManageSpecies extends JDialog implements FrameOption {
         btnCancel.setActionCommand("Cancel");
         btnAddSpecie.addActionListener(cs);
         btnAddSpecie.setActionCommand("AddSpecie");
+        
+        tblBreeds.setModel(BreedsTableModel.getInstance());
 
         this.setLocationRelativeTo(null);
         this.setTitle("Manage Species");
@@ -71,7 +74,7 @@ public class ManageSpecies extends JDialog implements FrameOption {
         jLabel2 = new javax.swing.JLabel();
         jComboBoxNameBreeds = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblBreeds = new javax.swing.JTable();
         btnAddSpecie = new javax.swing.JButton();
         Remover = new javax.swing.JButton();
         pnButtons = new javax.swing.JPanel();
@@ -93,7 +96,7 @@ public class ManageSpecies extends JDialog implements FrameOption {
 
         jComboBoxNameBreeds.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Aviar", "Bovina", "Canina", "Caprina", "Equina", "Exótica", "Felina", "Ovina", "Varias" }));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblBreeds.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -109,7 +112,7 @@ public class ManageSpecies extends JDialog implements FrameOption {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblBreeds);
 
         btnAddSpecie.setText("Agregar");
         btnAddSpecie.addActionListener(new java.awt.event.ActionListener() {
@@ -267,9 +270,9 @@ public class ManageSpecies extends JDialog implements FrameOption {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel pnButtons;
     private javax.swing.JPanel pnFields;
+    private javax.swing.JTable tblBreeds;
     // End of variables declaration//GEN-END:variables
 
     @Override
