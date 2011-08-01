@@ -7,15 +7,16 @@ import javax.persistence.EntityManager;
 public class ModelSpecies implements GeneralModel {
 
     private QueryManager queryManager;
-    private ModelSpecies modelSpecies;
-
-    public ModelSpecies getModelSpecies() {
-        return modelSpecies;
-    }
+    private Species species;
 
     public ModelSpecies() {
         queryManager = new QueryManager();
+        species = new Species();
     }
+    
+    public Species getSpecies() {
+        return species;
+    }    
 
     //retorna un objeto especifico tipo Species cuando se llame debe cargarse el Id desde generalVariableID del paquete util
     //los datos se le asignan cuando el usuario selecciona un cliente  del table
