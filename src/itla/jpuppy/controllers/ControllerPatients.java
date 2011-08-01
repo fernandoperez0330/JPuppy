@@ -8,24 +8,42 @@ import itla.jpuppy.forms.ManagePatients;
 import itla.jpuppy.forms.SearchCustomer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
 
-public class ControllerPatients extends Controller implements ActionListener {
+public class ControllerPatients extends Controller implements ActionListener, KeyListener, MouseListener{
 
     ManagePatients managePatients;
     ModelPatients modelPatients = new ModelPatients();
     ModelCustomers modelCustomer = new ModelCustomers();
+    
+    DefaultListModel listModel;
+    
+    //elementos de la ventana searchcustomer para pacientes
+    private JList ListCustomertoSearch;
+    private SearchCustomer searchCustomer;
+    private List<Long> arrIndexCustomers;
+    
+
     private final String MSG_EMPTY_NAME = "El nombre esta en blanco";
     private final String MSG_EMPTY_BIRTHDATE = "El Cumpleaños esta en blanco";
-    private final String MSG_SAVE_SUCCESSFULL = "El paciente esta agregado correctamente";
-    private final String MSG_ERROR_SUCCESSFULL = "El paciente NO se ha podido agregar, verifque nuevamente";
+    private final String MSG_SAVENEW_SUCCESSFULL = "El paciente esta agregado correctamente";
+    private final String MSG_SAVENEW_ERROR = "El paciente NO se ha podido agregar, verifque nuevamente";
     private final String MSG_CUSTOMER_NOEXIST = "Este cliente no existe en el sistema";
 
     public ControllerPatients(ManagePatients managePatients) {
@@ -37,69 +55,90 @@ public class ControllerPatients extends Controller implements ActionListener {
         tableModel.addColumn("Id");
         tableModel.addColumn("Nombre");
         tableModel.addColumn("Cliente Propietario");
-        tableModel.addColumn("Cumpleaños");
-        List<Patients> arrPatients = modelPatients.searchAllPatientByName("");
+        tableModel.addColumn("Cumpleaño");
+        List<Patients> arrPatients = modelPatients.searchAllPatientByName("%%");
         for (Patients patient : arrPatients) {
             String[] rows = {Integer.toString((int) patient.getPatientsId()), patient.getName(), patient.getOwner().getName(), patient.getBirthDate().toString()};
+            
             tableModel.addRow(rows);
         }
         return tableModel;
     }
     
     public DefaultListModel getModelCustomerbyName(String name){
-        DefaultListModel listModel = new DefaultListModel();
-        List<Customers> arrPatients = modelCustomer.searchAllCustomerByName(name); 
-        for (Customers customer: arrPatients){
-            listModel.addElement(Long.toString(customer.getPersonId()));
-            listModel.addElement(customer.getName());
+        listModel = new DefaultListModel();
+        List<Customers> arrCustomers = modelCustomer.searchAllCustomerByName("%" + name + "%"); 
+        arrIndexCustomers = new ArrayList<Long>();
+        for (Customers customer: arrCustomers){
+            listModel.addElement(Long.toString(customer.getPersonId()) + " - " + customer.getName());
+            //arreglo de los id del cliente 
+            arrIndexCustomers.add(customer.getPersonId());
         }
-        //listModel.addElement(name);
         return listModel;
+    }
+    
+    public JList getListCustomertoSearch() {
+        return ListCustomertoSearch;
+    }
+
+    public void setListCustomertoSearch(JList ListCustomertoSearch) {
+        this.ListCustomertoSearch = ListCustomertoSearch;
+    }
+    
+    public SearchCustomer getSearchCustomer() {
+        return searchCustomer;
+    }
+
+    public void setSearchCustomer(SearchCustomer searchCustomer) {
+        this.searchCustomer = searchCustomer;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton buttonPressed = (JButton) e.getSource();
         String nameButtonPressed = buttonPressed.getName();
-        //cambiar el customerId que esta por defecto
-        int customerId = 1;
+        
         if (nameButtonPressed.equals("add")) {
-            ManagePatients managePatients1 = new ManagePatients(null, true, true);
-            managePatients1.showFrame();
+            /*Cuando es para agregar un nuevo paciente */
+            new ManagePatients(this.managePatients, true, true).showFrame();
         } else if (nameButtonPressed.equals("save")) {
-            System.out.println("ha grabado");
+            /* 
+             * --------------------------------------
+             * Cuando es para grabar un nuevo paciente 
+             * --------------------------------------
+             */
             if (managePatients.getTxtFieldNombre().getText().equals("")) {
                 JOptionPane.showMessageDialog(managePatients, MSG_EMPTY_NAME);
                 managePatients.getTxtFieldNombre().requestFocus();
             } else if (managePatients.getTxtFieldCumpleano().getText().equals("")) {
                 JOptionPane.showMessageDialog(managePatients, MSG_EMPTY_BIRTHDATE);
                 managePatients.getTxtFieldCumpleano().requestFocus();
-            } else if (managePatients.getTxtFieldDueno().getText().equals("")) {
+            } else if (managePatients.getTxtFieldDueno().getText().equals("") && managePatients.getIdDueno().equals("")) {
                 JOptionPane.showMessageDialog(managePatients, MSG_EMPTY_NAME);
                 managePatients.getTxtFieldDueno().requestFocus();
             } else {
-                System.out.println(modelCustomer.searchCustomer(customerId));
                 Patients patients = modelPatients.getPatient();
-                // patients.setName(managePatients.getTxtFieldNombre().getText());
+                patients.setName(managePatients.getTxtFieldNombre().getText());
                 patients.setBirthDate(new Date());
                 //patients.setNotes(managePatients.getTxtFieldNombre().getText());
-                modelCustomer.searchCustomer(1);
-                Customers customer = modelCustomer.searchCustomer(1);
-
+                Customers customer = modelCustomer.searchCustomer(this.managePatients.getIdDueno());
                 patients.setOwner(customer);
                 patients.setDoctorLastVisit("");
                 patients.setLastVisit(new Date());
                 if (modelPatients.insertObject(patients)) {
-                    JOptionPane.showMessageDialog(managePatients, MSG_SAVE_SUCCESSFULL);
+                    JOptionPane.showMessageDialog(managePatients, MSG_SAVENEW_SUCCESSFULL);
+                    this.managePatients.getParent().getjTable1().setModel(this.getTableModelPatients());
                     managePatients.closeFrame();
                 } else {
-                    JOptionPane.showMessageDialog(managePatients, MSG_ERROR_SUCCESSFULL);
+                    //cuando todos el proceso se ejecuto correctamente
+                    this.managePatients.setTitle("algo nuevo");
+                    JOptionPane.showMessageDialog(managePatients, MSG_SAVENEW_ERROR);
                 }
             }
         }else if (nameButtonPressed.equals("searchCustomer")){
             new SearchCustomer(this.managePatients,true).showFrame();
         }else if (nameButtonPressed.equals("cancel")) {
-            int respond = JOptionPane.showConfirmDialog(null, "Desea Cancelar esta transaccion?", "Cancelar", JOptionPane.OK_CANCEL_OPTION);
+            int respond = JOptionPane.showConfirmDialog(null, "¿Desea Cancelar esta transaccion?", "Cancelar", JOptionPane.OK_CANCEL_OPTION);
             if (respond == 0) {
                 this.managePatients.closeFrame();
             }
@@ -109,4 +148,53 @@ public class ControllerPatients extends Controller implements ActionListener {
             System.out.println("ha actualizado");
         }
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
+    @Override
+    public void keyPressed(KeyEvent e) {}
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        JTextField inputPressed = (JTextField) e.getSource();
+        if (inputPressed.getName().equals("textSearchCustomer")){
+            this.ListCustomertoSearch.setModel(this.getModelCustomerbyName(inputPressed.getText()));;
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        JList objPressed = (JList) e.getSource();
+        int clickCount = e.getClickCount();
+ 
+        if (clickCount == 2){
+            Customers customer = modelCustomer.searchCustomer(arrIndexCustomers.get(objPressed.getSelectedIndex()));
+            this.managePatients.setIdDueno(customer.getPersonId());
+            //poner el nombre y el apellido en el campo del dueno
+            this.managePatients.getTxtFieldDueno().setText(customer.getName() + " " + customer.getLastName() );
+            this.getSearchCustomer().closeFrame();
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {}
+
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
+
+    @Override
+    public void eventDelete() {}
+
+    @Override
+    public void eventSave() {}
+
+    @Override
+    public void eventSearch() {}
 }

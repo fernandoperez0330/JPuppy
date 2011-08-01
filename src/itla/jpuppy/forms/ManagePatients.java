@@ -4,7 +4,6 @@ import itla.jpuppy.controllers.ControllerPatients;
 import java.awt.Font;
 import java.awt.Frame;
 import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -16,6 +15,8 @@ import javax.swing.JTextField;
 
 public class ManagePatients extends JDialog implements FrameOption {
     
+    private ManagePatients parent;
+
     private JPanel pnFields;
     private JLabel jLabel1;
     private JLabel jLabel2;
@@ -24,7 +25,7 @@ public class ManagePatients extends JDialog implements FrameOption {
     private JTextField TxtFieldNombre;
     private JTextField TxtFieldDueno;
     //id del cliente propietario del paciente
-    private int idDueno;
+    private Long idDueno;
     private JTextField TxtFieldCumpleano;
     private JScrollPane jScrollPane1;
     private JTextArea jTextAreNota;
@@ -40,7 +41,9 @@ public class ManagePatients extends JDialog implements FrameOption {
     private JButton btnRemove;
     private JButton btnCancel;
     private JButton btnSearchCustomer;
+    
     private JTable jTable1;
+
     //controlador
     private ControllerPatients Controller = new ControllerPatients(this);
     
@@ -56,8 +59,9 @@ public class ManagePatients extends JDialog implements FrameOption {
         this.setResizable(false);
     }
 
-    public ManagePatients(Frame owner, boolean modal, boolean flagManage) {
+    public ManagePatients(ManagePatients owner, boolean modal, boolean flagManage) {
         super(owner, modal);
+        this.parent = owner;
         this.setIconImage(FrameOption.icon.getImage());
         initComponents(2);
         ControllerPatients cp = new ControllerPatients(this);
@@ -67,8 +71,9 @@ public class ManagePatients extends JDialog implements FrameOption {
         this.setResizable(false);
     }
 
-    public ManagePatients(Frame owner, boolean modal, boolean flagManage, int patientId) {
+    public ManagePatients(ManagePatients owner, boolean modal, boolean flagManage, int patientId) {
         super(owner, modal);
+        this.parent = owner;
         this.setIconImage(FrameOption.icon.getImage());
         initComponents(3);
         ControllerPatients cp = new ControllerPatients(this);
@@ -233,11 +238,11 @@ public class ManagePatients extends JDialog implements FrameOption {
         this.TxtFieldUltimaVisita = TxtFieldUltimaVisita;
     }
 
-    public int getIdDueno() {
+    public Long getIdDueno() {
         return idDueno;
     }
 
-    public void setIdDueno(int idDueno) {
+    public void setIdDueno(Long idDueno) {
         this.idDueno = idDueno;
     }
 
@@ -319,6 +324,22 @@ public class ManagePatients extends JDialog implements FrameOption {
 
     public void setBtnUpdate(JButton btnUpdate) {
         this.btnUpdate = btnUpdate;
+    }
+    
+    public JTable getjTable1() {
+        return jTable1;
+    }
+
+    public void setjTable1(JTable jTable1) {
+        this.jTable1 = jTable1;
+    }
+    
+    public ManagePatients getParent() {
+        return parent;
+    }
+
+    public void setParent(ManagePatients parent) {
+        this.parent = parent;
     }
 
     private void setController(ControllerPatients cp, int state) {

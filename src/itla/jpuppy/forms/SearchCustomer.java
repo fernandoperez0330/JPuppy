@@ -3,6 +3,10 @@ package itla.jpuppy.forms;
 import itla.jpuppy.business.ModelCustomers;
 import java.awt.Font;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 public class SearchCustomer extends JDialog implements FrameOption{
     
@@ -20,10 +24,24 @@ public class SearchCustomer extends JDialog implements FrameOption{
     }
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jLabel1 = new JLabel();
+        jTextField1 = new JTextField();
+        jScrollPane1 = new JScrollPane();
+        
+        //adaptar el searchCustomer para que el controlador patients pueda manipular sus componentes
+        this.owner.getController().setSearchCustomer(this);
+        
+        
+        jList1 = new JList(this.owner.getController().getModelCustomerbyName(jTextField1.getText()));
+        
+        jList1.addMouseListener(this.owner.getController());
+        
+        jTextField1.setName("textSearchCustomer");
+        //poner el jlist en el controlador para que pueda manipularlo
+        this.owner.getController().setListCustomertoSearch(jList1);
+        
+        jTextField1.addKeyListener(this.owner.getController());
+        
         jLabel2 = new javax.swing.JLabel();
 
         jLabel1.setFont(new Font("Arial", 1, 14)); // NOI18N
@@ -31,7 +49,6 @@ public class SearchCustomer extends JDialog implements FrameOption{
 
         jTextField1.setFont(new Font("Arial", 1, 14)); // NOI18N
 
-        jList1.setModel(this.owner.getController().getModelCustomerbyName(jTextField1.getText()));
         jScrollPane1.setViewportView(jList1);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
