@@ -7,6 +7,11 @@ import javax.persistence.EntityManager;
 public class ModelSpecies implements GeneralModel {
 
     private QueryManager queryManager;
+    private ModelSpecies modelSpecies;
+
+    public ModelSpecies getModelSpecies() {
+        return modelSpecies;
+    }
 
     public ModelSpecies() {
         queryManager = new QueryManager();
