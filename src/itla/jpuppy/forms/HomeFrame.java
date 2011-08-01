@@ -10,11 +10,7 @@
  */
 package itla.jpuppy.forms;
 
-import itla.jpuppy.business.ModelCustomers;
 import itla.jpuppy.controllers.ControllerHome;
-import itla.jpuppy.datalayer.Customers;
-import itla.jpuppy.models.SearchingCtrlCustomers;
-import itla.jpuppy.models.SearchingModel;
 import itla.jpuppy.utils.Background;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -30,18 +26,13 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
     /** Creates new form JHomeFrame */
     private JPanel background;
     private JSearching searching;
-    private SearchingModel<Customers> modelSearching;
-    private SearchingCtrlCustomers ctrlCustormers;
+    
     private ControllerHome ctrlhome;
-    private ModelCustomers mdlCustomers;
 
     public HomeFrame() {
         initComponents();
         background = new Background("src/itla/jpuppy/resources/Vet.jpg");
         background.setBounds(0, 0, this.getWidth(), this.getHeight());
-        modelSearching = new SearchingModel<Customers>(new String[]{"Id", "Name", "Lastname", "City"}, new SearchingCtrlCustomers());
-        searching = new JSearching(modelSearching);
-        mdlCustomers = new ModelCustomers();
         ctrlhome = new ControllerHome(this);
         this.add(background);
         background.setLayout(new FlowLayout());
@@ -94,7 +85,7 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
     public JMenuItem getMnuiUsers() {
         return mnuiUsers;
     }
-    
+
     private void setListener() {
         searching.getTxtSearch().addKeyListener(ctrlhome);
         mnuiAcerca.addActionListener(ctrlhome);
@@ -108,19 +99,16 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
         mnuiSpecies.addActionListener(ctrlhome);
         mnuiUsers.addActionListener(ctrlhome);
     }
-
-    public ModelCustomers getMdlCustomers() {
-        return mdlCustomers;
-    }
-
-    public SearchingModel<Customers> getModelSearching() {
-        return modelSearching;
-    }
-
+    
     public JSearching getSearching() {
         return searching;
     }
 
+    public void setSearching(JSearching searching) {
+        this.searching = searching;
+    }
+    
+    
     @Override
     public void repaint(long time, int x, int y, int width, int height) {
         super.repaint(time, x, y, width, height);
@@ -253,15 +241,9 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
     public void closeFrame() {
         this.setVisible(false);
     }
-    
-    
-    private void unload() {
-        mdlCustomers.getQueryManager().getEntityManager().close();
-    }
 
     @Override
     public void dispose() {
         super.dispose();
-        unload();
     }
 }

@@ -1,4 +1,5 @@
 package itla.jpuppy.forms;
+
 import java.awt.Frame;
 
 /*
@@ -11,12 +12,11 @@ import java.awt.Frame;
  *
  * Created on Jul 25, 2011, 1:32:21 AM
  */
-
 /**
  *
  * @author Adderly
  */
-public class ManageUsers extends javax.swing.JDialog implements FrameOption{
+public class ManageUsers extends javax.swing.JDialog implements FrameOption {
 
     public ManageUsers(Frame owner, boolean modal) {
         super(owner, modal);
@@ -24,13 +24,10 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
         this.setLocationRelativeTo(null);
         this.setTitle("Manage Users");
         this.setResizable(false);
-        
+
     }
 
-   
-
     /** Creates new form NewJFrame */
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -232,11 +229,9 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
     private void jRadioButtonAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAdministradorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonAdministradorActionPerformed
-
     /**
-    * @param args the command line arguments
-    */
-
+     * @param args the command line arguments
+     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TxtFieldApellido;
     private javax.swing.JTextField TxtFieldCelular;
@@ -273,4 +268,9 @@ public class ManageUsers extends javax.swing.JDialog implements FrameOption{
         this.setVisible(false);
     }
 
+    @Override
+    public void dispose() {
+        itla.jpuppy.business.EntityManagerCreator.close();
+        super.dispose();
+    }
 }

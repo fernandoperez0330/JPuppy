@@ -1,5 +1,6 @@
 package itla.jpuppy.forms;
 
+import itla.jpuppy.business.EntityManagerCreator;
 import itla.jpuppy.business.ModelCustomers;
 import itla.jpuppy.controllers.ControllerCutomers;
 import itla.jpuppy.datalayer.Customers;
@@ -15,6 +16,22 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
     private SearchingCtrlCustomers ctrlCustormers;
     private ModelCustomers mdlCustomers;
     private ControllerCutomers ctrlCustormersEntity;
+    
+    public ManageCustomersMenu(Frame owner, boolean modal,SearchingModel<Customers> modelSearching,SearchingCtrlCustomers ctrlCustormers,ModelCustomers mdlCustomers) {
+        super(owner, modal);
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setTitle("Manage Customers");
+        this.setResizable(false);
+        this.modelSearching = modelSearching;
+        searching = new JSearching(modelSearching);
+        this.ctrlCustormers = ctrlCustormers;
+        this.mdlCustomers = mdlCustomers;
+        ctrlCustormersEntity = new ControllerCutomers(this);
+        searching.setBounds(54, 160, 786, 474);
+        setListener();
+        this.add(searching);
+    }
 
     public ManageCustomersMenu(Frame owner, boolean modal) {
         super(owner, modal);
@@ -138,13 +155,9 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
         this.setVisible(false);
     }
 
-    private void unload() {
-        mdlCustomers.getQueryManager().getEntityManager().close();
-    }
-
     @Override
     public void dispose() {
+        EntityManagerCreator.close();
         super.dispose();
-        unload();
     }
 }
