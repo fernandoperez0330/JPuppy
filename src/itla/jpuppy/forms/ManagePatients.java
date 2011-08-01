@@ -92,6 +92,8 @@ public class ManagePatients extends JDialog implements FrameOption {
         switch (state) {
             //cuando es para agregar un nuevo paciente
             case 2:
+                getContentManage(null);
+                break;
             //cuando es para modificar un paciente
             case 3:            
                 getContentManage(this.patientId);
@@ -181,7 +183,7 @@ public class ManagePatients extends JDialog implements FrameOption {
         btnSearchCustomer = new JButton();
         
         //verificar si es un paciente nuevo a agregar o uno existente a modificar
-        if (patientId != 0){
+        if (patientId == null){
             Controller.findPatient(patientId);
         }
 
