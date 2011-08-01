@@ -33,7 +33,7 @@ public class SearchCustomer extends JDialog implements FrameOption{
         
         
         jList1 = new JList(this.owner.getController().getModelCustomerbyName(jTextField1.getText()));
-        
+        jList1.setName("listCustomer");
         jList1.addMouseListener(this.owner.getController());
         
         jTextField1.setName("textSearchCustomer");

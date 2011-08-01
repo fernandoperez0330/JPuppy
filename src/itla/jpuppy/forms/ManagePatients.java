@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 public class ManagePatients extends JDialog implements FrameOption {
     
     private ManagePatients parent;
-    private Long patientId;
+    private Long patientId = null;
 
     private JPanel pnFields;
     private JLabel jLabel1;
@@ -53,8 +53,7 @@ public class ManagePatients extends JDialog implements FrameOption {
         super(owner, modal);
         this.setIconImage(FrameOption.icon.getImage());
         initComponents(1);
-        ControllerPatients cp = new ControllerPatients(this);
-        setController(cp, 1);
+        setController(Controller, 1);
         this.setLocationRelativeTo(null);
         this.setTitle("Lista de pacientes");
         this.setResizable(false);
@@ -65,8 +64,7 @@ public class ManagePatients extends JDialog implements FrameOption {
         this.parent = owner;
         this.setIconImage(FrameOption.icon.getImage());
         initComponents(2);
-        ControllerPatients cp = new ControllerPatients(this);
-        setController(cp, 2);
+        setController(Controller, 2);
         this.setLocationRelativeTo(null);
         this.setTitle("Agregar paciente nuevo");
         this.setResizable(false);
@@ -78,8 +76,7 @@ public class ManagePatients extends JDialog implements FrameOption {
         this.patientId = patientId;
         this.setIconImage(FrameOption.icon.getImage());
         initComponents(3);
-        ControllerPatients cp = new ControllerPatients(this);
-        setController(cp, 3);
+        setController(Controller, 3);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle("Modificar paciente");
@@ -357,26 +354,35 @@ public class ManagePatients extends JDialog implements FrameOption {
     public void setParent(ManagePatients parent) {
         this.parent = parent;
     }
+    
+    public Long getPatientId() {
+        return patientId;
+    }
 
-    private void setController(ControllerPatients cp, int state) {
+    public void setPatientId(Long patientId) {
+        this.patientId = patientId;
+    }
+
+    private void setController(ControllerPatients Controller, int state) {
         switch (state) {
             //cuando es para agregar un nuevo paciente
             case 2:
-                btnSave.addActionListener(cp);
-                btnCancel.addActionListener(cp);
-                btnSearchCustomer.addActionListener(cp);
+                btnSave.addActionListener(Controller);
+                btnCancel.addActionListener(Controller);
+                btnSearchCustomer.addActionListener(Controller);
                 break;
             //cuando es para modificar un paciente
             case 3:
-                //btnSave.addActionListener(cp);
-                //btnCancel.addActionListener(cp);
+                btnSave.addActionListener(Controller);
+                btnCancel.addActionListener(Controller);
+                btnSearchCustomer.addActionListener(Controller);
                 break;
             //cuando es para listar los pacientes
             default:
-                btnAdd.addActionListener(cp);
-                btnUpdate.addActionListener(cp);
-                btnSearch.addActionListener(cp);
-                btnRemove.addActionListener(cp);
+                btnAdd.addActionListener(Controller);
+                btnUpdate.addActionListener(Controller);
+                btnSearch.addActionListener(Controller);
+                btnRemove.addActionListener(Controller);
                 break;
         }
     }
