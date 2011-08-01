@@ -1,5 +1,6 @@
 package itla.jpuppy.forms;
 
+import datechooser.beans.DateChooserCombo;
 import itla.jpuppy.controllers.ControllerPatients;
 import java.awt.Font;
 import java.awt.Frame;
@@ -27,12 +28,12 @@ public class ManagePatients extends JDialog implements FrameOption {
     private JTextField TxtFieldDueno;
     //id del cliente propietario del paciente
     private Long idDueno;
-    private JTextField TxtFieldCumpleano;
+    private DateChooserCombo TxtFieldCumpleano;
     private JScrollPane jScrollPane1;
     private JTextArea jTextAreNota;
     private JLabel jLabel5;
     private JLabel jLabel6;
-    private JTextField TxtFieldUltimaVisita;
+    private DateChooserCombo TxtFieldUltimaVisita;
     private JTextField TxtFieldUltimaVisitaDoctor;
     private JPanel pnButtons;
     private JButton btnAdd;
@@ -167,12 +168,12 @@ public class ManagePatients extends JDialog implements FrameOption {
         jLabel4 = new JLabel();
         TxtFieldNombre = new JTextField();
         TxtFieldDueno = new JTextField();
-        TxtFieldCumpleano = new JTextField();
+        TxtFieldCumpleano = new DateChooserCombo();
         jScrollPane1 = new JScrollPane();
         jTextAreNota = new JTextArea();
         jLabel5 = new JLabel();
         jLabel6 = new JLabel();
-        TxtFieldUltimaVisita = new JTextField();
+        TxtFieldUltimaVisita = new DateChooserCombo();
         TxtFieldUltimaVisitaDoctor = new JTextField();
         pnButtons = new JPanel();
         btnSave = new JButton();
@@ -243,11 +244,11 @@ public class ManagePatients extends JDialog implements FrameOption {
     
     }
     
-    public JTextField getTxtFieldUltimaVisita() {
+    public DateChooserCombo getTxtFieldUltimaVisita() {
         return TxtFieldUltimaVisita;
     }
 
-    public void setTxtFieldUltimaVisita(JTextField TxtFieldUltimaVisita) {
+    public void setTxtFieldUltimaVisita(DateChooserCombo TxtFieldUltimaVisita) {
         this.TxtFieldUltimaVisita = TxtFieldUltimaVisita;
     }
 
@@ -259,11 +260,11 @@ public class ManagePatients extends JDialog implements FrameOption {
         this.idDueno = idDueno;
     }
 
-    public JTextField getTxtFieldCumpleano() {
+    public DateChooserCombo getTxtFieldCumpleano() {
         return TxtFieldCumpleano;
     }
 
-    public void setTxtFieldCumpleano(JTextField TxtFieldCumpleano) {
+    public void setTxtFieldCumpleano(DateChooserCombo TxtFieldCumpleano) {
         this.TxtFieldCumpleano = TxtFieldCumpleano;
     }
 
@@ -404,5 +405,9 @@ public class ManagePatients extends JDialog implements FrameOption {
     @Override
     public void closeFrame() {
         this.setVisible(false);
+    }
+    @Override
+    public void dispose() {
+        super.dispose();
     }
 }
