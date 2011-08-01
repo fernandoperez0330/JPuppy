@@ -16,7 +16,7 @@ public class ModelSpecies implements GeneralModel {
     
     public Species getSpecies() {
         return species;
-    }    
+    }     
 
     //retorna un objeto especifico tipo Species cuando se llame debe cargarse el Id desde generalVariableID del paquete util
     //los datos se le asignan cuando el usuario selecciona un cliente  del table

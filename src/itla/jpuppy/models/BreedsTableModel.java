@@ -2,6 +2,7 @@ package itla.jpuppy.models;
 
 import javax.swing.table.AbstractTableModel;
 
+//Modelo de agregado de Breeds
 public class BreedsTableModel extends AbstractTableModel{
 
     @Override

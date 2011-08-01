@@ -6,10 +6,6 @@ import javax.swing.JComboBox;
 import javax.swing.*;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Adderly
- */
 public class ManageSpecies extends JDialog implements FrameOption {
 
     public ManageSpecies(Frame owner, boolean modal) {
