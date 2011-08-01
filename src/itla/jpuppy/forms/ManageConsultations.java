@@ -1,5 +1,6 @@
 package itla.jpuppy.forms;
 //import itla.jpuppy.controllers.ControllerConsultations;
+import datechooser.beans.DateChooserCombo;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -65,10 +66,8 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
         jLabel6 = new javax.swing.JLabel();
         cbPatientConsultations = new javax.swing.JComboBox();
         txtRemarkConsultations = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        dateChooserBeginConsultations = new datechooser.beans.DateChooserCombo();
+        dateChooserEndConsultations = new datechooser.beans.DateChooserCombo();
         pnButtons3 = new javax.swing.JPanel();
         btnAddConsultations = new javax.swing.JButton();
         btnUpdateConsultations = new javax.swing.JButton();
@@ -104,18 +103,6 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel6.setText("Paciente:");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
         pnFields.setLayout(pnFieldsLayout);
         pnFieldsLayout.setHorizontalGroup(
@@ -125,16 +112,12 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnFieldsLayout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(10, 10, 10)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dateChooserBeginConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(dateChooserEndConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnFieldsLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(10, 10, 10)
@@ -165,20 +148,19 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
                             .addGroup(pnFieldsLayout.createSequentialGroup()
                                 .addGap(1, 1, 1)
                                 .addComponent(jLabel1))
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel3)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(cbCustomerConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnFieldsLayout.createSequentialGroup()
                                 .addGap(1, 1, 1)
                                 .addComponent(jLabel6))
                             .addComponent(cbPatientConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(dateChooserBeginConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnFieldsLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jLabel5)))
+                        .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dateChooserEndConsultations, 0, 0, Short.MAX_VALUE)
+                            .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(12, 12, 12)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnFieldsLayout.createSequentialGroup()
@@ -243,14 +225,6 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
    
     
 
@@ -264,8 +238,8 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
     private javax.swing.JComboBox cbCustomerConsultations;
     private javax.swing.JComboBox cbPatientConsultations;
     private javax.swing.JComboBox cbTypeConsultations;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private datechooser.beans.DateChooserCombo dateChooserBeginConsultations;
+    private datechooser.beans.DateChooserCombo dateChooserEndConsultations;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -273,8 +247,6 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel pnButtons3;
     private javax.swing.JPanel pnFields;
     private javax.swing.JTable tableConsultations;
