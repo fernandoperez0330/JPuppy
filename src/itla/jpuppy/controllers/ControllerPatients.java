@@ -18,6 +18,7 @@ import java.util.List;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -28,11 +29,15 @@ import javax.swing.table.DefaultTableModel;
 
 public class ControllerPatients extends Controller implements ActionListener, KeyListener, MouseListener{
 
-    ManagePatients managePatients;
-    ModelPatients modelPatients = new ModelPatients();
-    ModelCustomers modelCustomer = new ModelCustomers();
+    private ManagePatients managePatients;
+    private ModelPatients modelPatients = new ModelPatients();
+    private ModelCustomers modelCustomer = new ModelCustomers();
     
     DefaultListModel listModel;
+    
+    //elementos para la tabla de pacientes
+    private List<Patients> arrIndexTblPatients;
+    
     
     //elementos de la ventana searchcustomer para pacientes
     private JList ListCustomertoSearch;
@@ -51,7 +56,13 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
     }
 
     public DefaultTableModel getTableModelPatients() {
-        DefaultTableModel tableModel = new DefaultTableModel();
+        arrIndexTblPatients = new ArrayList<Patients>();
+        DefaultTableModel tableModel = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int rows,int columns){
+                return false;
+            }
+        };
         tableModel.addColumn("Id");
         tableModel.addColumn("Nombre");
         tableModel.addColumn("Cliente Propietario");
@@ -59,8 +70,9 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
         List<Patients> arrPatients = modelPatients.searchAllPatientByName("%%");
         for (Patients patient : arrPatients) {
             String[] rows = {Integer.toString((int) patient.getPatientsId()), patient.getName(), patient.getOwner().getName(), patient.getBirthDate().toString()};
-            
             tableModel.addRow(rows);
+            tableModel.isCellEditable(tableModel.getRowCount() - 1,tableModel.getRowCount() - 1);
+            arrIndexTblPatients.add(patient);
         }
         return tableModel;
     }
@@ -92,6 +104,19 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
     public void setSearchCustomer(SearchCustomer searchCustomer) {
         this.searchCustomer = searchCustomer;
     }
+    
+   public void findPatient(Long idPatient){
+       Patients patient = this.modelPatients.searchPatient(Long.toString(idPatient));
+       this.managePatients.getTxtFieldNombre().setText(patient.getName());
+       this.managePatients.getTxtFieldDueno().setText(patient.getOwner().getName() + " " + patient.getOwner().getLastName());
+       this.managePatients.setIdDueno(patient.getOwner().getPersonId());
+       try{
+            this.managePatients.getTxtFieldUltimaVisita().setText(patient.getLastVisit().toString());
+       }catch (NullPointerException exc){ this.managePatients.getTxtFieldUltimaVisita().setText(""); }
+       try{
+            this.managePatients.getTxtFieldCumpleano().setText(patient.getBirthDate().toString());
+       }catch (NullPointerException exc){ this.managePatients.getTxtFieldCumpleano().setText(""); }
+   }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -131,7 +156,6 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
                     managePatients.closeFrame();
                 } else {
                     //cuando todos el proceso se ejecuto correctamente
-                    this.managePatients.setTitle("algo nuevo");
                     JOptionPane.showMessageDialog(managePatients, MSG_SAVENEW_ERROR);
                 }
             }
@@ -145,10 +169,14 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
         } else if (nameButtonPressed.equals("search")) {
             System.out.println("ha buscado");
         } else if (nameButtonPressed.equals("update")) {
-            System.out.println("ha actualizado");
+            if (this.managePatients.getjTable1().getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(null,"No tiene ningun paciente seleccionado para modificar","Error",JOptionPane.OK_OPTION);
+            }else{
+                new ManagePatients(managePatients, true, true,arrIndexTblPatients.get(this.managePatients.getjTable1().getSelectedRow()).getPatientsId()).showFrame();
+            }
         }
     }
-
+    
     @Override
     public void keyTyped(KeyEvent e) {}
 
@@ -165,15 +193,24 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        JList objPressed = (JList) e.getSource();
         int clickCount = e.getClickCount();
- 
         if (clickCount == 2){
-            Customers customer = modelCustomer.searchCustomer(arrIndexCustomers.get(objPressed.getSelectedIndex()));
-            this.managePatients.setIdDueno(customer.getPersonId());
-            //poner el nombre y el apellido en el campo del dueno
-            this.managePatients.getTxtFieldDueno().setText(customer.getName() + " " + customer.getLastName() );
-            this.getSearchCustomer().closeFrame();
+            JComponent objPressed = (JComponent) e.getSource();
+            //listener de la table de pacientes
+            if (objPressed.getName().equals("tablePatients")){
+                JTable tablePressed = (JTable) objPressed;
+                //new ManagePatients(managePatients, true, true,tablePressed.getSelectedColumn()).showFrame();
+                new ManagePatients(managePatients, true, true,arrIndexTblPatients.get(tablePressed.getSelectedRow()).getPatientsId()).showFrame();
+                
+            //listener de la table de clientes para los pacientes
+            }else if (objPressed.getName().equals("listCustomer")){
+                JList listPressed = (JList) objPressed;
+                Customers customer = modelCustomer.searchCustomer(arrIndexCustomers.get(listPressed.getSelectedIndex()));
+                this.managePatients.setIdDueno(customer.getPersonId());
+                //poner el nombre y el apellido en el campo del dueno
+                this.managePatients.getTxtFieldDueno().setText(customer.getName() + " " + customer.getLastName() );
+                this.getSearchCustomer().closeFrame();
+            }
         }
     }
 
