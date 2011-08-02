@@ -2,7 +2,11 @@ package itla.jpuppy.forms;
 
 
 import itla.jpuppy.controllers.ControllerBreeds;
+import itla.jpuppy.controllers.Controller;
 import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -18,28 +22,39 @@ import java.awt.Frame;
  *
  * @author Adderly
  */
-public class ManageBreeds extends javax.swing.JDialog implements FrameOption{
+
+/* Necesito que la Persona que trabajo con esta vista por favor le coloque dos BasicArrowButton */
+/* Uno con orientacion 3 y otro con orientacion 7*/
+
+public class ManageBreeds extends Controller  implements FrameOption{
 
     public ManageBreeds(Frame owner, boolean modal) {
-        super(owner, modal);
+        super();
         initComponents();
-        /*ControllerBreeds cb = new ControllerBreeds(this);
-        setController(cb);
-        this.setLocationRelativeTo(null);
-        this.setTitle("Manage Users");
-        this.setResizable(false);*/
+        ControllerBreeds cb = new ControllerBreeds( this );
+        setController( cb );
+        initFields( this.pnFields , this.pnButtons );
+        this.setLocationRelativeTo( null );
+        this.setTitle( "Manage Users" );
+        this.setResizable( false );
     }
 
    
-    /*public void setController(ControllerBreeds cb)
+    public void setController( ControllerBreeds cb )
     {
+        btnAdd.setActionCommand( "add" );
+        btnUpdate.setActionCommand( "update" );
+        btnSearch.setActionCommand( "search" );
+        btnSave.setActionCommand( "save" );
+        btnRemove.setActionCommand( "remove" );
+        btnCancel.setActionCommand( "cancel" );
         btnAdd.addActionListener(cb);
         btnUpdate.addActionListener(cb);
         btnSearch.addActionListener(cb);
         btnSave.addActionListener(cb);
         btnRemove.addActionListener(cb);
         btnCancel.addActionListener(cb);
-    }*/
+    }
     /** Creates new form NewJFrame */
 
     @SuppressWarnings("unchecked")
@@ -212,5 +227,88 @@ public class ManageBreeds extends javax.swing.JDialog implements FrameOption{
     public void closeFrame() {
         this.dispose();
     }
+    
+    public String getBreedName(){
+        return TxtFieldRaza.getText();
+    }
+   
+    public String getSpecieName(){
+        return TxtFieldEspecie.getText();
+    }
+    
+   
+    public double getBreedWidth(){
+        double width=0;
+        try{
+        width = Double.parseDouble(TxtFieldAncho.getText() );
+        }catch( Exception e ){
+            
+        }
+        return width;
+    }
+    
+    
+    public double getBreedHeigth(){
+        double heigth=0;
+        try{
+        heigth = Double.parseDouble(TxtFieldAltura.getText() );
+        }catch( Exception e ){
+            
+        }
+        return heigth;
+    }
+   
+    public JPanel getPnButtons() {
+        return pnButtons;
+    }
+    
+    public void setAllFields(String breedName,String specieName,double width,double heigth){
+        TxtFieldRaza.setText( breedName );
+        TxtFieldEspecie.setText( specieName );
+        TxtFieldAncho.setText( String.valueOf( width ) );
+        TxtFieldAltura.setText( String.valueOf( heigth ) );
+    }
+  
+
+    @Override
+    public void eventDelete() {
+        if( !isEmptyFields() ){
+        changeStatePnlEdition( false );
+        cleanFields();
+        stateButtons(true, false);
+        }else{
+            javax.swing.JOptionPane.showMessageDialog( null ,"error: no selected register" );
+        }
+    }
+
+    @Override
+    public boolean eventSave() {
+        boolean state=true;
+        if( !isEmptyFields() ){
+            
+       changeStateWriteFields( false );
+       stateButtons(true, false);
+        }else {
+            state = false;
+            javax.swing.JOptionPane.showMessageDialog( null ,"error: cannot save registry , empty field" );
+        }
+        return state;
+       
+    }
+
+    @Override
+    public void eventSearch( String text ) {
+        
+        if( !isEmptyFields() )
+            cleanFields();
+        if( !text.equals("") )
+            changeStateWriteFields( false );
+       stateButtons(true, false);
+       changeStatePnlEdition( true );
+       
+    }
+
+   
+   
 
 }

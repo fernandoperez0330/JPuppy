@@ -49,4 +49,8 @@ public class ModelSpecies implements GeneralModel {
         Species g = (Species) object;
         return queryManager.deleteObject(g);
     }
+    public void close(){
+        queryManager.finalize();
+        EntityManagerCreator.close();
+    }
 }

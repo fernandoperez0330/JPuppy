@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 public class Breeds implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long breedsId;
     @Column(length = 30, nullable = false, unique = true)
     private String breedsName;

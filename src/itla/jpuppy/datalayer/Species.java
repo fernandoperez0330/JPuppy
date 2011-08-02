@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
 public class Species implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long speciesId;
     @Column(length = 30, nullable = false, unique = true)
     private String speciesName;

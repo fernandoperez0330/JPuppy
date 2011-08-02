@@ -1,11 +1,19 @@
 package itla.jpuppy;
 
 import itla.jpuppy.business.EntityManagerCreator;
+import itla.jpuppy.business.GeneralModel;
+import itla.jpuppy.business.ModelBreeds;
+import itla.jpuppy.business.ModelSpecies;
+import itla.jpuppy.business.QueryManager;
 import itla.jpuppy.datalayer.Breeds;
 import itla.jpuppy.datalayer.Species;
 import itla.jpuppy.datalayer.Users;
 import itla.jpuppy.forms.Login;
+import itla.jpuppy.forms.ManageBreeds;
 import itla.jpuppy.utils.EncryptText;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -37,18 +45,8 @@ public class Main {
 //        em.close();
 
  
-    //   new Login().showFrame();
-      
-        EntityManager em = Persistence.createEntityManagerFactory( "JPuppyPU" ).createEntityManager();
-        Species s = new Species( "specie" );
-        
-        em.getTransaction().begin();
-        em.persist( s );
-        Breeds b = new Breeds( "anything", s,5.5, 3.5 );
-        em.persist( b );
-        em.getTransaction().commit();
-        em.close();
-        
-        
+       new Login().showFrame();
+
+    
     }
 }

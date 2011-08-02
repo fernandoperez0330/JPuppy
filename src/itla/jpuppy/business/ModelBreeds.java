@@ -12,7 +12,7 @@ public class ModelBreeds implements GeneralModel {
         queryManager = new QueryManager();
     }
 
-    // Este metodo al igual que el de Patients no esta total definido , la misma situacion de patient
+    
    public Breeds searchBreeds( String breedsName ) {
         List<Breeds> listBreeds = queryManager.searchBreeds( breedsName );
         Breeds temp=null;
@@ -47,5 +47,9 @@ public class ModelBreeds implements GeneralModel {
     public boolean deleteObject(Object object) {
         Breeds g = (Breeds) object;
         return queryManager.deleteObject(g);
+    }
+     public void close(){
+        queryManager.finalize();
+        EntityManagerCreator.close();
     }
 }
