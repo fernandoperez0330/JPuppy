@@ -36,6 +36,7 @@ public class ControllerCutomers implements MouseListener, KeyListener, ActionLis
     private ModelCustomers mdlCustomers;
     private long edicion;
     private int myTableEdicion;
+    private Customers tempCustomer;
 
     public ControllerCutomers(ManageCustomersMenu customersMenu) {
         this.customersMenu = customersMenu;
@@ -49,6 +50,7 @@ public class ControllerCutomers implements MouseListener, KeyListener, ActionLis
         mdlPatients.getQueryManager().setEntityManager(mdlCustomers.getQueryManager().getEntityManager());
         cleanSearch();
         cleanSearchPatients();
+        edicion = 0;
     }
 
     public void cleanSearch() {
@@ -103,6 +105,14 @@ public class ControllerCutomers implements MouseListener, KeyListener, ActionLis
 
         if (e.getSource().equals(customersMenu.getBtnUpdate())) {
             if (edicion != 0) {
+                customersEdit = new ManageCustomersEdit(null, true, this);
+                tempCustomer = mdlCustomers.searchCustomer(edicion);
+                customersEdit.setFieldsValue(tempCustomer.getLastName(), tempCustomer.getCellphone(), tempCustomer.getCity(), tempCustomer.getAddress(), tempCustomer.getEmail(), tempCustomer.getName(), tempCustomer.getTelephone(), tempCustomer.getNote(), tempCustomer.getCedula());
+                myTablePatients.setElements(tempCustomer.getPatients());
+                customersEdit.getTblMyPatients().setModel(myTablePatients);
+                searchByFieldPatients("");
+                customersEdit.showFrame();
+                return;
             } else {
                 javax.swing.JOptionPane.showMessageDialog(null, edicion);
             }
@@ -130,39 +140,17 @@ public class ControllerCutomers implements MouseListener, KeyListener, ActionLis
                 JOptionPane.showMessageDialog(customersEdit, "Existen Campos En Blancos Por Favor Completar", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (mdlCustomers.checkDuplicateCedula(customersEdit.getTxtFieldCedula().getText())) {
-                JOptionPane.showMessageDialog(customersEdit, "Existe Otro Cliente Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
-                return;
+            if (edicion != 0) {
+                update();
+            } else {
+                insert();
             }
-            Calendar c1 = Calendar.getInstance();
-            Customers temp = new Customers(customersEdit.getTxtFieldName().getText(), customersEdit.getTxtFieldLastName().getText(), customersEdit.getTxtFieldCedula().getText(), new Date(c1.get(Calendar.YEAR), c1.get(Calendar.MONTH), c1.get(Calendar.DATE)), customersEdit.getTxtFieldPhone().getText(), customersEdit.getTxtFieldCellphone().getText(), customersEdit.getjTextAreaNote().getText(), customersEdit.getTxtFieldCity().getText(), customersEdit.getTxtFieldMail().getText(), customersEdit.getTxtFieldAdress().getText(), true);
-            if (myTablePatients.getElements().size() < 0) {
-                mdlCustomers.insertObject(temp);
-            }
-
-            if (myTablePatients.getElements().size() > 0) {
-                int i = JOptionPane.showConfirmDialog(customersEdit, "Realmente desea Sobreescribir Los Dueños de Sus Mascotas?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (i == 0) {
-                    temp.setPatients(myTablePatients.getElements());
-                    mdlCustomers.insertObject(temp);
-                    for (Patients patients : myTablePatients.getElements()) {
-                        patients.setOwner(temp);
-                        mdlPatients.updateObject(patients);
-                    }
-                }
-
-
-
-            }
-            JOptionPane.showMessageDialog(customersEdit, "Registro Insertado Exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-            customersEdit.dispose();
-
         }
 
         if (e.getSource().equals(customersEdit.getBtnCancel())) {
-             int i = JOptionPane.showConfirmDialog(customersEdit, "Realmente desea Cancelar la Insercion de Datos", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int i = JOptionPane.showConfirmDialog(customersEdit, "Realmente desea Cancelar la Insercion de Datos", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (i == 0) {
-             customersEdit.dispose();
+                customersEdit.dispose();
             }
             return;
         }
@@ -265,5 +253,45 @@ public class ControllerCutomers implements MouseListener, KeyListener, ActionLis
 
     @Override
     public void windowLostFocus(WindowEvent e) {
+    }
+
+    private void insert() {
+        if (mdlCustomers.checkDuplicateCedula(customersEdit.getTxtFieldCedula().getText())) {
+            JOptionPane.showMessageDialog(customersEdit, "Existe Otro Cliente Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Calendar c1 = Calendar.getInstance();
+        Customers temp = new Customers(customersEdit.getTxtFieldName().getText(), customersEdit.getTxtFieldLastName().getText(), customersEdit.getTxtFieldCedula().getText(), new Date(c1.get(Calendar.YEAR), c1.get(Calendar.MONTH), c1.get(Calendar.DATE)), customersEdit.getTxtFieldPhone().getText(), customersEdit.getTxtFieldCellphone().getText(), customersEdit.getjTextAreaNote().getText(), customersEdit.getTxtFieldCity().getText(), customersEdit.getTxtFieldMail().getText(), customersEdit.getTxtFieldAdress().getText(), true);
+        if (myTablePatients.getElements().size() == 0) {
+            mdlCustomers.insertObject(temp);
+        }
+
+        if (myTablePatients.getElements().size() > 0) {
+            int i = JOptionPane.showConfirmDialog(customersEdit, "Realmente desea Sobreescribir Los Dueños de Sus Mascotas?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (i == 0) {
+                temp.setPatients(myTablePatients.getElements());
+                mdlCustomers.insertObject(temp);
+                for (Patients patients : myTablePatients.getElements()) {
+                    patients.setOwner(temp);
+                    mdlPatients.updateObject(patients);
+                }
+            }
+        }
+        JOptionPane.showMessageDialog(customersEdit, "Registro Insertado Exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        customersEdit.dispose();
+    }
+
+    private void update() {
+        int i = JOptionPane.showConfirmDialog(customersEdit, "Realmente desea Sobreescribir Los Datos de Este Cliente?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (i == 0) {
+            mdlCustomers.updateObject(tempCustomer);
+             for (Patients patients : myTablePatients.getElements()) {
+                    patients.setOwner(tempCustomer);
+                    mdlPatients.updateObject(patients);
+                }
+            JOptionPane.showMessageDialog(customersEdit, "Registro Actualizado Exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            customersEdit.dispose();
+        }
     }
 }

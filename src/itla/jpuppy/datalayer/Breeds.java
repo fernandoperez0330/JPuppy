@@ -24,6 +24,14 @@ public class Breeds implements Serializable {
     public Breeds() {
     }
 
+    public Breeds(String breedsName, double height, double width) {
+        this.breedsName = breedsName;
+        this.height = height;
+        this.width = width;
+    }
+    
+    
+
     public Breeds(String breedsName, Species specie, double height, double width) {
         this.breedsName = breedsName;
         this.specie = specie;
