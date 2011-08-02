@@ -34,6 +34,7 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
         background = new Background("src/itla/jpuppy/resources/Vet.jpg");
         background.setBounds(0, 0, this.getWidth(), this.getHeight());
         ctrlhome = new ControllerHome(this);
+        this.addWindowFocusListener(ctrlhome);
         this.add(background);
         background.setLayout(new FlowLayout());
         background.add(searching);

@@ -29,32 +29,25 @@ public class Patients implements Serializable {
     private long patientsId;
     @Column(length = 30, nullable = false)
     private String name;
-    
     @ManyToOne
     private Customers owner;
     @Column(length = 255)
     private String notes;
     @Temporal(TemporalType.DATE)
     private Date birthDate;
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] image;
     @Temporal(TemporalType.DATE)
     private Date lastVisit;
     @Transient
     private String doctorLastVisit;
-    @OneToMany
-    private List<Appointments> patient;
 
     public Patients() {
     }
 
-    public Patients(String name, Customers owner, String notes, Date birthDate, byte[] image, Date lastVisit, String doctorLastVisit) {
+    public Patients(String name, Customers owner, String notes, Date birthDate, Date lastVisit, String doctorLastVisit) {
         this.name = name;
         this.owner = owner;
         this.notes = notes;
         this.birthDate = birthDate;
-        this.image = image;
         this.lastVisit = lastVisit;
         this.doctorLastVisit = doctorLastVisit;
     }
@@ -74,15 +67,6 @@ public class Patients implements Serializable {
     public void setDoctorLastVisit(String doctorLastVisit) {
         this.doctorLastVisit = doctorLastVisit;
     }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
     public Date getLastVisit() {
         return lastVisit;
     }

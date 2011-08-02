@@ -1,37 +1,14 @@
 package itla.jpuppy.forms;
 
 import itla.jpuppy.business.EntityManagerCreator;
-import itla.jpuppy.business.ModelCustomers;
 import itla.jpuppy.controllers.ControllerCutomers;
-import itla.jpuppy.datalayer.Customers;
-import itla.jpuppy.models.SearchingCtrlCustomers;
-import itla.jpuppy.models.SearchingModel;
 import java.awt.Frame;
 import javax.swing.JButton;
 
 public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOption {
 
     private JSearching searching;
-    private SearchingModel<Customers> modelSearching;
-    private SearchingCtrlCustomers ctrlCustormers;
-    private ModelCustomers mdlCustomers;
-    private ControllerCutomers ctrlCustormersEntity;
-    
-    public ManageCustomersMenu(Frame owner, boolean modal,SearchingModel<Customers> modelSearching,SearchingCtrlCustomers ctrlCustormers,ModelCustomers mdlCustomers) {
-        super(owner, modal);
-        initComponents();
-        this.setLocationRelativeTo(null);
-        this.setTitle("Manage Customers");
-        this.setResizable(false);
-        this.modelSearching = modelSearching;
-        searching = new JSearching(modelSearching);
-        this.ctrlCustormers = ctrlCustormers;
-        this.mdlCustomers = mdlCustomers;
-        ctrlCustormersEntity = new ControllerCutomers(this);
-        searching.setBounds(54, 160, 786, 474);
-        setListener();
-        this.add(searching);
-    }
+    private ControllerCutomers ctrlCustormers;
 
     public ManageCustomersMenu(Frame owner, boolean modal) {
         super(owner, modal);
@@ -39,34 +16,30 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
         this.setLocationRelativeTo(null);
         this.setTitle("Manage Customers");
         this.setResizable(false);
-        modelSearching = new SearchingModel<Customers>(new String[]{"Id", "Name", "Lastname", "City"}, new SearchingCtrlCustomers());
-        searching = new JSearching(modelSearching);
-        mdlCustomers = new ModelCustomers();
-        ctrlCustormersEntity = new ControllerCutomers(this);
+        
+        ctrlCustormers = new ControllerCutomers(this);
+        this.addWindowFocusListener(ctrlCustormers);
         searching.setBounds(54, 160, 786, 474);
         setListener();
         this.add(searching);
     }
 
-    public ModelCustomers getMdlCustomers() {
-        return mdlCustomers;
+    public void setSearching(JSearching searching) {
+        this.searching = searching;
     }
-
-    public SearchingModel<Customers> getModelSearching() {
-        return modelSearching;
-    }
+    
 
     public JSearching getSearching() {
         return searching;
     }
 
     private void setListener() {
-        searching.getTxtSearch().addKeyListener(ctrlCustormersEntity);
-        searching.getTblResult().addMouseListener(ctrlCustormersEntity);
+        searching.getTxtSearch().addKeyListener(ctrlCustormers);
+        searching.getTblResult().addMouseListener(ctrlCustormers);
 
-        btnAdd.addActionListener(ctrlCustormersEntity);
-        btnRemove.addActionListener(ctrlCustormersEntity);
-        btnUpdate.addActionListener(ctrlCustormersEntity);
+        btnAdd.addActionListener(ctrlCustormers);
+        btnRemove.addActionListener(ctrlCustormers);
+        btnUpdate.addActionListener(ctrlCustormers);
     }
 
     /** Creates new form NewJFrame */
@@ -127,6 +100,7 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUpdateActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnUpdate;

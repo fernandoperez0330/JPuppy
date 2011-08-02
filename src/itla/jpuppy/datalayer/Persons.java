@@ -26,9 +26,9 @@ public abstract class Persons implements Serializable {
     private String cedula;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateRegistered;
-    @Column(length = 12)
+    @Column(length = 13)
     private String telephone;
-    @Column(length = 12)
+    @Column(length = 13)
     private String cellphone;
     @Column(length = 255)
     private String note;

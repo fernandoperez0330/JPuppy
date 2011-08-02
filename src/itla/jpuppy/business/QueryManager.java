@@ -12,15 +12,19 @@ public class QueryManager {
         entityManager = EntityManagerCreator.getInstanceEM();
     }
 
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     public EntityManager getEntityManager() {
         return entityManager;
     }
 
-    public Breeds findBreed( long id ){
-        Breeds temp = entityManager.find( Breeds.class, id);
+    public Breeds findBreed(long id) {
+        Breeds temp = entityManager.find(Breeds.class, id);
         return temp;
     }
-    
+
     public boolean saveObject(Object object) {
         boolean status;
 
@@ -38,14 +42,13 @@ public class QueryManager {
 
     public boolean deleteObject(Object object) {
         boolean state = true;
-        
+
         entityManager.getTransaction().begin();
         try {
             entityManager.remove(object);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            e.printStackTrace();
             state = false;
         }
         return state;
@@ -75,55 +78,68 @@ public class QueryManager {
     //Metodos Disponibles para autocomplete en busqueda
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     public List<Users> searchUsers(String name) {
-        List<Users> listUsers=null;
-        try{
-         listUsers = entityManager.createQuery("SELECT a FROM Users a WHERE LOWER(a.name) LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
-        }catch(Exception e){
-            
+        List<Users> listUsers = null;
+        try {
+            listUsers = entityManager.createQuery("SELECT a FROM Users a WHERE LOWER(a.name) LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
+        } catch (Exception e) {
         }
         return listUsers;
     }
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     public List<Customers> searchCustomer(String name) {
-        List<Customers> listCustomers =null;
-        try{
-      listCustomers = entityManager.createQuery("SELECT a FROM Customers a WHERE LOWER(a.name) LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
-        }catch( Exception e){
-            
+        List<Customers> listCustomers = null;
+        try {
+            listCustomers = entityManager.createQuery("SELECT a FROM Customers a WHERE LOWER(a.name) LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
+        } catch (Exception e) {
+        }
+        return listCustomers;
+    }
+
+    public List<Customers> searchCustomerByCedula(String cedula) {
+        List<Customers> listCustomers = null;
+        try {
+            listCustomers = entityManager.createQuery("SELECT a FROM Customers a WHERE LOWER(a.cedula) =:cedulaToFind").setParameter("cedulaToFind", cedula).getResultList();
+        } catch (Exception e) {
         }
         return listCustomers;
     }
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
     public List<Patients> searchPatient(String patientsId) {
-        List<Patients> listPatients=null;
-        try{
-         listPatients = entityManager.createQuery("SELECT a FROM Patients a WHERE LOWER(a.patientsId) LIKE :nameToFind").setParameter("nameToFind", patientsId).getResultList();
-        }catch( Exception e){
-            
+        List<Patients> listPatients = null;
+        try {
+            listPatients = entityManager.createQuery("SELECT a FROM Patients a WHERE LOWER(a.patientsId) LIKE :nameToFind").setParameter("nameToFind", patientsId).getResultList();
+        } catch (Exception e) {
         }
+        return listPatients;
+    }
+
+    public List<Patients> searchPatientByName(String name) {
+        List<Patients> listPatients = null;
+        try{
+            listPatients = entityManager.createQuery("SELECT a FROM Patients a WHERE LOWER(a.name) LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
+        }catch(Exception e){}
+        
         return listPatients;
     }
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
     public List<Species> searchSpecie(String name) {
-        List<Species> listSpecieses =null;
-        try{
-        listSpecieses=entityManager.createQuery("SELECT a FROM Species a WHERE LOWER(a.speciesName) LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
-        }catch( Exception e ){
-            
+        List<Species> listSpecieses = null;
+        try {
+            listSpecieses = entityManager.createQuery("SELECT a FROM Species a WHERE LOWER(a.speciesName) LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
+        } catch (Exception e) {
         }
         return listSpecieses;
     }
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
     public List<Breeds> searchBreeds(String name) {
-        List<Breeds> listBreeds=null;;
-        try{
-        listBreeds = entityManager.createQuery("SELECT a FROM Breeds a WHERE LOWER(a.breedsName) LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
-        }catch( Exception e){
-            
+        List<Breeds> listBreeds = null;;
+        try {
+            listBreeds = entityManager.createQuery("SELECT a FROM Breeds a WHERE LOWER(a.breedsName) LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
+        } catch (Exception e) {
         }
         return listBreeds;
 

@@ -30,7 +30,14 @@ public class ModelCustomers implements GeneralModel {
     public List<Customers> searchAllCustomerByName(String name) {
         return queryManager.searchCustomer(name);
     }
-
+    public boolean checkDuplicateCedula(String cedula){
+        if (queryManager.searchCustomerByCedula(cedula).size()>0){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
     //Metodos comunes a todos los modelos , se llama el correspondiente de  queryManager
     
     @Override

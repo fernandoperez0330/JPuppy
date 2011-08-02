@@ -20,13 +20,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Jordhano
  */
-public class ControllerHome implements ActionListener, KeyListener {
+public class ControllerHome implements ActionListener, KeyListener, WindowFocusListener {
 
     private HomeFrame home = null;
     private SearchingModel<Customers> modelSearching;
@@ -38,7 +40,6 @@ public class ControllerHome implements ActionListener, KeyListener {
         mdlCustomers = new ModelCustomers();
         modelSearching.setElements(mdlCustomers.searchAllCustomerByName("%%"));
         home.setSearching(new JSearching(modelSearching));
-        //home.getModelSearching().setElements(home.getMdlCustomers().searchAllCustomerByName("%%"));
         
     }
     
@@ -56,7 +57,6 @@ public class ControllerHome implements ActionListener, KeyListener {
         javax.swing.JTextField txtSearch = home.getSearching().getTxtSearch();
         if (e.getSource().equals(txtSearch)) {
             modelSearching.setElements(mdlCustomers.searchAllCustomerByName("%" + txtSearch.getText().toLowerCase() + "%"));
-            //home.getModelSearching().setElements(home.getMdlCustomers().searchAllCustomerByName("%" + txtSearch.getText().toLowerCase() + "%"));
         }
 
     }
@@ -66,44 +66,61 @@ public class ControllerHome implements ActionListener, KeyListener {
         //Menu administrator
         if (e.getSource().equals(home.getMnuiCustomers())) {
             //new ManageCustomersEdit(home, true).showFrame();
-            //new ManageCustomersMenu(home, true, home.getModelSearching(), home.getCtrlCustormers(), home.getMdlCustomers()).showFrame();
             itla.jpuppy.business.EntityManagerCreator.close();
             new ManageCustomersMenu(home, true).showFrame();
+            return;
         }
 
         if (e.getSource().equals(home.getMnuiPatients())) {
             new ManagePatients(home, true).showFrame();
+            return;
         }
 
         if (e.getSource().equals(home.getMnuiSpecies())) {
             //new ManageSpecies(home, true).showFrame();
+            return;
         }
 
         if (e.getSource().equals(home.getMnuiBreeds())) {
             new ManageBreeds(home, true).showFrame();
+            return;
         }
 
         if (e.getSource().equals(home.getMnuiEmployees())) {
             JOptionPane.showMessageDialog(home, "Nuestros amigos de Vista Trabajaran En Esto");
+            return;
         }
 
         if (e.getSource().equals(home.getMnuiUsers())) {
             new ManageUsers(home, true).showFrame();
+            return;
         }
 
         //Menu User
 
         if (e.getSource().equals(home.getMnuiExit())) {
             home.dispose();
+            return;
         }
 
         // Menu about Us
         if (e.getSource().equals(home.getMnuiAcerca())) {
             new AboutUsFrame(home, true).showFrame();
+            return;
         }
 
         //e.getSource().equals()
 
 
+    }
+
+    @Override
+    public void windowGainedFocus(WindowEvent e) {
+        modelSearching.setElements(mdlCustomers.searchAllCustomerByName("%" + home.getSearching().getTxtSearch().getText().toLowerCase() + "%"));
+    }
+
+    @Override
+    public void windowLostFocus(WindowEvent e) {
+        ;
     }
 }
