@@ -5,7 +5,7 @@ import itla.jpuppy.business.QueryManager;
 import itla.jpuppy.datalayer.Breeds;
 import itla.jpuppy.datalayer.Species;
 import itla.jpuppy.forms.ManageSpecies;
-import itla.jpuppy.forms.SelectBreeds;
+
 import itla.jpuppy.models.BreedsTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

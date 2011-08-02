@@ -3,7 +3,7 @@ package itla.jpuppy.forms;
 import itla.jpuppy.controllers.ControllerSpecies;
 import itla.jpuppy.datalayer.Breeds;
 import itla.jpuppy.models.BreedsTableModel;
-import itla.jpuppy.models.MyTableCellRenderer;
+
 import java.awt.Frame;
 import java.util.List;
 import java.util.ListIterator;

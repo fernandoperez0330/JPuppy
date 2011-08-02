@@ -88,7 +88,7 @@ public class Login implements FrameOption {
 
     public String getTxtPassword() {
        
-       return  txtPassword.getText();
+       return String.valueOf( txtPassword.getPassword() );
        
     }
 
