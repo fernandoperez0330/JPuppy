@@ -77,7 +77,7 @@ public class ControllerHome implements ActionListener, KeyListener, WindowFocusL
         }
 
         if (e.getSource().equals(home.getMnuiSpecies())) {
-            //new ManageSpecies(home, true).showFrame();
+            new ManageSpecies(home, true).showFrame();
             return;
         }
 

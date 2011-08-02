@@ -20,11 +20,6 @@ public class QueryManager {
         return entityManager;
     }
 
-    public Breeds findBreed(long id) {
-        Breeds temp = entityManager.find(Breeds.class, id);
-        return temp;
-    }
-
     public boolean saveObject(Object object) {
         boolean status;
 
@@ -77,6 +72,11 @@ public class QueryManager {
 
     //Metodos Disponibles para autocomplete en busqueda
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    public Breeds findBreed(long id) {
+        Breeds temp = entityManager.find(Breeds.class, id);
+        return temp;
+    }
+
     public List<Users> searchUsers(String name) {
         List<Users> listUsers = null;
         try {
@@ -117,10 +117,11 @@ public class QueryManager {
 
     public List<Patients> searchPatientByName(String name) {
         List<Patients> listPatients = null;
-        try{
+        try {
             listPatients = entityManager.createQuery("SELECT a FROM Patients a WHERE LOWER(a.name) LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
-        }catch(Exception e){}
-        
+        } catch (Exception e) {
+        }
+
         return listPatients;
     }
 
@@ -141,6 +142,18 @@ public class QueryManager {
             listBreeds = entityManager.createQuery("SELECT a FROM Breeds a WHERE LOWER(a.breedsName) LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
         } catch (Exception e) {
         }
+        return listBreeds;
+
+    }
+
+    public List<Breeds> searchBreeds() {
+        List<Breeds> listBreeds = entityManager.createQuery("SELECT a FROM Breeds a").getResultList();
+        return listBreeds;
+
+    }
+
+    public Breeds searchBreeds(String name, String height) {
+        Breeds listBreeds = (Breeds) entityManager.createQuery("SELECT a FROM Breeds a WHERE a.breedsName = :nameToFind").setParameter("nameToFind", name).getSingleResult();
         return listBreeds;
 
     }

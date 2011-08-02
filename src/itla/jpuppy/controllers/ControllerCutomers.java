@@ -157,14 +157,13 @@ public class ControllerCutomers implements MouseListener, KeyListener, ActionLis
             JOptionPane.showMessageDialog(customersEdit, "Registro Insertado Exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
             customersEdit.dispose();
 
-
-
-
         }
 
         if (e.getSource().equals(customersEdit.getBtnCancel())) {
-            JOptionPane.showConfirmDialog(customersEdit, "Realmente desea Cancelar la Insercion de Datos", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-            customersEdit.dispose();
+             int i = JOptionPane.showConfirmDialog(customersEdit, "Realmente desea Cancelar la Insercion de Datos", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (i == 0) {
+             customersEdit.dispose();
+            }
             return;
         }
 

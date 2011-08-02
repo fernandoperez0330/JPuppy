@@ -3,21 +3,28 @@ package itla.jpuppy.forms;
 import itla.jpuppy.controllers.ControllerSpecies;
 import itla.jpuppy.datalayer.Breeds;
 import itla.jpuppy.models.BreedsTableModel;
-
+import itla.jpuppy.models.EditorTable;
 import java.awt.Frame;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.JComboBox;
 import javax.swing.*;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 public class ManageSpecies extends JDialog implements FrameOption {
 
     BreedsTableModel breedsTableModel = new BreedsTableModel();
+    private List<Breeds> list;
 
-    public ManageSpecies() {
+    public List<Breeds> getList() {
+        return list;
+    }
+    
+    public ManageSpecies(Frame owner, boolean modal) {
+        super(owner, modal);
         initComponents();
         ControllerSpecies cs = new ControllerSpecies(this);
 
@@ -41,14 +48,19 @@ public class ManageSpecies extends JDialog implements FrameOption {
 //        TableColumn col = tblBreeds.getColumnModel().getColumn(vColIndex);
 //        col.setCellRenderer(new MyTableCellRenderer());
 
-//        //Llenar el JTable de los datos existentes
-//        List<Breeds> list = new ControllerSpecies().getBreeds();
-//        for (Breeds value : list) {
-//            breedsTableModel.insertDataModel(value);
-//            //System.out.println(value.getBreedsName());
-//        }
+        //Llenar el JTable de los datos existentes
+         list = new ControllerSpecies().getBreeds();
+        DefaultTableModel temp = (DefaultTableModel) tblBreeds.getModel();
+        for (Breeds value : list) {
+            Object[] nuevo = {value.getBreedsName(), value.getSpecie().getSpeciesName(), value.getWidth(), value.getHeight()};
+            //System.out.println(value.getBreedsName());
+            temp.addRow(nuevo);
+        }
+        
+        EditorTable miRender = new EditorTable();
+        tblBreeds.setDefaultRenderer(Boolean.class, miRender);
 
-
+        
         //BreedsTableModel BreedsTableModel = new BreedsTableModel().getInstance();
         this.setLocationRelativeTo(null);
         this.setTitle("Manage Species");
@@ -109,7 +121,29 @@ public class ManageSpecies extends JDialog implements FrameOption {
 
         jComboBoxNameBreeds.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Aviar", "Bovina", "Canina", "Caprina", "Equina", "Exótica", "Felina", "Ovina", "Varias" }));
 
-        tblBreeds.setModel(breedsTableModel);
+        tblBreeds.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Specie", "Width", "Heidht", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblBreeds);
 
         javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
@@ -216,9 +250,9 @@ public class ManageSpecies extends JDialog implements FrameOption {
     public JComboBox getjComboBoxNameBreeds() {
         return jComboBoxNameBreeds;
     }
-
-    public void setjComboBoxNameBreeds(JComboBox jComboBoxNameBreeds) {
-        this.jComboBoxNameBreeds = jComboBoxNameBreeds;
+    
+    public JTable getJTableBreeds(){
+        return tblBreeds;
     }
     /**
      * @param args the command line arguments

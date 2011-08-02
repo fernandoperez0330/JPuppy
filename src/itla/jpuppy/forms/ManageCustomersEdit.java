@@ -38,8 +38,9 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
         this.setSize(this.getWidth(), 687);
         this.setLocationRelativeTo(null);
         this.setTitle("Manage Customers");
-        //this.setResizable(false);
+        this.setResizable(false);
     }
+    
 
     public JPanel getPnFields() {
         return pnFields;
