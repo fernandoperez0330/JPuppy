@@ -1,16 +1,23 @@
 package itla.jpuppy.forms;
 
 import itla.jpuppy.controllers.ControllerSpecies;
+import itla.jpuppy.datalayer.Breeds;
 import itla.jpuppy.models.BreedsTableModel;
+import itla.jpuppy.models.MyTableCellRenderer;
 import java.awt.Frame;
+import java.util.List;
+import java.util.ListIterator;
 import javax.swing.JComboBox;
 import javax.swing.*;
 import javax.swing.JTextField;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 public class ManageSpecies extends JDialog implements FrameOption {
 
-    public ManageSpecies(Frame owner, boolean modal) {
-        super(owner, modal);
+    BreedsTableModel breedsTableModel = new BreedsTableModel();
+
+    public ManageSpecies() {
         initComponents();
         ControllerSpecies cs = new ControllerSpecies(this);
 
@@ -26,11 +33,23 @@ public class ManageSpecies extends JDialog implements FrameOption {
         btnRemove.setActionCommand("Remove");
         btnCancel.addActionListener(cs);
         btnCancel.setActionCommand("Cancel");
-        btnAddSpecie.addActionListener(cs);
-        btnAddSpecie.setActionCommand("AddSpecie");
-        
-        tblBreeds.setModel(BreedsTableModel.getInstance());
 
+        //tblBreeds.setModel(BreedsTableModel.getInstance());
+        //tblBreeds.getModel().addTableModelListener(cs);
+
+        int vColIndex = 4;
+        TableColumn col = tblBreeds.getColumnModel().getColumn(vColIndex);
+        col.setCellRenderer(new MyTableCellRenderer());
+
+        //Llenar el JTable de los datos existentes
+        List<Breeds> list = new ControllerSpecies().getBreeds();
+        for (Breeds value : list) {
+            breedsTableModel.insertDataModel(value);
+            //System.out.println(value.getBreedsName());
+        }
+
+
+        //BreedsTableModel BreedsTableModel = new BreedsTableModel().getInstance();
         this.setLocationRelativeTo(null);
         this.setTitle("Manage Species");
         this.setResizable(false);
@@ -61,10 +80,6 @@ public class ManageSpecies extends JDialog implements FrameOption {
         return btnCancel.getActionCommand();
     }
 
-    public String getActionCommandAddSpecie() {
-        return btnAddSpecie.getActionCommand();
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -75,8 +90,6 @@ public class ManageSpecies extends JDialog implements FrameOption {
         jComboBoxNameBreeds = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBreeds = new javax.swing.JTable();
-        btnAddSpecie = new javax.swing.JButton();
-        Remover = new javax.swing.JButton();
         pnButtons = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -96,37 +109,8 @@ public class ManageSpecies extends JDialog implements FrameOption {
 
         jComboBoxNameBreeds.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Aviar", "Bovina", "Canina", "Caprina", "Equina", "Exótica", "Felina", "Ovina", "Varias" }));
 
-        tblBreeds.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Raza", "Especie", "Alto", "Ancho"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, false, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        tblBreeds.setModel(breedsTableModel);
         jScrollPane1.setViewportView(tblBreeds);
-
-        btnAddSpecie.setText("Agregar");
-        btnAddSpecie.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddSpecieActionPerformed(evt);
-            }
-        });
-
-        Remover.setText("Remover");
-        Remover.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RemoverActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
         pnFields.setLayout(pnFieldsLayout);
@@ -139,14 +123,9 @@ public class ManageSpecies extends JDialog implements FrameOption {
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(31, 31, 31)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jComboBoxNameBreeds, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE))
-                    .addGroup(pnFieldsLayout.createSequentialGroup()
-                        .addComponent(btnAddSpecie)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Remover)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                    .addComponent(jComboBoxNameBreeds, 0, 352, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnFieldsLayout.setVerticalGroup(
             pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,16 +135,12 @@ public class ManageSpecies extends JDialog implements FrameOption {
                         .addContainerGap()
                         .addComponent(jComboBoxNameBreeds, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnFieldsLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jLabel1)
                         .addGap(34, 34, 34)
                         .addComponent(jLabel2)))
-                .addGap(18, 18, 18)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddSpecie)
-                    .addComponent(Remover))
                 .addContainerGap(118, Short.MAX_VALUE))
         );
 
@@ -238,14 +213,6 @@ public class ManageSpecies extends JDialog implements FrameOption {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void btnAddSpecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSpecieActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddSpecieActionPerformed
-
-    private void RemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RemoverActionPerformed
-
     public JComboBox getjComboBoxNameBreeds() {
         return jComboBoxNameBreeds;
     }
@@ -257,9 +224,7 @@ public class ManageSpecies extends JDialog implements FrameOption {
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Remover;
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnAddSpecie;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnSave;
