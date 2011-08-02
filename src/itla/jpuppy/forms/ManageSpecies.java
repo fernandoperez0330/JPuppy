@@ -37,16 +37,16 @@ public class ManageSpecies extends JDialog implements FrameOption {
         //tblBreeds.setModel(BreedsTableModel.getInstance());
         //tblBreeds.getModel().addTableModelListener(cs);
 
-        int vColIndex = 4;
-        TableColumn col = tblBreeds.getColumnModel().getColumn(vColIndex);
-        col.setCellRenderer(new MyTableCellRenderer());
+//        int vColIndex = 4;
+//        TableColumn col = tblBreeds.getColumnModel().getColumn(vColIndex);
+//        col.setCellRenderer(new MyTableCellRenderer());
 
-        //Llenar el JTable de los datos existentes
-        List<Breeds> list = new ControllerSpecies().getBreeds();
-        for (Breeds value : list) {
-            breedsTableModel.insertDataModel(value);
-            //System.out.println(value.getBreedsName());
-        }
+//        //Llenar el JTable de los datos existentes
+//        List<Breeds> list = new ControllerSpecies().getBreeds();
+//        for (Breeds value : list) {
+//            breedsTableModel.insertDataModel(value);
+//            //System.out.println(value.getBreedsName());
+//        }
 
 
         //BreedsTableModel BreedsTableModel = new BreedsTableModel().getInstance();
