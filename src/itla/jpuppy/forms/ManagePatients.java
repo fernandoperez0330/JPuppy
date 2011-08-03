@@ -4,6 +4,8 @@ import datechooser.beans.DateChooserCombo;
 import itla.jpuppy.controllers.ControllerPatients;
 import java.awt.Font;
 import java.awt.Frame;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -31,6 +33,7 @@ public class ManagePatients extends JDialog implements FrameOption {
     private DateChooserCombo TxtFieldCumpleano;
     private JScrollPane jScrollPane1;
     private JTextArea jTextAreNota;
+
     private JLabel jLabel5;
     private JLabel jLabel6;
     private DateChooserCombo TxtFieldUltimaVisita;
@@ -169,11 +172,16 @@ public class ManagePatients extends JDialog implements FrameOption {
         TxtFieldNombre = new JTextField();
         TxtFieldDueno = new JTextField();
         TxtFieldCumpleano = new DateChooserCombo();
+        TxtFieldCumpleano.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy")); 
+        
         jScrollPane1 = new JScrollPane();
         jTextAreNota = new JTextArea();
         jLabel5 = new JLabel();
         jLabel6 = new JLabel();
         TxtFieldUltimaVisita = new DateChooserCombo();
+        TxtFieldUltimaVisita.setMaxDate(new GregorianCalendar());
+        
+        TxtFieldUltimaVisita.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy")); 
         TxtFieldUltimaVisitaDoctor = new JTextField();
         pnButtons = new JPanel();
         btnSave = new JButton();
@@ -362,6 +370,14 @@ public class ManagePatients extends JDialog implements FrameOption {
 
     public void setPatientId(Long patientId) {
         this.patientId = patientId;
+    }
+    
+     public JTextArea getjTextAreNota() {
+        return jTextAreNota;
+    }
+
+    public void setjTextAreNota(JTextArea jTextAreNota) {
+        this.jTextAreNota = jTextAreNota;
     }
 
     private void setController(ControllerPatients Controller, int state) {

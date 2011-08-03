@@ -12,8 +12,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -50,10 +52,7 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
     }
     
     public DefaultTableModel getTableModelPatients() {
-        if (this.arrIndexTblPatients != null) {
-         this.managePatients.getParent().getController().arrIndexTblPatients.clear();
-        }
-        else this.arrIndexTblPatients = new ArrayList<Long>();
+        arrIndexTblPatients = new ArrayList<Long>();
         DefaultTableModel tableModel = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int rows, int columns) {
@@ -66,7 +65,8 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
         tableModel.addColumn("Cumpleaño");
         List<Patients> arrPatients = modelPatients.searchAllPatientByName("%%");
         for (Patients patient : arrPatients) {
-            String[] rows = {Integer.toString((int) patient.getPatientsId()), patient.getName(), patient.getOwner().getName(), patient.getBirthDate().toString()};
+            //formato a la fecha para mostrarla
+            String[] rows = {Integer.toString((int) patient.getPatientsId()), patient.getName(), patient.getOwner().getName(),new SimpleDateFormat().format(patient.getBirthDate())};
             tableModel.addRow(rows);
             tableModel.isCellEditable(tableModel.getRowCount() - 1, tableModel.getRowCount() - 1);
             arrIndexTblPatients.add(patient.getPatientsId());
@@ -104,19 +104,30 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
 
     public void findPatient(Long idPatient) {
         Patients patient = this.modelPatients.searchPatient(Long.toString(idPatient));
+        //rellenar el campo el nombre
         this.managePatients.getTxtFieldNombre().setText(patient.getName());
+        //rellenar el campo dueno (solo para muestra)
         this.managePatients.getTxtFieldDueno().setText(patient.getOwner().getName() + " " + patient.getOwner().getLastName());
+        //rellenar el campo id del dueno
         this.managePatients.setIdDueno(patient.getOwner().getPersonId());
-        try {
-            this.managePatients.getTxtFieldUltimaVisita().setText(patient.getLastVisit().toString());
-        } catch (NullPointerException exc) {
-            this.managePatients.getTxtFieldUltimaVisita().setText("");
-        }
-        try {
-            this.managePatients.getTxtFieldCumpleano().setText(patient.getBirthDate().toString());
-        } catch (NullPointerException exc) {
-            this.managePatients.getTxtFieldCumpleano().setText("");
-        }
+        //rellenar el campo de cumpleanos
+        GregorianCalendar dateBirthDate = new GregorianCalendar();
+        dateBirthDate.setTime(patient.getBirthDate());
+        this.managePatients.getTxtFieldCumpleano().setSelectedDate(dateBirthDate);
+        
+        //rellenar la ultima visita
+        GregorianCalendar dateLastVisit = new GregorianCalendar();
+        dateLastVisit.setTime(patient.getLastVisit());
+       
+        this.managePatients.getTxtFieldUltimaVisita().setSelectedDate(dateLastVisit);
+        
+        //poner el doctor que lo visito
+        this.managePatients.getTxtFieldUltimaVisitaDoctor().setText(patient.getDoctorLastVisit());
+        
+        
+        //rellenar las notas
+        this.managePatients.getjTextAreNota().setText(patient.getNotes());
+        
     }
 
     @Override
@@ -190,7 +201,7 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
                     patients.setLastVisit(new Date());
                     if (modelPatients.updateObject(patients)) {
                         JOptionPane.showMessageDialog(managePatients, MSG_SAVEEXISTENT_SUCCESSFULL);
-                        this.managePatients.getParent().getjTable1().setModel(this.managePatients.getController().getTableModelPatients());
+                        this.managePatients.getParent().getjTable1().setModel(this.managePatients.getParent().getController().getTableModelPatients());
                         managePatients.closeFrame();
                     } else {
                         //cuando todos el proceso se ejecuto con errores
@@ -254,16 +265,13 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
 
             if (objName.equals("tablePatients")) {
                 JTable tablePressed = (JTable) objPressed;
-                //new ManagePatients(managePatients, true, true,tablePressed.getSelectedColumn()).showFrame();
+               //new ManagePatients(managePatients, true, true,tablePressed.getSelectedColumn()).showFrame();
                Long idPatients = null;
                 try{
                    idPatients = arrIndexTblPatients.get(tablePressed.getSelectedRow());
                 }catch (IndexOutOfBoundsException exc){ 
                     try{
-                        //idPatients = arrIndexTblPatients.get(tablePressed.getSelectedRow());
-                        for (Long index: arrIndexTblPatients){
-                            System.out.println("indice" + index);
-                        }
+                        System.out.println("Error: " + exc.getMessage() + exc.getCause());
                     }catch (IndexOutOfBoundsException subExc){ }
                 }
                 new ManagePatients(managePatients, true, true,idPatients).showFrame();
@@ -300,12 +308,10 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
     }
 
     @Override
-    public void eventSearch(String text) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    public void eventSearch(String text) {}
 
     @Override
     public boolean eventSave() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return false;
     }
 }
