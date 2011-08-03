@@ -21,7 +21,7 @@ public class SearchingCrtlPatients implements SearchingControl {
             case 1:
                 return temp.getName();
             case 2:
-                return (temp.getOwner().getName()+ temp.getOwner().getLastName());
+                return (temp.getOwner().getName()+ " "+ temp.getOwner().getLastName());
             case 3:
                 return temp.getBirthDate();
         }

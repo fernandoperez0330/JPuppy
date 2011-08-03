@@ -16,9 +16,9 @@ import java.awt.Frame;
  *
  * @author Adderly
  */
-public class ManageUsers extends javax.swing.JDialog implements FrameOption {
+public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption {
 
-    public ManageUsers(Frame owner, boolean modal) {
+    public ManageUsersMenu(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
         this.setLocationRelativeTo(null);

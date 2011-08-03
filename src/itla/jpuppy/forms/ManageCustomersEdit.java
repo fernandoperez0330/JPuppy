@@ -40,6 +40,19 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
         this.setTitle("Manage Customers");
         this.setResizable(false);
     }
+
+    public void setFieldsValue(String TxtFieldLastName, String TxtFieldCellphone, String TxtFieldCity, String TxtFieldAdress, String TxtFieldMail, String TxtFieldName, String TxtFieldPhone, String jTextAreaNote, String TxtFieldCedula) {
+        this.TxtFieldLastName.setText(TxtFieldLastName);
+        this.TxtFieldCellphone.setText(TxtFieldCellphone);
+        this.TxtFieldCity.setText(TxtFieldCity);
+        this.TxtFieldAdress.setText(TxtFieldAdress);
+        this.TxtFieldMail.setText(TxtFieldMail);
+        this.TxtFieldName.setText(TxtFieldName);
+        this.TxtFieldPhone.setText(TxtFieldPhone);
+        this.jTextAreaNote.setText(jTextAreaNote);
+        this.TxtFieldCedula.setText(TxtFieldCedula);
+    }
+    
     
 
     public JPanel getPnFields() {
