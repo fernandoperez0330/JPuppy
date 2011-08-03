@@ -29,7 +29,7 @@ public class Login implements FrameOption {
     public Login() {
 
         fLogin = new JFrame();
-        background = new Background("src/itla/jpuppy/resources/puppyPic.jpg");
+        background = new Background("");
         background.setLayout(null);
         //componentes
         title = new JLabel("Sistema de Veterinaria JPuppy");
@@ -37,27 +37,32 @@ public class Login implements FrameOption {
         lbPassword = new JLabel("CONTRASEÑA");
         txtUsers = new JTextField("");
         txtPassword = new JPasswordField();
-        btnEnter = new JButton("ENTRAR");
-        btnExit = new JButton("SALIR");
+        btnEnter = new JButton();
+        btnEnter.setActionCommand("ENTRAR");
+        btnExit = new JButton();
+        btnExit.setActionCommand("SALIR");
         background.setSize(400, 200);
         Font fuente = new Font("Monospaced", Font.BOLD, 22);
         title.setFont(fuente);
         image = new JLabel();
 
         //Border donde va el logo
-        Border border = LineBorder.createGrayLineBorder();
-        image.setBorder(border);
+
 
         //seteo de posicion
-        image.setBounds(25, 70, 80, 80);
+        image.setBounds(15, 65, 100, 80);
+        image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/logoLogin.png")));
         title.setBounds(30, 18, 500, 30);
         txtUsers.setBounds(210, 75, 150, 30);
         txtPassword.setBounds(210, 120, 150, 30);
         lbUserName.setBounds(120, 65, 60, 50);
         lbPassword.setBounds(120, 110, 80, 50);
-        btnEnter.setBounds(165, 170, 100, 30);
-        btnExit.setBounds(260, 170, 100, 30);
-        
+        btnEnter.setBounds(165, 170, 100, 40);
+        btnExit.setBounds(260, 170, 100, 40);
+
+        btnEnter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/good.png")));
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancelLogin.png")));
+
 
         //Instancia del Controlador
         ControllerLogin mainControl = new ControllerLogin(this);
@@ -76,20 +81,20 @@ public class Login implements FrameOption {
         background.add(btnEnter);
         background.add(btnExit);
         background.add(image);
-        background.setBorder(new LineBorder(Color.red));
+
     }
 
     //metodo para tener valor del JTextField Usuario
     public String getTxtUsers() {
-        
+
         return txtUsers.getText();
     }
     //metodo para tener valor del JTextField de contraseña
 
     public String getTxtPassword() {
-       
-       return String.valueOf( txtPassword.getPassword() );
-       
+
+       return  txtPassword.getText();
+
     }
 
     public String getBotonEnterString(){
