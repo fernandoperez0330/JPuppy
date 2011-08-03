@@ -24,14 +24,14 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class ControllerPatients implements ActionListener, KeyListener, MouseListener {
+public class ControllerPatients extends Controller implements ActionListener, KeyListener, MouseListener {
 
     private ManagePatients managePatients;
     private ModelPatients modelPatients = new ModelPatients();
     private ModelCustomers modelCustomer = new ModelCustomers();
     DefaultListModel listModel;
     //elementos para la tabla de pacientes
-    private List<Long> arrIndexTblPatients;
+    private List<Long> arrIndexTblPatients = null;
     //elementos de la ventana searchcustomer para pacientes
     private JList ListCustomertoSearch;
     private SearchCustomer searchCustomer;
@@ -48,11 +48,13 @@ public class ControllerPatients implements ActionListener, KeyListener, MouseLis
     public ControllerPatients(ManagePatients managePatients) {
         this.managePatients = managePatients;
     }
-
+    
     public DefaultTableModel getTableModelPatients() {
-        this.arrIndexTblPatients = new ArrayList<Long>();
+        if (this.arrIndexTblPatients != null) {
+         this.managePatients.getParent().getController().arrIndexTblPatients.clear();
+        }
+        else this.arrIndexTblPatients = new ArrayList<Long>();
         DefaultTableModel tableModel = new DefaultTableModel() {
-
             @Override
             public boolean isCellEditable(int rows, int columns) {
                 return false;
@@ -67,7 +69,7 @@ public class ControllerPatients implements ActionListener, KeyListener, MouseLis
             String[] rows = {Integer.toString((int) patient.getPatientsId()), patient.getName(), patient.getOwner().getName(), patient.getBirthDate().toString()};
             tableModel.addRow(rows);
             tableModel.isCellEditable(tableModel.getRowCount() - 1, tableModel.getRowCount() - 1);
-            this.arrIndexTblPatients.add(patient.getPatientsId());
+            arrIndexTblPatients.add(patient.getPatientsId());
         }
         return tableModel;
     }
@@ -132,33 +134,35 @@ public class ControllerPatients implements ActionListener, KeyListener, MouseLis
                  * Cuando es para grabar un nuevo paciente 
                  * --------------------------------------
                  */
-                if (managePatients.getTxtFieldNombre().getText().equals("")) {
-                    JOptionPane.showMessageDialog(managePatients, MSG_EMPTY_NAME);
-                    managePatients.getTxtFieldNombre().requestFocus();
-                } else if (managePatients.getTxtFieldCumpleano().getText().equals("")) {
-                    JOptionPane.showMessageDialog(managePatients, MSG_EMPTY_BIRTHDATE);
-                    managePatients.getTxtFieldCumpleano().requestFocus();
-                } else if (managePatients.getTxtFieldDueno().getText().equals("") && managePatients.getIdDueno().equals("")) {
-                    JOptionPane.showMessageDialog(managePatients, MSG_EMPTY_NAME);
-                    managePatients.getTxtFieldDueno().requestFocus();
-                } else {
-                    Patients patients = modelPatients.getPatient();
-                    patients.setName(managePatients.getTxtFieldNombre().getText());
-                    patients.setBirthDate(new Date());
-                    patients.setNotes(managePatients.getTxtFieldNombre().getText());
-                    Customers customer = modelCustomer.searchCustomer(this.managePatients.getIdDueno());
-                    patients.setOwner(customer);
-                    patients.setDoctorLastVisit("");
-                    patients.setLastVisit(new Date());
-                    if (modelPatients.insertObject(patients)) {
-                        JOptionPane.showMessageDialog(managePatients, MSG_SAVENEW_SUCCESSFULL);
-                        this.managePatients.getParent().getjTable1().setModel(this.getTableModelPatients());
-                        managePatients.closeFrame();
+                try{
+                    if (managePatients.getTxtFieldNombre().getText().equals("")) {
+                        JOptionPane.showMessageDialog(managePatients, MSG_EMPTY_NAME);
+                        managePatients.getTxtFieldNombre().requestFocus();
+                    } else if (managePatients.getTxtFieldCumpleano().getText().equals("")) {
+                        JOptionPane.showMessageDialog(managePatients, MSG_EMPTY_BIRTHDATE);
+                        managePatients.getTxtFieldCumpleano().requestFocus();
+                    } else if (managePatients.getTxtFieldDueno().getText().equals("") && managePatients.getIdDueno().equals("")) {
+                        JOptionPane.showMessageDialog(managePatients, MSG_EMPTY_NAME);
+                        managePatients.getTxtFieldDueno().requestFocus();
                     } else {
-                        //cuando todos el proceso se ejecuto correctamente
-                        JOptionPane.showMessageDialog(managePatients, MSG_SAVENEW_ERROR);
+                        Patients patients = modelPatients.getPatient();
+                        patients.setName(managePatients.getTxtFieldNombre().getText());
+                        patients.setBirthDate(new Date(managePatients.getTxtFieldCumpleano().getText()));
+                        patients.setNotes(managePatients.getTxtFieldNombre().getText());
+                        Customers customer = modelCustomer.searchCustomer(this.managePatients.getIdDueno());
+                        patients.setOwner(customer);
+                        patients.setDoctorLastVisit(managePatients.getTxtFieldUltimaVisitaDoctor().getText());
+                        patients.setLastVisit(new Date(managePatients.getTxtFieldUltimaVisita().getText()));
+                        if (modelPatients.insertObject(patients)) {
+                            JOptionPane.showMessageDialog(managePatients, MSG_SAVENEW_SUCCESSFULL);
+                            this.managePatients.getParent().getjTable1().setModel(this.getTableModelPatients());
+                            managePatients.closeFrame();
+                        } else {
+                            //cuando todos el proceso se ejecuto correctamente
+                            JOptionPane.showMessageDialog(managePatients, MSG_SAVENEW_ERROR);
+                        }
                     }
-                }
+                }catch(NullPointerException exc) { JOptionPane.showMessageDialog(managePatients,"Ocurrio un problema al agregar el paciente, favor intente de nuevo") ; }
             }else{
                 /* 
                  * --------------------------------------
@@ -186,10 +190,10 @@ public class ControllerPatients implements ActionListener, KeyListener, MouseLis
                     patients.setLastVisit(new Date());
                     if (modelPatients.updateObject(patients)) {
                         JOptionPane.showMessageDialog(managePatients, MSG_SAVEEXISTENT_SUCCESSFULL);
-                        this.managePatients.getParent().getjTable1().setModel(this.getTableModelPatients());
+                        this.managePatients.getParent().getjTable1().setModel(this.managePatients.getController().getTableModelPatients());
                         managePatients.closeFrame();
                     } else {
-                        //cuando todos el proceso se ejecuto correctamente
+                        //cuando todos el proceso se ejecuto con errores
                         JOptionPane.showMessageDialog(managePatients, MSG_SAVEEXISTENT_ERROR);
                     }
                 }
@@ -213,7 +217,9 @@ public class ControllerPatients implements ActionListener, KeyListener, MouseLis
             if (tablePressed.getSelectedRow() == -1) {
                 JOptionPane.showMessageDialog(null, "No tiene ningun paciente seleccionado para modificar", "Error", JOptionPane.OK_OPTION);
             } else {
-                new ManagePatients(managePatients, true, true, arrIndexTblPatients.get(tablePressed.getSelectedRow())).showFrame();
+                try{
+                    new ManagePatients(managePatients, true, true, arrIndexTblPatients.get(tablePressed.getSelectedRow())).showFrame();
+                }catch (IndexOutOfBoundsException exc){}    
             }
         }
     }
@@ -249,8 +255,18 @@ public class ControllerPatients implements ActionListener, KeyListener, MouseLis
             if (objName.equals("tablePatients")) {
                 JTable tablePressed = (JTable) objPressed;
                 //new ManagePatients(managePatients, true, true,tablePressed.getSelectedColumn()).showFrame();
-                new ManagePatients(managePatients, true, true, arrIndexTblPatients.get(tablePressed.getSelectedRow())).showFrame();
-
+               Long idPatients = null;
+                try{
+                   idPatients = arrIndexTblPatients.get(tablePressed.getSelectedRow());
+                }catch (IndexOutOfBoundsException exc){ 
+                    try{
+                        //idPatients = arrIndexTblPatients.get(tablePressed.getSelectedRow());
+                        for (Long index: arrIndexTblPatients){
+                            System.out.println("indice" + index);
+                        }
+                    }catch (IndexOutOfBoundsException subExc){ }
+                }
+                new ManagePatients(managePatients, true, true,idPatients).showFrame();
                 //listener de la table de clientes para los pacientes
             } else if (objName.equals("listCustomer")) {
                 JList listPressed = (JList) objPressed;
@@ -279,5 +295,17 @@ public class ControllerPatients implements ActionListener, KeyListener, MouseLis
     public void mouseExited(MouseEvent e) {
     }
 
-    
+    @Override
+    public void eventDelete() {
+    }
+
+    @Override
+    public void eventSearch(String text) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean eventSave() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
