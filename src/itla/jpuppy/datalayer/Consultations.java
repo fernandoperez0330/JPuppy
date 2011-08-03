@@ -43,6 +43,14 @@ public class Consultations implements Serializable {
     @Enumerated
     private TypeConsultations typeConsultations;
 
+    public TypeConsultations getTypeConsultations() {
+        return typeConsultations;
+    }
+
+    public void setTypeConsultations(TypeConsultations typeConsultations) {
+        this.typeConsultations = typeConsultations;
+    }
+
     public Consultations(Long id, Date dateStart, Date dateEnd, Customers customer, Patients patients, String remark, Appointments appointments, TypeConsultations typeConsultations) {
         this.id = id;
         this.dateStart = dateStart;
