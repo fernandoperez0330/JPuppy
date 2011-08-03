@@ -67,7 +67,7 @@ public abstract class Controller extends javax.swing.JDialog {
     protected void changeStateWriteFields(boolean estado) {
         javax.swing.text.JTextComponent textField;
         javax.swing.JComboBox combo;
-
+ 
         for (int i = 0; i < pnlEdition.getComponentCount(); i++) {
             try {
                 textField = (javax.swing.text.JTextComponent) pnlEdition.getComponent(i);

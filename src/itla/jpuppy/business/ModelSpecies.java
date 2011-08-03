@@ -42,6 +42,7 @@ public class ModelSpecies implements GeneralModel {
     public List<Species> searchAllSpeciesByName(String name) {
         return queryManager.searchSpecie(name);
     }
+     
         public List<Species> searchAllSpecies() {
         return queryManager.searchSpecie();
     }

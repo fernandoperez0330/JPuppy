@@ -40,7 +40,7 @@ public class ControllerBreeds implements ActionListener{
     private Breeds temp=null;
     private ComboBoxModel model = null;
     private String text ="";
-    private int counter=1;
+   
     
     public ControllerBreeds( ManageBreeds manageBreeds ) {
         modelBreeds = new ModelBreeds();

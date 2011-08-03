@@ -140,7 +140,7 @@ public class QueryManager {
         try {
             listSpecieses = entityManager.createQuery("SELECT a FROM Species a ").getResultList();
         } catch (Exception e) {
-        }
+        } 
         return listSpecieses;
     }
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
