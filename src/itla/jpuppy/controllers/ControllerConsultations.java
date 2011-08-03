@@ -32,7 +32,20 @@ public class ControllerConsultations implements ActionListener {
                         if (manageConsultations.getTxtRemarkConsultations().getText().equals("")) {
                             JOptionPane.showMessageDialog(null, "El campo observacion es requerido!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                         } else {
-                            //new ModelConsultations().insertObject(new Consultations(manageConsultations.getDateChooserBeginConsultations().getText(), manageConsultations.getDateChooserEndConsultations().getText(), new ModelCustomers().searchCustomer(id), new ModelPatients().searchPatient(idPatient), manageConsultations.getTxtRemarkConsultations().getText(), new ModelAppointments(), new TypeConsultations()));
+//                            new ModelConsultations().insertObject(
+//                            new Consultations(
+//                                    //manageConsultations.getDateChooserBeginConsultations().getText(), 
+//                                    //manageConsultations.getDateChooserEndConsultations().getText(), 
+//                                    //new ModelCustomers().getCustomer(manageConsultations.getCbCustomerConsultations().getSelectedItem().toString()), 
+//                                    //new ModelPatients().searchAllPatientByName(manageConsultations.getCbPatientConsultations().getSelectedItem().toString()).get(0), 
+//                                    //manageConsultations.getTxtRemarkConsultations().getText(), 
+//                                    
+//                                    //SE DEBE COMPLETAR EL MODELO
+//                                    //new ModelAppointments(), 
+//                                    
+//                                    //COMO SE OBTIENE UN OBJETO DE ESTE TIPO?
+//                                    //new TypeConsultations())
+//                             );
                         }
                     }
                 }

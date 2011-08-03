@@ -2,6 +2,7 @@ package itla.jpuppy.business;
 
 import itla.jpuppy.datalayer.Customers;
 import java.util.List;
+import java.util.ListIterator;
 import javax.persistence.EntityManager;
 
 public class ModelCustomers implements GeneralModel {
@@ -38,6 +39,18 @@ public class ModelCustomers implements GeneralModel {
         }
         
     }
+
+    public Customers getCustomer(String name) {
+
+        List<Customers> list = this.searchAllCustomerByName(name);
+        ListIterator<Customers> iterator = list.listIterator();
+        Customers temp = null;
+        while (iterator.hasNext()) {
+            temp = iterator.next();
+        }
+        return temp;
+    }    
+    
     //Metodos comunes a todos los modelos , se llama el correspondiente de  queryManager
     
     @Override
