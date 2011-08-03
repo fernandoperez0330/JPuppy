@@ -43,8 +43,11 @@ public class Consultations implements Serializable {
     @Enumerated
     private TypeConsultations typeConsultations;
 
+    public Consultations() {
+    }
+
     public TypeConsultations getTypeConsultations() {
-        return typeConsultations;
+        return this.typeConsultations;
     }
 
     public void setTypeConsultations(TypeConsultations typeConsultations) {

@@ -1,6 +1,7 @@
 package itla.jpuppy.forms;
 //import itla.jpuppy.controllers.ControllerConsultations;
 import datechooser.beans.DateChooserCombo;
+import itla.jpuppy.controllers.ControllerConsultations;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -10,7 +11,8 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
     public ManageConsultations(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        //ControllerConsultations controlConsultations = new ControllerConsultations();
+        
+        ControllerConsultations controlConsultations = new ControllerConsultations(this);
 
 /*        btnAddConsultations.addActionListener(controlConsultations);
         btnCancelConsultations.addActionListener(controlConsultations);
@@ -158,9 +160,8 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
                         .addGap(14, 14, 14)
                         .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dateChooserEndConsultations, 0, 0, Short.MAX_VALUE)
-                            .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE))))
                 .addGap(12, 12, 12)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnFieldsLayout.createSequentialGroup()
@@ -173,7 +174,7 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
                 .addGap(27, 27, 27))
         );
 
-        getContentPane().add(pnFields, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 166, 845, 100));
+        getContentPane().add(pnFields, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 880, 100));
 
         pnButtons3.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
 
@@ -220,7 +221,7 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
         ));
         jScrollPane1.setViewportView(tableConsultations);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 284, 845, 143));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 880, 143));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

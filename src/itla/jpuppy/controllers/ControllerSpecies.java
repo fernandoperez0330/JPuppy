@@ -121,24 +121,4 @@ public class ControllerSpecies implements ActionListener {
 
 
     }
-
-    //Metodos que conectan con el ModelSpecies
-    public void addSpecie(String breed, String name) {
-//        if (breed.equals("-") || name.equals("")) {
-//            JOptionPane.showMessageDialog(null, "Todos los campos son requeridos!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-//        } else {
-//            //Species species = new ModelSpecies().getSpecies();
-//            //species.
-//            
-//            
-//            //new ModelSpecies().insertObject(species);
-//            JOptionPane.showMessageDialog(null, "Se ha almacenado correctamente!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-//        }
-        //System.out.println("Especie: "+ breed + " nombre: "+ name);    
-    }
-
-    public List<Breeds> getBreeds() {
-        return new QueryManager().searchBreeds();
-        //return null;
-    }
 }
