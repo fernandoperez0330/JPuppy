@@ -67,6 +67,7 @@ public class ControllerSpecies implements ActionListener, TableModelListener {
                             }
                         }
                     }
+                    //System.out.println(listBreeds.size());
                     //ALMACENAMIENTO DE LA ESPECIE
                     new ModelSpecies().insertObject(new Species(manageSpecies.getjComboBoxNameBreeds().getSelectedItem().toString(), listBreeds));
                     JOptionPane.showMessageDialog(null, "Se almaceno conrrectamente!", "Informacion", JOptionPane.PLAIN_MESSAGE);

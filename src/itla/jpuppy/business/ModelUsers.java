@@ -22,7 +22,7 @@ public class ModelUsers implements GeneralModel {
         } catch (Exception exct) {
         }
         
-        System.out.println(name + "  " + password);
+        //System.out.println(name + "  " + password);
         
         if (user.getPassword().hashCode() == password.hashCode()) {
             status = true;
