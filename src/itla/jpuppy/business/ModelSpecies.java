@@ -13,7 +13,7 @@ public class ModelSpecies implements GeneralModel {
     public ModelSpecies() {
         queryManager = new QueryManager();
         species = new Species();
-    }
+    } 
     
     public Species getSpecies() {
         return species;
@@ -42,6 +42,10 @@ public class ModelSpecies implements GeneralModel {
     public List<Species> searchAllSpeciesByName(String name) {
         return queryManager.searchSpecie(name);
     }
+        public List<Species> searchAllSpecies() {
+        return queryManager.searchSpecie();
+    }
+    
 
     //Metodos comunes a todos los modelos , se llama el correspondiente de  queryManager
     @Override
