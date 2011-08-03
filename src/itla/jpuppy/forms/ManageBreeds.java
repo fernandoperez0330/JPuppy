@@ -3,15 +3,17 @@ package itla.jpuppy.forms;
 
 import itla.jpuppy.controllers.ControllerBreeds;
 import itla.jpuppy.controllers.Controller;
+import itla.jpuppy.datalayer.Species;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
+import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 /*
  * NewJFrame.java
  *
@@ -54,6 +56,9 @@ public class ManageBreeds extends Controller  implements FrameOption{
         btnSave.addActionListener(cb);
         btnRemove.addActionListener(cb);
         btnCancel.addActionListener(cb);
+      
+        
+       
     }
     /** Creates new form NewJFrame */
 
@@ -68,8 +73,8 @@ public class ManageBreeds extends Controller  implements FrameOption{
         jLabel4 = new javax.swing.JLabel();
         TxtFieldRaza = new javax.swing.JTextField();
         TxtFieldAncho = new javax.swing.JTextField();
-        TxtFieldEspecie = new javax.swing.JTextField();
         TxtFieldAltura = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox();
         pnButtons = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -77,6 +82,7 @@ public class ManageBreeds extends Controller  implements FrameOption{
         btnSave = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CrudEntities");
@@ -93,6 +99,8 @@ public class ManageBreeds extends Controller  implements FrameOption{
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel4.setText("Ancho.:");
 
+        jComboBox1.setEditable(true);
+
         javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
         pnFields.setLayout(pnFieldsLayout);
         pnFieldsLayout.setHorizontalGroup(
@@ -107,9 +115,9 @@ public class ManageBreeds extends Controller  implements FrameOption{
                 .addGap(85, 85, 85)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TxtFieldRaza, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-                    .addComponent(TxtFieldEspecie, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
                     .addComponent(TxtFieldAncho, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-                    .addComponent(TxtFieldAltura, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
+                    .addComponent(TxtFieldAltura, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, 0, 356, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnFieldsLayout.setVerticalGroup(
@@ -122,7 +130,7 @@ public class ManageBreeds extends Controller  implements FrameOption{
                 .addGap(18, 18, 18)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(TxtFieldEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -174,12 +182,16 @@ public class ManageBreeds extends Controller  implements FrameOption{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
+                            .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(144, 144, 144)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(144, 144, 144))))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +200,9 @@ public class ManageBreeds extends Controller  implements FrameOption{
                 .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(93, 93, 93)
                 .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         pack();
@@ -202,7 +216,6 @@ public class ManageBreeds extends Controller  implements FrameOption{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TxtFieldAltura;
     private javax.swing.JTextField TxtFieldAncho;
-    private javax.swing.JTextField TxtFieldEspecie;
     private javax.swing.JTextField TxtFieldRaza;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
@@ -210,14 +223,19 @@ public class ManageBreeds extends Controller  implements FrameOption{
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel pnButtons;
     private javax.swing.JPanel pnFields;
     // End of variables declaration//GEN-END:variables
 
+   
+    
+    
     @Override
     public void showFrame() {
        this.setVisible(true);
@@ -233,10 +251,13 @@ public class ManageBreeds extends Controller  implements FrameOption{
     }
    
     public String getSpecieName(){
-        return TxtFieldEspecie.getText();
+        return (String ) jComboBox1.getSelectedItem();
     }
     
-   
+ public void setMessageFind( String text ){
+     this.jLabel5.setText( text );
+ }
+ 
     public double getBreedWidth(){
         double width=0;
         try{
@@ -264,7 +285,7 @@ public class ManageBreeds extends Controller  implements FrameOption{
     
     public void setAllFields(String breedName,String specieName,double width,double heigth){
         TxtFieldRaza.setText( breedName );
-        TxtFieldEspecie.setText( specieName );
+        jComboBox1.setSelectedItem( ( String )specieName );
         TxtFieldAncho.setText( String.valueOf( width ) );
         TxtFieldAltura.setText( String.valueOf( heigth ) );
     }
@@ -307,7 +328,9 @@ public class ManageBreeds extends Controller  implements FrameOption{
        changeStatePnlEdition( true );
        
     }
-
+    public void setJComboBoxModel( ComboBoxModel boxModel ){
+        this.jComboBox1.setModel( boxModel );
+    }
    
    
 

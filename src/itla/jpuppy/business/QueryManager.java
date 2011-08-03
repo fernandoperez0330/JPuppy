@@ -134,7 +134,15 @@ public class QueryManager {
         }
         return listSpecieses;
     }
-
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+    public List<Species> searchSpecie() {
+        List<Species> listSpecieses = null;
+        try {
+            listSpecieses = entityManager.createQuery("SELECT a FROM Species a ").getResultList();
+        } catch (Exception e) {
+        } 
+        return listSpecieses;
+    }
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
     public List<Breeds> searchBreeds(String name) {
         List<Breeds> listBreeds = null;;

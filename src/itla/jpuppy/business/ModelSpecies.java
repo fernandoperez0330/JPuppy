@@ -2,6 +2,7 @@ package itla.jpuppy.business;
 
 import itla.jpuppy.datalayer.Species;
 import java.util.List;
+import java.util.ListIterator;
 import javax.persistence.EntityManager;
 
 public class ModelSpecies implements GeneralModel {
@@ -12,7 +13,7 @@ public class ModelSpecies implements GeneralModel {
     public ModelSpecies() {
         queryManager = new QueryManager();
         species = new Species();
-    }
+    } 
     
     public Species getSpecies() {
         return species;
@@ -25,11 +26,27 @@ public class ModelSpecies implements GeneralModel {
         Species temp = entityManager.find(Species.class, id);
         return temp;
     }
+    
+    public Species getSpeciesByName( String name ){
+        
+        List<Species> list = this.searchAllSpeciesByName( name );
+        ListIterator<Species> iterator =  list.listIterator();
+        Species temp = null;
+        while( iterator.hasNext() ){
+             temp = iterator.next();
+        }
+        return temp;
+    }
 
     // retorna lista de patient para autocomplete
     public List<Species> searchAllSpeciesByName(String name) {
         return queryManager.searchSpecie(name);
     }
+     
+        public List<Species> searchAllSpecies() {
+        return queryManager.searchSpecie();
+    }
+    
 
     //Metodos comunes a todos los modelos , se llama el correspondiente de  queryManager
     @Override

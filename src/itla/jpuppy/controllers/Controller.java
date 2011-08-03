@@ -1,6 +1,7 @@
 package itla.jpuppy.controllers;
 
 import java.awt.event.ActionListener;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 
 public abstract class Controller extends javax.swing.JDialog {
@@ -66,7 +67,7 @@ public abstract class Controller extends javax.swing.JDialog {
     protected void changeStateWriteFields(boolean estado) {
         javax.swing.text.JTextComponent textField;
         javax.swing.JComboBox combo;
-
+ 
         for (int i = 0; i < pnlEdition.getComponentCount(); i++) {
             try {
                 textField = (javax.swing.text.JTextComponent) pnlEdition.getComponent(i);
@@ -74,7 +75,7 @@ public abstract class Controller extends javax.swing.JDialog {
             } catch (Exception e) {
                 try {
                     combo = (javax.swing.JComboBox) pnlEdition.getComponent(i);
-                    combo.setEditable(estado);
+                    combo.setEditable( false );
                 } catch (Exception g) {
                 }
             }
