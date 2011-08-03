@@ -14,6 +14,7 @@ import itla.jpuppy.forms.ManageCustomersMenu;
 import itla.jpuppy.forms.ManagePatients;
 import itla.jpuppy.forms.ManageSpecies;
 import itla.jpuppy.forms.ManageUsersEdit;
+import itla.jpuppy.forms.ManageUsersMenu;
 import itla.jpuppy.models.SearchingCtrlCustomers;
 import itla.jpuppy.models.SearchingModel;
 import java.awt.event.ActionEvent;
@@ -72,11 +73,13 @@ public class ControllerHome implements ActionListener, KeyListener, WindowFocusL
         }
 
         if (e.getSource().equals(home.getMnuiPatients())) {
+            itla.jpuppy.business.EntityManagerCreator.close();
             new ManagePatients(home, true).showFrame();
             return;
         }
 
         if (e.getSource().equals(home.getMnuiSpecies())) {
+            itla.jpuppy.business.EntityManagerCreator.close();
             new ManageSpecies(home, true).showFrame();
             return;
         }
@@ -92,7 +95,8 @@ public class ControllerHome implements ActionListener, KeyListener, WindowFocusL
         }
 
         if (e.getSource().equals(home.getMnuiUsers())) {
-            new ManageUsersEdit(home, true).showFrame();
+            itla.jpuppy.business.EntityManagerCreator.close();
+            new ManageUsersMenu(home, true).showFrame();
             return;
         }
 

@@ -1,14 +1,10 @@
 package itla.jpuppy.controllers;
 
 import itla.jpuppy.business.ModelCustomers;
-import itla.jpuppy.business.ModelPatients;
 import itla.jpuppy.datalayer.Customers;
-import itla.jpuppy.datalayer.Patients;
 import itla.jpuppy.forms.JSearching;
 import itla.jpuppy.forms.ManageCustomersEdit;
 import itla.jpuppy.forms.ManageCustomersMenu;
-import itla.jpuppy.forms.SearchPatients;
-import itla.jpuppy.models.SearchingCrtlPatients;
 import itla.jpuppy.models.SearchingCtrlCustomers;
 import itla.jpuppy.models.SearchingModel;
 import java.awt.event.ActionEvent;
@@ -21,68 +17,34 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ControllerCutomers implements MouseListener, KeyListener, ActionListener, WindowFocusListener {
 
     private ManageCustomersMenu customersMenu = null;
     private ManageCustomersEdit customersEdit = null;
-    private SearchPatients patientsSearching = null;
     private SearchingModel<Customers> modelSearching;
-    private SearchingModel<Patients> modelSearchingPatients;
-    private SearchingModel<Patients> myTablePatients;
-    private ModelPatients mdlPatients;
     private ModelCustomers mdlCustomers;
     private long edicion;
-    private int myTableEdicion;
     private Customers tempCustomer;
 
     public ControllerCutomers(ManageCustomersMenu customersMenu) {
         this.customersMenu = customersMenu;
         modelSearching = new SearchingModel<Customers>(new String[]{"Id", "Name", "Lastname", "City"}, new SearchingCtrlCustomers());
-        modelSearchingPatients = new SearchingModel<Patients>(new String[]{"Id", "Name", "Owner", "BirthDate"}, new SearchingCrtlPatients());
-        myTablePatients = new SearchingModel<Patients>(new String[]{"Id", "Name", "Owner", "BirthDate"}, new SearchingCrtlPatients());
         customersMenu.setSearching(new JSearching(modelSearching));
-        patientsSearching = new SearchPatients(null, true, new JSearching(modelSearchingPatients), this);
         mdlCustomers = new ModelCustomers();
-        mdlPatients = new ModelPatients();
-        mdlPatients.getQueryManager().setEntityManager(mdlCustomers.getQueryManager().getEntityManager());
-        cleanSearch();
-        cleanSearchPatients();
+        searchByField("");
         edicion = 0;
-    }
-
-    public void cleanSearch() {
-        modelSearching.setElements(mdlCustomers.searchAllCustomerByName("%%"));
     }
 
     public void searchByField(String string) {
         modelSearching.setElements(mdlCustomers.searchAllCustomerByName("%" + string + "%"));
     }
 
-    public void searchByFieldPatients(String string) {
-        List<Patients> temp = mdlPatients.searchAllPatientByNameExplicit("%" + string + "%");
-        for (int i = 0; i < myTablePatients.getElements().size(); i++) {
-            if (temp.get(i).equals(myTablePatients.getElements().get(i))) {
-                temp.remove(i);
-            }
-        }
-        modelSearchingPatients.setElements(temp);
-    }
-
-    public void cleanSearchPatients() {
-        modelSearchingPatients.setElements(mdlPatients.searchAllPatientByNameExplicit("%%"));
-    }
-
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getSource().equals(customersMenu.getSearching().getTxtSearch())) {
             searchByField(customersMenu.getSearching().getTxtSearch().getText().toLowerCase());
-        }
-
-        if (e.getSource().equals(patientsSearching.getSearching().getTxtSearch())) {
-            searchByFieldPatients(patientsSearching.getSearching().getTxtSearch().getText().toLowerCase());
         }
     }
 
@@ -98,7 +60,6 @@ public class ControllerCutomers implements MouseListener, KeyListener, ActionLis
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(customersMenu.getBtnAdd())) {
             customersEdit = new ManageCustomersEdit(null, true, this);
-            customersEdit.getTblMyPatients().setModel(myTablePatients);
             customersEdit.showFrame();
             return;
         }
@@ -108,20 +69,17 @@ public class ControllerCutomers implements MouseListener, KeyListener, ActionLis
                 customersEdit = new ManageCustomersEdit(null, true, this);
                 tempCustomer = mdlCustomers.searchCustomer(edicion);
                 customersEdit.setFieldsValue(tempCustomer.getLastName(), tempCustomer.getCellphone(), tempCustomer.getCity(), tempCustomer.getAddress(), tempCustomer.getEmail(), tempCustomer.getName(), tempCustomer.getTelephone(), tempCustomer.getNote(), tempCustomer.getCedula());
-                myTablePatients.setElements(tempCustomer.getPatients());
-                customersEdit.getTblMyPatients().setModel(myTablePatients);
-                searchByFieldPatients("");
                 customersEdit.showFrame();
                 return;
             } else {
-                javax.swing.JOptionPane.showMessageDialog(null, edicion);
+                javax.swing.JOptionPane.showMessageDialog(customersMenu, "No Ha Sido Seleccionado Un Registro");
             }
             return;
         }
 
         if (e.getSource().equals(customersMenu.getBtnRemove())) {
             if (edicion != 0) {
-                int i = JOptionPane.showConfirmDialog(customersEdit, "Realmente desea Cancelar la Insercion de Datos", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int i = JOptionPane.showConfirmDialog(customersEdit, "Realmente desea Eliminar Este Cliente?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (i == 0) {
                     mdlCustomers.deleteObject(mdlCustomers.searchCustomer(edicion));
                     javax.swing.JOptionPane.showMessageDialog(customersMenu, "Registro Eliminado");
@@ -141,8 +99,31 @@ public class ControllerCutomers implements MouseListener, KeyListener, ActionLis
                 return;
             }
             if (edicion != 0) {
-                update();
+                tempCustomer.setName(customersEdit.getTxtFieldName().getText());
+                tempCustomer.setLastName(customersEdit.getTxtFieldLastName().getText());
+                tempCustomer.setAddress(customersEdit.getTxtFieldAdress().getText());
+                tempCustomer.setCellphone(customersEdit.getTxtFieldCellphone().getText());
+                tempCustomer.setTelephone(customersEdit.getTxtFieldPhone().getText());
+                tempCustomer.setEmail(customersEdit.getTxtFieldMail().getText());
+                tempCustomer.setCity(customersEdit.getTxtFieldCity().getText());
+                tempCustomer.setNote(customersEdit.getjTextAreaNote().getText());
+                
+                if (mdlCustomers.checkDuplicateCedula(customersEdit.getTxtFieldCedula().getText())) {
+                    if (tempCustomer.getCedula().equalsIgnoreCase(customersEdit.getTxtFieldCedula().getText())){
+                        update();
+                    }else{
+                        JOptionPane.showMessageDialog(customersEdit, "Existe Otro Usuario Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
+                    }
+                    
+                }else{
+                     tempCustomer.setCedula(customersEdit.getTxtFieldCedula().getText());
+                    update();
+                }
             } else {
+                if (mdlCustomers.checkDuplicateCedula(customersEdit.getTxtFieldCedula().getText())) {
+                    JOptionPane.showMessageDialog(customersEdit, "Existe Otro Cliente Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 insert();
             }
         }
@@ -153,22 +134,6 @@ public class ControllerCutomers implements MouseListener, KeyListener, ActionLis
                 customersEdit.dispose();
             }
             return;
-        }
-
-        if (e.getSource().equals(customersEdit.getBtnAdd())) {
-            patientsSearching.showFrame();
-            return;
-        }
-
-        if (e.getSource().equals(customersEdit.getBtnRemove())) {
-            if (myTableEdicion > -1) {
-                modelSearchingPatients.getElements().add(myTablePatients.getElements().get(myTableEdicion));
-                myTablePatients.getElements().remove(myTableEdicion);
-                myTablePatients.fireTableDataChanged();
-                myTableEdicion = 0;
-            } else {
-                JOptionPane.showMessageDialog(patientsSearching, "Debe Tener Seleccionado un Registro", "Error", JOptionPane.ERROR_MESSAGE);
-            }
         }
 
     }
@@ -182,27 +147,6 @@ public class ControllerCutomers implements MouseListener, KeyListener, ActionLis
                 return;
             }
         }
-
-        if (e.getSource().equals(patientsSearching.getSearching().getTblResult())) {
-            int fila = patientsSearching.getSearching().getTblResult().rowAtPoint(e.getPoint());
-            if (fila > -1) {
-                myTablePatients.getElements().add(modelSearchingPatients.getElements().get(fila));
-                modelSearchingPatients.getElements().remove(fila);
-                myTablePatients.fireTableDataChanged();
-                patientsSearching.closeFrame();
-
-                return;
-            }
-        }
-
-        if (e.getSource().equals(customersEdit.getTblMyPatients())) {
-            int fila = customersEdit.getTblMyPatients().rowAtPoint(e.getPoint());
-            if (fila > -1) {
-                myTableEdicion = fila;
-                return;
-            }
-        }
-
     }
 
     @Override
@@ -256,28 +200,9 @@ public class ControllerCutomers implements MouseListener, KeyListener, ActionLis
     }
 
     private void insert() {
-        if (mdlCustomers.checkDuplicateCedula(customersEdit.getTxtFieldCedula().getText())) {
-            JOptionPane.showMessageDialog(customersEdit, "Existe Otro Cliente Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
         Calendar c1 = Calendar.getInstance();
         Customers temp = new Customers(customersEdit.getTxtFieldName().getText(), customersEdit.getTxtFieldLastName().getText(), customersEdit.getTxtFieldCedula().getText(), new Date(c1.get(Calendar.YEAR), c1.get(Calendar.MONTH), c1.get(Calendar.DATE)), customersEdit.getTxtFieldPhone().getText(), customersEdit.getTxtFieldCellphone().getText(), customersEdit.getjTextAreaNote().getText(), customersEdit.getTxtFieldCity().getText(), customersEdit.getTxtFieldMail().getText(), customersEdit.getTxtFieldAdress().getText(), true);
-        if (myTablePatients.getElements().size() == 0) {
-            mdlCustomers.insertObject(temp);
-        }
-
-        if (myTablePatients.getElements().size() > 0) {
-            int i = JOptionPane.showConfirmDialog(customersEdit, "Realmente desea Sobreescribir Los Dueños de Sus Mascotas?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (i == 0) {
-                temp.setPatients(myTablePatients.getElements());
-                mdlCustomers.insertObject(temp);
-                for (Patients patients : myTablePatients.getElements()) {
-                    patients.setOwner(temp);
-                    mdlPatients.updateObject(patients);
-                }
-            }
-        }
+        mdlCustomers.insertObject(temp);
         JOptionPane.showMessageDialog(customersEdit, "Registro Insertado Exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
         customersEdit.dispose();
     }
@@ -286,10 +211,6 @@ public class ControllerCutomers implements MouseListener, KeyListener, ActionLis
         int i = JOptionPane.showConfirmDialog(customersEdit, "Realmente desea Sobreescribir Los Datos de Este Cliente?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (i == 0) {
             mdlCustomers.updateObject(tempCustomer);
-             for (Patients patients : myTablePatients.getElements()) {
-                    patients.setOwner(tempCustomer);
-                    mdlPatients.updateObject(patients);
-                }
             JOptionPane.showMessageDialog(customersEdit, "Registro Actualizado Exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
             customersEdit.dispose();
         }

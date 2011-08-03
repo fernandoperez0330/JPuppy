@@ -17,6 +17,18 @@ public class Users extends Persons implements Serializable {
     public Users() {
     }
 
+    public Users(String username, String password, String typeUser,String name, String lastName, String telephone, String cellPhone) {
+        this.username = username;
+        this.password = password;
+        this.typeUser = typeUser;
+        super.setName(name);
+        super.setLastName(lastName);
+        super.setTelephone(telephone);
+        super.setCellphone(cellPhone);
+    }
+    
+    
+    
     public Users(String name, String lastName, String cedula, String username, String password, String typeUser) {
         super(name, lastName, cedula);
         this.username = username;

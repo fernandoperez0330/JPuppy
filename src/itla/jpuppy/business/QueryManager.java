@@ -87,6 +87,15 @@ public class QueryManager {
         return listUsers;
     }
 
+    public List<Users> searchCustomerByUserName(String userName) {
+        List<Users> listCustomers = null;
+        try {
+            listCustomers = entityManager.createQuery("SELECT a FROM Users a WHERE LOWER(a.username) LIKE :cedulaToFind").setParameter("cedulaToFind", userName).getResultList();
+        } catch (Exception e) {
+        }
+        return listCustomers;
+    }
+
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     public List<Customers> searchCustomer(String name) {
         List<Customers> listCustomers = null;
@@ -175,8 +184,8 @@ public class QueryManager {
         } catch (Exception e) {
         }
         return listConsultations;
-    }    
-    
+    }
+
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
     public List<Consultations> searchConsultations(Date dateBegin, Date dateEnd) {
         List<Consultations> listConsultations = null;

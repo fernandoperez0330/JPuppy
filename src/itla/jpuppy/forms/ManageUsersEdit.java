@@ -1,9 +1,16 @@
 package itla.jpuppy.forms;
 
+import itla.jpuppy.controllers.ControllerUser;
 import java.awt.Frame;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 /*
@@ -22,14 +29,82 @@ import javax.swing.text.MaskFormatter;
  */
 public class ManageUsersEdit extends javax.swing.JDialog implements FrameOption {
 
-    public ManageUsersEdit(Frame owner, boolean modal) {
+    private ControllerUser ctrlUser;
+
+    public ManageUsersEdit(Frame owner, boolean modal, ControllerUser ctrlUser) {
         super(owner, modal);
-            initComponents();
-            TxtFieldPhone.setValue(new String(" 809-000-0000"));
+        this.ctrlUser = ctrlUser;
+        initComponents();
+        setListener();
+        TxtFieldPhone.setValue(new String(" 809-000-0000"));
+        TxtFieldCellPhone.setValue(new String(" 809-000-0000"));
         this.setLocationRelativeTo(null);
         this.setTitle("Manage Users");
         this.setResizable(false);
 
+    }
+
+    public void setFieldsValue(String TxtFieldApellido, String TxtFieldCellPhone, String TxtFieldName, String TxtFieldNameUser, String TxtFieldPassword, String TxtFieldPhone, String typeUser) {
+        this.TxtFieldApellido.setText(TxtFieldApellido);
+        this.TxtFieldCellPhone.setText(TxtFieldCellPhone);
+        this.TxtFieldName.setText(TxtFieldName);
+        this.TxtFieldNameUser.setText(TxtFieldNameUser);
+        this.TxtFieldPassword.setText(TxtFieldPassword);
+        this.TxtFieldPhone.setText(TxtFieldPhone);
+        if (typeUser.equalsIgnoreCase("Administrador")) {
+            this.jRadioButtonAdministrador.setSelected(true);
+        } else {
+            this.jRadioButtonOperador.setSelected(true);
+        }
+    }
+
+    public void setListener() {
+        btnCancel.addActionListener(ctrlUser);
+        btnSave.addActionListener(ctrlUser);
+    }
+
+    public JTextField getTxtFieldApellido() {
+        return TxtFieldApellido;
+    }
+
+    public JFormattedTextField getTxtFieldCellPhone() {
+        return TxtFieldCellPhone;
+    }
+
+    public JTextField getTxtFieldName() {
+        return TxtFieldName;
+    }
+
+    public JTextField getTxtFieldNameUser() {
+        return TxtFieldNameUser;
+    }
+
+    public JPasswordField getTxtFieldPassword() {
+        return TxtFieldPassword;
+    }
+
+    public JFormattedTextField getTxtFieldPhone() {
+        return TxtFieldPhone;
+    }
+
+    public JRadioButton getjRadioButtonAdministrador() {
+        return jRadioButtonAdministrador;
+    }
+
+    public JRadioButton getjRadioButtonOperador() {
+        return jRadioButtonOperador;
+    }
+
+    public JPanel getPnFields() {
+        return pnFields;
+    }
+
+    public JButton getBtnCancel() {
+        return btnCancel;
+    }
+
+    public JButton getBtnSave() {
+        return btnSave;
     }
 
     /** Creates new form NewJFrame */
@@ -178,23 +253,23 @@ public class ManageUsersEdit extends javax.swing.JDialog implements FrameOption 
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(117, 117, 117))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93)
+                .addGap(42, 42, 42)
                 .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         pack();
@@ -237,11 +312,5 @@ public class ManageUsersEdit extends javax.swing.JDialog implements FrameOption 
     @Override
     public void closeFrame() {
         this.setVisible(false);
-    }
-
-    @Override
-    public void dispose() {
-        itla.jpuppy.business.EntityManagerCreator.close();
-        super.dispose();
     }
 }

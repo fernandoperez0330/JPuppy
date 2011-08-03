@@ -21,9 +21,9 @@ public class ModelUsers implements GeneralModel {
             user = queryManager.searchUserValidated(name, password);
         } catch (Exception exct) {
         }
-        
+
         //System.out.println(name + "  " + password);
-        
+
         if (user.getPassword().hashCode() == password.hashCode()) {
             status = true;
         }
@@ -33,24 +33,34 @@ public class ModelUsers implements GeneralModel {
 
     //retorna un objeto especifico tipo Users cuando se llame debe cargarse el Id desde generalVariableID del paquete util
     //los datos se le asignan cuando el usuario selecciona un cliente  del table
-    public Users searchUser(int id) {
+    public Users searchUser(Long id) {
         EntityManager entityManager = EntityManagerCreator.getInstanceEM();
         Users temp = entityManager.find(Users.class, id);
-        entityManager.close();
-
         return temp;
     }
 
+    public boolean checkDuplicateUserName(String userName) {
+        if (queryManager.searchCustomerByUserName(userName).size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
     // retorna lista de patient para autocomplete
+
     public List<Users> searchAllUserByName(String name) {
         return queryManager.searchUsers(name);
+    }
+    
+    public List<Users> searchAllUserByUserName(String userName){
+         return queryManager.searchCustomerByUserName(userName);
     }
     //Metodos comunes a todos los modelos , se llama el correspondiente de  queryManager
 
     @Override
     public boolean deleteObject(Object object) {
-        Users g = (Users) object;
-        return queryManager.deleteObject(g);
+        return queryManager.deleteObject(object);
 
     }
 
@@ -62,6 +72,7 @@ public class ModelUsers implements GeneralModel {
 
     @Override
     public boolean insertObject(Object object) {
+        Users g = (Users) object;
         return queryManager.saveObject(g);
     }
 }

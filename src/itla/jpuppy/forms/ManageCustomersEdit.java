@@ -12,8 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -31,11 +29,8 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
         } catch (ParseException ex) {
             Logger.getLogger(ManageCustomersEdit.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        //this.add(spnResult);
         setListener();
         pack();
-        this.setSize(this.getWidth(), 687);
         this.setLocationRelativeTo(null);
         this.setTitle("Manage Customers");
         this.setResizable(false);
@@ -65,14 +60,6 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
 
     public JButton getBtnSave() {
         return btnSave;
-    }
-
-    public JButton getBtnAdd() {
-        return btnAdd;
-    }
-
-    public JButton getBtnRemove() {
-        return btnRemove;
     }
 
     public JTextField getTxtFieldAdress() {
@@ -111,16 +98,9 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
         return jTextAreaNote;
     }
 
-    public JTable getTblMyPatients() {
-        return tblMyPatients;
-    }
-
     public void setListener() {
         btnCancel.addActionListener(ctrlCustormers);
         btnSave.addActionListener(ctrlCustormers);
-        btnAdd.addActionListener(ctrlCustormers);
-        btnRemove.addActionListener(ctrlCustormers);
-        tblMyPatients.addMouseListener(ctrlCustormers);
     }
 
     @SuppressWarnings("unchecked")
@@ -187,30 +167,12 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
         label.setText("Cedula.:");
         label.setFont(new Font("Arial", Font.BOLD, 14));
 
-        btnAdd = new JButton();
-        btnAdd.setText("Añadir");
-        btnAdd.setToolTipText("Añadir Mascota");
-        btnAdd.setFocusable(false);
-
-        btnRemove = new JButton();
-        btnRemove.setText("Remover");
-        btnAdd.setToolTipText("Remover Mascota");
-        btnRemove.setFocusable(false);
-
-        tblMyPatients = new JTable();
-        tblMyPatients.setBounds(27, 475, 848, 158);
-
-        spnResult = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        spnResult.setBounds(27, 475, 848, 158);
-        spnResult.getVerticalScrollBar().setEnabled(true);
-        spnResult.setViewportView(tblMyPatients);
-
 
         javax.swing.GroupLayout gl_pnFields = new javax.swing.GroupLayout(pnFields);
         gl_pnFields.setHorizontalGroup(
-                gl_pnFields.createParallelGroup(Alignment.LEADING).addGroup(gl_pnFields.createSequentialGroup().addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addGroup(gl_pnFields.createSequentialGroup().addGap(10).addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addComponent(jLabel1).addComponent(jLabel3).addComponent(label, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE).addComponent(jLabel5))).addGroup(gl_pnFields.createSequentialGroup().addContainerGap().addComponent(jLabel7))).addPreferredGap(ComponentPlacement.UNRELATED).addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addGroup(gl_pnFields.createSequentialGroup().addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addComponent(TxtFieldName, GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE).addComponent(TxtFieldLastName, 241, 241, 241).addComponent(TxtFieldCedula, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE).addComponent(TxtFieldAdress, GroupLayout.PREFERRED_SIZE, 337, GroupLayout.PREFERRED_SIZE)).addPreferredGap(ComponentPlacement.RELATED, 172, Short.MAX_VALUE).addGroup(gl_pnFields.createParallelGroup(Alignment.TRAILING).addComponent(jLabel2).addComponent(jLabel4).addComponent(jLabel8).addComponent(jLabel6)).addGap(24).addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addGroup(gl_pnFields.createSequentialGroup().addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addComponent(TxtFieldMail, 206, 206, 206).addComponent(TxtFieldPhone, 187, 187, 187).addComponent(TxtFieldCellphone, GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)).addGap(121)).addGroup(gl_pnFields.createSequentialGroup().addComponent(TxtFieldCity, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE).addContainerGap()))).addGroup(gl_pnFields.createSequentialGroup().addComponent(jTextAreaNote, GroupLayout.PREFERRED_SIZE, 590, GroupLayout.PREFERRED_SIZE).addContainerGap()))).addGroup(gl_pnFields.createSequentialGroup().addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED).addComponent(btnRemove, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE).addContainerGap(417, Short.MAX_VALUE)));
+                gl_pnFields.createParallelGroup(Alignment.LEADING).addGroup(gl_pnFields.createSequentialGroup().addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addGroup(gl_pnFields.createSequentialGroup().addGap(10).addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addComponent(jLabel1).addComponent(jLabel3).addComponent(label, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE).addComponent(jLabel5))).addGroup(gl_pnFields.createSequentialGroup().addContainerGap().addComponent(jLabel7))).addPreferredGap(ComponentPlacement.UNRELATED).addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addGroup(gl_pnFields.createSequentialGroup().addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addComponent(TxtFieldName, GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE).addComponent(TxtFieldLastName, 241, 241, 241).addComponent(TxtFieldCedula, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE).addComponent(TxtFieldAdress, GroupLayout.PREFERRED_SIZE, 337, GroupLayout.PREFERRED_SIZE)).addPreferredGap(ComponentPlacement.RELATED, 172, Short.MAX_VALUE).addGroup(gl_pnFields.createParallelGroup(Alignment.TRAILING).addComponent(jLabel2).addComponent(jLabel4).addComponent(jLabel8).addComponent(jLabel6)).addGap(24).addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addGroup(gl_pnFields.createSequentialGroup().addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addComponent(TxtFieldMail, 206, 206, 206).addComponent(TxtFieldPhone, 187, 187, 187).addComponent(TxtFieldCellphone, GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)).addGap(121)).addGroup(gl_pnFields.createSequentialGroup().addComponent(TxtFieldCity, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE).addContainerGap()))).addGroup(gl_pnFields.createSequentialGroup().addComponent(jTextAreaNote, GroupLayout.PREFERRED_SIZE, 590, GroupLayout.PREFERRED_SIZE).addContainerGap()))).addGroup(gl_pnFields.createSequentialGroup().addContainerGap(417, Short.MAX_VALUE)));
         gl_pnFields.setVerticalGroup(
-                gl_pnFields.createParallelGroup(Alignment.LEADING).addGroup(gl_pnFields.createSequentialGroup().addContainerGap().addGroup(gl_pnFields.createParallelGroup(Alignment.BASELINE).addComponent(jLabel1).addComponent(TxtFieldName, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE).addComponent(jLabel2).addComponent(TxtFieldCellphone, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)).addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addGroup(gl_pnFields.createSequentialGroup().addGap(18).addGroup(gl_pnFields.createParallelGroup(Alignment.BASELINE).addComponent(jLabel3).addComponent(TxtFieldLastName, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE).addComponent(jLabel4)).addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addGroup(gl_pnFields.createSequentialGroup().addGap(18).addGroup(gl_pnFields.createParallelGroup(Alignment.BASELINE).addComponent(TxtFieldCedula, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE).addComponent(label, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)).addGap(18).addGroup(gl_pnFields.createParallelGroup(Alignment.BASELINE).addComponent(TxtFieldAdress, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE).addComponent(jLabel5))).addGroup(gl_pnFields.createSequentialGroup().addPreferredGap(ComponentPlacement.UNRELATED).addGroup(gl_pnFields.createParallelGroup(Alignment.BASELINE).addComponent(jLabel8).addComponent(TxtFieldMail, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)).addGap(18).addGroup(gl_pnFields.createParallelGroup(Alignment.BASELINE).addComponent(jLabel6).addComponent(TxtFieldCity, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))))).addGroup(gl_pnFields.createSequentialGroup().addPreferredGap(ComponentPlacement.UNRELATED).addComponent(TxtFieldPhone, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))).addPreferredGap(ComponentPlacement.UNRELATED).addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addComponent(jLabel7).addComponent(jTextAreaNote, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)).addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE).addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE).addComponent(btnRemove, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)).addPreferredGap(ComponentPlacement.RELATED)));
+                gl_pnFields.createParallelGroup(Alignment.LEADING).addGroup(gl_pnFields.createSequentialGroup().addContainerGap().addGroup(gl_pnFields.createParallelGroup(Alignment.BASELINE).addComponent(jLabel1).addComponent(TxtFieldName, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE).addComponent(jLabel2).addComponent(TxtFieldCellphone, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)).addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addGroup(gl_pnFields.createSequentialGroup().addGap(18).addGroup(gl_pnFields.createParallelGroup(Alignment.BASELINE).addComponent(jLabel3).addComponent(TxtFieldLastName, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE).addComponent(jLabel4)).addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addGroup(gl_pnFields.createSequentialGroup().addGap(18).addGroup(gl_pnFields.createParallelGroup(Alignment.BASELINE).addComponent(TxtFieldCedula, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE).addComponent(label, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)).addGap(18).addGroup(gl_pnFields.createParallelGroup(Alignment.BASELINE).addComponent(TxtFieldAdress, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE).addComponent(jLabel5))).addGroup(gl_pnFields.createSequentialGroup().addPreferredGap(ComponentPlacement.UNRELATED).addGroup(gl_pnFields.createParallelGroup(Alignment.BASELINE).addComponent(jLabel8).addComponent(TxtFieldMail, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)).addGap(18).addGroup(gl_pnFields.createParallelGroup(Alignment.BASELINE).addComponent(jLabel6).addComponent(TxtFieldCity, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))))).addGroup(gl_pnFields.createSequentialGroup().addPreferredGap(ComponentPlacement.UNRELATED).addComponent(TxtFieldPhone, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))).addPreferredGap(ComponentPlacement.UNRELATED).addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING).addComponent(jLabel7).addComponent(jTextAreaNote, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)).addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE).addGroup(gl_pnFields.createParallelGroup(Alignment.LEADING)).addPreferredGap(ComponentPlacement.RELATED)));
         pnFields.setLayout(gl_pnFields);
         pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
 
@@ -228,7 +190,6 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
         layout.setVerticalGroup(
                 layout.createParallelGroup(Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addComponent(pnButtons, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE).addGap(18).addComponent(pnFields, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addContainerGap(28, Short.MAX_VALUE)));
         getContentPane().setLayout(layout);
-        this.add(spnResult);
 
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -241,8 +202,6 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
     private javax.swing.JFormattedTextField TxtFieldPhone;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnRemove;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -255,8 +214,6 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
     private javax.swing.JPanel pnButtons;
     private javax.swing.JPanel pnFields;
     private javax.swing.JFormattedTextField TxtFieldCedula;
-    private JTable tblMyPatients;
-    private javax.swing.JScrollPane spnResult;
 
     @Override
     public void showFrame() {

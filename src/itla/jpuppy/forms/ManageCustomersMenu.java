@@ -14,7 +14,7 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
         super(owner, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setTitle("Manage Customers");
+        this.setTitle("Administracion de Clientes");
         this.setResizable(false);
         
         ctrlCustormers = new ControllerCutomers(this);
@@ -131,7 +131,7 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
 
     @Override
     public void dispose() {
-        EntityManagerCreator.close();
+        itla.jpuppy.business.EntityManagerCreator.close();
         super.dispose();
     }
 }
