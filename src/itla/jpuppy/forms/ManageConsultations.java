@@ -2,57 +2,69 @@ package itla.jpuppy.forms;
 //import itla.jpuppy.controllers.ControllerConsultations;
 import datechooser.beans.DateChooserCombo;
 import itla.jpuppy.controllers.ControllerConsultations;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-public class ManageConsultations extends javax.swing.JDialog  implements FrameOption{
 
-   
+public class ManageConsultations extends javax.swing.JDialog implements FrameOption {
+
     public ManageConsultations(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         ControllerConsultations controlConsultations = new ControllerConsultations(this);
 
-/*        btnAddConsultations.addActionListener(controlConsultations);
+        btnAddConsultations.addActionListener(controlConsultations);
         btnCancelConsultations.addActionListener(controlConsultations);
         btnRemoveConsultations.addActionListener(controlConsultations);
         btnSaveConsultations.addActionListener(controlConsultations);
         btnSearchConsultations.addActionListener(controlConsultations);
-        btnUpdateConsultations.addActionListener(controlConsultations);*/
+        btnUpdateConsultations.addActionListener(controlConsultations);
+
         btnAddConsultations.setActionCommand("addConsultation");
         btnCancelConsultations.setActionCommand("cancelConsultation");
         btnRemoveConsultations.setActionCommand("removeConsultation");
         btnSaveConsultations.setActionCommand("saveConsultation");
         btnSearchConsultations.setActionCommand("searchConsultation");
         btnUpdateConsultations.setActionCommand("updateConsultation");
-  }
-        //getter ActionCommand
-        public String getActionCommandAdd() {
+                     
+        dateChooserBeginConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));   
+        dateChooserEndConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));         
+        
+        
+
+        this.setLocationRelativeTo(null);
+        this.setTitle("Manejador de consultas");
+        this.setResizable(false);
+    }
+    //getter ActionCommand
+
+    public String getActionCommandAdd() {
         return btnAddConsultations.getActionCommand();
     }
 
-        public String getActionCommandUpd() {
+    public String getActionCommandUpd() {
         return btnUpdateConsultations.getActionCommand();
     }
 
-        public String getActionCommandSearch() {
+    public String getActionCommandSearch() {
         return btnSearchConsultations.getActionCommand();
     }
 
-        public String getActionCommandSave() {
+    public String getActionCommandSave() {
         return btnSaveConsultations.getActionCommand();
     }
 
-        public String getActionCommandRemove() {
+    public String getActionCommandRemove() {
         return btnRemoveConsultations.getActionCommand();
     }
 
-        public String getActionCommandCancel() {
+    public String getActionCommandCancel() {
         return btnCancelConsultations.getActionCommand();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -225,10 +237,6 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-   
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddConsultations;
     private javax.swing.JButton btnCancelConsultations;
@@ -254,15 +262,22 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
     private javax.swing.JTextField txtRemarkConsultations;
     // End of variables declaration//GEN-END:variables
 
-    //Demas getters y setters
-   /* public JComboBox getCbBeginDateConsultations() {
-        return cbBeginDateConsultations;
+    public DateChooserCombo getDateChooserBeginConsultations() {
+        return dateChooserBeginConsultations;
     }
 
-    public void setCbBeginDateConsultations(JComboBox cbBeginDateConsultations) {
-        this.cbBeginDateConsultations = cbBeginDateConsultations;
-    }*/
+    public DateChooserCombo getDateChooserEndConsultations() {
+        return dateChooserEndConsultations;
+    }
 
+    //Demas getters y setters
+   /* public JComboBox getCbBeginDateConsultations() {
+    return cbBeginDateConsultations;
+    }
+    
+    public void setCbBeginDateConsultations(JComboBox cbBeginDateConsultations) {
+    this.cbBeginDateConsultations = cbBeginDateConsultations;
+    }*/
     public JComboBox getCbCustomerConsultations() {
         return cbCustomerConsultations;
     }
@@ -270,13 +285,13 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
     public void setCbCustomerConsultations(JComboBox cbCustomerConsultations) {
         this.cbCustomerConsultations = cbCustomerConsultations;
     }
- /*
+    /*
     public JComboBox getCbEndDateConsultations() {
-        return cbEndDateConsultations;
+    return cbEndDateConsultations;
     }
-
+    
     public void setCbEndDateConsultations(JComboBox cbEndDateConsultations) {
-        this.cbEndDateConsultations = cbEndDateConsultations;
+    this.cbEndDateConsultations = cbEndDateConsultations;
     } */
 
     public JComboBox getCbPatientConsultations() {
@@ -311,6 +326,7 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
         this.txtRemarkConsultations = txtRemarkConsultations;
     }
 //metodos de la interface
+
     @Override
     public void showFrame() {
         this.setVisible(true);
@@ -321,5 +337,4 @@ public class ManageConsultations extends javax.swing.JDialog  implements FrameOp
     public void closeFrame() {
         this.dispose();
     }
-
 }
