@@ -1,6 +1,7 @@
 package itla.jpuppy.business;
 
 import itla.jpuppy.datalayer.Breeds;
+import itla.jpuppy.datalayer.Species;
 import java.util.List;
 
 
@@ -28,6 +29,10 @@ public class ModelBreeds implements GeneralModel {
     public List<Breeds> searchAllBreedsByName(String name) {
         return queryManager.searchBreeds(name);
     }
+    
+    public List<Breeds> searchBreedsBySpecie(Species specie) {
+        return queryManager.searchBreedsBySpecies(specie);
+    }    
 
     //Metodos comunes a todos los modelos , se llama el correspondiente de  queryManager
     

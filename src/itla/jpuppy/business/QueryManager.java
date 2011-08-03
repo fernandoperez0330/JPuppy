@@ -166,6 +166,18 @@ public class QueryManager {
 
     }
 
+    public List<Breeds> searchBreedsBySpecies(Species specie) {
+        List<Breeds> listBreeds = null;
+        try {
+            listBreeds = entityManager.createQuery("SELECT a FROM Breeds a WHERE a.specie =:specieToFind").setParameter("specieToFind", specie).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listBreeds;
+
+    }
+
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
     public List<Consultations> searchConsultations() {
         List<Consultations> listConsultations = null;

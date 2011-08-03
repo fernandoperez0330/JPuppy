@@ -20,7 +20,6 @@ import javax.swing.event.TableModelListener;
 public class ControllerSpecies implements ActionListener {
 
     private ManageSpecies manageSpecies = null;
-    private SearchSpecies searchSpecies = null;
 
     public ControllerSpecies(ManageSpecies ms) {
         this.manageSpecies = ms;
@@ -106,7 +105,7 @@ public class ControllerSpecies implements ActionListener {
             //new ModelSpecies().insertObject(new Species(manageSpecies.getjComboBoxNameBreeds().getSelectedItem().toString(), listBreeds));
 
         } else if (comando.equals(manageSpecies.getActionCommandSearch())) {
-            //new SearchSpecies(null, true).showFrame();
+            new SearchSpecies(null, true).showFrame();
         }  else if (comando.equals(manageSpecies.getActionCommandCancel())) {
             int respond = JOptionPane.showConfirmDialog(null, "¿Desea Cancelar esta transaccion?", "Cancelar", JOptionPane.OK_CANCEL_OPTION);
             if (respond == 0) {

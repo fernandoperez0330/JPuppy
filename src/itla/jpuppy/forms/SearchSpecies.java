@@ -1,9 +1,12 @@
 package itla.jpuppy.forms;
 
+import itla.jpuppy.models.ControllerSearchSpecies;
 import itla.jpuppy.business.ModelSpecies;
 import itla.jpuppy.controllers.*;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
 
 public class SearchSpecies extends javax.swing.JDialog implements FrameOption {
 
@@ -13,11 +16,13 @@ public class SearchSpecies extends javax.swing.JDialog implements FrameOption {
         super(parent, modal);
         initComponents();
 
-        //ControllerSpecies cs = new ControllerSpecies(this);
+        ControllerSearchSpecies css = new ControllerSearchSpecies(this);
 
-        //btnSearch.addActionListener(cs);
+        btnSearch.addActionListener(css);
         btnSearch.setActionCommand("SearchSpecies");
 
+        
+        //jComboBox1.add("-");
         model = new DefaultComboBoxModel(new ControllerBreeds().searchAllSpecies());
         this.setJComboBoxModel(model);
 
@@ -30,8 +35,16 @@ public class SearchSpecies extends javax.swing.JDialog implements FrameOption {
         return btnSearch.getActionCommand();
     }
 
+    public JComboBox getjComboBox1() {
+        return jComboBox1;
+    }
+
     public void setJComboBoxModel(ComboBoxModel boxModel) {
         this.jComboBox1.setModel(boxModel);
+    }
+
+    public JTable getjTable1() {
+        return jTable1;
     }
 
     @SuppressWarnings("unchecked")
@@ -47,7 +60,7 @@ public class SearchSpecies extends javax.swing.JDialog implements FrameOption {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel1.setText("Especie a buscar:");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -60,7 +73,7 @@ public class SearchSpecies extends javax.swing.JDialog implements FrameOption {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel2.setText("Razas pertenecientes a la especie:");
 
         btnSearch.setText("Buscar");

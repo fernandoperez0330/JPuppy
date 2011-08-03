@@ -13,11 +13,11 @@ public class ModelSpecies implements GeneralModel {
     public ModelSpecies() {
         queryManager = new QueryManager();
         species = new Species();
-    } 
-    
+    }
+
     public Species getSpecies() {
         return species;
-    }     
+    }
 
     //retorna un objeto especifico tipo Species cuando se llame debe cargarse el Id desde generalVariableID del paquete util
     //los datos se le asignan cuando el usuario selecciona un cliente  del table
@@ -26,14 +26,14 @@ public class ModelSpecies implements GeneralModel {
         Species temp = entityManager.find(Species.class, id);
         return temp;
     }
-    
-    public Species getSpeciesByName( String name ){
-        
-        List<Species> list = this.searchAllSpeciesByName( name );
-        ListIterator<Species> iterator =  list.listIterator();
+
+    public Species getSpeciesByName(String name) {
+
+        List<Species> list = this.searchAllSpeciesByName(name);
+        ListIterator<Species> iterator = list.listIterator();
         Species temp = null;
-        while( iterator.hasNext() ){
-             temp = iterator.next();
+        while (iterator.hasNext()) {
+            temp = iterator.next();
         }
         return temp;
     }
@@ -42,11 +42,10 @@ public class ModelSpecies implements GeneralModel {
     public List<Species> searchAllSpeciesByName(String name) {
         return queryManager.searchSpecie(name);
     }
-     
-        public List<Species> searchAllSpecies() {
+
+    public List<Species> searchAllSpecies() {
         return queryManager.searchSpecie();
     }
-    
 
     //Metodos comunes a todos los modelos , se llama el correspondiente de  queryManager
     @Override
