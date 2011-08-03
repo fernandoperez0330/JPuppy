@@ -42,6 +42,7 @@ public class Login implements FrameOption {
         btnExit = new JButton();
         btnExit.setActionCommand("SALIR");
         background.setSize(400, 200);
+        background.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 128, 128)));
         Font fuente = new Font("Monospaced", Font.BOLD, 22);
         title.setFont(fuente);
         image = new JLabel();
