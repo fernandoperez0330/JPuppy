@@ -41,10 +41,10 @@ public class ManagePatients extends JDialog implements FrameOption {
     private JPanel pnButtons;
     private JButton btnAdd;
     private JButton btnUpdate;
-    private JButton btnSearch;
     private JButton btnSave;
     private JButton btnRemove;
     private JButton btnCancel;
+    private JButton btnExit;
     private JButton btnSearchCustomer;
     
     private JTable jTable1;
@@ -107,7 +107,7 @@ public class ManagePatients extends JDialog implements FrameOption {
                 pnButtons = new JPanel();
                 btnAdd = new JButton();
                 btnUpdate = new JButton();
-                btnSearch = new JButton();
+                btnExit = new JButton();
                 btnRemove = new JButton();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -128,28 +128,27 @@ public class ManagePatients extends JDialog implements FrameOption {
 
                 pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
 
-                btnAdd.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/add.png"));
+                btnAdd.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources + "add.png"));
                 btnAdd.setFocusable(false);
                 btnAdd.setMaximumSize(new java.awt.Dimension(50, 50));
                 btnAdd.setName("add"); // NOI18N
                 btnAdd.setOpaque(false);
                 pnButtons.add(btnAdd);
 
-                btnUpdate.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/edit.png"));
+                btnUpdate.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources + "edit.png"));
                 btnUpdate.setFocusable(false);
                 btnUpdate.setName("update"); // NOI18N
-                
                 pnButtons.add(btnUpdate);
 
-                btnSearch.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/find.png"));
-                btnSearch.setFocusable(false);
-                btnSearch.setName("search"); // NOI18N
-                pnButtons.add(btnSearch);
-
-                btnRemove.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/remove.png"));
+                btnRemove.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources + "remove.png"));
                 btnRemove.setFocusable(false);
                 btnRemove.setName("remove"); // NOI18N
                 pnButtons.add(btnRemove);
+                
+                btnExit.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources + "cancel.png"));
+                btnExit.setFocusable(false);
+                btnExit.setName("exit"); // NOI18N
+                pnButtons.add(btnExit);
 
                 GroupLayout layout = new GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -161,6 +160,14 @@ public class ManagePatients extends JDialog implements FrameOption {
                 pack();
                 break;
         }
+    }
+
+    public JButton getBtnExit() {
+        return btnExit;
+    }
+
+    public void setBtnExit(JButton btnExit) {
+        this.btnExit = btnExit;
     }
     /*metodo para */
     public void getContentManage(Long patientId){
@@ -225,13 +232,13 @@ public class ManagePatients extends JDialog implements FrameOption {
         pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
 
 
-        btnSave.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/save.png"));
+        btnSave.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources + "save.png"));
         btnSave.setFocusable(false);
         btnSave.setName("save"); // NOI18N
         pnButtons.add(btnSave);
 
 
-        btnCancel.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/cancel.png"));
+        btnCancel.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources + "cancel.png"));
         btnCancel.setFocusable(false);
         btnCancel.setName("cancel"); // NOI18N
         pnButtons.add(btnCancel);
@@ -332,14 +339,6 @@ public class ManagePatients extends JDialog implements FrameOption {
         this.btnSave = btnSave;
     }
 
-    public JButton getBtnSearch() {
-        return btnSearch;
-    }
-
-    public void setBtnSearch(JButton btnSearch) {
-        this.btnSearch = btnSearch;
-    }
-
     public JButton getBtnUpdate() {
         return btnUpdate;
     }
@@ -356,6 +355,7 @@ public class ManagePatients extends JDialog implements FrameOption {
         this.jTable1 = jTable1;
     }
     
+    @Override
     public ManagePatients getParent() {
         return parent;
     }
@@ -398,7 +398,7 @@ public class ManagePatients extends JDialog implements FrameOption {
             default:
                 btnAdd.addActionListener(Controller);
                 btnUpdate.addActionListener(Controller);
-                btnSearch.addActionListener(Controller);
+                btnExit.addActionListener(Controller);
                 btnRemove.addActionListener(Controller);
                 break;
         }

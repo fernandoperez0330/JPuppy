@@ -212,6 +212,8 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
 
         } else if (nameButtonPressed.equals("searchCustomer")) {
             new SearchCustomer(this.managePatients, true).showFrame();
+        }else if (nameButtonPressed.equals("exit")) {
+            this.managePatients.closeFrame();
         } else if (nameButtonPressed.equals("cancel")) {
             int respond = JOptionPane.showConfirmDialog(null, "¿Desea Cancelar esta transaccion?", "Cancelar", JOptionPane.OK_CANCEL_OPTION);
             if (respond == 0) {
@@ -221,7 +223,12 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
             if (this.managePatients.getjTable1().getSelectedRow() == -1) {
                 JOptionPane.showMessageDialog(null, "No tiene ningun paciente seleccionado para modificar", "Error", JOptionPane.OK_OPTION);
             } else {
-                JOptionPane.showMessageDialog(null, "Opcion en construccion");
+                if (JOptionPane.showConfirmDialog(null,"¿Desea realmente borrar este paciente?","Eliminar Paciente",JOptionPane.YES_NO_OPTION) == 0){
+                    Patients entPatient = modelPatients.searchPatient(this.arrIndexTblPatients.get(this.managePatients.getjTable1().getSelectedRow()).toString());
+                    modelPatients.deleteObject(entPatient);
+                    JOptionPane.showMessageDialog(null,"El paciente ha sido eliminado correctamente");
+                    this.managePatients.getjTable1().setModel(this.getTableModelPatients());
+                }
             }
         } else if (nameButtonPressed.equals("update")) {
             JTable tablePressed = this.managePatients.getjTable1();
