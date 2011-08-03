@@ -20,16 +20,11 @@ import javax.swing.event.TableModelListener;
 public class ControllerSpecies implements ActionListener {
 
     private ManageSpecies manageSpecies = null;
-    private QueryManager queryManager = new QueryManager();
     private SearchSpecies searchSpecies = null;
-    
+
     public ControllerSpecies(ManageSpecies ms) {
         this.manageSpecies = ms;
     }
-
-    public ControllerSpecies(SearchSpecies ss) {
-        this.searchSpecies = ss;
-    }    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -37,6 +32,8 @@ public class ControllerSpecies implements ActionListener {
         //Breeds breeds = new Breeds();
         //Evaluando cual boton fue pulsado y que debe realizar
         String comando = e.getActionCommand();
+
+        //System.out.println(comando);
         if (comando.equals(manageSpecies.getActionCommandAdd())) {
             //Object[] possibilities = {"ham", "spam", "yam"};
             String nameSpecie = JOptionPane.showInputDialog(manageSpecies, "Escribe la especie que deseas agregar:", "Insertar especies.", JOptionPane.INFORMATION_MESSAGE);
@@ -109,10 +106,11 @@ public class ControllerSpecies implements ActionListener {
             //new ModelSpecies().insertObject(new Species(manageSpecies.getjComboBoxNameBreeds().getSelectedItem().toString(), listBreeds));
 
         } else if (comando.equals(manageSpecies.getActionCommandSearch())) {
-            new SearchSpecies(null, true).showFrame();
+            //new SearchSpecies(null, true).showFrame();
         } else if (comando.equals(searchSpecies.getActionCommandSearch())) {
-            
-        }else if (comando.equals(manageSpecies.getActionCommandCancel())) {
+            System.out.println("Hola");
+
+        } else if (comando.equals(manageSpecies.getActionCommandCancel())) {
             int respond = JOptionPane.showConfirmDialog(null, "¿Desea Cancelar esta transaccion?", "Cancelar", JOptionPane.OK_CANCEL_OPTION);
             if (respond == 0) {
                 manageSpecies.closeFrame();

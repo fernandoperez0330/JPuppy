@@ -32,7 +32,7 @@ public class ControllerBreeds implements ActionListener{
    
     private ModelBreeds modelBreeds=null;
     private ManageBreeds manageBreeds=null;
-    private ModelSpecies modelSpecies=null;
+    private ModelSpecies modelSpecies = new ModelSpecies();
     private Breeds breed=null;
     private Species species=null;;
     private java.util.LinkedList<Breeds> listBreeds=null;
@@ -46,9 +46,11 @@ public class ControllerBreeds implements ActionListener{
         modelBreeds = new ModelBreeds();
         this.manageBreeds = manageBreeds;
         listBreeds =  new java.util.LinkedList<Breeds>();
-        modelSpecies = new ModelSpecies();
         model = new DefaultComboBoxModel( this.searchAllSpecies() );
         this.manageBreeds.setJComboBoxModel( model );
+    }
+
+    public ControllerBreeds() {
     }
     
     public String[] searchAllSpecies(){

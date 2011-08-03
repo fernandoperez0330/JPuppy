@@ -1,25 +1,37 @@
 package itla.jpuppy.forms;
 
-import itla.jpuppy.controllers.ControllerSpecies;
+import itla.jpuppy.business.ModelSpecies;
+import itla.jpuppy.controllers.*;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 
 public class SearchSpecies extends javax.swing.JDialog implements FrameOption {
+
+    private ComboBoxModel model = null;
 
     public SearchSpecies(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        ControllerSpecies cs = new ControllerSpecies(this);
-        
-        btnSearch.addActionListener(cs);
-        btnSearch.setActionCommand("Search");
-        
+
+        //ControllerSpecies cs = new ControllerSpecies(this);
+
+        //btnSearch.addActionListener(cs);
+        btnSearch.setActionCommand("SearchSpecies");
+
+        model = new DefaultComboBoxModel(new ControllerBreeds().searchAllSpecies());
+        this.setJComboBoxModel(model);
+
         this.setLocationRelativeTo(null);
         this.setTitle("Buscardor especies:");
         this.setResizable(false);
     }
-    
-    public String getActionCommandSearch(){
+
+    public String getActionCommandSearch() {
         return btnSearch.getActionCommand();
+    }
+
+    public void setJComboBoxModel(ComboBoxModel boxModel) {
+        this.jComboBox1.setModel(boxModel);
     }
 
     @SuppressWarnings("unchecked")
@@ -87,7 +99,6 @@ public class SearchSpecies extends javax.swing.JDialog implements FrameOption {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox jComboBox1;
