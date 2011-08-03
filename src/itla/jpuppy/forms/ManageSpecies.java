@@ -3,7 +3,7 @@ package itla.jpuppy.forms;
 import itla.jpuppy.controllers.ControllerSpecies;
 import itla.jpuppy.datalayer.Breeds;
 import itla.jpuppy.models.BreedsTableModel;
-import itla.jpuppy.models.EditorTable;
+//import itla.jpuppy.models.EditorTable;
 import java.awt.Frame;
 import java.util.List;
 import java.util.ListIterator;
@@ -57,8 +57,8 @@ public class ManageSpecies extends JDialog implements FrameOption {
             temp.addRow(nuevo);
         }
         
-        EditorTable miRender = new EditorTable();
-        tblBreeds.setDefaultRenderer(Boolean.class, miRender);
+        //EditorTable miRender = new EditorTable();
+        //tblBreeds.setDefaultRenderer(Boolean.class, miRender);
 
         
         //BreedsTableModel BreedsTableModel = new BreedsTableModel().getInstance();
