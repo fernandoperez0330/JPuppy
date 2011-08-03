@@ -15,7 +15,7 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         initComponents();
 
         ControllerConsultations controlConsultations = new ControllerConsultations(this);
-
+ 
         btnAddConsultations.addActionListener(controlConsultations);
         btnCancelConsultations.addActionListener(controlConsultations);
         btnRemoveConsultations.addActionListener(controlConsultations);
@@ -233,7 +233,7 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         ));
         jScrollPane1.setViewportView(tableConsultations);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 880, 143));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 880, 150));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

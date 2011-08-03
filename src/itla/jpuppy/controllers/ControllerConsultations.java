@@ -17,7 +17,7 @@ public class ControllerConsultations implements ActionListener{
         String comando = e.getActionCommand();
         if (comando.equals(manageConsultations.getActionCommandAdd())) {
             
-            new ModelConsultations();
+            //new ModelConsultations().insertObject(e);
         }
     }
 

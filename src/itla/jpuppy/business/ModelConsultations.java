@@ -14,7 +14,7 @@ public class ModelConsultations implements GeneralModel {
     
     public Consultations getSpecies() {
         return consultations;
-    } 
+    }  
     
     
     
