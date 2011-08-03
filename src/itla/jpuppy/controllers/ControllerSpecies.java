@@ -5,6 +5,7 @@ import itla.jpuppy.business.QueryManager;
 import itla.jpuppy.datalayer.Breeds;
 import itla.jpuppy.datalayer.Species;
 import itla.jpuppy.forms.ManageSpecies;
+import itla.jpuppy.forms.SearchSpecies;
 import itla.jpuppy.models.BreedsTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,18 +17,19 @@ import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
-public class ControllerSpecies implements ActionListener, TableModelListener {
+public class ControllerSpecies implements ActionListener {
 
     private ManageSpecies manageSpecies = null;
     private QueryManager queryManager = new QueryManager();
-
+    private SearchSpecies searchSpecies = null;
+    
     public ControllerSpecies(ManageSpecies ms) {
         this.manageSpecies = ms;
-
     }
 
-    public ControllerSpecies() {
-    }
+    public ControllerSpecies(SearchSpecies ss) {
+        this.searchSpecies = ss;
+    }    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -39,7 +41,7 @@ public class ControllerSpecies implements ActionListener, TableModelListener {
             //Object[] possibilities = {"ham", "spam", "yam"};
             String nameSpecie = JOptionPane.showInputDialog(manageSpecies, "Escribe la especie que deseas agregar:", "Insertar especies.", JOptionPane.INFORMATION_MESSAGE);
 
-            if (new ModelSpecies().searchAllSpeciesByName(nameSpecie).size() == 0) {
+            if (new ModelSpecies().searchAllSpeciesByName(nameSpecie).isEmpty()) {
                 try {
                     if (nameSpecie.equals("")) {
                         JOptionPane.showMessageDialog(null, "Para almacenar especies, debes introdicir una especie!", "Error:", JOptionPane.ERROR_MESSAGE);
@@ -106,24 +108,18 @@ public class ControllerSpecies implements ActionListener, TableModelListener {
 //            }
             //new ModelSpecies().insertObject(new Species(manageSpecies.getjComboBoxNameBreeds().getSelectedItem().toString(), listBreeds));
 
-        } else if (comando.equals(manageSpecies.getActionCommandCancel())) {
+        } else if (comando.equals(manageSpecies.getActionCommandSearch())) {
+            new SearchSpecies(null, true).showFrame();
+        } else if (comando.equals(searchSpecies.getActionCommandSearch())) {
+            
+        }else if (comando.equals(manageSpecies.getActionCommandCancel())) {
             int respond = JOptionPane.showConfirmDialog(null, "¿Desea Cancelar esta transaccion?", "Cancelar", JOptionPane.OK_CANCEL_OPTION);
             if (respond == 0) {
                 manageSpecies.closeFrame();
             }
         }
 
-    }
 
-    @Override
-    public void tableChanged(TableModelEvent e) {
-//        int row = e.getFirstRow();
-//        int column = e.getColumn();
-//        BreedsTableModel model = (BreedsTableModel) e.getSource();
-//        String columnName = model.getColumnName(column);
-//        Object data = model.getValueAt(row, column);
-//        
-        System.out.println("*");
     }
 
     //Metodos que conectan con el ModelSpecies
