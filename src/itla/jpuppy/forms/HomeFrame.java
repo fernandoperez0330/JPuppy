@@ -14,6 +14,7 @@ import itla.jpuppy.controllers.ControllerHome;
 import itla.jpuppy.utils.Background;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GraphicsEnvironment;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
@@ -31,6 +32,9 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
 
     public HomeFrame() {
         initComponents();
+        //poner el icono al frame
+        this.setTitle("JPuppy: Sistema de veterinaria");
+        //poner la imagen de fondo para el frame principal
         background = new Background("src/itla/jpuppy/resources/Vet.jpg");
         background.setBounds(0, 0, this.getWidth(), this.getHeight());
         ctrlhome = new ControllerHome(this);
@@ -38,11 +42,11 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
         this.add(background);
         background.setLayout(new FlowLayout());
         background.add(searching);
-        this.setTitle("JPuppy: Sistema de veterinaria");
         this.setIconImage(HomeFrame.icon.getImage());
         this.setPreferredSize(new Dimension(700, 700));
         this.setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
+        this.setMaximizedBounds(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds());
         setListener();
 
     }
