@@ -2,6 +2,7 @@ package itla.jpuppy.business;
 
 import itla.jpuppy.datalayer.Species;
 import java.util.List;
+import java.util.ListIterator;
 import javax.persistence.EntityManager;
 
 public class ModelSpecies implements GeneralModel {
@@ -23,6 +24,17 @@ public class ModelSpecies implements GeneralModel {
     public Species searchSpecies(int id) {
         EntityManager entityManager = EntityManagerCreator.getInstanceEM();
         Species temp = entityManager.find(Species.class, id);
+        return temp;
+    }
+    
+    public Species getSpeciesByName( String name ){
+        
+        List<Species> list = this.searchAllSpeciesByName( name );
+        ListIterator<Species> iterator =  list.listIterator();
+        Species temp = null;
+        while( iterator.hasNext() ){
+             temp = iterator.next();
+        }
         return temp;
     }
 
