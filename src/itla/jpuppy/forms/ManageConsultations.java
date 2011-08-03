@@ -105,17 +105,28 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel2.setText("Tipo De Consulta:");
 
+        cbTypeConsultations.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
+
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel3.setText("Y");
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel4.setText("Observacion:");
 
+        cbCustomerConsultations.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
+
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel5.setText("Cliente:");
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel6.setText("Paciente:");
+
+        cbPatientConsultations.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
+        cbPatientConsultations.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPatientConsultationsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
         pnFields.setLayout(pnFieldsLayout);
@@ -140,50 +151,52 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnFieldsLayout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(10, 10, 10)
                         .addComponent(cbCustomerConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(jLabel6)
                         .addGap(10, 10, 10)
                         .addComponent(cbPatientConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnFieldsLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtRemarkConsultations)))
                 .addContainerGap())
         );
         pnFieldsLayout.setVerticalGroup(
             pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnFieldsLayout.createSequentialGroup()
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnFieldsLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
                         .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnFieldsLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jLabel1))
-                            .addComponent(cbCustomerConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(13, 13, 13)
+                                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(pnFieldsLayout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(jLabel6))
+                                    .addComponent(dateChooserBeginConsultations, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbCustomerConsultations)
+                                    .addComponent(cbPatientConsultations)
+                                    .addComponent(jLabel1)))
                             .addGroup(pnFieldsLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jLabel6))
-                            .addComponent(cbPatientConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateChooserBeginConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(14, 14, 14)
+                                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dateChooserEndConsultations, 0, 0, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))))
+                        .addGap(12, 12, 12))
                     .addGroup(pnFieldsLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dateChooserEndConsultations, 0, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE))))
-                .addGap(12, 12, 12)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnFieldsLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel2))
-                    .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addContainerGap()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)))
+                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtRemarkConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4))
-                    .addComponent(cbTypeConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                        .addComponent(cbTypeConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2))
+                .addGap(22, 22, 22))
         );
 
         getContentPane().add(pnFields, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 880, 100));
@@ -237,6 +250,11 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cbPatientConsultationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPatientConsultationsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbPatientConsultationsActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddConsultations;
     private javax.swing.JButton btnCancelConsultations;

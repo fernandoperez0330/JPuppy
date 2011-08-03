@@ -1,6 +1,7 @@
 package itla.jpuppy.business;
 
 import itla.jpuppy.datalayer.*;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -135,15 +136,17 @@ public class QueryManager {
         return listSpecieses;
     }
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+
     public List<Species> searchSpecie() {
         List<Species> listSpecieses = null;
         try {
             listSpecieses = entityManager.createQuery("SELECT a FROM Species a ").getResultList();
         } catch (Exception e) {
-        } 
+        }
         return listSpecieses;
     }
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+
     public List<Breeds> searchBreeds(String name) {
         List<Breeds> listBreeds = null;;
         try {
@@ -154,6 +157,42 @@ public class QueryManager {
 
     }
 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+    public List<Consultations> searchConsultations() {
+        List<Consultations> listConsultations = null;
+        try {
+            listConsultations = entityManager.createQuery("SELECT a FROM Consultations a ").getResultList();
+        } catch (Exception e) {
+        }
+        return listConsultations;
+    }
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+    public List<Consultations> searchConsultations(String name) {
+        List<Consultations> listConsultations = null;
+        try {
+            listConsultations = entityManager.createQuery("SELECT a FROM Consultations a WHERE a.customer = :nameToFind").setParameter("nameToFind", name).getResultList();
+        } catch (Exception e) {
+        }
+        return listConsultations;
+    }    
+    
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+    public List<Consultations> searchConsultations(Date dateBegin, Date dateEnd) {
+        List<Consultations> listConsultations = null;
+        try {
+            listConsultations = entityManager.createQuery("SELECT a FROM Consultations a WHERE a.dateStart BETWEEN :dateBegin AND :dateEnd").setParameter("dateBegin", dateBegin).setParameter("dateEnd", dateEnd).getResultList();
+        } catch (Exception e) {
+        }
+        return listConsultations;
+
+    }
+
+    /*
+    -----------------------------
+     * OverWitters
+    -----------------------------
+     */
     public List<Breeds> searchBreeds() {
         List<Breeds> listBreeds = entityManager.createQuery("SELECT a FROM Breeds a").getResultList();
         return listBreeds;
