@@ -47,7 +47,8 @@ public class Login implements FrameOption {
         title.setFont(fuente);
         image = new JLabel();
 
-        //Border donde va el logo
+
+        
 
 
         //seteo de posicion
@@ -114,6 +115,7 @@ public class Login implements FrameOption {
 
     @Override
     public void showFrame() {
+        fLogin.setIconImage(FrameOption.icon.getImage());
         fLogin.getContentPane().add(background, "Center");
         fLogin.add(background);
         fLogin.setSize(450, 230);
