@@ -4,7 +4,9 @@
  */
 package itla.jpuppy.forms;
 
+import datechooser.view.appearance.swing.SwingCellAppearance;
 import java.awt.Frame;
+import javax.swing.JButton;
 
 /**
  *
@@ -38,6 +40,12 @@ public class AboutUsFrame extends javax.swing.JDialog implements FrameOption {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        btnExit = new javax.swing.JButton("Cerrar");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
         
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("TexFrame"); // NOI18N
@@ -85,7 +93,7 @@ public class AboutUsFrame extends javax.swing.JDialog implements FrameOption {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText(" Copyright JPuppy. 2011  All rights reserved.");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
-        
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, -1, -1));
         pack();
     }// </editor-fold>//GEN-END:initComponents
     /**
@@ -102,6 +110,7 @@ public class AboutUsFrame extends javax.swing.JDialog implements FrameOption {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel labelSubTitle;
     private javax.swing.JLabel labelTitle;
+    private javax.swing.JButton btnExit;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -112,5 +121,8 @@ public class AboutUsFrame extends javax.swing.JDialog implements FrameOption {
     @Override
     public void closeFrame() {
         this.setVisible(false);
+    }
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {
+    closeFrame();
     }
 }
