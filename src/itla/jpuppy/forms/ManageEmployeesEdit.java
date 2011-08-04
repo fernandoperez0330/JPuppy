@@ -73,8 +73,8 @@ public class ManageEmployeesEdit extends javax.swing.JDialog implements FrameOpt
     public void setListener() {
         btnCancel.addActionListener(ctrlUser);
         btnSave.addActionListener(ctrlUser);
-        jRadioButtonDoctor.addActionListener(ctrlUser);
         jRadioButtonNormal.addActionListener(ctrlUser);
+        jRadioButtonDoctor.addActionListener(ctrlUser);
     }
 
     public JFormattedTextField getTxtFieldCedula() {

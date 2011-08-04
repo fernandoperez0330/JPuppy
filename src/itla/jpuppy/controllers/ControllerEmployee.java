@@ -3,7 +3,6 @@ package itla.jpuppy.controllers;
 import itla.jpuppy.business.ModelEmployees;
 import itla.jpuppy.datalayer.Doctor;
 import itla.jpuppy.datalayer.Employees;
-import itla.jpuppy.datalayer.Users;
 import itla.jpuppy.forms.JSearching;
 import itla.jpuppy.forms.ManageEmployeesEdit;
 import itla.jpuppy.forms.ManageEmployeesMenu;
@@ -143,7 +142,9 @@ public class ControllerEmployee implements MouseListener, KeyListener, ActionLis
 
 
         if (e.getSource().equals(manageEdit.getBtnSave())) {
-
+            if (manageEdit.getjRadioButtonNormal().isSelected()) {
+                manageEdit.getTxtFieldSpeciality().setText("Sorry 4 Wait");
+            }
             if (isEmptyFields()) {
                 JOptionPane.showMessageDialog(manageEdit, "Existen Campos En Blancos Por Favor Completar", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -170,13 +171,13 @@ public class ControllerEmployee implements MouseListener, KeyListener, ActionLis
                         isEmployee();
                         if (mdlEmployees.checkDuplicateCedula(manageEdit.getTxtFieldCedula().getText())) {
                             if (tempEmployee.getCedula().equalsIgnoreCase(manageEdit.getTxtFieldCedula().getText())) {
-                                update(true);
+                                update(false);
                             } else {
                                 JOptionPane.showMessageDialog(manageEdit, "Existe Otro Usuario Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
                             tempEmployee.setCedula(manageEdit.getTxtFieldCedula().getText());
-                            update(true);
+                            update(false);
                         }
                     }
 
@@ -194,6 +195,7 @@ public class ControllerEmployee implements MouseListener, KeyListener, ActionLis
                             update(true);
                         }
                     } else {
+                        mdlEmployees.deleteObject(tempEmployee);
                         tempDoctor = new Doctor();
                         tempDoctor.setPersonId(edicion);
                         isDoctor();
@@ -228,11 +230,15 @@ public class ControllerEmployee implements MouseListener, KeyListener, ActionLis
         }
 
         if (e.getSource().equals(manageEdit.getjRadioButtonDoctor())) {
+            //JOptionPane.showMessageDialog(manageEdit, "Cambio", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
+            manageEdit.getLblSpeciality().setVisible(true);
             manageEdit.getTxtFieldSpeciality().setVisible(true);
             return;
         }
 
-        if (e.getSource().equals(manageEdit.getjRadioButtonDoctor())) {
+        if (e.getSource().equals(manageEdit.getjRadioButtonNormal())) {
+            //JOptionPane.showMessageDialog(manageEdit, "Cambio 2", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
+            manageEdit.getLblSpeciality().setVisible(false);
             manageEdit.getTxtFieldSpeciality().setVisible(false);
             return;
         }
@@ -279,7 +285,7 @@ public class ControllerEmployee implements MouseListener, KeyListener, ActionLis
             } catch (Exception e) {
             }
         }
-        return false;
+        return state;
     }
 
     private void insert() {
