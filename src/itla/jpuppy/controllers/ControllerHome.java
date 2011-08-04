@@ -14,8 +14,8 @@ import itla.jpuppy.forms.ManageCustomersMenu;
 import itla.jpuppy.forms.ManageEmployeesMenu;
 import itla.jpuppy.forms.ManagePatients;
 import itla.jpuppy.forms.ManageSpecies;
-import itla.jpuppy.forms.ManageUsersEdit;
-import itla.jpuppy.forms.ManageUsersMenu;
+//import itla.jpuppy.forms.ManageUsersEdit;
+//import itla.jpuppy.forms.ManageUsersMenu;
 import itla.jpuppy.models.SearchingCtrlCustomers;
 import itla.jpuppy.models.SearchingModel;
 import java.awt.event.ActionEvent;
@@ -98,7 +98,7 @@ public class ControllerHome implements ActionListener, KeyListener, WindowFocusL
 
         if (e.getSource().equals(home.getMnuiUsers())) {
             itla.jpuppy.business.EntityManagerCreator.close();
-            new ManageUsersMenu(home, true).showFrame();
+            //new ManageUsersMenu(home, true).showFrame();
             return;
         }
 

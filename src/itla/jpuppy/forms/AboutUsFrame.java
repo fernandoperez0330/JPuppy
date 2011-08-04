@@ -4,15 +4,14 @@
  */
 package itla.jpuppy.forms;
 
-import datechooser.view.appearance.swing.SwingCellAppearance;
 import java.awt.Frame;
-import javax.swing.JButton;
+import javax.swing.JDialog;
 
 /**
  *
  * @author Randy
  */
-public class AboutUsFrame extends javax.swing.JDialog implements FrameOption {
+public class AboutUsFrame extends JDialog implements FrameOption {
 
     /** Creates new form AboutUsFrame */
     public AboutUsFrame(Frame owner, boolean modal) {
@@ -29,7 +28,6 @@ public class AboutUsFrame extends javax.swing.JDialog implements FrameOption {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        
         labelTitle = new javax.swing.JLabel();
         labelSubTitle = new javax.swing.JLabel();
         imagAbout = new javax.swing.JLabel();
@@ -42,14 +40,14 @@ public class AboutUsFrame extends javax.swing.JDialog implements FrameOption {
         jLabel5 = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton("Cerrar");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
+                closeFrame();                
             }
         });
-        
+        setTitle("Acerca de...");
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("TexFrame"); // NOI18N
-        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         
         labelTitle.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -60,7 +58,7 @@ public class AboutUsFrame extends javax.swing.JDialog implements FrameOption {
         labelSubTitle.setText("Sistema de Veterinaria");
         getContentPane().add(labelSubTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
         
-        imagAbout.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/splash.png")); // NOI18N
+        imagAbout.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources + "splash.png")); // NOI18N
         getContentPane().add(imagAbout, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, -10, 190, 380));
         
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -68,32 +66,32 @@ public class AboutUsFrame extends javax.swing.JDialog implements FrameOption {
         jTextArea1.setColumns(20);
         jTextArea1.setEditable(false);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Permite Administrar toda la Informacion\nsobre la salud de sus pacientes, organizada\nen historias clínicas, vacunaciones y analisis,\nde esta forma podrá tomar decisiones correctas\nen poco tiempo."); // NOI18N
+        jTextArea1.setText("Permite Administrar toda la Información\nsobre la salud de sus pacientes, organizada\nen historias clínicas, vacunaciones y analisis,\nde esta forma podrá tomar decisiones correctas\nen poco tiempo."); // NOI18N
         jTextArea1.setSelectionColor(new java.awt.Color(204, 204, 255));
         jScrollPane1.setViewportView(jTextArea1);
         
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 390, 100));
         
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Product Version:");
+        jLabel1.setText("Version del producto:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
         
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("System:");
+        jLabel2.setText("Sistema:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
         
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("1.0 V");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, -1, -1));
         
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Windows 7");
+        jLabel4.setText("Windows Xp, Vista y 7");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, -1, -1));
         
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText(" Copyright JPuppy. 2011  All rights reserved.");
+        jLabel5.setText("Copyright JPuppy. 2011. Todos los derechos reservados.");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, -1, -1));
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 335, -1, -1));
         pack();
     }// </editor-fold>//GEN-END:initComponents
     /**
@@ -121,8 +119,5 @@ public class AboutUsFrame extends javax.swing.JDialog implements FrameOption {
     @Override
     public void closeFrame() {
         this.setVisible(false);
-    }
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {
-    closeFrame();
     }
 }
