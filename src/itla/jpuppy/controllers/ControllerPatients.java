@@ -162,17 +162,17 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
                     } else {
                         Patients  patient = modelPatients.getPatient();
                         patient.setName(managePatients.getTxtFieldNombre().getText());
-                        patient.setBirthDate(new Date(managePatients.getTxtFieldCumpleano().getText()));
+                        patient.setBirthDate(new Date(managePatients.getTxtFieldCumpleano().getSelectedDate().getTimeInMillis()));
                         patient.setNotes(managePatients.getjTextAreNota().getText());
                         Customers customer = modelCustomer.searchCustomer(this.managePatients.getIdDueno());
                         patient.setOwner(customer);
                         patient.setDoctorLastVisit(managePatients.getTxtFieldUltimaVisitaDoctor().getText());
-                        patient.setLastVisit(new Date(managePatients.getTxtFieldUltimaVisita().getText()));
+                        patient.setLastVisit(new Date(managePatients.getTxtFieldUltimaVisita().getSelectedDate().getTimeInMillis()));
                         
                         
                         if (modelPatients.insertObject(patient)) {
                             JOptionPane.showMessageDialog(managePatients, MSG_SAVENEW_SUCCESSFULL);
-                            this.managePatients.getParent().getjTable1().setModel(this.getTableModelPatients());
+                            managePatients.getParent().getjTable1().setModel(managePatients.getParent().getController().getTableModelPatients());
                             managePatients.closeFrame();
                         } else {
                             //cuando todos el proceso se ejecuto correctamente
@@ -231,12 +231,17 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
             } else {
                 if (JOptionPane.showConfirmDialog(null,"¿Desea realmente borrar este paciente?","Eliminar Paciente",JOptionPane.YES_NO_OPTION) == 0){
                     //eliminar los pacientes
-                    Patients entPatient = modelPatients.searchPatient(arrIndexTblPatients.get(managePatients.getjTable1().getSelectedRow()));
+                    Patients entPatient = null;
                     try{   
+                        entPatient = modelPatients.searchPatient(arrIndexTblPatients.get(managePatients.getjTable1().getSelectedRow()));
                         modelPatients.deleteObject(entPatient);
-                    }catch(Exception exc){}
+                    }
+                    catch(Exception exc){ System.out.println("Error: " + exc.getMessage() + ", Cause: " + exc.getCause()); }
                     //cuando el paciente ha sido eliminado correctamente
-                    JOptionPane.showMessageDialog(null,"El paciente ha sido eliminado correctamente");
+                    if (entPatient != null)
+                        JOptionPane.showMessageDialog(null,"El paciente ha sido eliminado correctamente");
+                    else 
+                        JOptionPane.showMessageDialog(null,"El paciente no se ha podido eliminar, favor intentar nuevamente");
                     //actualizar la tabla donde se lista los pacientes
                     managePatients.getjTable1().setModel(this.getTableModelPatients());
                 }
