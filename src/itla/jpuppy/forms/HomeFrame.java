@@ -91,6 +91,11 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
         return mnuiUsers;
     }
 
+    public JMenuItem getMnuiProductosServicios() {
+        return mnuiProductosServicios;
+    }
+    
+
     private void setListener() {
         searching.getTxtSearch().addKeyListener(ctrlhome);
         mnuiAcerca.addActionListener(ctrlhome);
@@ -103,6 +108,7 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
         mnuiPerfil.addActionListener(ctrlhome);
         mnuiSpecies.addActionListener(ctrlhome);
         mnuiUsers.addActionListener(ctrlhome);
+        mnuiProductosServicios.addActionListener(ctrlhome);
     }
     
     public JSearching getSearching() {
@@ -133,6 +139,8 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
         spAdmin2 = new javax.swing.JPopupMenu.Separator();
         mnuiEmployees = new javax.swing.JMenuItem();
         mnuiUsers = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        mnuiProductosServicios = new javax.swing.JMenuItem();
         mnuVentas = new javax.swing.JMenu();
         mnuUsuarios = new javax.swing.JMenu();
         mnuiPerfil = new javax.swing.JMenuItem();
@@ -172,6 +180,11 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
         mnuiUsers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.CTRL_MASK));
         mnuiUsers.setText("Usuarios");
         mnuAdministrator.add(mnuiUsers);
+        mnuAdministrator.add(jSeparator1);
+
+        mnuiProductosServicios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.CTRL_MASK));
+        mnuiProductosServicios.setText("Productos y Servicios");
+        mnuAdministrator.add(mnuiProductosServicios);
 
         mnubHome.add(mnuAdministrator);
 
@@ -218,6 +231,7 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu mnuAcerca;
     private javax.swing.JMenu mnuAdministrator;
     private javax.swing.JMenu mnuUsuarios;
@@ -231,6 +245,7 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
     private javax.swing.JMenuItem mnuiExit;
     private javax.swing.JMenuItem mnuiPatients;
     private javax.swing.JMenuItem mnuiPerfil;
+    private javax.swing.JMenuItem mnuiProductosServicios;
     private javax.swing.JMenuItem mnuiSpecies;
     private javax.swing.JMenuItem mnuiUsers;
     private javax.swing.JPopupMenu.Separator spAdmin1;

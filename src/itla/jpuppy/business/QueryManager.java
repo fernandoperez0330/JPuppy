@@ -81,9 +81,8 @@ public class QueryManager {
         Breeds temp = entityManager.find(Breeds.class, id);
         return temp;
     }
-    
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     public List<Employees> searchEmployees(String name) {
         List<Employees> listUsers = null;
         try {
@@ -92,10 +91,17 @@ public class QueryManager {
         }
         return listUsers;
     }
-    
-    
+
+    public List<Articles> searchArticles(String name) {
+        List<Articles> listUsers = null;
+        try {
+            listUsers = entityManager.createQuery("SELECT a FROM Articles a WHERE LOWER(a.name) LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
+        } catch (Exception e) {
+        }
+        return listUsers;
+    }
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    
+
     public List<Users> searchUsers(String name) {
         List<Users> listUsers = null;
         try {
