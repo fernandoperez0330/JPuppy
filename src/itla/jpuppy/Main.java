@@ -45,8 +45,8 @@ public class Main {
 //        em.getTransaction().commit();
 //        em.close();
 
- 
-       new ManageAppointnments(null, true).showFrame();
+       new Login().showFrame();
+       //new ManageAppointnments(null, true).showFrame();
        
     
     }
