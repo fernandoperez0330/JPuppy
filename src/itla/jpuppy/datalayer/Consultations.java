@@ -16,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import itla.jpuppy.utils.TypeConsultations;
 
 /**
  *
@@ -24,7 +23,7 @@ import itla.jpuppy.utils.TypeConsultations;
  */
 @Entity
 public class Consultations implements Serializable {
-    private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -41,20 +40,20 @@ public class Consultations implements Serializable {
     @OneToOne
     private Appointments appointments;
     @Enumerated
-    private TypeConsultations typeConsultations;
+    private String typeConsultations;
 
     public Consultations() {
     }
 
-    public TypeConsultations getTypeConsultations() {
+    public String getTypeConsultations() {
         return this.typeConsultations;
     }
 
-    public void setTypeConsultations(TypeConsultations typeConsultations) {
+    public void setTypeConsultations(String typeConsultations) {
         this.typeConsultations = typeConsultations;
     }
 
-    public Consultations(Long id, Date dateStart, Date dateEnd, Customers customer, Patients patients, String remark, Appointments appointments, TypeConsultations typeConsultations) {
+    public Consultations(Long id, Date dateStart, Date dateEnd, Customers customer, Patients patients, String remark, Appointments appointments, String typeConsultations) {
         this.id = id;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
