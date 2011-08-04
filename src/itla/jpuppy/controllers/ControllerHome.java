@@ -9,12 +9,12 @@ import itla.jpuppy.datalayer.Customers;
 import itla.jpuppy.forms.AboutUsFrame;
 import itla.jpuppy.forms.HomeFrame;
 import itla.jpuppy.forms.JSearching;
+import itla.jpuppy.forms.ManageArticlesMenu;
 import itla.jpuppy.forms.ManageBreeds;
 import itla.jpuppy.forms.ManageCustomersMenu;
 import itla.jpuppy.forms.ManageEmployeesMenu;
 import itla.jpuppy.forms.ManagePatients;
 import itla.jpuppy.forms.ManageSpecies;
-//import itla.jpuppy.forms.ManageUsersEdit;
 //import itla.jpuppy.forms.ManageUsersMenu;
 import itla.jpuppy.models.SearchingCtrlCustomers;
 import itla.jpuppy.models.SearchingModel;
@@ -99,6 +99,12 @@ public class ControllerHome implements ActionListener, KeyListener, WindowFocusL
         if (e.getSource().equals(home.getMnuiUsers())) {
             itla.jpuppy.business.EntityManagerCreator.close();
             //new ManageUsersMenu(home, true).showFrame();
+            return;
+        }
+        
+        if (e.getSource().equals(home.getMnuiProductosServicios())){
+            itla.jpuppy.business.EntityManagerCreator.close();
+             new ManageArticlesMenu(home, true).showFrame();
             return;
         }
 
