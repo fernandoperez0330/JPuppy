@@ -6,6 +6,7 @@ package itla.jpuppy.business;
 
 import itla.jpuppy.datalayer.Appointments;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  *
@@ -22,8 +23,25 @@ public class ModelAppointments implements GeneralModel{
     
     
     public List<Appointments> serachAllAppointmentsByPattients(){
+        
         return null;
     }
+    public Appointments getSpecificAppointments( String PatientName ){
+        boolean state = false;
+        Appointments temp = null;
+        List<Appointments>  list = queryManager.searchAllAppointments();
+        ListIterator<Appointments> iter =  list.listIterator();
+        while( iter.hasNext() && !state ){
+            temp = iter.next();
+            if( temp.getPatientName().equals(PatientName))
+                state = true;
+            
+        }
+        if( state )
+        return temp;
+        else 
+            return null;
+    } 
     
     @Override
     public boolean insertObject(Object object) {

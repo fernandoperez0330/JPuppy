@@ -106,8 +106,9 @@ public class ControllerBreeds implements ActionListener{
                        javax.swing.JOptionPane.showMessageDialog( null, "error : cannot save register,Specie field is empty or bad input" );
                    }
                }else {
+                   Species es = this.modelSpecies.getSpeciesByName( this.manageBreeds.getSpecieName() );
                 temp.setBreedsName( this.manageBreeds.getBreedName() );
-                temp.getSpecie().setSpeciesName( this.manageBreeds.getSpecieName() );
+                temp.setSpecie( es );
                 temp.setHeight( this.manageBreeds.getBreedHeigth() );
                 temp.setWidth( this.manageBreeds.getBreedWidth() );
                 

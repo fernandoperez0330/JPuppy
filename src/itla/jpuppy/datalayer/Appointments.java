@@ -27,7 +27,7 @@ import javax.persistence.Temporal;
 public class Appointments implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -100,8 +100,18 @@ public class Appointments implements Serializable{
     public void setStatus(enumAppointmentStatus status) {
         this.status = status;
     }
-
- 
+    public String getDoctorName(){
+        return this.doctor.getName();
+    }
+    public String getPatientName(){
+        return this.patient.getName();
+    }
+    public void setDoctorName( String name ){
+        this.doctor.setName( name  );
+    }
+    public void setPatientName( String name ){
+        this.patient.setName( name );
+    }
     
 
 }

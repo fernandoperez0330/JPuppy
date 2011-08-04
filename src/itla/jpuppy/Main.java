@@ -9,6 +9,7 @@ import itla.jpuppy.datalayer.Breeds;
 import itla.jpuppy.datalayer.Species;
 import itla.jpuppy.datalayer.Users;
 import itla.jpuppy.forms.Login;
+import itla.jpuppy.forms.ManageAppointnments;
 import itla.jpuppy.forms.ManageBreeds;
 import itla.jpuppy.utils.EncryptText;
 import java.util.LinkedList;
@@ -45,7 +46,7 @@ public class Main {
 //        em.close();
 
  
-       new Login().showFrame();
+       new ManageAppointnments(null, true).showFrame();
        
     
     }

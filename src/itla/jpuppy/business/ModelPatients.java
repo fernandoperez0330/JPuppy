@@ -28,9 +28,18 @@ public class ModelPatients implements GeneralModel {
      public List<Patients> searchAllPatientByNameExplicit(String name) {
         return queryManager.searchPatientByName(name);
     }
+        public List<Patients> searchAllPatient() {
+        return queryManager.searchAllPatient();
+    }
     
     public List<Patients> searchAllPatientByName(String name) {
         return queryManager.searchPatientByName(name);
+    }
+    public Patients getPatientsByName( String name ){
+        Patients p = null;
+                List<Patients> list = this.searchAllPatientByName(name);
+                p = list.get(0);
+                return p;
     }
 
     //Metodos comunes a todos los modelos , se llama el correspondiente de  queryManager

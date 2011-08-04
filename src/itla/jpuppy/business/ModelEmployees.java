@@ -2,6 +2,7 @@ package itla.jpuppy.business;
 
 import itla.jpuppy.datalayer.*;
 import java.util.List;
+import java.util.ListIterator;
 import javax.persistence.EntityManager;
 
 public class ModelEmployees implements GeneralModel {
@@ -30,11 +31,28 @@ public class ModelEmployees implements GeneralModel {
         Doctor temp = entityManager.find(Doctor.class, id);
         return temp;
     }
+    public List<Doctor> searchAllDoctor(){
+        return queryManager.searchAllDoctor();
+    }
 
     private Employees searchDoctor(Long id) {
         EntityManager entityManager = EntityManagerCreator.getInstanceEM();
         Employees temp = entityManager.find(Doctor.class, id);
         return temp;
+    }
+       public Doctor getDoctorByName( String name ) {
+            Doctor doctor = null;
+            List<Doctor> list = queryManager.searchAllDoctor();
+            boolean state = false ;
+            ListIterator<Doctor> iter = list.listIterator();
+            while ( iter.hasNext() && !state ){
+                doctor = iter.next();
+                if( doctor.getName().equals( name ))
+                    state = true;
+            }
+            if( state )
+            return doctor;
+            else return null;
     }
 
     // retorna lista de patient para autocomplete

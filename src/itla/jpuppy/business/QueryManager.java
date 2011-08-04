@@ -154,6 +154,17 @@ public class QueryManager {
 
         return listPatients;
     }
+    
+            public List<Patients> searchAllPatient() {
+        List<Patients> listPatients = null;
+        try {
+            listPatients = entityManager.createQuery("SELECT a FROM Patients a").getResultList();
+        } catch (Exception e) {
+        }
+
+        return listPatients;
+    }
+
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
     public List<Species> searchSpecie(String name) {
@@ -228,6 +239,17 @@ public class QueryManager {
         return listConsultations;
 
     }
+        public List<Doctor> searchAllDoctor(){
+        List<Doctor>  listResult = null;
+        try{
+            
+            listResult =  entityManager.createQuery( "SELECT e FROM Doctor e" ).getResultList();
+                     
+        }catch( Exception e ){
+            
+        }
+        return listResult;
+    }
 
     /*
     -----------------------------
@@ -245,6 +267,9 @@ public class QueryManager {
         return listBreeds;
 
     }
+        public List<Appointments> searchAllAppointments(){
+        return entityManager.createQuery( "SELECT e  FROM Appointments e" ).getResultList();
+    }       
 
     @Override
     protected void finalize() {

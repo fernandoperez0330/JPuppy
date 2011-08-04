@@ -85,7 +85,7 @@ public abstract class Controller extends javax.swing.JDialog {
     protected boolean isEmptyFields() {
         boolean state = false;
         javax.swing.text.JTextComponent textField;
-        String date;
+        javax.swing.JComboBox combo;
 
 
         for (int i = 0; i <= pnlEdition.getComponentCount(); i++) {
@@ -100,6 +100,14 @@ public abstract class Controller extends javax.swing.JDialog {
                     }
                 }
             } catch (Exception e) {
+                try{
+                    combo =( javax.swing.JComboBox) pnlEdition.getComponent( i );
+                    if( combo.getSelectedItem().equals("-"))
+                        state = true;
+                    
+                }catch(Exception ep){
+                    
+                }
             }
         }
         return state;
@@ -114,7 +122,7 @@ public abstract class Controller extends javax.swing.JDialog {
 
     protected void eventEdit(String text) { ////La Variable Global
        
-        if (text.equals("")) {
+        if (text.equals("-")||text.equals("-")) {
             javax.swing.JOptionPane.showMessageDialog(null, "No Selected Register", "Aviso", javax.swing.JOptionPane.ERROR_MESSAGE);
         } else {
             changeStateWriteFields(true);

@@ -306,12 +306,12 @@ public enumAppointmentStatus getStatusName(){
         return enumAppointmentStatus.NOTASISTED;
 
 }
-public String getRegisteredDate(){
-    return dateChooserRegister.getText();
+public Date getRegisteredDate(){
+    return new Date( this.dateChooserRegister.getSelectedDate().getTimeInMillis() );
 }
 
-public String getAcordetDate(){
-    return dateChooserCita.getText();
+public Date getAcordetDate(){
+    return new Date ( this.dateChooserCita.getSelectedDate().getTimeInMillis() );
             
 }
 
@@ -321,12 +321,16 @@ public String getAcordetDate(){
     }
     
     public void setAllFields(String PatientName , Date registered,Date acordded,String doctor,int status ){
+        Calendar c = Calendar.getInstance();
         jComboBoxPaciente.setSelectedItem( PatientName );
-        dateChooserRegister.setText(registered.toString());
-        dateChooserCita.setText( acordded.toString() );
+        c.setTime( registered );
+        dateChooserRegister.setSelectedDate( c );
+        c.setTime( acordded );
+        dateChooserCita.setSelectedDate( c );
         jComboBoxDoctor.setSelectedItem( doctor );
-        jComboBoxStatus.setSelectedIndex( status );
+        jComboBoxStatus.setSelectedIndex( status+1 );
     }
+
   
 
     @Override
@@ -344,7 +348,7 @@ public String getAcordetDate(){
     public boolean eventSave() {
         boolean state=true;
         if( !isEmptyFields() ){
-            
+           
        changeStateWriteFields( false );
        stateButtons(true, false);
         }else {
@@ -381,5 +385,5 @@ public String getAcordetDate(){
        m.showFrame();
      
    }
-
+ 
 }
