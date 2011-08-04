@@ -2,13 +2,17 @@ package itla.jpuppy.forms;
 //import itla.jpuppy.controllers.ControllerConsultations;
 import datechooser.beans.DateChooserCombo;
 import itla.jpuppy.controllers.ControllerConsultations;
+import itla.jpuppy.utils.TypeConsultations;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
 public class ManageConsultations extends javax.swing.JDialog implements FrameOption {
+
+    
 
     public ManageConsultations(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -33,7 +37,8 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         dateChooserBeginConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));   
         dateChooserEndConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));         
         
-        
+
+        cbTypeConsultations.setModel(new DefaultComboBoxModel(TypeConsultations.values()));
 
         this.setLocationRelativeTo(null);
         this.setTitle("Manejador de consultas");
@@ -106,6 +111,11 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         jLabel2.setText("Tipo De Consulta:");
 
         cbTypeConsultations.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
+        cbTypeConsultations.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTypeConsultationsActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel3.setText("Y");
@@ -254,6 +264,10 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
     private void cbPatientConsultationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPatientConsultationsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbPatientConsultationsActionPerformed
+
+    private void cbTypeConsultationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTypeConsultationsActionPerformed
+       // TODO add your handling code here:
+    }//GEN-LAST:event_cbTypeConsultationsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddConsultations;
