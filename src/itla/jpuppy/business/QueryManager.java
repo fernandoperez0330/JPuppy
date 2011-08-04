@@ -30,7 +30,9 @@ public class QueryManager {
             entityManager.getTransaction().commit();
             status = true;
         } catch (Exception e) {
-            entityManager.getTransaction().rollback();
+            try{
+                entityManager.getTransaction().rollback();
+            }catch(Exception exc) { System.err.println("Error: " + e.getMessage() + "Cause: " + e.getCause()); }
             status = false;
         }
         return status;
@@ -116,13 +118,9 @@ public class QueryManager {
     }
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
-    public List<Patients> searchPatient(String patientsId) {
-        List<Patients> listPatients = null;
-        try {
-            listPatients = entityManager.createQuery("SELECT a FROM Patients a WHERE LOWER(a.patientsId) LIKE :nameToFind").setParameter("nameToFind", patientsId).getResultList();
-        } catch (Exception e) {
-        }
-        return listPatients;
+    public Patients searchPatient(Long patientsId) {
+        Patients patient = entityManager.find(Patients.class,patientsId);
+        return patient;
     }
 
     public List<Patients> searchPatientByName(String name) {

@@ -52,7 +52,8 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
     }
     
     public DefaultTableModel getTableModelPatients() {
-        arrIndexTblPatients = new ArrayList<Long>();
+        if (arrIndexTblPatients == null) arrIndexTblPatients = new ArrayList<Long>();
+        else arrIndexTblPatients.clear();
         DefaultTableModel tableModel = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int rows, int columns) {
@@ -103,23 +104,26 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
     }
 
     public void findPatient(Long idPatient) {
-        Patients patient = this.modelPatients.searchPatient(Long.toString(idPatient));
+        Patients patient = this.modelPatients.searchPatient(idPatient);
         //rellenar el campo el nombre
-        this.managePatients.getTxtFieldNombre().setText(patient.getName());
+        managePatients.getTxtFieldNombre().setText(patient.getName());
         //rellenar el campo dueno (solo para muestra)
-        this.managePatients.getTxtFieldDueno().setText(patient.getOwner().getName() + " " + patient.getOwner().getLastName());
+        managePatients.getTxtFieldDueno().setText(patient.getOwner().getName() + " " + patient.getOwner().getLastName());
         //rellenar el campo id del dueno
-        this.managePatients.setIdDueno(patient.getOwner().getPersonId());
+        managePatients.setIdDueno(patient.getOwner().getPersonId());
         //rellenar el campo de cumpleanos
         GregorianCalendar dateBirthDate = new GregorianCalendar();
         dateBirthDate.setTime(patient.getBirthDate());
-        this.managePatients.getTxtFieldCumpleano().setSelectedDate(dateBirthDate);
+        managePatients.getTxtFieldCumpleano().setSelectedDate(dateBirthDate);
         
         //rellenar la ultima visita
         GregorianCalendar dateLastVisit = new GregorianCalendar();
+        try{
         dateLastVisit.setTime(patient.getLastVisit());
-       
-        this.managePatients.getTxtFieldUltimaVisita().setSelectedDate(dateLastVisit);
+        managePatients.getTxtFieldUltimaVisita().setSelectedDate(dateLastVisit);
+        }catch (NullPointerException exc) {}
+        
+        
         
         //poner el doctor que lo visito
         this.managePatients.getTxtFieldUltimaVisitaDoctor().setText(patient.getDoctorLastVisit());
@@ -156,15 +160,17 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
                         JOptionPane.showMessageDialog(managePatients, MSG_EMPTY_NAME);
                         managePatients.getTxtFieldDueno().requestFocus();
                     } else {
-                        Patients patients = modelPatients.getPatient();
-                        patients.setName(managePatients.getTxtFieldNombre().getText());
-                        patients.setBirthDate(new Date(managePatients.getTxtFieldCumpleano().getText()));
-                        patients.setNotes(managePatients.getTxtFieldNombre().getText());
+                        Patients  patient = modelPatients.getPatient();
+                        patient.setName(managePatients.getTxtFieldNombre().getText());
+                        patient.setBirthDate(new Date(managePatients.getTxtFieldCumpleano().getText()));
+                        patient.setNotes(managePatients.getjTextAreNota().getText());
                         Customers customer = modelCustomer.searchCustomer(this.managePatients.getIdDueno());
-                        patients.setOwner(customer);
-                        patients.setDoctorLastVisit(managePatients.getTxtFieldUltimaVisitaDoctor().getText());
-                        patients.setLastVisit(new Date(managePatients.getTxtFieldUltimaVisita().getText()));
-                        if (modelPatients.insertObject(patients)) {
+                        patient.setOwner(customer);
+                        patient.setDoctorLastVisit(managePatients.getTxtFieldUltimaVisitaDoctor().getText());
+                        patient.setLastVisit(new Date(managePatients.getTxtFieldUltimaVisita().getText()));
+                        
+                        
+                        if (modelPatients.insertObject(patient)) {
                             JOptionPane.showMessageDialog(managePatients, MSG_SAVENEW_SUCCESSFULL);
                             this.managePatients.getParent().getjTable1().setModel(this.getTableModelPatients());
                             managePatients.closeFrame();
@@ -224,10 +230,13 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
                 JOptionPane.showMessageDialog(null, "No tiene ningun paciente seleccionado para modificar", "Error", JOptionPane.OK_OPTION);
             } else {
                 if (JOptionPane.showConfirmDialog(null,"¿Desea realmente borrar este paciente?","Eliminar Paciente",JOptionPane.YES_NO_OPTION) == 0){
-                    Patients entPatient = modelPatients.searchPatient(this.arrIndexTblPatients.get(this.managePatients.getjTable1().getSelectedRow()).toString());
-                    modelPatients.deleteObject(entPatient);
+                    //eliminar los pacientes
+                    Patients entPatient = modelPatients.searchPatient(arrIndexTblPatients.get(managePatients.getjTable1().getSelectedRow()));
+                    try{   
+                        modelPatients.deleteObject(entPatient);
+                    }catch(Exception exc){}
                     JOptionPane.showMessageDialog(null,"El paciente ha sido eliminado correctamente");
-                    this.managePatients.getjTable1().setModel(this.getTableModelPatients());
+                    managePatients.getjTable1().setModel(this.getTableModelPatients());
                 }
             }
         } else if (nameButtonPressed.equals("update")) {
@@ -260,6 +269,8 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        
+        //cuando clickean 2 veces un elemento
         int clickCount = e.getClickCount();
         if (clickCount == 2) {
             JComponent objPressed = (JComponent) e.getSource();
@@ -272,14 +283,11 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
 
             if (objName.equals("tablePatients")) {
                 JTable tablePressed = (JTable) objPressed;
-               //new ManagePatients(managePatients, true, true,tablePressed.getSelectedColumn()).showFrame();
-               Long idPatients = null;
+                Long idPatients = null;
                 try{
                    idPatients = arrIndexTblPatients.get(tablePressed.getSelectedRow());
-                }catch (IndexOutOfBoundsException exc){ 
-                    try{
-                        System.out.println("Error: " + exc.getMessage() + exc.getCause());
-                    }catch (IndexOutOfBoundsException subExc){ }
+                }catch (Exception exc){ 
+                    System.out.println("Error: " + exc.getMessage() + ", Cause: " + exc.getCause());
                 }
                 new ManagePatients(managePatients, true, true,idPatients).showFrame();
                 //listener de la table de clientes para los pacientes

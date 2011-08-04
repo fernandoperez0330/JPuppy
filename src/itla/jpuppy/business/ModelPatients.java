@@ -19,15 +19,9 @@ public class ModelPatients implements GeneralModel {
     }
 
     //Este metodo todavia no estas totalmente definido , se necesita especificar si id seria unico
-    public Patients searchPatient(String patientsId) {
-
-        List<Patients> listPatients = queryManager.searchPatient(patientsId);
-        Patients temp = null;
-        for (Patients p : listPatients) {
-            //if( p.getPatientsId().equals(patientsId)) //Aki Error
-            temp = p;
-        }
-        return temp;
+    public Patients searchPatient(Long patientsId) {
+        Patients patient = queryManager.searchPatient(patientsId);
+        return patient;
     }
 
     // retorna lista de patient para autocomplete
@@ -36,7 +30,7 @@ public class ModelPatients implements GeneralModel {
     }
     
     public List<Patients> searchAllPatientByName(String name) {
-        return queryManager.searchPatient(name);
+        return queryManager.searchPatientByName(name);
     }
 
     //Metodos comunes a todos los modelos , se llama el correspondiente de  queryManager
