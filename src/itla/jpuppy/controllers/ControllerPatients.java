@@ -235,13 +235,16 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
                     try{   
                         modelPatients.deleteObject(entPatient);
                     }catch(Exception exc){}
+                    //cuando el paciente ha sido eliminado correctamente
                     JOptionPane.showMessageDialog(null,"El paciente ha sido eliminado correctamente");
+                    //actualizar la tabla donde se lista los pacientes
                     managePatients.getjTable1().setModel(this.getTableModelPatients());
                 }
             }
         } else if (nameButtonPressed.equals("update")) {
             JTable tablePressed = this.managePatients.getjTable1();
             if (tablePressed.getSelectedRow() == -1) {
+                //cuando no tiene nigun elemento seleccionado
                 JOptionPane.showMessageDialog(null, "No tiene ningun paciente seleccionado para modificar", "Error", JOptionPane.OK_OPTION);
             } else {
                 try{
