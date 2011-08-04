@@ -59,6 +59,7 @@ public class ControllerCutomers implements MouseListener, KeyListener, ActionLis
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(customersMenu.getBtnAdd())) {
+            edicion = 0;
             customersEdit = new ManageCustomersEdit(null, true, this);
             customersEdit.showFrame();
             return;
@@ -70,6 +71,7 @@ public class ControllerCutomers implements MouseListener, KeyListener, ActionLis
                 tempCustomer = mdlCustomers.searchCustomer(edicion);
                 customersEdit.setFieldsValue(tempCustomer.getLastName(), tempCustomer.getCellphone(), tempCustomer.getCity(), tempCustomer.getAddress(), tempCustomer.getEmail(), tempCustomer.getName(), tempCustomer.getTelephone(), tempCustomer.getNote(), tempCustomer.getCedula());
                 customersEdit.showFrame();
+                edicion = 0;
                 return;
             } else {
                 javax.swing.JOptionPane.showMessageDialog(customersMenu, "No Ha Sido Seleccionado Un Registro");

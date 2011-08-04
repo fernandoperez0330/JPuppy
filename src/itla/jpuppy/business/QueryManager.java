@@ -30,9 +30,11 @@ public class QueryManager {
             entityManager.getTransaction().commit();
             status = true;
         } catch (Exception e) {
-            try{
+            try {
                 entityManager.getTransaction().rollback();
-            }catch(Exception exc) { System.err.println("Error: " + e.getMessage() + "Cause: " + e.getCause()); }
+            } catch (Exception exc) {
+                System.err.println("Error: " + e.getMessage() + "Cause: " + e.getCause());
+            }
             status = false;
         }
         return status;
@@ -79,7 +81,21 @@ public class QueryManager {
         Breeds temp = entityManager.find(Breeds.class, id);
         return temp;
     }
+    
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+    public List<Employees> searchEmployees(String name) {
+        List<Employees> listUsers = null;
+        try {
+            listUsers = entityManager.createQuery("SELECT a FROM Employees a WHERE LOWER(a.name) LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
+        } catch (Exception e) {
+        }
+        return listUsers;
+    }
+    
+    
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    
     public List<Users> searchUsers(String name) {
         List<Users> listUsers = null;
         try {
@@ -108,18 +124,18 @@ public class QueryManager {
         return listCustomers;
     }
 
-    public List<Customers> searchCustomerByCedula(String cedula) {
-        List<Customers> listCustomers = null;
+    public List<Persons> searchPersonByCedula(String cedula) {
+        List<Persons> listPersons = null;
         try {
-            listCustomers = entityManager.createQuery("SELECT a FROM Customers a WHERE LOWER(a.cedula) =:cedulaToFind").setParameter("cedulaToFind", cedula).getResultList();
+            listPersons = entityManager.createQuery("SELECT a FROM Persons a WHERE LOWER(a.cedula) =:cedulaToFind").setParameter("cedulaToFind", cedula).getResultList();
         } catch (Exception e) {
         }
-        return listCustomers;
+        return listPersons;
     }
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
     public Patients searchPatient(Long patientsId) {
-        Patients patient = entityManager.find(Patients.class,patientsId);
+        Patients patient = entityManager.find(Patients.class, patientsId);
         return patient;
     }
 

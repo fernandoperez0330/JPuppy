@@ -39,7 +39,6 @@ public class Consultations implements Serializable {
     private String remark;
     @OneToOne
     private Appointments appointments;
-    @Enumerated
     private String typeConsultations;
 
     public Consultations() {

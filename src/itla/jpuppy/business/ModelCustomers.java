@@ -32,7 +32,7 @@ public class ModelCustomers implements GeneralModel {
         return queryManager.searchCustomer(name);
     }
     public boolean checkDuplicateCedula(String cedula){
-        if (queryManager.searchCustomerByCedula(cedula).size()>0){
+        if (queryManager.searchPersonByCedula(cedula).size()>0){
             return true;
         }else{
             return false;

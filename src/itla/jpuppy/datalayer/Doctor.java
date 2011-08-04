@@ -31,8 +31,13 @@ public class Doctor extends Employees implements Serializable {
         super(name, lastName, cedula, jobPosition);
         this.speciality = speciality;
     }
-
     
+    public Doctor(String name, String lastName, String cedula, String jobPosition, String speciality, String phone, String cellPhone) {
+        super(name, lastName, cedula, jobPosition);
+        this.speciality = speciality;
+        super.setTelephone(phone);
+        super.setCellphone(cellPhone);
+    }
 
     public List<Appointments> getAppointments() {
         return appointments;

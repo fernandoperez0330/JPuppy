@@ -11,6 +11,7 @@ import itla.jpuppy.forms.HomeFrame;
 import itla.jpuppy.forms.JSearching;
 import itla.jpuppy.forms.ManageBreeds;
 import itla.jpuppy.forms.ManageCustomersMenu;
+import itla.jpuppy.forms.ManageEmployeesMenu;
 import itla.jpuppy.forms.ManagePatients;
 import itla.jpuppy.forms.ManageSpecies;
 import itla.jpuppy.forms.ManageUsersEdit;
@@ -90,7 +91,8 @@ public class ControllerHome implements ActionListener, KeyListener, WindowFocusL
         }
 
         if (e.getSource().equals(home.getMnuiEmployees())) {
-            JOptionPane.showMessageDialog(home, "Nuestros amigos de Vista Trabajaran En Esto");
+            itla.jpuppy.business.EntityManagerCreator.close();
+            new ManageEmployeesMenu(home, true).showFrame();
             return;
         }
 

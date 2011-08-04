@@ -51,7 +51,6 @@ public class ControllerUser implements MouseListener, KeyListener, ActionListene
 
     @Override
     public void windowLostFocus(WindowEvent e) {
-        
     }
 
     @Override
@@ -98,6 +97,7 @@ public class ControllerUser implements MouseListener, KeyListener, ActionListene
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(manageMenu.getBtnAdd())) {
+            edicion = 0;
             manageEdit = new ManageUsersEdit(null, true, this);
             manageEdit.showFrame();
             return;
@@ -109,6 +109,7 @@ public class ControllerUser implements MouseListener, KeyListener, ActionListene
                 tempUser = mdlUsers.searchUser(edicion);
                 manageEdit.setFieldsValue(tempUser.getLastName(), tempUser.getCellphone(), tempUser.getName(), tempUser.getUsername(), tempUser.getPassword(), tempUser.getTelephone(), tempUser.getTypeUser());
                 manageEdit.showFrame();
+                edicion = 0;
                 return;
             } else {
                 javax.swing.JOptionPane.showMessageDialog(manageMenu, "No Ha Sido Seleccionado Un Registro");
@@ -160,7 +161,7 @@ public class ControllerUser implements MouseListener, KeyListener, ActionListene
                         JOptionPane.showMessageDialog(manageEdit, "Existe Otra Persona Con El Mismo Numero de Usuario", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
                     }
 
-                }else{
+                } else {
                     tempUser.setUsername(manageEdit.getTxtFieldNameUser().getText());
                     update();
                 }
