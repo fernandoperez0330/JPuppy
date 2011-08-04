@@ -53,8 +53,7 @@ public class Consultations implements Serializable {
         this.typeConsultations = typeConsultations;
     }
 
-    public Consultations(Long id, Date dateStart, Date dateEnd, Customers customer, Patients patients, String remark, Appointments appointments, String typeConsultations) {
-        this.id = id;
+    public Consultations(Date dateStart, Date dateEnd, Customers customer, Patients patients, String remark, Appointments appointments, String typeConsultations) {
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.customer = customer;
@@ -68,10 +67,6 @@ public class Consultations implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Appointments getAppointments() {
