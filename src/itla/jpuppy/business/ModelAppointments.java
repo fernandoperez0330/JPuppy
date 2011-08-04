@@ -1,25 +1,48 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package itla.jpuppy.business;
 
-public class ModelAppointments implements GeneralModel {
+import itla.jpuppy.datalayer.Appointments;
+import java.util.List;
 
-    private QueryManager queryManager;
+/**
+ *
+ * @author jansel
+ */
+public class ModelAppointments implements GeneralModel{
 
+    private QueryManager queryManager=null;
+    
+    
     public ModelAppointments() {
         queryManager = new QueryManager();
     }
-
+    
+    
+    public List<Appointments> serachAllAppointmentsByPattients(){
+        return null;
+    }
+    
     @Override
     public boolean insertObject(Object object) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        Appointments appointments = ( Appointments )object;
+        return queryManager.saveObject( appointments  );
     }
 
     @Override
     public boolean updateObject(Object object) {
-        throw new UnsupportedOperationException("Not supported yet.");
+     
+         Appointments appointments = ( Appointments )object;
+        return queryManager.updateObject( appointments );
     }
 
     @Override
     public boolean deleteObject(Object object) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Appointments appointments = ( Appointments )object;
+        return queryManager.deleteObject( appointments );
     }
+    
 }

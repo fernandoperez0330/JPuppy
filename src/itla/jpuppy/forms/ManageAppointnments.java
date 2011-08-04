@@ -1,14 +1,21 @@
 package itla.jpuppy.forms;
 
 
-import itla.jpuppy.controllers.ControllerBreeds;
+
 import itla.jpuppy.controllers.Controller;
+import itla.jpuppy.controllers.ControllerAppointments;
 import itla.jpuppy.datalayer.Species;
+import itla.jpuppy.utils.enumAppointmentStatus;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import sun.util.calendar.BaseCalendar;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -22,28 +29,30 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Adderly
+ * @author Jansel
  */
 
 /* Necesito que la Persona que trabajo con esta vista por favor le coloque dos BasicArrowButton */
 /* Uno con orientacion 3 y otro con orientacion 7*/
 
-public class ManageBreeds extends Controller  implements FrameOption{
+public class ManageAppointnments extends Controller  implements FrameOption{
 
-    public ManageBreeds(Frame owner, boolean modal) {
+    public ManageAppointnments(Frame owner, boolean modal) {
         super();
         initComponents();
-        ControllerBreeds cb = new ControllerBreeds( this );
+        ControllerAppointments cb = new ControllerAppointments( this );
         setController( cb );
         initFields( this.pnFields , this.pnButtons );
         this.setLocationRelativeTo( null );
-        this.setTitle( "Manage Users" );
+        this.setTitle( "Manage Appointments" );
         this.setResizable( false );
-        this.jComboBox1.setSelectedItem("-");
+        setMessageFind("");
+    
+        
     }
 
    
-    public void setController( ControllerBreeds cb )
+    public void setController( ControllerAppointments ca )
     {
         btnAdd.setActionCommand( "add" );
         btnUpdate.setActionCommand( "update" );
@@ -51,12 +60,13 @@ public class ManageBreeds extends Controller  implements FrameOption{
         btnSave.setActionCommand( "save" );
         btnRemove.setActionCommand( "remove" );
         btnCancel.setActionCommand( "cancel" );
-        btnAdd.addActionListener(cb);
-        btnUpdate.addActionListener(cb);
-        btnSearch.addActionListener(cb);
-        btnSave.addActionListener(cb);
-        btnRemove.addActionListener(cb);
-        btnCancel.addActionListener(cb);
+        btnAdd.addActionListener(ca);
+        btnUpdate.addActionListener(ca);
+        btnSearch.addActionListener(ca);
+        btnSave.addActionListener(ca);
+        btnRemove.addActionListener(ca);
+        btnCancel.addActionListener(ca);
+ 
       
         
        
@@ -72,10 +82,10 @@ public class ManageBreeds extends Controller  implements FrameOption{
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        TxtFieldRaza = new javax.swing.JTextField();
-        TxtFieldAncho = new javax.swing.JTextField();
-        TxtFieldAltura = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBoxPaciente = new javax.swing.JComboBox();
+        jComboBoxStatus = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
+        jComboBoxDoctor = new javax.swing.JComboBox();
         pnButtons = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -89,18 +99,25 @@ public class ManageBreeds extends Controller  implements FrameOption{
         setTitle("CrudEntities");
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel1.setText("Nombre de la raza.:");
+        jLabel1.setText("Nombre del Paciente.:");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel2.setText("Especie.:");
+        jLabel2.setText("Fecha de Registro.:");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel3.setText("Altura.:");
+        jLabel3.setText("Fecha de Cita.:");
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel4.setText("Ancho.:");
+        jLabel4.setText("Doctor.:");
 
-        jComboBox1.setEditable(true);
+        jComboBoxPaciente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
+
+        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
+
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 14));
+        jLabel6.setText("Status.:");
+
+        jComboBoxDoctor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
 
         javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
         pnFields.setLayout(pnFieldsLayout);
@@ -112,13 +129,17 @@ public class ManageBreeds extends Controller  implements FrameOption{
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addGap(85, 85, 85)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel6))
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxtFieldRaza, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-                    .addComponent(TxtFieldAncho, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-                    .addComponent(TxtFieldAltura, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, 0, 356, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnFieldsLayout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(jComboBoxPaciente, 0, 361, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnFieldsLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBoxDoctor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxStatus, 0, 361, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         pnFieldsLayout.setVerticalGroup(
@@ -127,20 +148,20 @@ public class ManageBreeds extends Controller  implements FrameOption{
                 .addContainerGap()
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(TxtFieldRaza, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(TxtFieldAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(TxtFieldAncho, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jComboBoxDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
@@ -183,16 +204,14 @@ public class ManageBreeds extends Controller  implements FrameOption{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
-                            .addContainerGap())
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(144, 144, 144)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(87, 87, 87))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,9 +220,9 @@ public class ManageBreeds extends Controller  implements FrameOption{
                 .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(93, 93, 93)
                 .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         pack();
@@ -215,27 +234,41 @@ public class ManageBreeds extends Controller  implements FrameOption{
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TxtFieldAltura;
-    private javax.swing.JTextField TxtFieldAncho;
-    private javax.swing.JTextField TxtFieldRaza;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBoxDoctor;
+    private javax.swing.JComboBox jComboBoxPaciente;
+    private javax.swing.JComboBox jComboBoxStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel pnButtons;
     private javax.swing.JPanel pnFields;
     // End of variables declaration//GEN-END:variables
 
-   
+    private datechooser.beans.DateChooserCombo dateChooserRegister;
+    private datechooser.beans.DateChooserCombo dateChooserCita;
     
+    {
+        
+        dateChooserRegister = new datechooser.beans.DateChooserCombo();
+        dateChooserRegister.setDateFormat( new SimpleDateFormat("dd-MMM-yyyy"));
+        this.getContentPane().add( dateChooserRegister );
+        dateChooserRegister.setBounds(390, 280, 360, 28);
+    }
+    {
+        dateChooserCita = new datechooser.beans.DateChooserCombo();
+        dateChooserCita.setDateFormat( new SimpleDateFormat("dd-MMM-yyyy"));
+        this.getContentPane().add( dateChooserCita );
+        dateChooserCita.setBounds(390, 315, 360, 28);
+    }
     
     @Override
     public void showFrame() {
@@ -246,49 +279,53 @@ public class ManageBreeds extends Controller  implements FrameOption{
     public void closeFrame() {
         this.dispose();
     }
-    
-    public String getBreedName(){
-        return TxtFieldRaza.getText();
-    }
-   
-    public String getSpecieName(){
-        return (String ) jComboBox1.getSelectedItem();
-    }
+
     
  public void setMessageFind( String text ){
      this.jLabel5.setText( text );
  }
  
-    public double getBreedWidth(){
-        double width=0;
-        try{
-        width = Double.parseDouble(TxtFieldAncho.getText() );
-        }catch( Exception e ){
-            
-        }
-        return width;
-    }
+public String getPatientName(){
+    return ( String ) jComboBoxPaciente.getSelectedItem();
+}
+
+public String getDoctorName(){
+    return  ( String ) jComboBoxDoctor.getSelectedItem();
+}
+
+public enumAppointmentStatus getStatusName(){
+    String status= ( String ) jComboBoxStatus.getSelectedItem();
     
-    
-    public double getBreedHeigth(){
-        double heigth=0;
-        try{
-        heigth = Double.parseDouble(TxtFieldAltura.getText() );
-        }catch( Exception e ){
+    if( status.equals( "ACTIVE" ) )
+        return enumAppointmentStatus.ACTIVE;
+    else if ( status.equals( "CANCELED" ) )
+        return enumAppointmentStatus.CANCELED;
+    else if ( status.equals( "POSPUSED" ) )
+        return enumAppointmentStatus.POSPUSED;
+    else 
+        return enumAppointmentStatus.NOTASISTED;
+
+}
+public String getRegisteredDate(){
+    return dateChooserRegister.getText();
+}
+
+public String getAcordetDate(){
+    return dateChooserCita.getText();
             
-        }
-        return heigth;
-    }
+}
+
    
     public JPanel getPnButtons() {
         return pnButtons;
     }
     
-    public void setAllFields(String breedName,String specieName,double width,double heigth){
-        TxtFieldRaza.setText( breedName );
-        jComboBox1.setSelectedItem( ( String )specieName );
-        TxtFieldAncho.setText( String.valueOf( width ) );
-        TxtFieldAltura.setText( String.valueOf( heigth ) );
+    public void setAllFields(String PatientName , Date registered,Date acordded,String doctor,int status ){
+        jComboBoxPaciente.setSelectedItem( PatientName );
+        dateChooserRegister.setText(registered.toString());
+        dateChooserCita.setText( acordded.toString() );
+        jComboBoxDoctor.setSelectedItem( doctor );
+        jComboBoxStatus.setSelectedIndex( status );
     }
   
 
@@ -320,19 +357,29 @@ public class ManageBreeds extends Controller  implements FrameOption{
 
     @Override
     public void eventSearch( String text ) {
-        
+           
         if( !isEmptyFields() )
             cleanFields();
-        if( !text.equals("") )
+        if( !text.equals("-") )
             changeStateWriteFields( false );
        stateButtons(true, false);
        changeStatePnlEdition( true );
        
     }
-    public void setJComboBoxModel( ComboBoxModel boxModel ){
-        this.jComboBox1.setModel( boxModel );
+    public void setJComboBoxModelDoctor( ComboBoxModel boxModel ){
+        this.jComboBoxDoctor.setModel( boxModel );
     }
- 
+      public void setJComboBoxModelPatients( ComboBoxModel boxModel ){
+        this.jComboBoxPaciente.setModel( boxModel );
+    }
+        public void setJComboBoxModelStatus( ComboBoxModel boxModel ){
+        this.jComboBoxStatus.setModel( boxModel );
+    }
    
+   public static void main(String...string){
+       ManageAppointnments m = new ManageAppointnments(null, true); 
+       m.showFrame();
+     
+   }
 
 }

@@ -10,11 +10,13 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Persistence;
 import javax.persistence.Temporal;
 
 /**
@@ -41,8 +43,7 @@ public class Appointments implements Serializable{
 
     public Appointments(){}
 
-    public Appointments(long id, Date dateRegistered, Date acordedDate, Patients patient, Doctor doctor, enumAppointmentStatus status) {
-        this.id = id;
+    public Appointments(Date dateRegistered, Date acordedDate, Patients patient, Doctor doctor, enumAppointmentStatus status) {
         this.dateRegistered = dateRegistered;
         this.acordedDate = acordedDate;
         this.patient = patient;
@@ -100,5 +101,7 @@ public class Appointments implements Serializable{
         this.status = status;
     }
 
+ 
     
+
 }
