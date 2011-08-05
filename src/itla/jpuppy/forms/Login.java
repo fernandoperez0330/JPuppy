@@ -53,7 +53,7 @@ public class Login implements FrameOption {
 
         //seteo de posicion
         image.setBounds(15, 65, 100, 80);
-        image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/logoLogin.png")));
+        image.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"logoLogin.png"));
         title.setBounds(30, 18, 500, 30);
         txtUsers.setBounds(210, 75, 150, 30);
         txtPassword.setBounds(210, 120, 150, 30);
@@ -62,8 +62,8 @@ public class Login implements FrameOption {
         btnEnter.setBounds(165, 170, 100, 40);
         btnExit.setBounds(260, 170, 100, 40);
 
-        btnEnter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/good.png")));
-        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancelLogin.png")));
+        btnEnter.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"good.png"));
+        btnExit.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"cancelLogin.png"));
 
 
         //Instancia del Controlador

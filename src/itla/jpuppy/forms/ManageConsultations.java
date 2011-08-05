@@ -206,45 +206,58 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
                         .addComponent(txtRemarkConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cbTypeConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2))
-                .addGap(22, 22, 22))
+                .addGap(42, 42, 42))
         );
 
-        getContentPane().add(pnFields, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 880, 100));
+        getContentPane().add(pnFields, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 880, 120));
 
-        pnButtons3.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
+        pnButtons3.setLayout(null);
 
-        btnAddConsultations.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/add.png"))); // NOI18N
+        btnAddConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/add.png"));
         btnAddConsultations.setFocusable(false);
+        //btnAddConsultations.setContentAreaFilled( false );
         btnAddConsultations.setMaximumSize(new java.awt.Dimension(50, 50));
         btnAddConsultations.setName("add"); // NOI18N
         pnButtons3.add(btnAddConsultations);
+        btnAddConsultations.setBounds(60, 20, 110, 50);
 
-        btnUpdateConsultations.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/edit.png"))); // NOI18N
+        btnUpdateConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/edit.png"));
         btnUpdateConsultations.setFocusable(false);
+        //btnUpdateConsultations.setContentAreaFilled( false );
         btnUpdateConsultations.setName("update"); // NOI18N
         pnButtons3.add(btnUpdateConsultations);
+        btnUpdateConsultations.setBounds(460, 20, 110, 50);
 
-        btnSearchConsultations.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/find.png"))); // NOI18N
+        btnSearchConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/find.png"));
         btnSearchConsultations.setFocusable(false);
+        //btnSearchConsultations.setContentAreaFilled( false );
         btnSearchConsultations.setName("search"); // NOI18N
         pnButtons3.add(btnSearchConsultations);
+        btnSearchConsultations.setBounds(580, 20, 110, 50);
 
-        btnSaveConsultations.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/save.png"))); // NOI18N
+        btnSaveConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/save.png"));
         btnSaveConsultations.setFocusable(false);
+        //btnSaveConsultations.setContentAreaFilled( false );
         btnSaveConsultations.setName("save"); // NOI18N
         pnButtons3.add(btnSaveConsultations);
+        btnSaveConsultations.setBounds(190, 20, 120, 50);
 
-        btnRemoveConsultations.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/remove.png"))); // NOI18N
+        btnRemoveConsultations.setIcon(null);
+        btnRemoveConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/remove.png"));
         btnRemoveConsultations.setFocusable(false);
+        //btnRemoveConsultations.setContentAreaFilled( false );
         btnRemoveConsultations.setName("remove"); // NOI18N
         pnButtons3.add(btnRemoveConsultations);
+        btnRemoveConsultations.setBounds(330, 20, 110, 50);
 
-        btnCancelConsultations.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancel.png"))); // NOI18N
+        btnCancelConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/cancel.png"));
         btnCancelConsultations.setFocusable(false);
+        //btnCancelConsultations.setContentAreaFilled( false );
         btnCancelConsultations.setName("cancel"); // NOI18N
         pnButtons3.add(btnCancelConsultations);
+        btnCancelConsultations.setBounds(700, 20, 120, 50);
 
-        getContentPane().add(pnButtons3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 885, 120));
+        getContentPane().add(pnButtons3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 880, 90));
 
         tableConsultations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -256,7 +269,7 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         ));
         jScrollPane1.setViewportView(tableConsultations);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 880, 150));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 880, 150));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
