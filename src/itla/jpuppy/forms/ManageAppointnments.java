@@ -55,13 +55,13 @@ public class ManageAppointnments extends JDialog  implements FrameOption{
    
     public void setController( ControllerAppointments ca )
     {
-        btnAdd.setActionCommand( "add" );
+//        btnAdd.setActionCommand( "add" );
         btnUpdate.setActionCommand( "update" );
         btnSearch.setActionCommand( "search" );
         btnSave.setActionCommand( "save" );
         btnRemove.setActionCommand( "remove" );
         btnCancel.setActionCommand( "cancel" );
-        btnAdd.addActionListener(ca);
+  //      btnAdd.addActionListener(ca);
         btnUpdate.addActionListener(ca);
         btnSearch.addActionListener(ca);
         btnSave.addActionListener(ca);
