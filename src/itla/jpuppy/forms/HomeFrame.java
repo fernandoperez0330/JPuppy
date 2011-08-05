@@ -15,6 +15,7 @@ import itla.jpuppy.utils.Background;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GraphicsEnvironment;
+import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
@@ -22,7 +23,7 @@ import javax.swing.JPanel;
  *
  * @author Guillermo Hdez
  */
-public class HomeFrame extends javax.swing.JFrame implements FrameOption {
+public class HomeFrame extends JFrame implements FrameOption {
 
     /** Creates new form JHomeFrame */
     private JPanel background;
@@ -35,7 +36,7 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
         //poner el icono al frame
         this.setTitle("JPuppy: Sistema de veterinaria");
         //poner la imagen de fondo para el frame principal
-        background = new Background("src/itla/jpuppy/resources/Vet.jpg");
+        background = new Background(FrameOption.dirResources + "Vet.jpg");
         background.setBounds(0, 0, this.getWidth(), this.getHeight());
         ctrlhome = new ControllerHome(this);
         this.addWindowFocusListener(ctrlhome);
@@ -153,7 +154,7 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
         setName("JPuppy"); // NOI18N
         setResizable(false);
 
-        mnuAdministrator.setText("Administrador");
+        mnuAdministrator.setText("Administración");
 
         mnuiCustomers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
         mnuiCustomers.setText("Clientes");
@@ -198,7 +199,7 @@ public class HomeFrame extends javax.swing.JFrame implements FrameOption {
         mnuUsuarios.add(mnuiPerfil);
 
         mnuiCloseSeccion.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
-        mnuiCloseSeccion.setText("Cerrar Seccion");
+        mnuiCloseSeccion.setText("Cerrar Sesión");
         mnuUsuarios.add(mnuiCloseSeccion);
 
         mnuiExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));

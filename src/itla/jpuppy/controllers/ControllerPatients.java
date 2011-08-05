@@ -277,7 +277,6 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        
         //cuando clickean 2 veces un elemento
         int clickCount = e.getClickCount();
         if (clickCount == 2) {
@@ -323,18 +322,14 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
     }
 
     @Override
-    public void mouseExited(MouseEvent e) {
-    }
+    public void mouseExited(MouseEvent e) {}
 
     @Override
-    public void eventDelete() {
-    }
+    public void eventDelete() {}
 
     @Override
     public void eventSearch(String text) {}
 
     @Override
-    public boolean eventSave() {
-        return false;
-    }
+    public boolean eventSave() { return false; }
 }
