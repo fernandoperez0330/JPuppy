@@ -243,7 +243,7 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         btnSaveConsultations.setBounds(190, 20, 120, 50);
 
         btnRemoveConsultations.setIcon(null);
-        btnRemoveConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/remove.png"));
+        btnRemoveConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"remove.png"));
         btnRemoveConsultations.setFocusable(false);
         //btnRemoveConsultations.setContentAreaFilled( false );
         btnRemoveConsultations.setName("remove"); // NOI18N
