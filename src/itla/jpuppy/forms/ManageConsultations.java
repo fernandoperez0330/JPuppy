@@ -213,7 +213,7 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
 
         pnButtons3.setLayout(null);
 
-        btnAddConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/add.png"));
+        btnAddConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"add.png"));
         btnAddConsultations.setFocusable(false);
         //btnAddConsultations.setContentAreaFilled( false );
         btnAddConsultations.setMaximumSize(new java.awt.Dimension(50, 50));
@@ -221,21 +221,21 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         pnButtons3.add(btnAddConsultations);
         btnAddConsultations.setBounds(60, 20, 110, 50);
 
-        btnUpdateConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/edit.png"));
+        btnUpdateConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"edit.png"));
         btnUpdateConsultations.setFocusable(false);
         //btnUpdateConsultations.setContentAreaFilled( false );
         btnUpdateConsultations.setName("update"); // NOI18N
         pnButtons3.add(btnUpdateConsultations);
         btnUpdateConsultations.setBounds(460, 20, 110, 50);
 
-        btnSearchConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/find.png"));
+        btnSearchConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"find.png"));
         btnSearchConsultations.setFocusable(false);
         //btnSearchConsultations.setContentAreaFilled( false );
         btnSearchConsultations.setName("search"); // NOI18N
         pnButtons3.add(btnSearchConsultations);
         btnSearchConsultations.setBounds(580, 20, 110, 50);
 
-        btnSaveConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/save.png"));
+        btnSaveConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"save.png"));
         btnSaveConsultations.setFocusable(false);
         //btnSaveConsultations.setContentAreaFilled( false );
         btnSaveConsultations.setName("save"); // NOI18N
@@ -250,7 +250,7 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         pnButtons3.add(btnRemoveConsultations);
         btnRemoveConsultations.setBounds(330, 20, 110, 50);
 
-        btnCancelConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/cancel.png"));
+        btnCancelConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"cancel.png"));
         btnCancelConsultations.setFocusable(false);
         //btnCancelConsultations.setContentAreaFilled( false );
         btnCancelConsultations.setName("cancel"); // NOI18N
