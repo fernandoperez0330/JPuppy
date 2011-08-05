@@ -3,41 +3,42 @@ package itla.jpuppy.controllers;
 import itla.jpuppy.business.ModelUsers;
 import itla.jpuppy.datalayer.Users;
 import itla.jpuppy.forms.JSearching;
+import itla.jpuppy.forms.ManageMenu;
 import itla.jpuppy.forms.ManageUsersEdit;
 import itla.jpuppy.forms.ManageUsersMenu;
 import itla.jpuppy.models.SearchingCtrlUsers;
 import itla.jpuppy.models.SearchingModel;
 import itla.jpuppy.utils.EncryptText;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
 import java.util.Calendar;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class ControllerUser implements MouseListener, KeyListener, ActionListener, WindowFocusListener {
+public class ControllerUser extends Controller {
 
-    private ManageUsersMenu manageMenu;
     private ManageUsersEdit manageEdit;
     private SearchingModel<Users> modelSearching;
     private ModelUsers mdlUsers;
     private long edicion;
     private Users tempUser;
+    private ManageMenu manageMenu;
 
-    public ControllerUser(ManageUsersMenu manageMenu) {
+    public ControllerUser(ManageMenu manageMenu) {
         this.manageMenu = manageMenu;
+        this.manageEdit = new ManageUsersEdit(null, true, this);
         modelSearching = new SearchingModel<Users>(new String[]{"Id", "Name", "Username", "Type User"}, new SearchingCtrlUsers());
-        manageMenu.setSearching(new JSearching(modelSearching));
+        this.manageMenu.setSearching(new JSearching(modelSearching));
         mdlUsers = new ModelUsers();
         searchByField("");
         edicion = 0;
+    }
+    
+        public void setManageMenu(ManageMenu manageMenu) {
+        this.manageMenu = manageMenu;
     }
 
     public void searchByField(String string) {
@@ -97,118 +98,37 @@ public class ControllerUser implements MouseListener, KeyListener, ActionListene
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(manageMenu.getBtnAdd())) {
-            edicion = 0;
-            manageEdit = new ManageUsersEdit(null, true, this);
-            manageEdit.showFrame();
+            btnAdd();
             return;
         }
 
         if (e.getSource().equals(manageMenu.getBtnUpdate())) {
-            if (edicion != 0) {
-                manageEdit = new ManageUsersEdit(null, true, this);
-                tempUser = mdlUsers.searchUser(edicion);
-                manageEdit.setFieldsValue(tempUser.getLastName(), tempUser.getCellphone(), tempUser.getName(), tempUser.getUsername(), tempUser.getPassword(), tempUser.getTelephone(), tempUser.getTypeUser());
-                manageEdit.showFrame();
-                edicion = 0;
-                return;
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(manageMenu, "No Ha Sido Seleccionado Un Registro");
-            }
+            btnUpdate();
             return;
         }
 
         if (e.getSource().equals(manageMenu.getBtnRemove())) {
-            if (edicion != 0) {
-                int i = JOptionPane.showConfirmDialog(manageMenu, "Realmente desea Eliminar Este Usuario?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (i == 0) {
-                    mdlUsers.deleteObject(mdlUsers.searchUser(edicion));
-                    javax.swing.JOptionPane.showMessageDialog(manageMenu, "Registro Eliminado");
-                }
-                searchByField(manageMenu.getSearching().getTxtSearch().getText().toLowerCase());
-                edicion = 0;
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(manageMenu, "No Ha Sido Seleccionado Un Registro");
-            }
+            btnRemove();
             return;
         }
 
         if (e.getSource().equals(manageEdit.getBtnSave())) {
-
-            if (isEmptyFields()) {
-                JOptionPane.showMessageDialog(manageEdit, "Existen Campos En Blancos Por Favor Completar", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            if (edicion != 0) {
-                try {
-                    tempUser.setPassword(EncryptText.md5(manageEdit.getTxtFieldPassword().getText()));
-                } catch (Exception ex) {
-                    Logger.getLogger(ControllerUser.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                if (manageEdit.getjRadioButtonAdministrador().isSelected()) {
-                    tempUser.setTypeUser("Administrador");
-                } else {
-                    tempUser.setTypeUser("Operador");
-                }
-                tempUser.setLastName(manageEdit.getTxtFieldApellido().getText());
-                tempUser.setName(manageEdit.getTxtFieldName().getText());
-                tempUser.setCellphone(manageEdit.getTxtFieldCellPhone().getText());
-                tempUser.setTelephone(manageEdit.getTxtFieldPhone().getText());
-
-                if (mdlUsers.checkDuplicateUserName(manageEdit.getTxtFieldNameUser().getText())) {
-                    if (tempUser.getUsername().equalsIgnoreCase(manageEdit.getTxtFieldNameUser().getText())) {
-                        update();
-                    } else {
-                        JOptionPane.showMessageDialog(manageEdit, "Existe Otra Persona Con El Mismo Numero de Usuario", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
-                    }
-
-                } else {
-                    tempUser.setUsername(manageEdit.getTxtFieldNameUser().getText());
-                    update();
-                }
-            } else {
-                if (mdlUsers.searchAllUserByUserName(manageEdit.getTxtFieldNameUser().getText()).size() > 0) {
-                    JOptionPane.showMessageDialog(manageEdit, "Existe Otro Usuario Con El Mismo Nombre de Usuario", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                insert();
-            }
+            btnSave();
+            return;
         }
 
         if (e.getSource().equals(manageEdit.getBtnCancel())) {
-            int i = JOptionPane.showConfirmDialog(manageEdit, "Realmente desea Cancelar la Insercion de Datos", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (i == 0) {
-                manageEdit.dispose();
-            }
+            btncancelar();
             return;
         }
-    }
-
-    private boolean isEmptyFields() {
-        boolean state = false;
-        javax.swing.text.JTextComponent textField;
-        String date;
-
-
-        for (int i = 0; i <= manageEdit.getPnFields().getComponentCount(); i++) {
-            try {
-                textField = (javax.swing.text.JTextComponent) manageEdit.getPnFields().getComponent(i);
-                if (textField.getText().equals("")) {
-                    state = true;
-                    textField.requestFocus();
-                } else if (textField.getText().indexOf("-") != -1) {
-                    String special = textField.getText().trim();
-                    if ((special.length() < 12) && (special.length() != 10)) {
-                        state = true;
-                        textField.requestFocus();
-                    }
-                }
-            } catch (Exception e) {
-            }
+        
+        if (e.getSource().equals(manageMenu.getBtnExit())){
+            manageMenu.closeFrame();
         }
-        return state;
     }
 
-    private void insert() {
+    @Override
+    public void insert() {
         try {
             Calendar c1 = Calendar.getInstance();
             String i;
@@ -226,11 +146,99 @@ public class ControllerUser implements MouseListener, KeyListener, ActionListene
         }
     }
 
-    private void update() {
+    @Override
+    public void update() {
         int i = JOptionPane.showConfirmDialog(manageEdit, "Realmente desea Sobreescribir Los Datos de Este Cliente?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (i == 0) {
             mdlUsers.updateObject(tempUser);
             JOptionPane.showMessageDialog(manageEdit, "Registro Actualizado Exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            manageEdit.dispose();
+        }
+    }
+
+    @Override
+    public void btnAdd() {
+        edicion = 0;
+        manageEdit = new ManageUsersEdit(null, true, this);
+        manageEdit.showFrame();
+    }
+
+    @Override
+    public void btnUpdate() {
+        if (edicion != 0) {
+            manageEdit = new ManageUsersEdit(null, true, this);
+            tempUser = mdlUsers.searchUser(edicion);
+            manageEdit.setFieldsValue(tempUser.getLastName(), tempUser.getCellphone(), tempUser.getName(), tempUser.getUsername(), tempUser.getPassword(), tempUser.getTelephone(), tempUser.getTypeUser());
+            manageEdit.showFrame();
+            edicion = 0;
+            return;
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(manageMenu, "No Ha Sido Seleccionado Un Registro");
+        }
+    }
+
+    @Override
+    public void btnSave() {
+
+        if (isEmptyFields()) {
+            JOptionPane.showMessageDialog(manageEdit, "Existen Campos En Blancos Por Favor Completar", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (edicion != 0) {
+            try {
+                tempUser.setPassword(EncryptText.md5(manageEdit.getTxtFieldPassword().getText()));
+            } catch (Exception ex) {
+                Logger.getLogger(ControllerUser.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (manageEdit.getjRadioButtonAdministrador().isSelected()) {
+                tempUser.setTypeUser("Administrador");
+            } else {
+                tempUser.setTypeUser("Operador");
+            }
+            tempUser.setLastName(manageEdit.getTxtFieldApellido().getText());
+            tempUser.setName(manageEdit.getTxtFieldName().getText());
+            tempUser.setCellphone(manageEdit.getTxtFieldCellPhone().getText());
+            tempUser.setTelephone(manageEdit.getTxtFieldPhone().getText());
+
+            if (mdlUsers.checkDuplicateUserName(manageEdit.getTxtFieldNameUser().getText())) {
+                if (tempUser.getUsername().equalsIgnoreCase(manageEdit.getTxtFieldNameUser().getText())) {
+                    update();
+                } else {
+                    JOptionPane.showMessageDialog(manageEdit, "Existe Otra Persona Con El Mismo Numero de Usuario", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } else {
+                tempUser.setUsername(manageEdit.getTxtFieldNameUser().getText());
+                update();
+            }
+        } else {
+            if (mdlUsers.searchAllUserByUserName(manageEdit.getTxtFieldNameUser().getText()).size() > 0) {
+                JOptionPane.showMessageDialog(manageEdit, "Existe Otro Usuario Con El Mismo Nombre de Usuario", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            insert();
+        }
+    }
+
+    @Override
+    public void btnRemove() {
+        if (edicion != 0) {
+            int i = JOptionPane.showConfirmDialog(manageMenu, "Realmente desea Eliminar Este Usuario?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (i == 0) {
+                mdlUsers.deleteObject(mdlUsers.searchUser(edicion));
+                javax.swing.JOptionPane.showMessageDialog(manageMenu, "Registro Eliminado");
+            }
+            searchByField(manageMenu.getSearching().getTxtSearch().getText().toLowerCase());
+            edicion = 0;
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(manageMenu, "No Ha Sido Seleccionado Un Registro");
+        }
+    }
+
+    @Override
+    public void btncancelar() {
+        int i = JOptionPane.showConfirmDialog(manageEdit, "Realmente desea Cancelar la Insercion de Datos", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (i == 0) {
             manageEdit.dispose();
         }
     }

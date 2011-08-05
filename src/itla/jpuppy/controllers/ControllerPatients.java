@@ -26,7 +26,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class ControllerPatients extends Controller implements ActionListener, KeyListener, MouseListener {
+public class ControllerPatients implements ActionListener, KeyListener, MouseListener {
 
     private ManagePatients managePatients;
     private ModelPatients modelPatients = new ModelPatients();
@@ -323,13 +323,4 @@ public class ControllerPatients extends Controller implements ActionListener, Ke
 
     @Override
     public void mouseExited(MouseEvent e) {}
-
-    @Override
-    public void eventDelete() {}
-
-    @Override
-    public void eventSearch(String text) {}
-
-    @Override
-    public boolean eventSave() { return false; }
 }

@@ -1,10 +1,12 @@
 package itla.jpuppy.controllers;
 
+import itla.jpuppy.forms.ManageMenu;
 import java.awt.event.ActionListener;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowFocusListener;
 
-public abstract class Controller extends javax.swing.JDialog {
+public abstract class Controller implements MouseListener, KeyListener, ActionListener, WindowFocusListener {
 
     protected javax.swing.JButton btnAdd;
     protected javax.swing.JButton btnUpdate;
@@ -12,8 +14,10 @@ public abstract class Controller extends javax.swing.JDialog {
     protected javax.swing.JButton btnSave;
     protected javax.swing.JButton btnRemove;
     protected javax.swing.JButton btnCancel;
-    protected javax.swing.JPanel  pnlButton;
-    protected javax.swing.JPanel  pnlEdition;
+    protected javax.swing.JPanel pnlButton;
+    protected javax.swing.JPanel pnlEdition;
+    
+    
 
     protected void stateButtons(boolean state1, boolean state2) {
         btnAdd.setEnabled(state1);
@@ -25,23 +29,24 @@ public abstract class Controller extends javax.swing.JDialog {
 
         changeStatePnlEdition(state2);
     }
-    
-    protected void initFields(javax.swing.JPanel pnlFields , javax.swing.JPanel pnlButtons ){
-             this.pnlButton  = pnlButtons;
-             this.pnlEdition  = pnlFields;
-             initButtons();
-             stateButtons(true, false);
-             
-                     
-    } 
-    protected void initButtons(){
-        this.btnAdd = ( javax.swing.JButton )this.pnlButton.getComponent( 0 );
-        this.btnUpdate = ( javax.swing.JButton )this.pnlButton.getComponent( 1 );
-        this.btnSearch = ( javax.swing.JButton )this.pnlButton.getComponent( 2 );
-        this.btnSave = ( javax.swing.JButton )this.pnlButton.getComponent( 3 );
-        this.btnRemove = ( javax.swing.JButton )this.pnlButton.getComponent( 4 );
-        this.btnCancel = ( javax.swing.JButton )this.pnlButton.getComponent( 5 );
-        
+
+    protected void initFields(javax.swing.JPanel pnlFields, javax.swing.JPanel pnlButtons) {
+        this.pnlButton = pnlButtons;
+        this.pnlEdition = pnlFields;
+        initButtons();
+        stateButtons(true, false);
+
+
+    }
+
+    protected void initButtons() {
+        this.btnAdd = (javax.swing.JButton) this.pnlButton.getComponent(0);
+        this.btnUpdate = (javax.swing.JButton) this.pnlButton.getComponent(1);
+        this.btnSearch = (javax.swing.JButton) this.pnlButton.getComponent(2);
+        this.btnSave = (javax.swing.JButton) this.pnlButton.getComponent(3);
+        this.btnRemove = (javax.swing.JButton) this.pnlButton.getComponent(4);
+        this.btnCancel = (javax.swing.JButton) this.pnlButton.getComponent(5);
+
     }
 
     protected void changeStatePnlEdition(boolean state) {
@@ -52,7 +57,6 @@ public abstract class Controller extends javax.swing.JDialog {
         }
     }
 
-    
     protected void cleanFields() {
         javax.swing.text.JTextComponent textField;
         for (int i = 0; i < pnlEdition.getComponentCount(); i++) {
@@ -67,7 +71,7 @@ public abstract class Controller extends javax.swing.JDialog {
     protected void changeStateWriteFields(boolean estado) {
         javax.swing.text.JTextComponent textField;
         javax.swing.JComboBox combo;
- 
+
         for (int i = 0; i < pnlEdition.getComponentCount(); i++) {
             try {
                 textField = (javax.swing.text.JTextComponent) pnlEdition.getComponent(i);
@@ -75,11 +79,34 @@ public abstract class Controller extends javax.swing.JDialog {
             } catch (Exception e) {
                 try {
                     combo = (javax.swing.JComboBox) pnlEdition.getComponent(i);
-                    combo.setEditable( false );
+                    combo.setEditable(false);
                 } catch (Exception g) {
                 }
             }
         }
+    }
+
+    protected void eventNew() {//La Variable Global
+        cleanFields();
+        stateButtons(false, true);
+        changeStateWriteFields(true);
+        //sNombre = "";
+    }
+
+    protected void eventEdit(String text) { ////La Variable Global
+
+        if (text.equals("-") || text.equals("-")) {
+            javax.swing.JOptionPane.showMessageDialog(null, "No Selected Register", "Aviso", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } else {
+            changeStateWriteFields(true);
+            stateButtons(false, true);
+        }
+    }
+
+    protected void eventCancelar() { //La Variable Global
+        cleanFields();
+        stateButtons(true, false);
+        String sNombre = "";
     }
 
     protected boolean isEmptyFields() {
@@ -100,47 +127,30 @@ public abstract class Controller extends javax.swing.JDialog {
                     }
                 }
             } catch (Exception e) {
-                try{
-                    combo =( javax.swing.JComboBox) pnlEdition.getComponent( i );
-                    if( combo.getSelectedItem().equals("-"))
+                try {
+                    combo = (javax.swing.JComboBox) pnlEdition.getComponent(i);
+                    if (combo.getSelectedItem().equals("-")) {
                         state = true;
-                    
-                }catch(Exception ep){
-                    
+                    }
+
+                } catch (Exception ep) {
                 }
             }
         }
         return state;
     }
 
-    protected void eventNew() {//La Variable Global
-        cleanFields();
-        stateButtons(false, true);
-        changeStateWriteFields(true);
-        //sNombre = "";
-    }
+    public abstract void btnAdd();
 
-    protected void eventEdit(String text) { ////La Variable Global
-       
-        if (text.equals("-")||text.equals("-")) {
-            javax.swing.JOptionPane.showMessageDialog(null, "No Selected Register", "Aviso", javax.swing.JOptionPane.ERROR_MESSAGE);
-        } else {
-            changeStateWriteFields(true);
-            stateButtons(false, true);
-        }
-    }
+    public abstract void btnUpdate();
 
-    protected void eventCancelar() { //La Variable Global
-        cleanFields();
-        stateButtons(true, false);
-        String sNombre = ""; 
-    }
-    
-    public abstract void eventDelete();
-    
-    public abstract boolean eventSave();
-    
-    public abstract void eventSearch( String text );
-    
-    
+    public abstract void btnSave();
+
+    public abstract void btnRemove();
+
+    public abstract void btncancelar();
+
+    public abstract void insert();
+
+    public abstract void update();
 }

@@ -73,12 +73,12 @@ public class ControllerBreeds implements ActionListener{
                  
         String command = e.getActionCommand();
         if( command.equals( "add" ) ){
-           this.manageBreeds.eventNew();
+           //this.manageBreeds.eventNew();
            this.manageBreeds.setMessageFind("");
            
         }else if( command.equals( "update" ) ){
             
-                this.manageBreeds.eventEdit(this.manageBreeds.getBreedName());
+              //  this.manageBreeds.eventEdit(this.manageBreeds.getBreedName());
             
         }else if( command.equals( "remove" ) ){
             this.manageBreeds.eventDelete();
@@ -120,7 +120,7 @@ public class ControllerBreeds implements ActionListener{
           
            
         }else if( command.equals( "cancel" ) ){
-            this.manageBreeds.eventCancelar();
+            //this.manageBreeds.eventCancelar();
             this.manageBreeds.setMessageFind("");
             temp = null;
             

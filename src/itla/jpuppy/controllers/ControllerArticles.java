@@ -5,33 +5,32 @@ import itla.jpuppy.datalayer.Articles;
 import itla.jpuppy.forms.JSearching;
 import itla.jpuppy.forms.ManageArticlesEdit;
 import itla.jpuppy.forms.ManageArticlesMenu;
+import itla.jpuppy.forms.ManageMenu;
 import itla.jpuppy.models.SearchingCtrlArticles;
 import itla.jpuppy.models.SearchingModel;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class ControllerArticles implements MouseListener, KeyListener, ActionListener, WindowFocusListener {
+public class ControllerArticles extends Controller {
 
-    private ManageArticlesMenu manageMenu;
     private ManageArticlesEdit manageEdit;
     private SearchingModel<Articles> modelSearching;
     private ModelArticles mdlArticles;
     private long edicion;
     private Articles tempArticles;
+    private ManageMenu manageMenu;
 
-    public ControllerArticles(ManageArticlesMenu manageMenu) {
+    public ControllerArticles(ManageMenu manageMenu) {
+
         this.manageMenu = manageMenu;
+        this.manageEdit = new ManageArticlesEdit(null, true, this);
         modelSearching = new SearchingModel<Articles>(new String[]{"ArticleId", "Nombre", "Cantidad", "Precio"}, new SearchingCtrlArticles());
-        manageMenu.setSearching(new JSearching(modelSearching));
+        this.manageMenu.setSearching(new JSearching(modelSearching));
         mdlArticles = new ModelArticles();
         searchByField("");
         edicion = 0;
@@ -41,9 +40,13 @@ public class ControllerArticles implements MouseListener, KeyListener, ActionLis
         modelSearching.setElements(mdlArticles.searchAllArticleByName("%" + string + "%"));
     }
 
+    public void setManageMenu(ManageMenu manageMenu) {
+        this.manageMenu = manageMenu;
+    }
+    
     @Override
     public void windowGainedFocus(WindowEvent e) {
-        searchByField(manageMenu.getSearching().getTxtSearch().getText().toLowerCase());
+        //searchByField(manageMenu.getSearching().getTxtSearch().getText().toLowerCase());
     }
 
     @Override
@@ -93,90 +96,42 @@ public class ControllerArticles implements MouseListener, KeyListener, ActionLis
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (manageMenu == null) {
+            System.out.println("ninon");
+        }
+
         if (e.getSource().equals(manageMenu.getBtnAdd())) {
-            edicion = 0;
-            manageEdit = new ManageArticlesEdit(null, true, this);
-            manageEdit.showFrame();
+            btnAdd();
             return;
         }
 
         if (e.getSource().equals(manageMenu.getBtnUpdate())) {
-            if (edicion != 0) {
-                manageEdit = new ManageArticlesEdit(null, true, this);
-                tempArticles = mdlArticles.searchArticle(edicion);
-                manageEdit.setFields(String.valueOf(tempArticles.getAmount()), tempArticles.getName(), String.valueOf(tempArticles.getPrice()), tempArticles.getDescription());
-                manageEdit.showFrame();
-                edicion = 0;
-                return;
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(manageMenu, "No Ha Sido Seleccionado Un Registro");
-            }
+            btnUpdate();
             return;
         }
 
         if (e.getSource().equals(manageMenu.getBtnRemove())) {
-            if (edicion != 0) {
-                int i = JOptionPane.showConfirmDialog(manageMenu, "Realmente desea Eliminar Este Usuario?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (i == 0) {
-                    mdlArticles.deleteObject(mdlArticles.searchArticle(edicion));
-                    javax.swing.JOptionPane.showMessageDialog(manageMenu, "Registro Eliminado");
-                }
-                searchByField(manageMenu.getSearching().getTxtSearch().getText().toLowerCase());
-                edicion = 0;
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(manageMenu, "No Ha Sido Seleccionado Un Registro");
-            }
+            btnRemove();
             return;
         }
 
         if (e.getSource().equals(manageEdit.getBtnSave())) {
-
-            if (isEmptyFields()) {
-                JOptionPane.showMessageDialog(manageEdit, "Existen Campos En Blancos Por Favor Completar", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            if (edicion != 0) {
-                update();
-            } else {
-                insert();
-            }
+            btnSave();
+            return;
         }
 
         if (e.getSource().equals(manageEdit.getBtnCancel())) {
-            int i = JOptionPane.showConfirmDialog(manageEdit, "Realmente desea Cancelar la Insercion de Datos", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (i == 0) {
-                manageEdit.dispose();
-            }
+            btncancelar();
             return;
         }
-    }
 
-    private boolean isEmptyFields() {
-        boolean state = false;
-        javax.swing.text.JTextComponent textField;
-        String date;
-
-
-        for (int i = 0; i <= manageEdit.getPnFields().getComponentCount(); i++) {
-            try {
-                textField = (javax.swing.text.JTextComponent) manageEdit.getPnFields().getComponent(i);
-                if (textField.getText().equals("")) {
-                    state = true;
-                    textField.requestFocus();
-                } else if (textField.getText().indexOf("-") != -1) {
-                    String special = textField.getText().trim();
-                    if ((special.length() < 12) && (special.length() != 10)) {
-                        state = true;
-                        textField.requestFocus();
-                    }
-                }
-            } catch (Exception e) {
-            }
+        if (e.getSource().equals(manageMenu.getBtnExit())) {
+            manageMenu.closeFrame();
         }
-        return state;
     }
 
-    private void insert() {
+    @Override
+    public void insert() {
         try {
             Articles temp = new Articles(manageEdit.getTxtFieldName().getText(), Double.parseDouble(manageEdit.getTxtFieldPrice().getText()), Integer.parseInt(manageEdit.getTxtFieldPrice().getText()), manageEdit.getjTxtAreaDescription().getText());
             mdlArticles.insertObject(temp);
@@ -187,7 +142,8 @@ public class ControllerArticles implements MouseListener, KeyListener, ActionLis
         }
     }
 
-    private void update() {
+    @Override
+    public void update() {
         tempArticles.setName(manageEdit.getTxtFieldName().getText());
         tempArticles.setPrice(Double.parseDouble(manageEdit.getTxtFieldPrice().getText()));
         tempArticles.setAmount(Integer.parseInt(manageEdit.getTxtFieldAmount().getText()));
@@ -196,6 +152,63 @@ public class ControllerArticles implements MouseListener, KeyListener, ActionLis
         if (i == 0) {
             mdlArticles.updateObject(tempArticles);
             JOptionPane.showMessageDialog(manageEdit, "Registro Actualizado Exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            manageEdit.dispose();
+        }
+    }
+
+    @Override
+    public void btnAdd() {
+        edicion = 0;
+        manageEdit = new ManageArticlesEdit(null, true, this);
+        manageEdit.showFrame();
+    }
+
+    @Override
+    public void btnUpdate() {
+        if (edicion != 0) {
+            manageEdit = new ManageArticlesEdit(null, true, this);
+            tempArticles = mdlArticles.searchArticle(edicion);
+            manageEdit.setFields(String.valueOf(tempArticles.getAmount()), tempArticles.getName(), String.valueOf(tempArticles.getPrice()), tempArticles.getDescription());
+            manageEdit.showFrame();
+            edicion = 0;
+            return;
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(manageMenu, "No Ha Sido Seleccionado Un Registro");
+        }
+    }
+
+    @Override
+    public void btnSave() {
+        if (isEmptyFields()) {
+            JOptionPane.showMessageDialog(manageEdit, "Existen Campos En Blancos Por Favor Completar", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (edicion != 0) {
+            update();
+        } else {
+            insert();
+        }
+    }
+
+    @Override
+    public void btnRemove() {
+        if (edicion != 0) {
+            int i = JOptionPane.showConfirmDialog(manageMenu, "Realmente desea Eliminar Este Usuario?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (i == 0) {
+                mdlArticles.deleteObject(mdlArticles.searchArticle(edicion));
+                javax.swing.JOptionPane.showMessageDialog(manageMenu, "Registro Eliminado");
+            }
+            searchByField(manageMenu.getSearching().getTxtSearch().getText().toLowerCase());
+            edicion = 0;
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(manageMenu, "No Ha Sido Seleccionado Un Registro");
+        }
+    }
+
+    @Override
+    public void btncancelar() {
+        int i = JOptionPane.showConfirmDialog(manageEdit, "Realmente desea Cancelar la Insercion de Datos", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (i == 0) {
             manageEdit.dispose();
         }
     }

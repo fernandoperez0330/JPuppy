@@ -92,9 +92,19 @@ public class HomeFrame extends JFrame implements FrameOption {
         return mnuiUsers;
     }
 
-    public JMenuItem getMnuiProductosServicios() {
-        return mnuiProductosServicios;
+    public JMenuItem getMnuiProductsServices() {
+        return mnuiProductsServices;
     }
+
+    public JMenuItem getMnuiAppointments() {
+        return mnuiAppointments;
+    }
+
+    public JMenuItem getMnuiConsults() {
+        return mnuiConsults;
+    }
+    
+    
     
 
     private void setListener() {
@@ -109,7 +119,9 @@ public class HomeFrame extends JFrame implements FrameOption {
         mnuiPerfil.addActionListener(ctrlhome);
         mnuiSpecies.addActionListener(ctrlhome);
         mnuiUsers.addActionListener(ctrlhome);
-        mnuiProductosServicios.addActionListener(ctrlhome);
+        mnuiProductsServices.addActionListener(ctrlhome);
+        mnuiAppointments.addActionListener(ctrlhome);
+        mnuiConsults.addActionListener(ctrlhome);
     }
     
     public JSearching getSearching() {
@@ -141,7 +153,10 @@ public class HomeFrame extends JFrame implements FrameOption {
         mnuiEmployees = new javax.swing.JMenuItem();
         mnuiUsers = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        mnuiProductosServicios = new javax.swing.JMenuItem();
+        mnuiProductsServices = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        mnuiConsults = new javax.swing.JMenuItem();
+        mnuiAppointments = new javax.swing.JMenuItem();
         mnuVentas = new javax.swing.JMenu();
         mnuUsuarios = new javax.swing.JMenu();
         mnuiPerfil = new javax.swing.JMenuItem();
@@ -183,9 +198,18 @@ public class HomeFrame extends JFrame implements FrameOption {
         mnuAdministrator.add(mnuiUsers);
         mnuAdministrator.add(jSeparator1);
 
-        mnuiProductosServicios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.CTRL_MASK));
-        mnuiProductosServicios.setText("Productos y Servicios");
-        mnuAdministrator.add(mnuiProductosServicios);
+        mnuiProductsServices.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.CTRL_MASK));
+        mnuiProductsServices.setText("Productos y Servicios");
+        mnuAdministrator.add(mnuiProductsServices);
+        mnuAdministrator.add(jSeparator2);
+
+        mnuiConsults.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_8, java.awt.event.InputEvent.CTRL_MASK));
+        mnuiConsults.setText("Consulta");
+        mnuAdministrator.add(mnuiConsults);
+
+        mnuiAppointments.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_9, java.awt.event.InputEvent.CTRL_MASK));
+        mnuiAppointments.setText("Citas");
+        mnuAdministrator.add(mnuiAppointments);
 
         mnubHome.add(mnuAdministrator);
 
@@ -233,20 +257,23 @@ public class HomeFrame extends JFrame implements FrameOption {
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenu mnuAcerca;
     private javax.swing.JMenu mnuAdministrator;
     private javax.swing.JMenu mnuUsuarios;
     private javax.swing.JMenu mnuVentas;
     private javax.swing.JMenuBar mnubHome;
     private javax.swing.JMenuItem mnuiAcerca;
+    private javax.swing.JMenuItem mnuiAppointments;
     private javax.swing.JMenuItem mnuiBreeds;
     private javax.swing.JMenuItem mnuiCloseSeccion;
+    private javax.swing.JMenuItem mnuiConsults;
     private javax.swing.JMenuItem mnuiCustomers;
     private javax.swing.JMenuItem mnuiEmployees;
     private javax.swing.JMenuItem mnuiExit;
     private javax.swing.JMenuItem mnuiPatients;
     private javax.swing.JMenuItem mnuiPerfil;
-    private javax.swing.JMenuItem mnuiProductosServicios;
+    private javax.swing.JMenuItem mnuiProductsServices;
     private javax.swing.JMenuItem mnuiSpecies;
     private javax.swing.JMenuItem mnuiUsers;
     private javax.swing.JPopupMenu.Separator spAdmin1;

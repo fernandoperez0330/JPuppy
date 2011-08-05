@@ -1,6 +1,7 @@
 package itla.jpuppy.forms;
 
-import itla.jpuppy.controllers.ControllerArticles;
+import itla.jpuppy.controllers.Controller;
+import itla.jpuppy.controllers.ControllerEmployee;
 import java.awt.Frame;
 import javax.swing.JButton;
 
@@ -16,40 +17,37 @@ import javax.swing.JButton;
  */
 /**
  *
- * @author Adderly
+ * @author Jansel & Jordhano(Solo Nosotros Lo Usaremos!!!XD)
  */
-public class ManageArticlesMenu extends javax.swing.JDialog implements FrameOption {
+public class ManageMenu extends javax.swing.JDialog implements FrameOption {
 
     private JSearching searching;
-    private ControllerArticles ctrlArticles;
+    private Controller controller;
 
-    public ManageArticlesMenu(Frame owner, boolean modal) {
+    public ManageMenu(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setTitle("Administracion de Articulos");
         this.setResizable(false);
-
-        //ctrlArticles = new ControllerArticles(this);
-        this.addWindowFocusListener(ctrlArticles);
-        searching.setBounds(54, 160, 786, 474);
-        setListener();
-        this.add(searching);
+        this.addWindowFocusListener(controller);
     }
 
     private void setListener() {
-        searching.getTxtSearch().addKeyListener(ctrlArticles);
-        searching.getTblResult().addMouseListener(ctrlArticles);
+        searching.getTxtSearch().addKeyListener(controller);
+        searching.getTblResult().addMouseListener(controller);
 
-        btnAdd.addActionListener(ctrlArticles);
-        btnRemove.addActionListener(ctrlArticles);
-        btnUpdate.addActionListener(ctrlArticles);
+        btnAdd.addActionListener(controller);
+        btnRemove.addActionListener(controller);
+        btnUpdate.addActionListener(controller);
+        btnExit.addActionListener(controller);
+
     }
 
     public void setSearching(JSearching searching) {
         this.searching = searching;
+       
     }
-    
+
     public JSearching getSearching() {
         return searching;
     }
@@ -65,8 +63,13 @@ public class ManageArticlesMenu extends javax.swing.JDialog implements FrameOpti
     public JButton getBtnUpdate() {
         return btnUpdate;
     }
+
+    public JButton getBtnExit() {
+        return btnExit;
+    }
     
     
+
     /** Creates new form NewJFrame */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -76,6 +79,7 @@ public class ManageArticlesMenu extends javax.swing.JDialog implements FrameOpti
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CrudEntities");
@@ -104,6 +108,9 @@ public class ManageArticlesMenu extends javax.swing.JDialog implements FrameOpti
         btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/remove.png"))); // NOI18N
         btnRemove.setFocusable(false);
         pnButtons.add(btnRemove);
+
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancel.png"))); // NOI18N
+        pnButtons.add(btnExit);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,10 +144,21 @@ public class ManageArticlesMenu extends javax.swing.JDialog implements FrameOpti
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JPanel pnButtons;
     // End of variables declaration//GEN-END:variables
+
+    public void showFrameMenu(Controller controller, String title) {
+
+        this.controller = controller;
+        this.setTitle(title);
+        searching.setBounds(54, 160, 786, 474);
+        add(searching);
+        setListener();
+        showFrame();
+    }
 
     @Override
     public void showFrame() {
@@ -150,11 +168,12 @@ public class ManageArticlesMenu extends javax.swing.JDialog implements FrameOpti
     @Override
     public void closeFrame() {
         this.setVisible(false);
+        
     }
 
     @Override
     public void dispose() {
         itla.jpuppy.business.EntityManagerCreator.close();
-        super.dispose();
+        closeFrame();
     }
 }

@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import sun.util.calendar.BaseCalendar;
@@ -35,14 +36,14 @@ import sun.util.calendar.BaseCalendar;
 /* Necesito que la Persona que trabajo con esta vista por favor le coloque dos BasicArrowButton */
 /* Uno con orientacion 3 y otro con orientacion 7*/
 
-public class ManageAppointnments extends Controller  implements FrameOption{
+public class ManageAppointnments extends JDialog  implements FrameOption{
 
     public ManageAppointnments(Frame owner, boolean modal) {
         super();
         initComponents();
         ControllerAppointments cb = new ControllerAppointments( this );
         setController( cb );
-        initFields( this.pnFields , this.pnButtons );
+        //initFields( this.pnFields , this.pnButtons );
         this.setLocationRelativeTo( null );
         this.setTitle( "Manage Appointments" );
         this.setResizable( false );
@@ -87,7 +88,6 @@ public class ManageAppointnments extends Controller  implements FrameOption{
         jLabel6 = new javax.swing.JLabel();
         jComboBoxDoctor = new javax.swing.JComboBox();
         pnButtons = new javax.swing.JPanel();
-        btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
@@ -166,12 +166,6 @@ public class ManageAppointnments extends Controller  implements FrameOption{
 
         pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
 
-        btnAdd.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/add.png"));
-        btnAdd.setFocusable(false);
-        btnAdd.setMaximumSize(new java.awt.Dimension(50, 50));
-        btnAdd.setName("add"); // NOI18N
-        pnButtons.add(btnAdd);
-
         btnUpdate.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/edit.png"));
         btnUpdate.setFocusable(false);
         btnUpdate.setName("update"); // NOI18N
@@ -211,7 +205,7 @@ public class ManageAppointnments extends Controller  implements FrameOption{
             .addGroup(layout.createSequentialGroup()
                 .addGap(118, 118, 118)
                 .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +228,6 @@ public class ManageAppointnments extends Controller  implements FrameOption{
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnSave;
@@ -260,7 +253,7 @@ public class ManageAppointnments extends Controller  implements FrameOption{
         
         dateChooserRegister = new datechooser.beans.DateChooserCombo();
         dateChooserRegister.setDateFormat( new SimpleDateFormat("dd-MMM-yyyy"));
-        this.getContentPane().add( dateChooserRegister );
+//        this.getContentPane().add( dateChooserRegister );
         dateChooserRegister.setBounds(390, 280, 360, 28);
     }
     {
@@ -333,20 +326,23 @@ public Date getAcordetDate(){
 
   
 
-    @Override
+    //@Override
     public void eventDelete() {
-        if( !isEmptyFields() ){
+/*        if( !isEmptyFields() ){
         changeStatePnlEdition( false );
         cleanFields();
         stateButtons(true, false);
+ * 
         }else{
             javax.swing.JOptionPane.showMessageDialog( null ,"error: no selected register" );
         }
+ * 
+ */
     }
 
-    @Override
+    //@Override
     public boolean eventSave() {
-        boolean state=true;
+       /* boolean state=true;
         if( !isEmptyFields() ){
            
        changeStateWriteFields( false );
@@ -356,18 +352,22 @@ public Date getAcordetDate(){
             javax.swing.JOptionPane.showMessageDialog( null ,"error: cannot save registry , empty field" );
         }
         return state;
-       
+        * 
+        */
+       return true;
     }
 
-    @Override
+    //@Override
     public void eventSearch( String text ) {
            
-        if( !isEmptyFields() )
+        /*if( !isEmptyFields() )
             cleanFields();
         if( !text.equals("-") )
             changeStateWriteFields( false );
        stateButtons(true, false);
        changeStatePnlEdition( true );
+         * 
+         */
        
     }
     public void setJComboBoxModelDoctor( ComboBoxModel boxModel ){
@@ -379,11 +379,8 @@ public Date getAcordetDate(){
         public void setJComboBoxModelStatus( ComboBoxModel boxModel ){
         this.jComboBoxStatus.setModel( boxModel );
     }
-   
-   public static void main(String...string){
-       ManageAppointnments m = new ManageAppointnments(null, true); 
-       m.showFrame();
-     
-   }
+
+    
+
  
 }

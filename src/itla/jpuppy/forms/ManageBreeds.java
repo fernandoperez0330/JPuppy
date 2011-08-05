@@ -7,6 +7,7 @@ import itla.jpuppy.datalayer.Species;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import javax.swing.ComboBoxModel;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 /*
@@ -28,14 +29,14 @@ import javax.swing.JPanel;
 /* Necesito que la Persona que trabajo con esta vista por favor le coloque dos BasicArrowButton */
 /* Uno con orientacion 3 y otro con orientacion 7*/
 
-public class ManageBreeds extends Controller  implements FrameOption{
+public class ManageBreeds extends JDialog  implements FrameOption{
 
     public ManageBreeds(Frame owner, boolean modal) {
         super();
         initComponents();
         ControllerBreeds cb = new ControllerBreeds( this );
         setController( cb );
-        initFields( this.pnFields , this.pnButtons );
+//        initFields( this.pnFields , this.pnButtons );
         this.setLocationRelativeTo( null );
         this.setTitle( "Manage Users" );
         this.setResizable( false );
@@ -292,20 +293,22 @@ public class ManageBreeds extends Controller  implements FrameOption{
     }
   
 
-    @Override
+    //@Override
     public void eventDelete() {
-        if( !isEmptyFields() ){
+    /*    if( !isEmptyFields() ){
         changeStatePnlEdition( false );
         cleanFields();
         stateButtons(true, false);
         }else{
             javax.swing.JOptionPane.showMessageDialog( null ,"error: no selected register" );
         }
+     * 
+     */
     }
 
-    @Override
+    //@Override
     public boolean eventSave() {
-        boolean state=true;
+        /*boolean state=true;
         if( !isEmptyFields() ){
             
        changeStateWriteFields( false );
@@ -315,18 +318,22 @@ public class ManageBreeds extends Controller  implements FrameOption{
             javax.swing.JOptionPane.showMessageDialog( null ,"error: cannot save registry , empty field" );
         }
         return state;
-       
+         * 
+         */
+       return true;
     }
 
-    @Override
+    //@Override
     public void eventSearch( String text ) {
-        
+        /*
         if( !isEmptyFields() )
             cleanFields();
         if( !text.equals("") )
             changeStateWriteFields( false );
        stateButtons(true, false);
        changeStatePnlEdition( true );
+         * 
+         */
        
     }
     public void setJComboBoxModel( ComboBoxModel boxModel ){

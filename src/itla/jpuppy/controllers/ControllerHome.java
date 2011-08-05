@@ -5,18 +5,26 @@
 package itla.jpuppy.controllers;
 
 import itla.jpuppy.business.ModelCustomers;
+import itla.jpuppy.datalayer.Articles;
 import itla.jpuppy.datalayer.Customers;
+import itla.jpuppy.datalayer.Users;
 import itla.jpuppy.forms.AboutUsFrame;
 import itla.jpuppy.forms.HomeFrame;
 import itla.jpuppy.forms.JSearching;
+import itla.jpuppy.forms.ManageAppointnments;
 import itla.jpuppy.forms.ManageArticlesMenu;
 import itla.jpuppy.forms.ManageBreeds;
+import itla.jpuppy.forms.ManageConsultations;
 import itla.jpuppy.forms.ManageCustomersMenu;
 import itla.jpuppy.forms.ManageEmployeesMenu;
+import itla.jpuppy.forms.ManageMenu;
 import itla.jpuppy.forms.ManagePatients;
 import itla.jpuppy.forms.ManageSpecies;
-//import itla.jpuppy.forms.ManageUsersMenu;
+import itla.jpuppy.forms.ManageUsersMenu;
+import itla.jpuppy.forms.ManageUsersMenu;
+import itla.jpuppy.models.SearchingCtrlArticles;
 import itla.jpuppy.models.SearchingCtrlCustomers;
+import itla.jpuppy.models.SearchingCtrlUsers;
 import itla.jpuppy.models.SearchingModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +43,8 @@ public class ControllerHome implements ActionListener, KeyListener, WindowFocusL
     private HomeFrame home = null;
     private SearchingModel<Customers> modelSearching;
     private ModelCustomers mdlCustomers;
+    private ManageMenu refersMenu;
+    private ManageMenu refersMenu2;
 
     public ControllerHome(HomeFrame home) {
         this.home = home;
@@ -42,10 +52,10 @@ public class ControllerHome implements ActionListener, KeyListener, WindowFocusL
         mdlCustomers = new ModelCustomers();
         modelSearching.setElements(mdlCustomers.searchAllCustomerByName("%%"));
         home.setSearching(new JSearching(modelSearching));
-        
+        refersMenu = new ManageMenu(home, true);
+        refersMenu2 = new ManageMenu(home, true);
     }
-    
-    
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -98,13 +108,31 @@ public class ControllerHome implements ActionListener, KeyListener, WindowFocusL
 
         if (e.getSource().equals(home.getMnuiUsers())) {
             itla.jpuppy.business.EntityManagerCreator.close();
+            ControllerUser temp = new ControllerUser(refersMenu2);
+            refersMenu2.showFrameMenu(temp,"Manejador de Usuarios");
+            temp.setManageMenu(null);
+            
             //new ManageUsersMenu(home, true).showFrame();
             return;
         }
-        
-        if (e.getSource().equals(home.getMnuiProductosServicios())){
+
+        if (e.getSource().equals(home.getMnuiProductsServices())) {
             itla.jpuppy.business.EntityManagerCreator.close();
-             new ManageArticlesMenu(home, true).showFrame();
+            ControllerArticles temp = new ControllerArticles(refersMenu);
+            refersMenu.showFrameMenu(temp,"Manejador de Productos");
+            temp.setManageMenu(null);
+            return;
+        }
+
+        if (e.getSource().equals(home.getMnuiAppointments())) {
+            itla.jpuppy.business.EntityManagerCreator.close();
+            new ManageAppointnments(home, true).showFrame();
+            return;
+        }
+
+        if (e.getSource().equals(home.getMnuiConsults())) {
+            itla.jpuppy.business.EntityManagerCreator.close();
+            new ManageConsultations(home, true).showFrame();
             return;
         }
 

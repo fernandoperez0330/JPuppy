@@ -107,13 +107,13 @@ public class ControllerAppointments implements ActionListener{
         String command = e.getActionCommand();
         
         if( command.equals( "add" ) ){
-           this.manageAppointments.eventNew();
+//           this.manageAppointments.eventNew();
            this.manageAppointments.setMessageFind("");
            initComboBox();
            temp = null;
         }else if( command.equals( "update" ) ){
             
-                this.manageAppointments.eventEdit(this.manageAppointments.getPatientName());
+  //              this.manageAppointments.eventEdit(this.manageAppointments.getPatientName());
             
         }else if( command.equals( "remove" ) ){
             this.manageAppointments.eventDelete();
@@ -166,7 +166,7 @@ public class ControllerAppointments implements ActionListener{
           
            
         }else if( command.equals( "cancel" ) ){
-            this.manageAppointments.eventCancelar();
+//            this.manageAppointments.eventCancelar();
             this.manageAppointments.setMessageFind("");
             temp = null;
             

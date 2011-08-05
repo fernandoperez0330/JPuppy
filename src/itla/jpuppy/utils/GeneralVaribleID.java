@@ -4,34 +4,29 @@
  */
 package itla.jpuppy.utils;
 
+import itla.jpuppy.controllers.ControllerArticles;
+import itla.jpuppy.controllers.ControllerUser;
+import itla.jpuppy.forms.ManageMenu;
+
 /**
  *
  * @author jansel
  */
 public class GeneralVaribleID {
     
-    private static long USerId;
-    private static long CustomerID;
+    private static ControllerUser ctrlUser;
+    private static ControllerArticles ctrlArticles;
+
+    public static ControllerArticles getCtrlArticles(ManageMenu manageMenu) {
+        if (ctrlArticles != null){
+            //ctrlArticles = new ControllerUser(manageMenu);
+        }
+        return ctrlArticles;
+    }
+
+    public static ControllerUser getCtrlUser() {
+        return ctrlUser;
+    }
     
-    public GeneralVaribleID(){
-        USerId=0;
-        CustomerID=0;
-    }
-
-    public static long getCustomerID() {
-        return CustomerID;
-    }
-
-    public void setCustomerID(long CustomerID) {
-        GeneralVaribleID.CustomerID = CustomerID;
-    }
-
-    public long getUSerId() {
-        return USerId;
-    }
-
-    public void setUSerId(int USerId) {
-        GeneralVaribleID.USerId = USerId;
-    }
     
 }

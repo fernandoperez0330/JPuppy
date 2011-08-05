@@ -30,7 +30,7 @@ public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption 
         this.setTitle("Administracion de Usuarios");
         this.setResizable(false);
 
-        ctrlUser = new ControllerUser(this);
+        //ctrlUser = new ControllerUser(this);
         this.addWindowFocusListener(ctrlUser);
         searching.setBounds(54, 160, 786, 474);
         setListener();

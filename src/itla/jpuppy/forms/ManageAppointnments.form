@@ -36,7 +36,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
               <Component id="pnFields" min="-2" max="-2" attributes="1"/>
-              <EmptySpace pref="139" max="32767" attributes="0"/>
+              <EmptySpace pref="160" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -192,18 +192,6 @@
         <Property name="verticalGap" type="int" value="8"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnAdd">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.ImageIcon(&quot;./src/itla/jpuppy/resources/add.png&quot;)" type="code"/>
-            </Property>
-            <Property name="focusable" type="boolean" value="false"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[50, 50]"/>
-            </Property>
-            <Property name="name" type="java.lang.String" value="add" noResource="true"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="btnUpdate">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
