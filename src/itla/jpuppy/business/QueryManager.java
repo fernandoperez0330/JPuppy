@@ -129,6 +129,16 @@ public class QueryManager {
         }
         return listCustomers;
     }
+    
+    //Retorna la lista completa de todos los clientes
+    public List<Customers> searchCustomer() {
+        List<Customers> listCustomers = null;
+        try {
+            listCustomers = entityManager.createQuery("SELECT a FROM Customers a").getResultList();
+        } catch (Exception e) {
+        }
+        return listCustomers;
+    }   
 
     public List<Persons> searchPersonByCedula(String cedula) {
         List<Persons> listPersons = null;

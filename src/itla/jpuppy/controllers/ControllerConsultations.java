@@ -21,27 +21,38 @@ public class ControllerConsultations implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
         if (comando.equals(manageConsultations.getActionCommandAdd())) {
-            if (manageConsultations.getCbCustomerConsultations().getSelectedItem().toString().equals("")) {
+            if (manageConsultations.getCbCustomerConsultations().getSelectedItem() == null) {
                 JOptionPane.showMessageDialog(null, "Seleccione el cliente!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                if (manageConsultations.getCbPatientConsultations().getSelectedItem().toString().equals("")) {
+                if (manageConsultations.getCbPatientConsultations().getSelectedItem() == null) {
                     JOptionPane.showMessageDialog(null, "Selecione el paciente!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    if (manageConsultations.getCbTypeConsultations().getSelectedItem().toString().equals("")) {
+                    if (manageConsultations.getCbTypeConsultations().getSelectedItem() == null) {
                         JOptionPane.showMessageDialog(null, "Selecione el tipo de consulta!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         if (manageConsultations.getTxtRemarkConsultations().getText().equals("")) {
                             JOptionPane.showMessageDialog(null, "El campo observacion es requerido!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                         } else {
+                            System.out.println(new ModelPatients().searchAllPatientByName(manageConsultations.getCbPatientConsultations().getSelectedItem().toString()).get(0));
+                            boolean insertObject;
                             try {
-                                boolean insertObject = new ModelConsultations().insertObject(new Consultations(
-                                        new Date(manageConsultations.getDateChooserBeginConsultations().getText()), 
-                                        new Date(manageConsultations.getDateChooserEndConsultations().getText()), 
-                                        new ModelCustomers().getCustomer(manageConsultations.getCbCustomerConsultations().getSelectedItem().toString()), new ModelPatients().searchAllPatientByName(manageConsultations.getCbPatientConsultations().getSelectedItem().toString()).get(0), manageConsultations.getTxtRemarkConsultations().getText(), null, manageConsultations.getCbTypeConsultations().getSelectedItem().toString()));
+                                insertObject = new ModelConsultations().insertObject(new Consultations(
+                                        new Date(manageConsultations.getDateChooserBeginConsultations().getSelectedDate().getTimeInMillis()),
+                                        new Date(manageConsultations.getDateChooserEndConsultations().getSelectedDate().getTimeInMillis()),
+                                        new ModelCustomers().getCustomer(manageConsultations.getCbCustomerConsultations().getSelectedItem().toString()),
+                                        new ModelPatients().getPatientsByName(manageConsultations.getCbPatientConsultations().getSelectedItem().toString()),
+                                        manageConsultations.getTxtRemarkConsultations().getText(),
+                                        new ModelAppointments().getSpecificAppointments(manageConsultations.getCbPatientConsultations().getSelectedItem().toString()),
+                                        manageConsultations.getCbTypeConsultations().getSelectedItem().toString()));
                             } catch (Exception ecp) {
-                                ecp.printStackTrace();
+                                //ecp.printStackTrace();
+                                insertObject = false;
                             }
-
+                            if (insertObject) {
+                                JOptionPane.showMessageDialog(null, "La consulta fue agregada exitosamente!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "La consulta no pudo ser agregada !", "Informacion", JOptionPane.ERROR_MESSAGE);
+                            }
                         }
                     }
                 }

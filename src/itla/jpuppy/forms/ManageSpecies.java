@@ -60,7 +60,7 @@ public class ManageSpecies extends JDialog implements FrameOption {
         
         //BreedsTableModel BreedsTableModel = new BreedsTableModel().getInstance();
         this.setLocationRelativeTo(null);
-        this.setTitle("Manage Species");
+        this.setTitle("Manejador de  especies");
         this.setResizable(false);
     }
 

@@ -20,9 +20,8 @@ public class SearchSpecies extends javax.swing.JDialog implements FrameOption {
 
         btnSearch.addActionListener(css);
         btnSearch.setActionCommand("SearchSpecies");
-
-        
-        //jComboBox1.add("-");
+        jButton1.setEnabled(false);
+            
         model = new DefaultComboBoxModel(new ControllerBreeds().searchAllSpecies());
         this.setJComboBoxModel(model);
         
@@ -63,6 +62,8 @@ public class SearchSpecies extends javax.swing.JDialog implements FrameOption {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel1.setText("Especie a buscar:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

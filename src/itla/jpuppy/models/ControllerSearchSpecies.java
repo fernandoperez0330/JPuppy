@@ -22,7 +22,8 @@ public class ControllerSearchSpecies implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
         if (comando.equals(searchSpecies.getActionCommandSearch())) {
-            if (searchSpecies.getjComboBox1().getSelectedItem().equals("")) {
+            
+            if (searchSpecies.getjComboBox1().getSelectedItem() == null) {
                 JOptionPane.showMessageDialog(null, "Selecciona la especie que deseas buscasr!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 list = new ModelBreeds().searchBreedsBySpecie(new ModelSpecies().getSpeciesByName(searchSpecies.getjComboBox1().getSelectedItem().toString()));

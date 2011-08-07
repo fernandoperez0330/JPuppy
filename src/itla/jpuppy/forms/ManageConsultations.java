@@ -1,10 +1,12 @@
 package itla.jpuppy.forms;
 //import itla.jpuppy.controllers.ControllerConsultations;
 import datechooser.beans.DateChooserCombo;
+import itla.jpuppy.business.ModelPatients;
 import itla.jpuppy.controllers.ControllerConsultations;
+import itla.jpuppy.utils.GeneratorDataCombo;
 import itla.jpuppy.utils.TypeConsultations;
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -12,14 +14,13 @@ import javax.swing.JTextField;
 
 public class ManageConsultations extends javax.swing.JDialog implements FrameOption {
 
-    
+    private ComboBoxModel model = null;
 
     public ManageConsultations(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
         ControllerConsultations controlConsultations = new ControllerConsultations(this);
- 
+
         btnAddConsultations.addActionListener(controlConsultations);
         btnCancelConsultations.addActionListener(controlConsultations);
         btnRemoveConsultations.addActionListener(controlConsultations);
@@ -33,12 +34,24 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         btnSaveConsultations.setActionCommand("saveConsultation");
         btnSearchConsultations.setActionCommand("searchConsultation");
         btnUpdateConsultations.setActionCommand("updateConsultation");
-                     
-        dateChooserBeginConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));   
-        dateChooserEndConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));         
-        
+
+        dateChooserBeginConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));
+        dateChooserEndConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));
+
 
         cbTypeConsultations.setModel(new DefaultComboBoxModel(TypeConsultations.values()));
+
+        try {
+            model = new DefaultComboBoxModel(new GeneratorDataCombo().dataCustomers());
+            this.setCbCustomerConsultationsModel(model);
+        } catch (Exception e) {
+        }
+        try {
+            model = new DefaultComboBoxModel(new GeneratorDataCombo().dataPatients());
+            this.setCbPatientsConsultationsModel(model);
+        } catch (Exception e) {
+        }        
+        
 
         this.setLocationRelativeTo(null);
         this.setTitle("Manejador de consultas");
@@ -123,15 +136,12 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel4.setText("Observacion:");
 
-        cbCustomerConsultations.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
-
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel5.setText("Cliente:");
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel6.setText("Paciente:");
 
-        cbPatientConsultations.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
         cbPatientConsultations.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbPatientConsultationsActionPerformed(evt);
@@ -213,7 +223,7 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
 
         pnButtons3.setLayout(null);
 
-        btnAddConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"add.png"));
+        btnAddConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/add.png"));
         btnAddConsultations.setFocusable(false);
         //btnAddConsultations.setContentAreaFilled( false );
         btnAddConsultations.setMaximumSize(new java.awt.Dimension(50, 50));
@@ -221,21 +231,21 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         pnButtons3.add(btnAddConsultations);
         btnAddConsultations.setBounds(60, 20, 110, 50);
 
-        btnUpdateConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"edit.png"));
+        btnUpdateConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/edit.png"));
         btnUpdateConsultations.setFocusable(false);
         //btnUpdateConsultations.setContentAreaFilled( false );
         btnUpdateConsultations.setName("update"); // NOI18N
         pnButtons3.add(btnUpdateConsultations);
         btnUpdateConsultations.setBounds(460, 20, 110, 50);
 
-        btnSearchConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"find.png"));
+        btnSearchConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/find.png"));
         btnSearchConsultations.setFocusable(false);
         //btnSearchConsultations.setContentAreaFilled( false );
         btnSearchConsultations.setName("search"); // NOI18N
         pnButtons3.add(btnSearchConsultations);
         btnSearchConsultations.setBounds(580, 20, 110, 50);
 
-        btnSaveConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"save.png"));
+        btnSaveConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/save.png"));
         btnSaveConsultations.setFocusable(false);
         //btnSaveConsultations.setContentAreaFilled( false );
         btnSaveConsultations.setName("save"); // NOI18N
@@ -243,14 +253,14 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         btnSaveConsultations.setBounds(190, 20, 120, 50);
 
         btnRemoveConsultations.setIcon(null);
-        btnRemoveConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"remove.png"));
+        btnRemoveConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/remove.png"));
         btnRemoveConsultations.setFocusable(false);
         //btnRemoveConsultations.setContentAreaFilled( false );
         btnRemoveConsultations.setName("remove"); // NOI18N
         pnButtons3.add(btnRemoveConsultations);
         btnRemoveConsultations.setBounds(330, 20, 110, 50);
 
-        btnCancelConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"cancel.png"));
+        btnCancelConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/cancel.png"));
         btnCancelConsultations.setFocusable(false);
         //btnCancelConsultations.setContentAreaFilled( false );
         btnCancelConsultations.setName("cancel"); // NOI18N
@@ -279,9 +289,8 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
     }//GEN-LAST:event_cbPatientConsultationsActionPerformed
 
     private void cbTypeConsultationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTypeConsultationsActionPerformed
-       // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_cbTypeConsultationsActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddConsultations;
     private javax.swing.JButton btnCancelConsultations;
@@ -327,9 +336,10 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         return cbCustomerConsultations;
     }
 
-    public void setCbCustomerConsultations(JComboBox cbCustomerConsultations) {
-        this.cbCustomerConsultations = cbCustomerConsultations;
+    public void setCbCustomerConsultationsModel(ComboBoxModel model) {
+        this.cbCustomerConsultations.setModel(model);
     }
+
     /*
     public JComboBox getCbEndDateConsultations() {
     return cbEndDateConsultations;
@@ -338,13 +348,12 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
     public void setCbEndDateConsultations(JComboBox cbEndDateConsultations) {
     this.cbEndDateConsultations = cbEndDateConsultations;
     } */
-
     public JComboBox getCbPatientConsultations() {
         return cbPatientConsultations;
     }
 
-    public void setCbPatientConsultations(JComboBox cbPatientConsultations) {
-        this.cbPatientConsultations = cbPatientConsultations;
+    public void setCbPatientsConsultationsModel(ComboBoxModel model) {
+        this.cbPatientConsultations.setModel(model);
     }
 
     public JComboBox getCbTypeConsultations() {
