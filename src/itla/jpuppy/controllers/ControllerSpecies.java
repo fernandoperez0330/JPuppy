@@ -107,10 +107,10 @@ public class ControllerSpecies implements ActionListener {
         } else if (comando.equals(manageSpecies.getActionCommandSearch())) {
             new SearchSpecies(null, true).showFrame();
         }  else if (comando.equals(manageSpecies.getActionCommandCancel())) {
-            int respond = JOptionPane.showConfirmDialog(null, "¿Desea Cancelar esta transaccion?", "Cancelar", JOptionPane.OK_CANCEL_OPTION);
-            if (respond == 0) {
+            //int respond = JOptionPane.showConfirmDialog(null, "¿Desea Cancelar esta transaccion?", "Cancelar", JOptionPane.OK_CANCEL_OPTION);
+            //if (respond == 0) {
                 manageSpecies.closeFrame();
-            }
+            //}
         }
 //else if (comando.equals(searchSpecies.getActionCommandSearch())) {
 //            System.out.println("Hola");
