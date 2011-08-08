@@ -17,6 +17,7 @@ public class ControllerConsultations implements ActionListener {
     private ManageConsultations manageConsultations = null;
     //private List<Consultations> list = null;
     DefaultTableModel temp;
+    private List<Consultations> list = null;
 
     public ControllerConsultations(ManageConsultations mc) {
         this.manageConsultations = mc;
@@ -65,6 +66,9 @@ public class ControllerConsultations implements ActionListener {
                                 //System.out.println(value.getBreedsName());
                                 this.addToTable(nuevo);
 
+                                //Resetea los campos
+                                manageConsultations.getTxtRemarkConsultations().setText(null);
+
                                 JOptionPane.showMessageDialog(null, "La consulta fue agregada exitosamente!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                             } else {
                                 JOptionPane.showMessageDialog(null, "La consulta no pudo ser agregada !", "Informacion", JOptionPane.ERROR_MESSAGE);
@@ -102,9 +106,10 @@ public class ControllerConsultations implements ActionListener {
                                     delets = delets + 1;
                                     //manageConsultations.getTableConsultations().remove(a);
 
+                                    //temp.fireTableRowsDeleted(manageConsultations.getTableConsultations().getSelectedRow(), manageConsultations.getTableConsultations().getSelectedRow());
+                                    //temp.removeRow(manageConsultations.getTableConsultations().getSelectedRow());
                                     //temp.setRowCount(manageConsultations.getTableConsultations().getSelectedRow());
                                 }
-
 //                                //System.out.println(manageSpecies.getJTableBreeds().getValueAt(a, 0).toString() +" - "+ manageSpecies.getJTableBreeds().getValueAt(a, 2).toString() +" - "+ manageSpecies.getJTableBreeds().getValueAt(a, 3).toString());
 //                                breeds = queryManager.searchBreeds(manageSpecies.getJTableBreeds().getValueAt(a, 0).toString(), String.valueOf(manageSpecies.getJTableBreeds().getValueAt(a, 2)));
 //                                //, Double.valueOf(String.valueOf(manageSpecies.getJTableBreeds().getValueAt(a, 2)))
@@ -116,6 +121,16 @@ public class ControllerConsultations implements ActionListener {
                     if (delets > 0) {
                         String MSG = delets + " consulta(s) eliminada(s) exitosamente!";
                         JOptionPane.showMessageDialog(null, MSG, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                        
+//                        temp.setRowCount(0);
+//                        //Refresca la tabla con las consultas almacenadas
+//                        list = new ModelConsultations().getConsultations();
+//                        for (Consultations value : list) {
+//                            //System.out.println(new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getName());
+//                            String user = new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getName() + " " + new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getLastName();
+//                            Object[] nuevo = {value.getId(), value.getTypeConsultations(), user, new ModelPatients().searchPatient(value.getPatients().getPatientsId()).getName()};
+//                            temp.addRow(nuevo);
+//                        }
                     }
                 }
 
@@ -128,13 +143,8 @@ public class ControllerConsultations implements ActionListener {
             if (manageConsultations.getTableConsultations().getSelectedRow() == -1 || manageConsultations.getTableConsultations().getSelectedRows().length > 1) {
                 JOptionPane.showMessageDialog(null, "Favor selecciona la consulta que sera editada!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                Object[] values = {
-                    manageConsultations.getTableConsultations().getValueAt(manageConsultations.getTableConsultations().getSelectedRow(), 1),
-                    manageConsultations.getTableConsultations().getValueAt(manageConsultations.getTableConsultations().getSelectedRow(), 2),
-                    manageConsultations.getTableConsultations().getValueAt(manageConsultations.getTableConsultations().getSelectedRow(), 3),
-                    new ModelConsultations().getConsultationsByID(Long.parseLong(String.valueOf(manageConsultations.getTableConsultations().getValueAt(manageConsultations.getTableConsultations().getSelectedRow(), 0)))).getRemark()
-                };
-                new EditConsultations(null, true, manageConsultations.getTableConsultations().getValueAt(manageConsultations.getTableConsultations().getSelectedRow(), 0), values).showFrame();
+                //String id = (String) manageConsultations.getTableConsultations().getValueAt(manageConsultations.getTableConsultations().getSelectedRow(), 0);
+                new EditConsultations(null, true, manageConsultations.getTableConsultations().getValueAt(manageConsultations.getTableConsultations().getSelectedRow(), 0)).showFrame();
             }
 
         } else if (comando.equals(manageConsultations.getActionCommandCancel())) {
@@ -148,7 +158,6 @@ public class ControllerConsultations implements ActionListener {
                 if (nuevos.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "No se han encontrado consultas de este cliente!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-
                     temp.setRowCount(0);
                     //System.out.println(nuevos.size());
                     for (Consultations value : nuevos) {

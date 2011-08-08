@@ -1,24 +1,106 @@
 package itla.jpuppy.forms;
 
 import itla.jpuppy.business.ModelConsultations;
-import itla.jpuppy.business.ModelCustomers;
+import itla.jpuppy.datalayer.Appointments;
+import itla.jpuppy.datalayer.Consultations;
+import itla.jpuppy.datalayer.Customers;
+import itla.jpuppy.datalayer.Patients;
 import itla.jpuppy.models.ControlEditConsultations;
 import itla.jpuppy.utils.GeneratorDataCombo;
 import itla.jpuppy.utils.TypeConsultations;
+import java.util.Date;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JTextArea;
 
 public class EditConsultations extends javax.swing.JDialog implements FrameOption {
 
     Long idnew = null;
     private ComboBoxModel model = null;
+    private Consultations consultation = null;
+    
+    private Date dateStart = null;
+    private Date dateEnd = null;
+    private Customers customer = null;
+    private Patients patients = null;
+    private String remark = null;
+    private Appointments appointments = null;
+    private String typeConsultations = null;
 
-    public EditConsultations(java.awt.Frame parent, boolean modal, Object id, Object[] values) {
+    public Customers getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customers customer) {
+        this.customer = customer;
+    }
+
+    public Date getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public Date getDateStart() {
+        return dateStart;
+    }
+
+    public void setDateStart(Date dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public JComboBox getjComboBox1() {
+        return jComboBox1;
+    }
+
+    public void setjComboBox1(JComboBox jComboBox1) {
+        this.jComboBox1 = jComboBox1;
+    }
+
+    public JComboBox getjComboBox2() {
+        return jComboBox2;
+    }
+
+    public void setjComboBox2(JComboBox jComboBox2) {
+        this.jComboBox2 = jComboBox2;
+    }
+
+    public JComboBox getjComboBox3() {
+        return jComboBox3;
+    }
+
+    public void setjComboBox3(JComboBox jComboBox3) {
+        this.jComboBox3 = jComboBox3;
+    }
+
+    public JTextArea getjTextArea1() {
+        return jTextArea1;
+    }
+
+    public void setjTextArea1(JTextArea jTextArea1) {
+        this.jTextArea1 = jTextArea1;
+    }
+
+    public Patients getPatients() {
+        return patients;
+    }
+
+    public void setPatients(Patients patients) {
+        this.patients = patients;
+    }
+    
+
+    public EditConsultations(java.awt.Frame parent, boolean modal, Object id) {
         super(parent, modal);
         initComponents();
 
         idnew = Long.parseLong(String.valueOf(id));
-
+        consultation = new ModelConsultations().getConsultationsByID(idnew);
+        
+        
         //Llena los campos para el editado
         try {
             model = new DefaultComboBoxModel(new GeneratorDataCombo().dataCustomers());
@@ -28,12 +110,14 @@ public class EditConsultations extends javax.swing.JDialog implements FrameOptio
             this.jComboBox1.setModel(new DefaultComboBoxModel(TypeConsultations.values()));
         } catch (Exception e) {
         }
+        //System.out.println(consultation.getTypeConsultations());
+        this.jComboBox1.setSelectedItem(consultation.getTypeConsultations());
+        this.jComboBox2.setSelectedItem(consultation.getCustomer().getName()+ " "+ consultation.getCustomer().getLastName());
+        this.jComboBox3.setSelectedItem(consultation.getPatients().getName());
+        this.jTextArea1.setText(String.valueOf(consultation.getRemark()));
         
-        this.jComboBox1.setSelectedItem(values[0]);
-        this.jComboBox2.setSelectedItem(values[1]);
-        this.jComboBox3.setSelectedItem(values[2]);
-        this.jTextArea1.setText(String.valueOf(values[3]));
-        //System.out.println("Este es: "+values[3]);
+        
+        
 
         ControlEditConsultations ce = new ControlEditConsultations(this);
 

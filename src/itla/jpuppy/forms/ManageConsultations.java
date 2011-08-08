@@ -51,10 +51,10 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
 
         dateChooserBeginConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));
         dateChooserEndConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));
-
-
+    
         cbTypeConsultations.setModel(new DefaultComboBoxModel(TypeConsultations.values()));
 
+        
         try {
             model = new DefaultComboBoxModel(new GeneratorDataCombo().dataCustomers());
             this.setCbCustomerConsultationsModel(model);
@@ -66,6 +66,10 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         } catch (Exception e) {
         }
 
+        cbCustomerConsultations.setSelectedIndex(-1);
+        cbPatientConsultations.setSelectedIndex(-1);
+        cbTypeConsultations.setSelectedIndex(-1); 
+        
         //Llena la tabla de las consultas almacenadas
         list = new ModelConsultations().getConsultations();
         for (Consultations value : list) {
@@ -75,6 +79,7 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
             Object[] nuevo = {value.getId(), value.getTypeConsultations(), user, new ModelPatients().searchPatient(value.getPatients().getPatientsId()).getName()};
             temp.addRow(nuevo);
         }
+        
         //new ModelConsultations().getConsultationID();
         this.setLocationRelativeTo(null);
         this.setTitle("Manejador de consultas");
