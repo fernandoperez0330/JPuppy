@@ -164,32 +164,37 @@ public class ManageAppointnments extends JDialog  implements FrameOption{
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
+        pnButtons.setLayout(null);
 
         btnUpdate.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/edit.png"));
         btnUpdate.setFocusable(false);
         btnUpdate.setName("update"); // NOI18N
         pnButtons.add(btnUpdate);
+        btnUpdate.setBounds(90, 0, 110, 50);
 
         btnSearch.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/find.png"));
         btnSearch.setFocusable(false);
         btnSearch.setName("search"); // NOI18N
         pnButtons.add(btnSearch);
+        btnSearch.setBounds(220, 0, 110, 50);
 
         btnSave.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/save.png"));
         btnSave.setFocusable(false);
         btnSave.setName("save"); // NOI18N
         pnButtons.add(btnSave);
+        btnSave.setBounds(352, 0, 110, 50);
 
         btnRemove.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/remove.png"));
         btnRemove.setFocusable(false);
         btnRemove.setName("remove"); // NOI18N
         pnButtons.add(btnRemove);
+        btnRemove.setBounds(490, 0, 110, 50);
 
         btnCancel.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/cancel.png"));
         btnCancel.setFocusable(false);
         btnCancel.setName("cancel"); // NOI18N
         pnButtons.add(btnCancel);
+        btnCancel.setBounds(620, 0, 110, 50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -199,24 +204,22 @@ public class ManageAppointnments extends JDialog  implements FrameOption{
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
+                        .addGap(96, 96, 96)
+                        .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93)
+                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
                 .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

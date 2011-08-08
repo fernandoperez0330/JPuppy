@@ -93,28 +93,32 @@ public class ManageSpecies extends JDialog implements FrameOption {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CrudEntities");
 
-        pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
+        pnButtons.setLayout(null);
 
         btnAdd.setIcon(new javax.swing.ImageIcon("src\\itla\\jpuppy\\resources\\add.png"));
         btnAdd.setFocusable(false);
         btnAdd.setMaximumSize(new java.awt.Dimension(50, 50));
         btnAdd.setName("add"); // NOI18N
         pnButtons.add(btnAdd);
+        btnAdd.setBounds(0, 0, 130, 60);
 
         btnSearch.setIcon(new javax.swing.ImageIcon("src\\itla\\jpuppy\\resources\\find.png"));
         btnSearch.setFocusable(false);
         btnSearch.setName("search"); // NOI18N
         pnButtons.add(btnSearch);
+        btnSearch.setBounds(136, 0, 130, 60);
 
         btnRemove.setIcon(new javax.swing.ImageIcon("src\\itla\\jpuppy\\resources\\remove.png"));
         btnRemove.setFocusable(false);
         btnRemove.setName("remove"); // NOI18N
         pnButtons.add(btnRemove);
+        btnRemove.setBounds(272, 0, 130, 60);
 
         btnCancel.setIcon(new javax.swing.ImageIcon("src\\itla\\jpuppy\\resources\\cancel.png"));
         btnCancel.setFocusable(false);
         btnCancel.setName("cancel"); // NOI18N
         pnButtons.add(btnCancel);
+        btnCancel.setBounds(408, 0, 130, 60);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,7 +133,7 @@ public class ManageSpecies extends JDialog implements FrameOption {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

@@ -32,7 +32,7 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
 
         ctrlEmployee = new ControllerEmployee(this);
         this.addWindowFocusListener(ctrlEmployee);
-        searching.setBounds(54, 160, 786, 474);
+        searching.setBounds(54, 100, 600, 474);
         setListener();
         this.add(searching);
     }
@@ -80,7 +80,7 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CrudEntities");
 
-        pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
+        pnButtons.setLayout(null);
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/add.png"))); // NOI18N
         btnAdd.setFocusable(false);
@@ -91,6 +91,7 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
             }
         });
         pnButtons.add(btnAdd);
+        btnAdd.setBounds(160, 0, 110, 50);
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/edit.png"))); // NOI18N
         btnUpdate.setFocusable(false);
@@ -100,10 +101,12 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
             }
         });
         pnButtons.add(btnUpdate);
+        btnUpdate.setBounds(280, 0, 110, 50);
 
         btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/remove.png"))); // NOI18N
         btnRemove.setFocusable(false);
         pnButtons.add(btnRemove);
+        btnRemove.setBounds(400, 0, 110, 50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,15 +114,15 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(521, Short.MAX_VALUE))
+                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(324, Short.MAX_VALUE))
         );
 
         pack();
