@@ -91,6 +91,10 @@ public class EditConsultations extends javax.swing.JDialog implements FrameOptio
     public void setPatients(Patients patients) {
         this.patients = patients;
     }
+
+    public Consultations getConsultation() {
+        return consultation;
+    }
     
 
     public EditConsultations(java.awt.Frame parent, boolean modal, Object id) {
@@ -115,9 +119,6 @@ public class EditConsultations extends javax.swing.JDialog implements FrameOptio
         this.jComboBox2.setSelectedItem(consultation.getCustomer().getName()+ " "+ consultation.getCustomer().getLastName());
         this.jComboBox3.setSelectedItem(consultation.getPatients().getName());
         this.jTextArea1.setText(String.valueOf(consultation.getRemark()));
-        
-        
-        
 
         ControlEditConsultations ce = new ControlEditConsultations(this);
 

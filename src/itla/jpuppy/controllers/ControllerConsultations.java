@@ -122,15 +122,15 @@ public class ControllerConsultations implements ActionListener {
                         String MSG = delets + " consulta(s) eliminada(s) exitosamente!";
                         JOptionPane.showMessageDialog(null, MSG, "Informacion", JOptionPane.INFORMATION_MESSAGE);
                         
-//                        temp.setRowCount(0);
-//                        //Refresca la tabla con las consultas almacenadas
-//                        list = new ModelConsultations().getConsultations();
-//                        for (Consultations value : list) {
-//                            //System.out.println(new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getName());
-//                            String user = new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getName() + " " + new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getLastName();
-//                            Object[] nuevo = {value.getId(), value.getTypeConsultations(), user, new ModelPatients().searchPatient(value.getPatients().getPatientsId()).getName()};
-//                            temp.addRow(nuevo);
-//                        }
+                        temp.setRowCount(0);
+                        //Refresca la tabla con las consultas almacenadas
+                        list = new ModelConsultations().getConsultations();
+                        for (Consultations value : list) {
+                            //System.out.println(new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getName());
+                            String user = new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getName() + " " + new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getLastName();
+                            Object[] nuevo = {value.getId(), value.getTypeConsultations(), user, new ModelPatients().searchPatient(value.getPatients().getPatientsId()).getName()};
+                            temp.addRow(nuevo);
+                        }
                     }
                 }
 

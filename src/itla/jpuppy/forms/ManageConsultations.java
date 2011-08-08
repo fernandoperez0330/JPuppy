@@ -26,6 +26,9 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         return list;
     }
 
+    public ManageConsultations() {
+    }
+
     public ManageConsultations(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -39,6 +42,7 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         btnSearchConsultations.addActionListener(controlConsultations);
         btnSearchConsultations.setEnabled(false);
         btnUpdateConsultations.addActionListener(controlConsultations);
+        btnUpdateConsultations.setEnabled(false);
         btnSearch.addActionListener(controlConsultations);
         
         btnAddConsultations.setActionCommand("addConsultation");
