@@ -103,6 +103,12 @@ public class HomeFrame extends JFrame implements FrameOption {
     public JMenuItem getMnuiConsults() {
         return mnuiConsults;
     }
+
+    public JMenuItem getMnuiInvoice() {
+        return mnuiInvoice;
+    }
+    
+    
     
     
     
@@ -122,6 +128,7 @@ public class HomeFrame extends JFrame implements FrameOption {
         mnuiProductsServices.addActionListener(ctrlhome);
         mnuiAppointments.addActionListener(ctrlhome);
         mnuiConsults.addActionListener(ctrlhome);
+        mnuiInvoice.addActionListener(ctrlhome);
     }
     
     public JSearching getSearching() {
@@ -158,6 +165,7 @@ public class HomeFrame extends JFrame implements FrameOption {
         mnuiConsults = new javax.swing.JMenuItem();
         mnuiAppointments = new javax.swing.JMenuItem();
         mnuVentas = new javax.swing.JMenu();
+        mnuiInvoice = new javax.swing.JMenuItem();
         mnuUsuarios = new javax.swing.JMenu();
         mnuiPerfil = new javax.swing.JMenuItem();
         mnuiCloseSeccion = new javax.swing.JMenuItem();
@@ -214,6 +222,11 @@ public class HomeFrame extends JFrame implements FrameOption {
         mnubHome.add(mnuAdministrator);
 
         mnuVentas.setText("Ventas");
+
+        mnuiInvoice.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_9, java.awt.event.InputEvent.ALT_MASK));
+        mnuiInvoice.setText("Factura");
+        mnuVentas.add(mnuiInvoice);
+
         mnubHome.add(mnuVentas);
 
         mnuUsuarios.setText("Usuario");
@@ -271,6 +284,7 @@ public class HomeFrame extends JFrame implements FrameOption {
     private javax.swing.JMenuItem mnuiCustomers;
     private javax.swing.JMenuItem mnuiEmployees;
     private javax.swing.JMenuItem mnuiExit;
+    private javax.swing.JMenuItem mnuiInvoice;
     private javax.swing.JMenuItem mnuiPatients;
     private javax.swing.JMenuItem mnuiPerfil;
     private javax.swing.JMenuItem mnuiProductsServices;

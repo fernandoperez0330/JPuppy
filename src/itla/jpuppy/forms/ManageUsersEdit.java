@@ -1,6 +1,8 @@
 package itla.jpuppy.forms;
 
 import itla.jpuppy.controllers.ControllerUser;
+import itla.jpuppy.utils.RestrictionNLength;
+import itla.jpuppy.utils.RestrictionSLength;
 import java.awt.Frame;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -38,10 +40,14 @@ public class ManageUsersEdit extends javax.swing.JDialog implements FrameOption 
         setListener();
         TxtFieldPhone.setValue(new String(" 809-000-0000"));
         TxtFieldCellPhone.setValue(new String(" 809-000-0000"));
-        this.setLocationRelativeTo(null);
-        this.setTitle("Manage Users");
-        this.setResizable(false);
+        TxtFieldApellido.setDocument(new RestrictionSLength(TxtFieldApellido, 30));
+        TxtFieldName.setDocument(new RestrictionSLength(TxtFieldName, 30));
+        TxtFieldNameUser.setDocument(new RestrictionSLength(TxtFieldNameUser, 30));
+        TxtFieldPassword.setDocument(new RestrictionSLength(TxtFieldPassword, 255));
 
+        this.setLocationRelativeTo(null);
+        this.setTitle("Administrando Usuario");
+        this.setResizable(false);
     }
 
     public void setFieldsValue(String TxtFieldApellido, String TxtFieldCellPhone, String TxtFieldName, String TxtFieldNameUser, String TxtFieldPassword, String TxtFieldPhone, String typeUser) {
@@ -58,9 +64,17 @@ public class ManageUsersEdit extends javax.swing.JDialog implements FrameOption 
         }
     }
 
+    public void setFieldsValue(String lastName, String cellphone, String name, String telephone) {
+        this.TxtFieldApellido.setText(lastName);
+        this.TxtFieldName.setText(name);
+        this.TxtFieldCellPhone.setText(cellphone);
+        this.TxtFieldPhone.setText(telephone);
+    }
+
     public void setListener() {
         btnCancel.addActionListener(ctrlUser);
         btnSave.addActionListener(ctrlUser);
+        btnPerson.addActionListener(ctrlUser);
     }
 
     public JTextField getTxtFieldApellido() {
@@ -130,6 +144,7 @@ public class ManageUsersEdit extends javax.swing.JDialog implements FrameOption 
         try{
             TxtFieldPhone = new javax.swing.JFormattedTextField(new MaskFormatter(" ###-###-####"));
             TxtFieldCellPhone = new javax.swing.JFormattedTextField(new MaskFormatter(" ###-###-####"));
+            btnPerson = new javax.swing.JButton();
             pnButtons = new javax.swing.JPanel();
             btnSave = new javax.swing.JButton();
             btnCancel = new javax.swing.JButton();
@@ -175,6 +190,8 @@ public class ManageUsersEdit extends javax.swing.JDialog implements FrameOption 
 
         }
 
+        btnPerson.setText("Search");
+
         javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
         pnFields.setLayout(pnFieldsLayout);
         pnFieldsLayout.setHorizontalGroup(
@@ -190,18 +207,20 @@ public class ManageUsersEdit extends javax.swing.JDialog implements FrameOption 
                     .addComponent(jLabel6)
                     .addComponent(jLabel2))
                 .addGap(85, 85, 85)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(TxtFieldCellPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addComponent(TxtFieldPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addComponent(TxtFieldNameUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addComponent(TxtFieldApellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
-                    .addComponent(TxtFieldName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
+                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnFieldsLayout.createSequentialGroup()
                         .addComponent(jRadioButtonAdministrador)
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButtonOperador))
-                    .addComponent(TxtFieldPhone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(TxtFieldPhone, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TxtFieldApellido, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TxtFieldName, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TxtFieldPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TxtFieldNameUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                    .addComponent(TxtFieldCellPhone, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(18, 18, 18)
+                .addComponent(btnPerson)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         pnFieldsLayout.setVerticalGroup(
             pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,7 +228,8 @@ public class ManageUsersEdit extends javax.swing.JDialog implements FrameOption 
                 .addContainerGap()
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(TxtFieldNameUser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtFieldNameUser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPerson))
                 .addGap(18, 18, 18)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -260,16 +280,16 @@ public class ManageUsersEdit extends javax.swing.JDialog implements FrameOption 
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(117, 117, 117))))
+                        .addGap(96, 96, 96))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -289,6 +309,7 @@ public class ManageUsersEdit extends javax.swing.JDialog implements FrameOption 
     private javax.swing.JPasswordField TxtFieldPassword;
     private javax.swing.JFormattedTextField TxtFieldPhone;
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnPerson;
     private javax.swing.JButton btnSave;
     private javax.swing.ButtonGroup btnTypeUser;
     private javax.swing.JLabel jLabel1;
@@ -312,5 +333,9 @@ public class ManageUsersEdit extends javax.swing.JDialog implements FrameOption 
     @Override
     public void closeFrame() {
         this.setVisible(false);
+    }
+
+    public JButton getBtnPerson() {
+        return btnPerson;
     }
 }

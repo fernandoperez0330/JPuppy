@@ -11,6 +11,9 @@ public class Customers extends Persons implements Serializable {
 
     @OneToMany
     private List<Patients> patients;
+    
+    @OneToMany(mappedBy = "customer")
+    private List<Invoice> invoices;
 
     public Customers() {
        
@@ -46,4 +49,14 @@ public class Customers extends Persons implements Serializable {
     public void setPatients(List<Patients> patients) {
         this.patients = patients;
     }
+
+    public List<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
+    }
+    
+    
 }

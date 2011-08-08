@@ -30,7 +30,7 @@ public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption 
         this.setTitle("Administracion de Usuarios");
         this.setResizable(false);
 
-        //ctrlUser = new ControllerUser(this);
+        ctrlUser = new ControllerUser(this);
         this.addWindowFocusListener(ctrlUser);
         searching.setBounds(54, 160, 786, 474);
         setListener();
@@ -44,6 +44,7 @@ public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption 
         btnAdd.addActionListener(ctrlUser);
         btnRemove.addActionListener(ctrlUser);
         btnUpdate.addActionListener(ctrlUser);
+        getBtnExit.addActionListener(ctrlUser);
     }
 
     public void setSearching(JSearching searching) {
@@ -65,6 +66,11 @@ public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption 
     public JButton getBtnUpdate() {
         return btnUpdate;
     }
+
+    public JButton getBtnExit() {
+        return getBtnExit;
+    }
+    
     
     
     /** Creates new form NewJFrame */
@@ -76,6 +82,7 @@ public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption 
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
+        getBtnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CrudEntities");
@@ -104,6 +111,10 @@ public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption 
         btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/remove.png"))); // NOI18N
         btnRemove.setFocusable(false);
         pnButtons.add(btnRemove);
+
+        getBtnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancel.png"))); // NOI18N
+        getBtnExit.setFocusable(false);
+        pnButtons.add(getBtnExit);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,6 +150,7 @@ public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption 
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton getBtnExit;
     private javax.swing.JPanel pnButtons;
     // End of variables declaration//GEN-END:variables
 
@@ -149,7 +161,7 @@ public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption 
 
     @Override
     public void closeFrame() {
-        this.setVisible(false);
+        dispose();
     }
 
     @Override

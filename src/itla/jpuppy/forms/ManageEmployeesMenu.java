@@ -44,6 +44,7 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
         btnAdd.addActionListener(ctrlEmployee);
         btnRemove.addActionListener(ctrlEmployee);
         btnUpdate.addActionListener(ctrlEmployee);
+        btnExit.addActionListener(ctrlEmployee);
     }
 
     public void setSearching(JSearching searching) {
@@ -65,6 +66,12 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
     public JButton getBtnUpdate() {
         return btnUpdate;
     }
+
+    public JButton getBtnExit() {
+        return btnExit;
+    }
+    
+    
     
     
     /** Creates new form NewJFrame */
@@ -76,6 +83,7 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CrudEntities");
@@ -104,6 +112,10 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
         btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/remove.png"))); // NOI18N
         btnRemove.setFocusable(false);
         pnButtons.add(btnRemove);
+
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancel.png"))); // NOI18N
+        btnExit.setFocusable(false);
+        pnButtons.add(btnExit);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,6 +149,7 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JPanel pnButtons;
@@ -149,7 +162,7 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
 
     @Override
     public void closeFrame() {
-        this.setVisible(false);
+        dispose();
     }
 
     @Override

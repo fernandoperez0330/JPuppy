@@ -5,12 +5,13 @@
 package itla.jpuppy.datalayer;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -20,11 +21,15 @@ import javax.persistence.InheritanceType;
 public class Articles implements Serializable{
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long articleId;
+    @Column(length=30)
     private String name;
     private double price;
     private int amount;
+    @Column(length=150)
     private String description;
-
+    @ManyToMany
+    private List<Invoice> invoices;
+    
     public Articles() {
     }
 

@@ -1,6 +1,7 @@
 package itla.jpuppy.forms;
 
 import itla.jpuppy.controllers.ControllerCutomers;
+import itla.jpuppy.utils.RestrictionSLength;
 import java.awt.Font;
 import java.awt.Frame;
 import java.text.ParseException;
@@ -29,11 +30,23 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
         } catch (ParseException ex) {
             Logger.getLogger(ManageCustomersEdit.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        TxtFieldLastName.setDocument(new RestrictionSLength(TxtFieldLastName, 30));
+        TxtFieldCity.setDocument(new RestrictionSLength(TxtFieldCity, 30));
+        TxtFieldAdress.setDocument(new RestrictionSLength(TxtFieldAdress, 100));
+        TxtFieldMail.setDocument(new RestrictionSLength(TxtFieldMail, 100));
+        TxtFieldName.setDocument(new RestrictionSLength(TxtFieldName, 30));
+        jTextAreaNote.setDocument(new RestrictionSLength(jTextAreaNote, 200));
+
         setListener();
+
         pack();
+
+
         this.setLocationRelativeTo(null);
-        this.setTitle("Manage Customers");
+        this.setTitle("Administrando Cliente");
         this.setResizable(false);
+
     }
 
     public void setFieldsValue(String TxtFieldLastName, String TxtFieldCellphone, String TxtFieldCity, String TxtFieldAdress, String TxtFieldMail, String TxtFieldName, String TxtFieldPhone, String jTextAreaNote, String TxtFieldCedula) {
@@ -47,8 +60,15 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
         this.jTextAreaNote.setText(jTextAreaNote);
         this.TxtFieldCedula.setText(TxtFieldCedula);
     }
-    
-    
+
+    public void setFieldsValue(String TxtFieldLastName, String TxtFieldCellphone, String TxtFieldMail, String TxtFieldName, String TxtFieldPhone, String TxtFieldCedula) {
+        this.TxtFieldLastName.setText(TxtFieldLastName);
+        this.TxtFieldCellphone.setText(TxtFieldCellphone);
+        this.TxtFieldMail.setText(TxtFieldMail);
+        this.TxtFieldName.setText(TxtFieldName);
+        this.TxtFieldPhone.setText(TxtFieldPhone);
+        this.TxtFieldCedula.setText(TxtFieldCedula);
+    }
 
     public JPanel getPnFields() {
         return pnFields;
@@ -101,6 +121,11 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
     public void setListener() {
         btnCancel.addActionListener(ctrlCustormers);
         btnSave.addActionListener(ctrlCustormers);
+        btnPerson.addActionListener(ctrlCustormers);
+    }
+
+    public JButton getBtnPerson() {
+        return btnPerson;
     }
 
     @SuppressWarnings("unchecked")
@@ -128,9 +153,10 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
         pnButtons = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        btnPerson = new javax.swing.JButton("Search");
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("CrudEntities");
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel1.setText("Nombre.:");
@@ -154,7 +180,7 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
         jLabel7.setText("Nota.:");
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14));
-        jLabel8.setText("Mail.:");
+        jLabel8.setText("Correo.:");
         jTextAreaNote = new javax.swing.JTextArea();
 
         jTextAreaNote.setColumns(20);
@@ -190,9 +216,10 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
         layout.setVerticalGroup(
                 layout.createParallelGroup(Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addComponent(pnButtons, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE).addGap(18).addComponent(pnFields, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addContainerGap(28, Short.MAX_VALUE)));
         getContentPane().setLayout(layout);
-
-    }// </editor-fold>//GEN-END:initComponents
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+        btnPerson.setBounds(770, 15, 85, 25);
+        pnFields.add(btnPerson);
+    }// </editor-fold>                        
+    // Variables declaration - do not modify                     
     private javax.swing.JTextField TxtFieldLastName;
     private javax.swing.JFormattedTextField TxtFieldCellphone;
     private javax.swing.JTextField TxtFieldCity;
@@ -211,6 +238,7 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextArea jTextAreaNote;
+    private javax.swing.JButton btnPerson;
     private javax.swing.JPanel pnButtons;
     private javax.swing.JPanel pnFields;
     private javax.swing.JFormattedTextField TxtFieldCedula;

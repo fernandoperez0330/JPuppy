@@ -30,11 +30,11 @@ public abstract class Persons implements Serializable {
     private String telephone;
     @Column(length = 13)
     private String cellphone;
-    @Column(length = 255)
+    @Column(length = 200)
     private String note;
     @Column(length = 30)
     private String city;
-    @Column(length = 50)
+    @Column(length = 100)
     private String address;
     @Column(length = 100)
     private String email;

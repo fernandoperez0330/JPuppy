@@ -36,7 +36,7 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="pnFields" min="-2" max="-2" attributes="1"/>
-                      <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -47,9 +47,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnButtons" min="-2" pref="120" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
               <Component id="pnFields" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="70" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,20 +72,22 @@
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="TxtFieldCellPhone" pref="403" max="32767" attributes="0"/>
-                      <Component id="TxtFieldPassword" alignment="0" pref="403" max="32767" attributes="0"/>
-                      <Component id="TxtFieldNameUser" alignment="0" pref="403" max="32767" attributes="1"/>
-                      <Component id="TxtFieldApellido" alignment="0" pref="403" max="32767" attributes="1"/>
-                      <Component id="TxtFieldName" alignment="0" pref="403" max="32767" attributes="1"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jRadioButtonAdministrador" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jRadioButtonOperador" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="TxtFieldPhone" alignment="0" pref="403" max="32767" attributes="0"/>
+                      <Component id="TxtFieldPhone" alignment="0" max="32767" attributes="1"/>
+                      <Component id="TxtFieldApellido" alignment="0" max="32767" attributes="1"/>
+                      <Component id="TxtFieldName" alignment="0" max="32767" attributes="1"/>
+                      <Component id="TxtFieldPassword" alignment="0" max="32767" attributes="1"/>
+                      <Component id="TxtFieldNameUser" alignment="0" pref="326" max="32767" attributes="1"/>
+                      <Component id="TxtFieldCellPhone" alignment="0" max="32767" attributes="1"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnPerson" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="46" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -96,6 +98,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="TxtFieldNameUser" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="btnPerson" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -234,6 +237,11 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(new MaskFormatter(&quot; ###-###-####&quot;))"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnPerson">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Search"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

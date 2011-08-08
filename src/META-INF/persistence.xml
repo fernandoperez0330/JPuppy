@@ -13,6 +13,7 @@
     <class>itla.jpuppy.datalayer.Doctor</class>
     <class>itla.jpuppy.datalayer.Consultations</class>
     <class>itla.jpuppy.datalayer.Articles</class>
+    <class>itla.jpuppy.datalayer.Invoice</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpuppydb"/>
       <property name="javax.persistence.jdbc.password" value="jpuppy2011"/>

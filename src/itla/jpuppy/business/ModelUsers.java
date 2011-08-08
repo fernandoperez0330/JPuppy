@@ -13,6 +13,11 @@ public class ModelUsers implements GeneralModel {
         queryManager = new QueryManager();
     }
 
+    public static QueryManager getQueryManager() {
+        return queryManager;
+    }
+    
+    
     public boolean validateUser(String name, String password) {
         boolean status = false;
         Users user = null;
@@ -67,12 +72,12 @@ public class ModelUsers implements GeneralModel {
     @Override
     public boolean updateObject(Object object) {
         Users g = (Users) object;
-        return queryManager.updateObject(g);
+        return queryManager.updateObject(object);
     }
 
     @Override
     public boolean insertObject(Object object) {
-        Users g = (Users) object;
-        return queryManager.saveObject(g);
+        //Users g = (Users) object;
+        return queryManager.saveObject(object);
     }
 }

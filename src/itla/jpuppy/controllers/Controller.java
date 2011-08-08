@@ -108,7 +108,7 @@ public abstract class Controller implements MouseListener, KeyListener, ActionLi
         stateButtons(true, false);
         String sNombre = "";
     }
-
+/*
     protected boolean isEmptyFields() {
         boolean state = false;
         javax.swing.text.JTextComponent textField;
@@ -140,6 +140,8 @@ public abstract class Controller implements MouseListener, KeyListener, ActionLi
         return state;
     }
 
+     * 
+     */
     public abstract void btnAdd();
 
     public abstract void btnUpdate();

@@ -6,6 +6,7 @@ package itla.jpuppy.datalayer;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -15,7 +16,8 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Doctor extends Employees implements Serializable {
-
+    
+    @Column(length=40)
     private String speciality;
     @OneToMany
     private List<Appointments> appointments;

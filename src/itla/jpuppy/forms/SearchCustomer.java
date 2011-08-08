@@ -14,9 +14,8 @@ public class SearchCustomer extends JDialog implements FrameOption{
     ModelCustomers modelCustomer;
     
     /** Creates new form SearchCustomernew */
-    public SearchCustomer(ManagePatients owner,boolean modals) {
+    public SearchCustomer(JDialog owner,boolean modals) {
         super(owner,modals);
-        this.owner = owner;
         this.setTitle("Buscar cliente");
         initComponents();
         this.setLocationRelativeTo(null);

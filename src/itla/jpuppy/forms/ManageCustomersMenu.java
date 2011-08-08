@@ -1,6 +1,5 @@
 package itla.jpuppy.forms;
 
-import itla.jpuppy.business.EntityManagerCreator;
 import itla.jpuppy.controllers.ControllerCutomers;
 import java.awt.Frame;
 import javax.swing.JButton;
@@ -13,6 +12,11 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
     public ManageCustomersMenu(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
+        btnExit = new JButton();
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancel.png")));
+        btnExit.setFocusable(false);
+        pnButtons.add(btnExit);
+        
         this.setLocationRelativeTo(null);
         this.setTitle("Administracion de Clientes");
         this.setResizable(false);
@@ -40,6 +44,7 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
         btnAdd.addActionListener(ctrlCustormers);
         btnRemove.addActionListener(ctrlCustormers);
         btnUpdate.addActionListener(ctrlCustormers);
+        btnExit.addActionListener(ctrlCustormers);
     }
 
     /** Creates new form NewJFrame */
@@ -119,6 +124,12 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
     }
 
     // End of variables declaration//GEN-END:variables
+    private javax.swing.JButton btnExit;
+
+    public JButton getBtnExit() {
+        return btnExit;
+    }
+    
     @Override
     public void showFrame() {
         this.setVisible(true);
@@ -126,7 +137,7 @@ public class ManageCustomersMenu extends javax.swing.JDialog implements FrameOpt
 
     @Override
     public void closeFrame() {
-        this.setVisible(false);
+        dispose();
     }
 
     @Override

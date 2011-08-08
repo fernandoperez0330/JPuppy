@@ -16,7 +16,7 @@ import javax.persistence.Entity;
 @Entity
 public class Employees extends Persons implements Serializable {
 
-    @Column(nullable = false)
+    @Column(nullable = false,length=40)
     private String jobPosition;
 
     public Employees() {

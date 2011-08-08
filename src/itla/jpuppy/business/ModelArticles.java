@@ -13,6 +13,12 @@ public class ModelArticles implements GeneralModel {
         queryManager = new QueryManager();
     }
 
+    public static QueryManager getQueryManager() {
+        return queryManager;
+    }
+    
+    
+
     //retorna un objeto especifico tipo Users cuando se llame debe cargarse el Id desde generalVariableID del paquete util
     //los datos se le asignan cuando el usuario selecciona un cliente  del table
     public Articles searchArticle(Long id) {

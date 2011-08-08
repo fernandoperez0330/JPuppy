@@ -5,7 +5,6 @@ import itla.jpuppy.datalayer.Articles;
 import itla.jpuppy.forms.JSearching;
 import itla.jpuppy.forms.ManageArticlesEdit;
 import itla.jpuppy.forms.ManageArticlesMenu;
-import itla.jpuppy.forms.ManageMenu;
 import itla.jpuppy.models.SearchingCtrlArticles;
 import itla.jpuppy.models.SearchingModel;
 import java.awt.event.ActionEvent;
@@ -23,12 +22,11 @@ public class ControllerArticles extends Controller {
     private ModelArticles mdlArticles;
     private long edicion;
     private Articles tempArticles;
-    private ManageMenu manageMenu;
+    private ManageArticlesMenu manageMenu;
 
-    public ControllerArticles(ManageMenu manageMenu) {
+    public ControllerArticles(ManageArticlesMenu manageMenu) {
 
         this.manageMenu = manageMenu;
-        this.manageEdit = new ManageArticlesEdit(null, true, this);
         modelSearching = new SearchingModel<Articles>(new String[]{"ArticleId", "Nombre", "Cantidad", "Precio"}, new SearchingCtrlArticles());
         this.manageMenu.setSearching(new JSearching(modelSearching));
         mdlArticles = new ModelArticles();
@@ -40,13 +38,9 @@ public class ControllerArticles extends Controller {
         modelSearching.setElements(mdlArticles.searchAllArticleByName("%" + string + "%"));
     }
 
-    public void setManageMenu(ManageMenu manageMenu) {
-        this.manageMenu = manageMenu;
-    }
-    
     @Override
     public void windowGainedFocus(WindowEvent e) {
-        //searchByField(manageMenu.getSearching().getTxtSearch().getText().toLowerCase());
+        searchByField(manageMenu.getSearching().getTxtSearch().getText().toLowerCase());
     }
 
     @Override
@@ -96,9 +90,6 @@ public class ControllerArticles extends Controller {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (manageMenu == null) {
-            System.out.println("ninon");
-        }
 
         if (e.getSource().equals(manageMenu.getBtnAdd())) {
             btnAdd();
@@ -115,19 +106,23 @@ public class ControllerArticles extends Controller {
             return;
         }
 
-        if (e.getSource().equals(manageEdit.getBtnSave())) {
-            btnSave();
-            return;
-        }
-
-        if (e.getSource().equals(manageEdit.getBtnCancel())) {
-            btncancelar();
-            return;
-        }
-
         if (e.getSource().equals(manageMenu.getBtnExit())) {
             manageMenu.closeFrame();
+            return;
         }
+        try {
+            if (e.getSource().equals(manageEdit.getBtnSave())) {
+                btnSave();
+                return;
+            }
+
+            if (e.getSource().equals(manageEdit.getBtnCancel())) {
+                btncancelar();
+                return;
+            }
+        }catch(java.lang.NullPointerException err){
+        }
+
     }
 
     @Override
@@ -211,5 +206,30 @@ public class ControllerArticles extends Controller {
         if (i == 0) {
             manageEdit.dispose();
         }
+    }
+
+    private boolean isEmptyFields() {
+        boolean state = false;
+        javax.swing.text.JTextComponent textField;
+        String date;
+
+
+        for (int i = 0; i <= manageEdit.getPnFields().getComponentCount(); i++) {
+            try {
+                textField = (javax.swing.text.JTextComponent) manageEdit.getPnFields().getComponent(i);
+                if (textField.getText().equals("")) {
+                    state = true;
+                    textField.requestFocus();
+                } else if (textField.getText().indexOf("-") != -1) {
+                    String special = textField.getText().trim();
+                    if ((special.length() < 12) && (special.length() != 10)) {
+                        state = true;
+                        textField.requestFocus();
+                    }
+                }
+            } catch (Exception e) {
+            }
+        }
+        return state;
     }
 }

@@ -3,24 +3,22 @@ package itla.jpuppy.controllers;
 import itla.jpuppy.business.ModelEmployees;
 import itla.jpuppy.datalayer.Doctor;
 import itla.jpuppy.datalayer.Employees;
+import itla.jpuppy.datalayer.Persons;
 import itla.jpuppy.forms.JSearching;
 import itla.jpuppy.forms.ManageEmployeesEdit;
 import itla.jpuppy.forms.ManageEmployeesMenu;
+import itla.jpuppy.forms.SearchPersons;
 import itla.jpuppy.models.SearchingCtrlEmployees;
 import itla.jpuppy.models.SearchingModel;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class ControllerEmployee implements MouseListener, KeyListener, ActionListener, WindowFocusListener {
+public class ControllerEmployee extends Controller {
 
     private ManageEmployeesMenu manageMenu;
     private ManageEmployeesEdit manageEdit;
@@ -34,7 +32,7 @@ public class ControllerEmployee implements MouseListener, KeyListener, ActionLis
     public ControllerEmployee(ManageEmployeesMenu manageMenu) {
         this.manageMenu = manageMenu;
         modelSearching = new SearchingModel<Employees>(new String[]{"Id", "Name", "Cedula", "Cargo"}, new SearchingCtrlEmployees());
-        manageMenu.setSearching(new JSearching(modelSearching));
+        this.manageMenu.setSearching(new JSearching(modelSearching));
         mdlEmployees = new ModelEmployees();
         searchByField("");
         edicion = 0;
@@ -98,149 +96,53 @@ public class ControllerEmployee implements MouseListener, KeyListener, ActionLis
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(manageMenu.getBtnAdd())) {
-            edicion = 0;
-            manageEdit = new ManageEmployeesEdit(null, true, this);
-            manageEdit.showFrame();
+            btnAdd();
             return;
         }
 
         if (e.getSource().equals(manageMenu.getBtnUpdate())) {
-            if (edicion != 0) {
-                manageEdit = new ManageEmployeesEdit(null, true, this);
-                if (mdlEmployees.checkIsDoctor(edicion)) {
-                    tempDoctor = mdlEmployees.searchDoctorEmployee(edicion);
-                    manageEdit.setFieldsValueDoctor(tempDoctor.getCedula(), tempDoctor.getCellphone(), tempDoctor.getPosition(), tempDoctor.getLastName(), tempDoctor.getName(), tempDoctor.getTelephone(), tempDoctor.getSpeciality());
-                    isDoctor = true;
-                } else {
-                    tempEmployee = mdlEmployees.searchEmployee(edicion);
-                    manageEdit.setFieldsValue(tempEmployee.getCedula(), tempEmployee.getCellphone(), tempEmployee.getPosition(), tempEmployee.getLastName(), tempEmployee.getName(), tempEmployee.getTelephone(), "");
-                    isDoctor = false;
-                }
-                manageEdit.showFrame();
-                edicion = 0;
-                return;
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(manageMenu, "No Ha Sido Seleccionado Un Registro");
-            }
+            btnUpdate();
             return;
         }
 
         if (e.getSource().equals(manageMenu.getBtnRemove())) {
-            if (edicion != 0) {
-                int i = JOptionPane.showConfirmDialog(manageMenu, "Realmente desea Eliminar Este Usuario?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (i == 0) {
-                    mdlEmployees.deleteObject(mdlEmployees.searchEmployee(edicion));
-                    javax.swing.JOptionPane.showMessageDialog(manageMenu, "Registro Eliminado");
-                }
-                searchByField(manageMenu.getSearching().getTxtSearch().getText().toLowerCase());
-                edicion = 0;
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(manageMenu, "No Ha Sido Seleccionado Un Registro");
-            }
+            btnRemove();
             return;
         }
 
+        if (e.getSource().equals(manageMenu.getBtnExit())) {
+            manageMenu.closeFrame();
+            return;
+        }
 
-        if (e.getSource().equals(manageEdit.getBtnSave())) {
-            if (manageEdit.getjRadioButtonNormal().isSelected()) {
-                manageEdit.getTxtFieldSpeciality().setText("Sorry 4 Wait");
-            }
-            if (isEmptyFields()) {
-                JOptionPane.showMessageDialog(manageEdit, "Existen Campos En Blancos Por Favor Completar", "Error", JOptionPane.ERROR_MESSAGE);
+        try {
+            if (e.getSource().equals(manageEdit.getBtnSave())) {
+                btnSave();
                 return;
             }
-            if (edicion != 0) {
-                if (mdlEmployees.checkIsDoctor(edicion)) {
-                    if (manageEdit.getjRadioButtonDoctor().isSelected()) {
-                        isDoctor();
-                        if (mdlEmployees.checkDuplicateCedula(manageEdit.getTxtFieldCedula().getText())) {
-                            if (tempDoctor.getCedula().equalsIgnoreCase(manageEdit.getTxtFieldCedula().getText())) {
-                                update(true);
-                            } else {
-                                JOptionPane.showMessageDialog(manageEdit, "Existe Otro Usuario Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
-                            }
-                        } else {
-                            tempDoctor.setCedula(manageEdit.getTxtFieldCedula().getText());
-                            update(true);
-                        }
 
-                    } else {
-                        mdlEmployees.deleteObject(tempDoctor);
-                        tempEmployee = new Employees();
-                        tempEmployee.setPersonId(edicion);
-                        isEmployee();
-                        if (mdlEmployees.checkDuplicateCedula(manageEdit.getTxtFieldCedula().getText())) {
-                            if (tempEmployee.getCedula().equalsIgnoreCase(manageEdit.getTxtFieldCedula().getText())) {
-                                update(false);
-                            } else {
-                                JOptionPane.showMessageDialog(manageEdit, "Existe Otro Usuario Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
-                            }
-                        } else {
-                            tempEmployee.setCedula(manageEdit.getTxtFieldCedula().getText());
-                            update(false);
-                        }
-                    }
-
-                } else {
-                    if (manageEdit.getjRadioButtonNormal().isSelected()) {
-                        isEmployee();
-                        if (mdlEmployees.checkDuplicateCedula(manageEdit.getTxtFieldCedula().getText())) {
-                            if (tempEmployee.getCedula().equalsIgnoreCase(manageEdit.getTxtFieldCedula().getText())) {
-                                update(true);
-                            } else {
-                                JOptionPane.showMessageDialog(manageEdit, "Existe Otro Usuario Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
-                            }
-                        } else {
-                            tempEmployee.setCedula(manageEdit.getTxtFieldCedula().getText());
-                            update(true);
-                        }
-                    } else {
-                        mdlEmployees.deleteObject(tempEmployee);
-                        tempDoctor = new Doctor();
-                        tempDoctor.setPersonId(edicion);
-                        isDoctor();
-                        if (mdlEmployees.checkDuplicateCedula(manageEdit.getTxtFieldCedula().getText())) {
-                            if (tempDoctor.getCedula().equalsIgnoreCase(manageEdit.getTxtFieldCedula().getText())) {
-                                update(true);
-                            } else {
-                                JOptionPane.showMessageDialog(manageEdit, "Existe Otro Usuario Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
-                            }
-                        } else {
-                            tempDoctor.setCedula(manageEdit.getTxtFieldCedula().getText());
-                            update(true);
-                        }
-                    }
-
-                }
-            } else {
-                if (mdlEmployees.checkDuplicateCedula(manageEdit.getTxtFieldCedula().getText())) {
-                    JOptionPane.showMessageDialog(manageEdit, "Existe Otro Cliente Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                insert();
+            if (e.getSource().equals(manageEdit.getBtnCancel())) {
+                btncancelar();
+                return;
             }
-        }
 
-        if (e.getSource().equals(manageEdit.getBtnCancel())) {
-            int i = JOptionPane.showConfirmDialog(manageEdit, "Realmente desea Cancelar la Insercion de Datos", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (i == 0) {
-                manageEdit.dispose();
+            if (e.getSource().equals(manageEdit.getjRadioButtonDoctor())) {
+                manageEdit.getLblSpeciality().setVisible(true);
+                manageEdit.getTxtFieldSpeciality().setVisible(true);
+                return;
             }
-            return;
-        }
 
-        if (e.getSource().equals(manageEdit.getjRadioButtonDoctor())) {
-            //JOptionPane.showMessageDialog(manageEdit, "Cambio", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
-            manageEdit.getLblSpeciality().setVisible(true);
-            manageEdit.getTxtFieldSpeciality().setVisible(true);
-            return;
-        }
-
-        if (e.getSource().equals(manageEdit.getjRadioButtonNormal())) {
-            //JOptionPane.showMessageDialog(manageEdit, "Cambio 2", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
-            manageEdit.getLblSpeciality().setVisible(false);
-            manageEdit.getTxtFieldSpeciality().setVisible(false);
-            return;
+            if (e.getSource().equals(manageEdit.getjRadioButtonNormal())) {
+                manageEdit.getLblSpeciality().setVisible(false);
+                manageEdit.getTxtFieldSpeciality().setVisible(false);
+                return;
+            }
+            
+            if (e.getSource().equals(manageEdit.getBtnPerson())){
+                btnPersonData();
+                return;
+            }
+        } catch (java.lang.NullPointerException err) {
         }
     }
 
@@ -288,7 +190,8 @@ public class ControllerEmployee implements MouseListener, KeyListener, ActionLis
         return state;
     }
 
-    private void insert() {
+    @Override
+    public void insert() {
         try {
             String i;
             if (manageEdit.getjRadioButtonDoctor().isSelected()) {
@@ -308,7 +211,7 @@ public class ControllerEmployee implements MouseListener, KeyListener, ActionLis
         }
     }
 
-    private void update(boolean isDoctor) {
+    public void update(boolean isDoctor) {
         int i = JOptionPane.showConfirmDialog(manageEdit, "Realmente desea Sobreescribir Los Datos de Este Cliente?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (i == 0) {
             if (isDoctor == true) {
@@ -319,5 +222,149 @@ public class ControllerEmployee implements MouseListener, KeyListener, ActionLis
             JOptionPane.showMessageDialog(manageEdit, "Registro Actualizado Exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
             manageEdit.dispose();
         }
+    }
+
+    @Override
+    public void btnAdd() {
+        edicion = 0;
+        manageEdit = new ManageEmployeesEdit(null, true, this);
+        manageEdit.showFrame();
+    }
+
+    @Override
+    public void btnUpdate() {
+        if (edicion != 0) {
+            manageEdit = new ManageEmployeesEdit(null, true, this);
+            if (mdlEmployees.checkIsDoctor(edicion)) {
+                tempDoctor = mdlEmployees.searchDoctorEmployee(edicion);
+                manageEdit.setFieldsValueDoctor(tempDoctor.getCedula(), tempDoctor.getCellphone(), tempDoctor.getPosition(), tempDoctor.getLastName(), tempDoctor.getName(), tempDoctor.getTelephone(), tempDoctor.getSpeciality());
+                isDoctor = true;
+            } else {
+                tempEmployee = mdlEmployees.searchEmployee(edicion);
+                manageEdit.setFieldsValue(tempEmployee.getCedula(), tempEmployee.getCellphone(), tempEmployee.getPosition(), tempEmployee.getLastName(), tempEmployee.getName(), tempEmployee.getTelephone(), "");
+                isDoctor = false;
+            }
+            manageEdit.showFrame();
+            edicion = 0;
+            return;
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(manageMenu, "No Ha Sido Seleccionado Un Registro");
+        }
+    }
+
+    @Override
+    public void btnSave() {
+        if (manageEdit.getjRadioButtonNormal().isSelected()) {
+            manageEdit.getTxtFieldSpeciality().setText("Sorry 4 Wait");
+        }
+        if (isEmptyFields()) {
+            JOptionPane.showMessageDialog(manageEdit, "Existen Campos En Blancos Por Favor Completar", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (edicion != 0) {
+            if (mdlEmployees.checkIsDoctor(edicion)) {
+                if (manageEdit.getjRadioButtonDoctor().isSelected()) {
+                    isDoctor();
+                    if (mdlEmployees.checkDuplicateCedula(manageEdit.getTxtFieldCedula().getText())) {
+                        if (tempDoctor.getCedula().equalsIgnoreCase(manageEdit.getTxtFieldCedula().getText())) {
+                            update(true);
+                        } else {
+                            JOptionPane.showMessageDialog(manageEdit, "Existe Otro Usuario Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        tempDoctor.setCedula(manageEdit.getTxtFieldCedula().getText());
+                        update(true);
+                    }
+
+                } else {
+                    mdlEmployees.deleteObject(tempDoctor);
+                    tempEmployee = new Employees();
+                    tempEmployee.setPersonId(edicion);
+                    isEmployee();
+                    if (mdlEmployees.checkDuplicateCedula(manageEdit.getTxtFieldCedula().getText())) {
+                        if (tempEmployee.getCedula().equalsIgnoreCase(manageEdit.getTxtFieldCedula().getText())) {
+                            update(false);
+                        } else {
+                            JOptionPane.showMessageDialog(manageEdit, "Existe Otro Usuario Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        tempEmployee.setCedula(manageEdit.getTxtFieldCedula().getText());
+                        update(false);
+                    }
+                }
+
+            } else {
+                if (manageEdit.getjRadioButtonNormal().isSelected()) {
+                    isEmployee();
+                    if (mdlEmployees.checkDuplicateCedula(manageEdit.getTxtFieldCedula().getText())) {
+                        if (tempEmployee.getCedula().equalsIgnoreCase(manageEdit.getTxtFieldCedula().getText())) {
+                            update(true);
+                        } else {
+                            JOptionPane.showMessageDialog(manageEdit, "Existe Otro Usuario Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        tempEmployee.setCedula(manageEdit.getTxtFieldCedula().getText());
+                        update(true);
+                    }
+                } else {
+                    mdlEmployees.deleteObject(tempEmployee);
+                    tempDoctor = new Doctor();
+                    tempDoctor.setPersonId(edicion);
+                    isDoctor();
+                    if (mdlEmployees.checkDuplicateCedula(manageEdit.getTxtFieldCedula().getText())) {
+                        if (tempDoctor.getCedula().equalsIgnoreCase(manageEdit.getTxtFieldCedula().getText())) {
+                            update(true);
+                        } else {
+                            JOptionPane.showMessageDialog(manageEdit, "Existe Otro Usuario Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        tempDoctor.setCedula(manageEdit.getTxtFieldCedula().getText());
+                        update(true);
+                    }
+                }
+
+            }
+        } else {
+            if (mdlEmployees.checkDuplicateCedula(manageEdit.getTxtFieldCedula().getText())) {
+                JOptionPane.showMessageDialog(manageEdit, "Existe Otro Cliente Con El Mismo Numero de Cedula", "Error GRAVE", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            insert();
+        }
+    }
+
+    @Override
+    public void btnRemove() {
+        if (edicion != 0) {
+            int i = JOptionPane.showConfirmDialog(manageMenu, "Realmente desea Eliminar Este Usuario?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (i == 0) {
+                mdlEmployees.deleteObject(mdlEmployees.searchEmployee(edicion));
+                javax.swing.JOptionPane.showMessageDialog(manageMenu, "Registro Eliminado");
+            }
+            searchByField(manageMenu.getSearching().getTxtSearch().getText().toLowerCase());
+            edicion = 0;
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(manageMenu, "No Ha Sido Seleccionado Un Registro");
+        }
+    }
+
+    @Override
+    public void btncancelar() {
+        int i = JOptionPane.showConfirmDialog(manageEdit, "Realmente desea Cancelar la Insercion de Datos", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (i == 0) {
+            manageEdit.dispose();
+        }
+    }
+
+    @Override
+    public void update() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    private void btnPersonData() {
+        Persons temp = new SearchPersons(manageEdit, true, mdlEmployees.getQueryManager(),2).personShowSearch();
+        edicion = temp.getPersonId();
+        manageEdit.setFieldsValue(temp.getCedula(), temp.getCellphone(), temp.getLastName(), temp.getName(), temp.getTelephone());
+        return;
     }
 }

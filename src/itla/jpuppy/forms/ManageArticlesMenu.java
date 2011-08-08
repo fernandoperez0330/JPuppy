@@ -30,7 +30,7 @@ public class ManageArticlesMenu extends javax.swing.JDialog implements FrameOpti
         this.setTitle("Administracion de Articulos");
         this.setResizable(false);
 
-        //ctrlArticles = new ControllerArticles(this);
+        ctrlArticles = new ControllerArticles(this);
         this.addWindowFocusListener(ctrlArticles);
         searching.setBounds(54, 160, 786, 474);
         setListener();
@@ -44,6 +44,7 @@ public class ManageArticlesMenu extends javax.swing.JDialog implements FrameOpti
         btnAdd.addActionListener(ctrlArticles);
         btnRemove.addActionListener(ctrlArticles);
         btnUpdate.addActionListener(ctrlArticles);
+        BtnExit.addActionListener(ctrlArticles);
     }
 
     public void setSearching(JSearching searching) {
@@ -65,6 +66,13 @@ public class ManageArticlesMenu extends javax.swing.JDialog implements FrameOpti
     public JButton getBtnUpdate() {
         return btnUpdate;
     }
+
+    public JButton getBtnExit() {
+        return BtnExit;
+    }
+    
+    
+    
     
     
     /** Creates new form NewJFrame */
@@ -76,6 +84,7 @@ public class ManageArticlesMenu extends javax.swing.JDialog implements FrameOpti
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
+        BtnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CrudEntities");
@@ -104,6 +113,10 @@ public class ManageArticlesMenu extends javax.swing.JDialog implements FrameOpti
         btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/remove.png"))); // NOI18N
         btnRemove.setFocusable(false);
         pnButtons.add(btnRemove);
+
+        BtnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancel.png"))); // NOI18N
+        BtnExit.setFocusable(false);
+        pnButtons.add(BtnExit);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,6 +149,7 @@ public class ManageArticlesMenu extends javax.swing.JDialog implements FrameOpti
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnExit;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnUpdate;
@@ -149,7 +163,7 @@ public class ManageArticlesMenu extends javax.swing.JDialog implements FrameOpti
 
     @Override
     public void closeFrame() {
-        this.setVisible(false);
+        dispose();
     }
 
     @Override

@@ -1,6 +1,8 @@
 package itla.jpuppy.forms;
 
 import itla.jpuppy.controllers.ControllerArticles;
+import itla.jpuppy.utils.RestrictionNLength;
+import itla.jpuppy.utils.RestrictionSLength;
 import java.awt.Frame;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -16,16 +18,20 @@ public class ManageArticlesEdit extends javax.swing.JDialog implements FrameOpti
         super(owner, modal);
         this.ctrlUser = ctrlUser;
         initComponents();
+        TxtFieldName.setDocument(new RestrictionSLength(TxtFieldName, 30));
+        TxtFieldPrice.setDocument(new RestrictionNLength(TxtFieldPrice, 6, false));
+        TxtFieldAmount.setDocument(new RestrictionNLength(TxtFieldAmount, 6, true));
+        jTxtAreaDescription.setDocument(new RestrictionSLength(jTxtAreaDescription, 150));
         setListener();
         this.setLocationRelativeTo(null);
-        this.setTitle("Manage Users");
+        this.setTitle("Administrando Producto y Servicio");
         this.setResizable(false);
 
     }
 
-    public void setFields(String TxtFieldAmount, String TxtFieldNameUser, String TxtFieldPrice, String jTxtAreaDescription) {
+    public void setFields(String TxtFieldAmount, String TxtFieldName, String TxtFieldPrice, String jTxtAreaDescription) {
         this.TxtFieldAmount.setText(TxtFieldAmount);
-        this.TxtFieldName.setText(TxtFieldNameUser);
+        this.TxtFieldName.setText(TxtFieldName);
         this.TxtFieldPrice.setText(TxtFieldPrice);
         this.jTxtAreaDescription.setText(jTxtAreaDescription);
     }

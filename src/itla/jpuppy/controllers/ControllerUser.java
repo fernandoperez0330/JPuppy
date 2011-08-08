@@ -1,11 +1,13 @@
 package itla.jpuppy.controllers;
 
 import itla.jpuppy.business.ModelUsers;
+import itla.jpuppy.datalayer.Persons;
 import itla.jpuppy.datalayer.Users;
 import itla.jpuppy.forms.JSearching;
 import itla.jpuppy.forms.ManageMenu;
 import itla.jpuppy.forms.ManageUsersEdit;
 import itla.jpuppy.forms.ManageUsersMenu;
+import itla.jpuppy.forms.SearchPersons;
 import itla.jpuppy.models.SearchingCtrlUsers;
 import itla.jpuppy.models.SearchingModel;
 import itla.jpuppy.utils.EncryptText;
@@ -25,20 +27,15 @@ public class ControllerUser extends Controller {
     private ModelUsers mdlUsers;
     private long edicion;
     private Users tempUser;
-    private ManageMenu manageMenu;
+    private ManageUsersMenu manageMenu;
 
-    public ControllerUser(ManageMenu manageMenu) {
+    public ControllerUser(ManageUsersMenu manageMenu) {
         this.manageMenu = manageMenu;
-        this.manageEdit = new ManageUsersEdit(null, true, this);
         modelSearching = new SearchingModel<Users>(new String[]{"Id", "Name", "Username", "Type User"}, new SearchingCtrlUsers());
         this.manageMenu.setSearching(new JSearching(modelSearching));
         mdlUsers = new ModelUsers();
         searchByField("");
         edicion = 0;
-    }
-    
-        public void setManageMenu(ManageMenu manageMenu) {
-        this.manageMenu = manageMenu;
     }
 
     public void searchByField(String string) {
@@ -112,18 +109,26 @@ public class ControllerUser extends Controller {
             return;
         }
 
-        if (e.getSource().equals(manageEdit.getBtnSave())) {
-            btnSave();
-            return;
-        }
-
-        if (e.getSource().equals(manageEdit.getBtnCancel())) {
-            btncancelar();
-            return;
-        }
-        
-        if (e.getSource().equals(manageMenu.getBtnExit())){
+        if (e.getSource().equals(manageMenu.getBtnExit())) {
             manageMenu.closeFrame();
+            return;
+        }
+        try {
+            if (e.getSource().equals(manageEdit.getBtnSave())) {
+                btnSave();
+                return;
+            }
+
+            if (e.getSource().equals(manageEdit.getBtnCancel())) {
+                btncancelar();
+                return;
+            }
+
+            if (e.getSource().equals(manageEdit.getBtnPerson())) {
+                btnPersonData();
+                return;
+            }
+        } catch (java.lang.NullPointerException err) {
         }
     }
 
@@ -160,6 +165,7 @@ public class ControllerUser extends Controller {
     public void btnAdd() {
         edicion = 0;
         manageEdit = new ManageUsersEdit(null, true, this);
+        manageEdit.getBtnPerson().setVisible(true);
         manageEdit.showFrame();
     }
 
@@ -167,6 +173,7 @@ public class ControllerUser extends Controller {
     public void btnUpdate() {
         if (edicion != 0) {
             manageEdit = new ManageUsersEdit(null, true, this);
+            manageEdit.getBtnPerson().setVisible(false);
             tempUser = mdlUsers.searchUser(edicion);
             manageEdit.setFieldsValue(tempUser.getLastName(), tempUser.getCellphone(), tempUser.getName(), tempUser.getUsername(), tempUser.getPassword(), tempUser.getTelephone(), tempUser.getTypeUser());
             manageEdit.showFrame();
@@ -241,5 +248,56 @@ public class ControllerUser extends Controller {
         if (i == 0) {
             manageEdit.dispose();
         }
+    }
+
+    public void btnPersonData() {
+        Persons temp = new SearchPersons(manageEdit, true, ModelUsers.getQueryManager(), 1).personShowSearch();
+        edicion = temp.getPersonId();
+        tempUser = mdlUsers.searchUser(edicion);
+        if (tempUser == null) {
+            
+           
+           
+
+            try {
+                 mdlUsers.insertObject(temp);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+             System.out.println("Grita 0");
+            tempUser = mdlUsers.searchUser(edicion);
+            System.out.println("Grita 1");
+            tempUser.setUsername("Dragon");
+            System.out.println("Grita 2");
+            mdlUsers.updateObject(tempUser);
+            System.out.println("Grita Final");
+        }
+        //manageEdit.setFieldsValue(temp.getLastName(), temp.getCellphone(), temp.getName(), temp.getTelephone());
+        return;
+    }
+
+    private boolean isEmptyFields() {
+        boolean state = false;
+        javax.swing.text.JTextComponent textField;
+        String date;
+
+
+        for (int i = 0; i <= manageEdit.getPnFields().getComponentCount(); i++) {
+            try {
+                textField = (javax.swing.text.JTextComponent) manageEdit.getPnFields().getComponent(i);
+                if (textField.getText().equals("")) {
+                    state = true;
+                    textField.requestFocus();
+                } else if (textField.getText().indexOf("-") != -1) {
+                    String special = textField.getText().trim();
+                    if ((special.length() < 12) && (special.length() != 10)) {
+                        state = true;
+                        textField.requestFocus();
+                    }
+                }
+            } catch (Exception e) {
+            }
+        }
+        return state;
     }
 }
