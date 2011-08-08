@@ -39,13 +39,15 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         btnSearchConsultations.addActionListener(controlConsultations);
         btnSearchConsultations.setEnabled(false);
         btnUpdateConsultations.addActionListener(controlConsultations);
-
+        btnSearch.addActionListener(controlConsultations);
+        
         btnAddConsultations.setActionCommand("addConsultation");
         btnCancelConsultations.setActionCommand("cancelConsultation");
         btnRemoveConsultations.setActionCommand("removeConsultation");
         btnSaveConsultations.setActionCommand("saveConsultation");
         btnSearchConsultations.setActionCommand("searchConsultation");
         btnUpdateConsultations.setActionCommand("updateConsultation");
+        btnSearch.setActionCommand("searchCustomer");
 
         dateChooserBeginConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));
         dateChooserEndConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));
@@ -73,7 +75,7 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
             Object[] nuevo = {value.getId(), value.getTypeConsultations(), user, new ModelPatients().searchPatient(value.getPatients().getPatientsId()).getName()};
             temp.addRow(nuevo);
         }
-
+        //new ModelConsultations().getConsultationID();
         this.setLocationRelativeTo(null);
         this.setTitle("Manejador de consultas");
         this.setResizable(false);
@@ -104,6 +106,10 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         return btnCancelConsultations.getActionCommand();
     }
 
+    public String getActionCommandSearchCus() {
+        return btnSearch.getActionCommand();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -122,7 +128,8 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         dateChooserBeginConsultations = new datechooser.beans.DateChooserCombo();
         dateChooserEndConsultations = new datechooser.beans.DateChooserCombo();
         jLabel7 = new javax.swing.JLabel();
-        txtRemarkConsultations1 = new javax.swing.JTextField();
+        txtCustomerName = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
         pnButtons3 = new javax.swing.JPanel();
         btnAddConsultations = new javax.swing.JButton();
         btnUpdateConsultations = new javax.swing.JButton();
@@ -143,7 +150,7 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel1.setText("Entre La Fecha:");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel2.setText("Tipo De Consulta:");
 
         cbTypeConsultations.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
@@ -171,8 +178,10 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel7.setText("Nombre del cliente:");
+
+        btnSearch.setText("Buscar");
 
         javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
         pnFields.setLayout(pnFieldsLayout);
@@ -214,7 +223,9 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
                         .addContainerGap()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRemarkConsultations1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch)))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         pnFieldsLayout.setVerticalGroup(
@@ -251,7 +262,9 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtRemarkConsultations1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearch))
                     .addComponent(jLabel7))
                 .addContainerGap())
         );
@@ -348,6 +361,7 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
     private javax.swing.JButton btnCancelConsultations;
     private javax.swing.JButton btnRemoveConsultations;
     private javax.swing.JButton btnSaveConsultations;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSearchConsultations;
     private javax.swing.JButton btnUpdateConsultations;
     private javax.swing.JComboBox cbCustomerConsultations;
@@ -366,8 +380,8 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
     private javax.swing.JPanel pnButtons3;
     private javax.swing.JPanel pnFields;
     private javax.swing.JTable tableConsultations;
+    private javax.swing.JTextField txtCustomerName;
     private javax.swing.JTextField txtRemarkConsultations;
-    private javax.swing.JTextField txtRemarkConsultations1;
     // End of variables declaration//GEN-END:variables
 
     public DateChooserCombo getDateChooserBeginConsultations() {
@@ -434,6 +448,14 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         this.txtRemarkConsultations = txtRemarkConsultations;
     }
 //metodos de la interface
+
+    public JTextField getTxtCustomerName() {
+        return txtCustomerName;
+    }
+
+    public void setTxtCustomerName(JTextField txtCustomerName) {
+        this.txtCustomerName = txtCustomerName;
+    }
 
     @Override
     public void showFrame() {

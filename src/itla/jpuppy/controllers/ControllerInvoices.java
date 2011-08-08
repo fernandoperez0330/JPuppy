@@ -42,7 +42,6 @@ public class ControllerInvoices implements ActionListener, KeyListener, MouseLis
         mdlArticles = new ModelArticles();
         searchByField("");
         myPriceChanched();
-        System.out.println(mdlArticles.getQueryManager().nextInvoice());
     }
 
     public void searchByField(String string) {
@@ -63,14 +62,19 @@ public class ControllerInvoices implements ActionListener, KeyListener, MouseLis
         if (e.getSource().equals(invoice.getBtnNew())) {
             int i = JOptionPane.showConfirmDialog(invoice, "Realmente Desea Crear Una Nueva Factura?", "Atencion", JOptionPane.OK_CANCEL_OPTION);
             if (i == 0) {
+                for (int j = 0; j < invoice.getTblMyArticles().getRowCount(); j++) {
+                    clean(i);
+                }
             }
         }
 
         if (e.getSource().equals(invoice.getBtnSearch())) {
-            Persons temp = new SearchPersons(null, true, mdlArticles.getQueryManager(), 4).personShowSearch();
-            tempCustomer = new ModelCustomers().searchCustomer(temp.getPersonId());
-            invoice.setCustomerFields(tempCustomer.getAddress(), String.valueOf(tempCustomer.getPersonId()), tempCustomer.getName() + " " + tempCustomer.getLastName());
-
+            try {
+                Persons temp = new SearchPersons(null, true, mdlArticles.getQueryManager(), 4).personShowSearch();
+                tempCustomer = new ModelCustomers().searchCustomer(temp.getPersonId());
+                invoice.setCustomerFields(tempCustomer.getAddress(), String.valueOf(tempCustomer.getPersonId()), tempCustomer.getName() + " " + tempCustomer.getLastName());
+            } catch (java.lang.NullPointerException d) {
+            }
         }
     }
 
@@ -89,25 +93,27 @@ public class ControllerInvoices implements ActionListener, KeyListener, MouseLis
         }
 
         if ((e.getSource().equals(invoice.getTblMyArticles())) && (e.getKeyCode() == 127)) {
+            clean(invoice.getTblMyArticles().getSelectedRow());
+        }
+    }
 
-            if (myInvoice.getElements().size() > 0) {
-                int row = invoice.getTblMyArticles().getSelectedRow();
-                try {
-                    Articles obj = myInvoice.getElements().get(row);
-                    obj.setAmount(obj.getAmount() - 1);
-                    for (int i = 0; i < modelSearching.getElements().size(); i++) {
-                        if (obj.getArticleId() == modelSearching.getElements().get(i).getArticleId()) {
-                            modelSearching.getElements().get(i).setAmount(modelSearching.getElements().get(i).getAmount() + 1);
-                        }
+    private void clean(int row ) {
+        if (myInvoice.getElements().size() > 0) {
+            try {
+                Articles obj = myInvoice.getElements().get(row);
+                obj.setAmount(obj.getAmount() - 1);
+                for (int i = 0; i < modelSearching.getElements().size(); i++) {
+                    if (obj.getArticleId() == modelSearching.getElements().get(i).getArticleId()) {
+                        modelSearching.getElements().get(i).setAmount(modelSearching.getElements().get(i).getAmount() + 1);
                     }
-                    if (obj.getAmount() == 0) {
-                        myInvoice.getElements().remove(obj);
-                    }
-                    myInvoice.fireTableDataChanged();
-                    modelSearching.fireTableDataChanged();
-                    myPriceChanched();
-                } catch (java.lang.ArrayIndexOutOfBoundsException ds) {
                 }
+                if (obj.getAmount() == 0) {
+                    myInvoice.getElements().remove(obj);
+                }
+                myInvoice.fireTableDataChanged();
+                modelSearching.fireTableDataChanged();
+                myPriceChanched();
+            } catch (java.lang.ArrayIndexOutOfBoundsException ds) {
             }
         }
     }

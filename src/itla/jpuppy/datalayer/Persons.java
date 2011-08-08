@@ -1,5 +1,6 @@
 package itla.jpuppy.datalayer;
 
+import itla.jpuppy.utils.GeneratedValues;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 
 @Entity
@@ -17,7 +19,7 @@ public abstract class Persons implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long personId;
+    private long personId;
     @Column(length = 30, nullable = false)
     private String name;
     @Column(length = 30, nullable = false)
