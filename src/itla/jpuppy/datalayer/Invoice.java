@@ -4,6 +4,7 @@
  */
 package itla.jpuppy.datalayer;
 
+import itla.jpuppy.utils.GeneratedValues;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -13,11 +14,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 
 @Entity
 public class Invoice implements Serializable {
-    @Id
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateBorn;
@@ -28,9 +30,11 @@ public class Invoice implements Serializable {
     private List<Articles> articles;
 
     public Invoice() {
+        id = 0;
     }
 
     public Invoice(Date dateBorn, double total, Customers customer, List<Articles> articles) {
+        id = 0;
         this.dateBorn = dateBorn;
         this.total = total;
         this.customer = customer;
@@ -76,8 +80,6 @@ public class Invoice implements Serializable {
     public void setTotal(double total) {
         this.total = total;
     }
-    
-    
    
     
 }

@@ -4,33 +4,22 @@
  */
 package itla.jpuppy.utils;
 
-import itla.jpuppy.business.ModelCustomers;
 import itla.jpuppy.business.ModelInvoice;
 
 public class GeneratedValues {
 
-    private static long personId;
     private static int invoiceId;
 
     private GeneratedValues() {
     }
 
     public static void begin() {
-        personId = new ModelCustomers().searchAllCustomer().size();
-        //invoiceId = new ModelInvoice().searchAllArticleByName("").size();
-    }
-
-    public static long getNextPersonId() {
-        personId += 1;
-        return personId;
+        invoiceId = new ModelInvoice().searchAllInvoicesByDate("%%").size();
     }
 
     public static long getNextInvoiceId() {
-        return invoiceId + 1;
-    }
-
-    public static long getPersonId() {
-        return personId;
+        invoiceId += 1;
+        return invoiceId;
     }
 
     public static long getInvoiceId() {

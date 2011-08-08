@@ -45,7 +45,7 @@ public class InvoiceMenu extends javax.swing.JFrame implements FrameOption {
         
         btnNew.addActionListener(ctrlInvoices);
         btnSave.addActionListener(ctrlInvoices);
-        btnSearchInvoice.addActionListener(ctrlInvoices);
+//        btnSearchInvoice.addActionListener(ctrlInvoices);
         btnSearch.addActionListener(ctrlInvoices);
         btnExit.addActionListener(ctrlInvoices);
     }
@@ -55,7 +55,14 @@ public class InvoiceMenu extends javax.swing.JFrame implements FrameOption {
         this.txtCodeCustomer.setText(txtCodeCustomer);
         this.txtName.setText(txtName);
     }
-    
+
+    public JTextField getTxtDateInvoice() {
+        return txtDateInvoice;
+    }
+
+    public JTextField getTxtNoInvoice() {
+        return txtNoInvoice;
+    }
     
     public JButton getBtnExit() {
         return btnExit;
@@ -71,10 +78,6 @@ public class InvoiceMenu extends javax.swing.JFrame implements FrameOption {
 
     public JButton getBtnSearch() {
         return btnSearch;
-    }
-
-    public JButton getBtnSearchInvoice() {
-        return btnSearchInvoice;
     }
 
     public JPanel getPnlCustomerInfo() {
@@ -140,7 +143,6 @@ public class InvoiceMenu extends javax.swing.JFrame implements FrameOption {
         pnlOptions = new javax.swing.JPanel();
         btnNew = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
-        btnSearchInvoice = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         lblTotalLabel = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
@@ -151,22 +153,22 @@ public class InvoiceMenu extends javax.swing.JFrame implements FrameOption {
 
         pnlInvoiceInfo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblNoInvoice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNoInvoice.setFont(new java.awt.Font("Tahoma", 0, 14));
         lblNoInvoice.setText("No.Factura.:");
 
-        lblDateInvoice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblDateInvoice.setFont(new java.awt.Font("Tahoma", 0, 14));
         lblDateInvoice.setText("Fecha.:");
 
-        lblUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblUser.setFont(new java.awt.Font("Tahoma", 0, 14));
         lblUser.setText("Usuario.:");
 
-        txtNoInvoice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNoInvoice.setFont(new java.awt.Font("Tahoma", 0, 14));
         txtNoInvoice.setEnabled(false);
 
-        txtDateInvoice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDateInvoice.setFont(new java.awt.Font("Tahoma", 0, 14));
         txtDateInvoice.setEnabled(false);
 
-        txtUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtUser.setFont(new java.awt.Font("Tahoma", 0, 14));
         txtUser.setEnabled(false);
 
         javax.swing.GroupLayout pnlInvoiceInfoLayout = new javax.swing.GroupLayout(pnlInvoiceInfo);
@@ -227,7 +229,7 @@ public class InvoiceMenu extends javax.swing.JFrame implements FrameOption {
         lblAdress.setFont(new java.awt.Font("Tahoma", 0, 14));
         lblAdress.setText("Dirrecion.:");
 
-        txtAdress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtAdress.setFont(new java.awt.Font("Tahoma", 0, 14));
         txtAdress.setEnabled(false);
 
         btnSearch.setText("Buscar");
@@ -286,16 +288,13 @@ public class InvoiceMenu extends javax.swing.JFrame implements FrameOption {
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/save.png"))); // NOI18N
         btnSave.setFocusable(false);
 
-        btnSearchInvoice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/find.png"))); // NOI18N
-        btnSearchInvoice.setFocusable(false);
-
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancel.png"))); // NOI18N
         btnExit.setFocusable(false);
 
         lblTotalLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
         lblTotalLabel.setText("Total.:");
 
-        txtTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtTotal.setFont(new java.awt.Font("Tahoma", 1, 18));
         txtTotal.setEnabled(false);
 
         javax.swing.GroupLayout pnlOptionsLayout = new javax.swing.GroupLayout(pnlOptions);
@@ -307,11 +306,9 @@ public class InvoiceMenu extends javax.swing.JFrame implements FrameOption {
                 .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSearchInvoice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(114, 114, 114)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
                 .addComponent(lblTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,14 +316,13 @@ public class InvoiceMenu extends javax.swing.JFrame implements FrameOption {
         );
         pnlOptionsLayout.setVerticalGroup(
             pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOptionsLayout.createSequentialGroup()
+            .addGroup(pnlOptionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnExit, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-                    .addComponent(btnSearchInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
-                    .addComponent(btnSave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
-                    .addComponent(btnNew, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnExit, 0, 0, Short.MAX_VALUE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
+                    .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
+                    .addGroup(pnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblTotalLabel)))
                 .addContainerGap())
@@ -383,7 +379,6 @@ public class InvoiceMenu extends javax.swing.JFrame implements FrameOption {
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnSearchInvoice;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAdress;
     private javax.swing.JLabel lblCodeCustomer;
