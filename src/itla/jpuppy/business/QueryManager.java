@@ -82,12 +82,8 @@ public class QueryManager {
         return temp;
     }
 
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    public int nextInvoice(){
-            return (Integer) entityManager.createQuery("SELECT LAST_INSERT_ID('jpuppydb.invoice')").getSingleResult();
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    }
-    
     public List<Employees> searchEmployees(String name) {
         List<Employees> listUsers = null;
         try {
@@ -114,6 +110,15 @@ public class QueryManager {
         List<Articles> listUsers = null;
         try {
             listUsers = entityManager.createQuery("SELECT a FROM Articles a WHERE LOWER(a.name) LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
+        } catch (Exception e) {
+        }
+        return listUsers;
+    }
+
+    public List<Invoice> searchInvoices(String date) {
+        List<Invoice> listUsers = null;
+        try {
+            listUsers = entityManager.createQuery("SELECT a FROM Invoice a WHERE LOWER(a.dateBorn) LIKE :nameToFind").setParameter("nameToFind", date).getResultList();
         } catch (Exception e) {
         }
         return listUsers;
@@ -184,13 +189,7 @@ public class QueryManager {
     }
 
     public List<Patients> searchAllPatient() {
-        List<Patients> listPatients = null;
-        try {
-            listPatients = entityManager.createQuery("SELECT a FROM Patients a").getResultList();
-        } catch (Exception e) {
-        }
-
-        return listPatients;
+        return searchPatientByName("%%");
     }
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
@@ -260,7 +259,7 @@ public class QueryManager {
     public List<Consultations> searchConsultations(String name) {
         List<Consultations> listConsultations = null;
         try {
-            listConsultations = entityManager.createQuery("SELECT a FROM Consultations a WHERE a.customer = :nameToFind").setParameter("nameToFind", name).getResultList();
+            listConsultations = entityManager.createQuery("SELECT a FROM Consultations a WHERE LOWER(a.customer.name) LIKE :nameToFind").setParameter("nameToFind", name).getResultList();
         } catch (Exception e) {
         }
         return listConsultations;

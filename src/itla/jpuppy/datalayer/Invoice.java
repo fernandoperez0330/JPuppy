@@ -17,8 +17,8 @@ import javax.persistence.Temporal;
 
 @Entity
 public class Invoice implements Serializable {
-    @Id @GeneratedValue(strategy= GenerationType.IDENTITY,generator="InvoiceId")
-    private int id;
+    @Id
+    private long id;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateBorn;
     private double total;
@@ -61,11 +61,11 @@ public class Invoice implements Serializable {
         this.dateBorn = dateBorn;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

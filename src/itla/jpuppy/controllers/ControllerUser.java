@@ -4,7 +4,6 @@ import itla.jpuppy.business.ModelUsers;
 import itla.jpuppy.datalayer.Persons;
 import itla.jpuppy.datalayer.Users;
 import itla.jpuppy.forms.JSearching;
-import itla.jpuppy.forms.ManageMenu;
 import itla.jpuppy.forms.ManageUsersEdit;
 import itla.jpuppy.forms.ManageUsersMenu;
 import itla.jpuppy.forms.SearchPersons;
@@ -255,22 +254,24 @@ public class ControllerUser extends Controller {
         edicion = temp.getPersonId();
         tempUser = mdlUsers.searchUser(edicion);
         if (tempUser == null) {
-            
-           
-           
-
+            Users tempxd = new Users();
+            tempxd.setPersonId(edicion);
+            tempxd.setName(temp.getName());
+            tempxd.setLastName(temp.getLastName());
+            mdlUsers.insertObject(tempxd);
+            System.out.println("Grita 0");
+            tempUser = mdlUsers.searchUser(edicion);
+            System.out.println("Grita 1");
             try {
-                 mdlUsers.insertObject(temp);
+                tempUser.setUsername("Dragon");
+                System.out.println("Grita 2");
+                mdlUsers.updateObject(tempUser);
+                System.out.println("Grita Final");
             } catch (Exception e) {
                 e.printStackTrace();
             }
-             System.out.println("Grita 0");
-            tempUser = mdlUsers.searchUser(edicion);
-            System.out.println("Grita 1");
-            tempUser.setUsername("Dragon");
-            System.out.println("Grita 2");
-            mdlUsers.updateObject(tempUser);
-            System.out.println("Grita Final");
+
+
         }
         //manageEdit.setFieldsValue(temp.getLastName(), temp.getCellphone(), temp.getName(), temp.getTelephone());
         return;

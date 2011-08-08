@@ -34,6 +34,7 @@ public class GeneratorDataCombo {
     //Construye la lista con NOMBRE - APELLIDO que llenara combox
     public String[] dataPatients() {
         List<Patients> list = new ModelPatients().searchAllPatient();
+        System.out.println(list.size());
         if (list.isEmpty()) {
             return null;
         } else {
