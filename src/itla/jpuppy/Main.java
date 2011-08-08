@@ -31,23 +31,19 @@ public class Main {
 //        6. En Persistence.XML poner create
             
         //Inserta el primer usuario
-//        EntityManager em = EntityManagerCreator.getInstanceEM();
-//        Users user;
-//        try {
-//            user = new Users("Frangeris", "Peguero", "12356789", "fran", EncryptText.md5("123"), "admin");
-//
-//        em.getTransaction().begin();
-//        em.persist(user);
-//
-//        } catch (Exception ex) {
-//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        em.getTransaction().commit();
-//        em.close();
+        EntityManager em = EntityManagerCreator.getInstanceEM();
+        Users user;
+        try {
+            user = new Users("Admintrador", "JPuppy", "123456789", "admin", EncryptText.md5("123456"), "admin");
+        em.getTransaction().begin();
+        em.persist(user);
+
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        em.getTransaction().commit();
+        em.close();
 
        new Login().showFrame();
-       //new ManageAppointnments(null, true).showFrame();
-       
-    
     }
 }
