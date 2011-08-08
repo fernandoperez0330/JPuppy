@@ -1,30 +1,43 @@
 package itla.jpuppy.forms;
 //import itla.jpuppy.controllers.ControllerConsultations;
 import datechooser.beans.DateChooserCombo;
+import itla.jpuppy.business.ModelConsultations;
+import itla.jpuppy.business.ModelCustomers;
+import itla.jpuppy.business.ModelPatients;
 import itla.jpuppy.controllers.ControllerConsultations;
+import itla.jpuppy.datalayer.Consultations;
+import itla.jpuppy.utils.GeneratorDataCombo;
 import itla.jpuppy.utils.TypeConsultations;
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
+import java.util.List;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class ManageConsultations extends javax.swing.JDialog implements FrameOption {
 
-    
+    private ComboBoxModel model = null;
+    private List<Consultations> list = null;
+
+    public List<Consultations> getList() {
+        return list;
+    }
 
     public ManageConsultations(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
         ControllerConsultations controlConsultations = new ControllerConsultations(this);
- 
+
         btnAddConsultations.addActionListener(controlConsultations);
         btnCancelConsultations.addActionListener(controlConsultations);
         btnRemoveConsultations.addActionListener(controlConsultations);
         btnSaveConsultations.addActionListener(controlConsultations);
+        btnSaveConsultations.setEnabled(false);
         btnSearchConsultations.addActionListener(controlConsultations);
+        btnSearchConsultations.setEnabled(false);
         btnUpdateConsultations.addActionListener(controlConsultations);
 
         btnAddConsultations.setActionCommand("addConsultation");
@@ -33,12 +46,33 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         btnSaveConsultations.setActionCommand("saveConsultation");
         btnSearchConsultations.setActionCommand("searchConsultation");
         btnUpdateConsultations.setActionCommand("updateConsultation");
-                     
-        dateChooserBeginConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));   
-        dateChooserEndConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));         
-        
+
+        dateChooserBeginConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));
+        dateChooserEndConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));
+
 
         cbTypeConsultations.setModel(new DefaultComboBoxModel(TypeConsultations.values()));
+
+        try {
+            model = new DefaultComboBoxModel(new GeneratorDataCombo().dataCustomers());
+            this.setCbCustomerConsultationsModel(model);
+        } catch (Exception e) {
+        }
+        try {
+            model = new DefaultComboBoxModel(new GeneratorDataCombo().dataPatients());
+            this.setCbPatientsConsultationsModel(model);
+        } catch (Exception e) {
+        }
+
+        //Llena la tabla de las consultas almacenadas
+        list = new ModelConsultations().getConsultations();
+        for (Consultations value : list) {
+            //System.out.println(new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getName());
+            DefaultTableModel temp = (DefaultTableModel) this.getTableConsultations().getModel();
+            String user = new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getName() + " "+ new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getLastName();
+            Object[] nuevo = {value.getId(), value.getTypeConsultations(), user, new ModelPatients().searchPatient(value.getPatients().getPatientsId()).getName()};
+            temp.addRow(nuevo);
+        }
 
         this.setLocationRelativeTo(null);
         this.setTitle("Manejador de consultas");
@@ -87,6 +121,8 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         txtRemarkConsultations = new javax.swing.JTextField();
         dateChooserBeginConsultations = new datechooser.beans.DateChooserCombo();
         dateChooserEndConsultations = new datechooser.beans.DateChooserCombo();
+        jLabel7 = new javax.swing.JLabel();
+        txtRemarkConsultations1 = new javax.swing.JTextField();
         pnButtons3 = new javax.swing.JPanel();
         btnAddConsultations = new javax.swing.JButton();
         btnUpdateConsultations = new javax.swing.JButton();
@@ -107,7 +143,7 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel1.setText("Entre La Fecha:");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14));
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Tipo De Consulta:");
 
         cbTypeConsultations.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
@@ -123,56 +159,63 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel4.setText("Observacion:");
 
-        cbCustomerConsultations.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
-
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel5.setText("Cliente:");
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14));
         jLabel6.setText("Paciente:");
 
-        cbPatientConsultations.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
         cbPatientConsultations.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbPatientConsultationsActionPerformed(evt);
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel7.setText("Nombre del cliente:");
+
         javax.swing.GroupLayout pnFieldsLayout = new javax.swing.GroupLayout(pnFields);
         pnFields.setLayout(pnFieldsLayout);
         pnFieldsLayout.setHorizontalGroup(
             pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnFieldsLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
                 .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnFieldsLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateChooserBeginConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)
+                        .addGap(10, 10, 10)
+                        .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnFieldsLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dateChooserBeginConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(dateChooserEndConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnFieldsLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(10, 10, 10)
+                                .addComponent(cbTypeConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(dateChooserEndConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnFieldsLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(10, 10, 10)
+                                .addComponent(cbCustomerConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel6)
+                                .addGap(10, 10, 10)
+                                .addComponent(cbPatientConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnFieldsLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtRemarkConsultations))))
                     .addGroup(pnFieldsLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(10, 10, 10)
-                        .addComponent(cbTypeConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pnFieldsLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(10, 10, 10)
-                        .addComponent(cbCustomerConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel6)
-                        .addGap(10, 10, 10)
-                        .addComponent(cbPatientConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnFieldsLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRemarkConsultations)))
-                .addContainerGap())
+                        .addComponent(txtRemarkConsultations1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         pnFieldsLayout.setVerticalGroup(
             pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,14 +249,18 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
                         .addComponent(txtRemarkConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cbTypeConsultations, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2))
-                .addGap(42, 42, 42))
+                .addGap(18, 18, 18)
+                .addGroup(pnFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtRemarkConsultations1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addContainerGap())
         );
 
-        getContentPane().add(pnFields, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 880, 120));
+        getContentPane().add(pnFields, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 850, 130));
 
         pnButtons3.setLayout(null);
 
-        btnAddConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"add.png"));
+        btnAddConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/add.png"));
         btnAddConsultations.setFocusable(false);
         //btnAddConsultations.setContentAreaFilled( false );
         btnAddConsultations.setMaximumSize(new java.awt.Dimension(50, 50));
@@ -221,21 +268,21 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         pnButtons3.add(btnAddConsultations);
         btnAddConsultations.setBounds(60, 20, 110, 50);
 
-        btnUpdateConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"edit.png"));
+        btnUpdateConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/edit.png"));
         btnUpdateConsultations.setFocusable(false);
         //btnUpdateConsultations.setContentAreaFilled( false );
         btnUpdateConsultations.setName("update"); // NOI18N
         pnButtons3.add(btnUpdateConsultations);
         btnUpdateConsultations.setBounds(460, 20, 110, 50);
 
-        btnSearchConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"find.png"));
+        btnSearchConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/find.png"));
         btnSearchConsultations.setFocusable(false);
         //btnSearchConsultations.setContentAreaFilled( false );
         btnSearchConsultations.setName("search"); // NOI18N
         pnButtons3.add(btnSearchConsultations);
         btnSearchConsultations.setBounds(580, 20, 110, 50);
 
-        btnSaveConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"save.png"));
+        btnSaveConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/save.png"));
         btnSaveConsultations.setFocusable(false);
         //btnSaveConsultations.setContentAreaFilled( false );
         btnSaveConsultations.setName("save"); // NOI18N
@@ -243,14 +290,14 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         btnSaveConsultations.setBounds(190, 20, 120, 50);
 
         btnRemoveConsultations.setIcon(null);
-        btnRemoveConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"remove.png"));
+        btnRemoveConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/remove.png"));
         btnRemoveConsultations.setFocusable(false);
         //btnRemoveConsultations.setContentAreaFilled( false );
         btnRemoveConsultations.setName("remove"); // NOI18N
         pnButtons3.add(btnRemoveConsultations);
         btnRemoveConsultations.setBounds(330, 20, 110, 50);
 
-        btnCancelConsultations.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources+"cancel.png"));
+        btnCancelConsultations.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/cancel.png"));
         btnCancelConsultations.setFocusable(false);
         //btnCancelConsultations.setContentAreaFilled( false );
         btnCancelConsultations.setName("cancel"); // NOI18N
@@ -261,15 +308,30 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
 
         tableConsultations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Tipo Consulta:", "Cliente:", "Paciente:", ""
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tableConsultations);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 880, 150));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 850, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -279,9 +341,8 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
     }//GEN-LAST:event_cbPatientConsultationsActionPerformed
 
     private void cbTypeConsultationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTypeConsultationsActionPerformed
-       // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_cbTypeConsultationsActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddConsultations;
     private javax.swing.JButton btnCancelConsultations;
@@ -300,11 +361,13 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnButtons3;
     private javax.swing.JPanel pnFields;
     private javax.swing.JTable tableConsultations;
     private javax.swing.JTextField txtRemarkConsultations;
+    private javax.swing.JTextField txtRemarkConsultations1;
     // End of variables declaration//GEN-END:variables
 
     public DateChooserCombo getDateChooserBeginConsultations() {
@@ -327,9 +390,10 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         return cbCustomerConsultations;
     }
 
-    public void setCbCustomerConsultations(JComboBox cbCustomerConsultations) {
-        this.cbCustomerConsultations = cbCustomerConsultations;
+    public void setCbCustomerConsultationsModel(ComboBoxModel model) {
+        this.cbCustomerConsultations.setModel(model);
     }
+
     /*
     public JComboBox getCbEndDateConsultations() {
     return cbEndDateConsultations;
@@ -338,13 +402,12 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
     public void setCbEndDateConsultations(JComboBox cbEndDateConsultations) {
     this.cbEndDateConsultations = cbEndDateConsultations;
     } */
-
     public JComboBox getCbPatientConsultations() {
         return cbPatientConsultations;
     }
 
-    public void setCbPatientConsultations(JComboBox cbPatientConsultations) {
-        this.cbPatientConsultations = cbPatientConsultations;
+    public void setCbPatientsConsultationsModel(ComboBoxModel model) {
+        this.cbPatientConsultations.setModel(model);
     }
 
     public JComboBox getCbTypeConsultations() {

@@ -32,7 +32,7 @@ public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption 
 
         ctrlUser = new ControllerUser(this);
         this.addWindowFocusListener(ctrlUser);
-        searching.setBounds(54, 160, 786, 474);
+        searching.setBounds(54, 90, 786, 474);
         setListener();
         this.add(searching);
     }
@@ -87,7 +87,7 @@ public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CrudEntities");
 
-        pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
+        pnButtons.setLayout(null);
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/add.png"))); // NOI18N
         btnAdd.setFocusable(false);
@@ -98,6 +98,7 @@ public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption 
             }
         });
         pnButtons.add(btnAdd);
+        btnAdd.setBounds(230, 0, 110, 50);
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/edit.png"))); // NOI18N
         btnUpdate.setFocusable(false);
@@ -107,10 +108,12 @@ public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption 
             }
         });
         pnButtons.add(btnUpdate);
+        btnUpdate.setBounds(350, 0, 110, 50);
 
         btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/remove.png"))); // NOI18N
         btnRemove.setFocusable(false);
         pnButtons.add(btnRemove);
+        btnRemove.setBounds(470, 0, 110, 50);
 
         getBtnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancel.png"))); // NOI18N
         getBtnExit.setFocusable(false);
@@ -129,8 +132,8 @@ public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption 
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(521, Short.MAX_VALUE))
+                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(435, Short.MAX_VALUE))
         );
 
         pack();

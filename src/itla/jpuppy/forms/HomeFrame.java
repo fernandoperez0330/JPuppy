@@ -212,7 +212,7 @@ public class HomeFrame extends JFrame implements FrameOption {
         mnuAdministrator.add(jSeparator2);
 
         mnuiConsults.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_8, java.awt.event.InputEvent.CTRL_MASK));
-        mnuiConsults.setText("Consulta");
+        mnuiConsults.setText("Consultas");
         mnuAdministrator.add(mnuiConsults);
 
         mnuiAppointments.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_9, java.awt.event.InputEvent.CTRL_MASK));

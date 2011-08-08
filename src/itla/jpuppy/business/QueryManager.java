@@ -148,6 +148,16 @@ public class QueryManager {
         return listCustomers;
     }
 
+    //Retorna la lista completa de todos los clientes
+    public List<Customers> searchCustomer() {
+        List<Customers> listCustomers = null;
+        try {
+            listCustomers = entityManager.createQuery("SELECT a FROM Customers a").getResultList();
+        } catch (Exception e) {
+        }
+        return listCustomers;
+    }
+
     public List<Persons> searchPersonByCedula(String cedula) {
         List<Persons> listPersons = null;
         try {
@@ -234,6 +244,16 @@ public class QueryManager {
         } catch (Exception e) {
         }
         return listConsultations;
+    }
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+    public Consultations searchConsultationsByID(long id) {
+        Consultations consultation = null;
+        try {
+            consultation = (Consultations) entityManager.createQuery("SELECT a FROM Consultations a WHERE a.id = :idToFind").setParameter("idToFind", id).getSingleResult();
+        } catch (Exception e) {
+        }
+        return consultation;
     }
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 

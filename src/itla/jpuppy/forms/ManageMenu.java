@@ -84,7 +84,7 @@ public class ManageMenu extends javax.swing.JDialog implements FrameOption {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CrudEntities");
 
-        pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
+        pnButtons.setLayout(null);
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/add.png"))); // NOI18N
         btnAdd.setFocusable(false);
@@ -95,6 +95,7 @@ public class ManageMenu extends javax.swing.JDialog implements FrameOption {
             }
         });
         pnButtons.add(btnAdd);
+        btnAdd.setBounds(150, 0, 110, 50);
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/edit.png"))); // NOI18N
         btnUpdate.setFocusable(false);
@@ -104,29 +105,32 @@ public class ManageMenu extends javax.swing.JDialog implements FrameOption {
             }
         });
         pnButtons.add(btnUpdate);
+        btnUpdate.setBounds(270, 0, 110, 50);
 
         btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/remove.png"))); // NOI18N
         btnRemove.setFocusable(false);
         pnButtons.add(btnRemove);
+        btnRemove.setBounds(400, 0, 110, 50);
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancel.png"))); // NOI18N
         pnButtons.add(btnExit);
+        btnExit.setBounds(530, 0, 110, 50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 812, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(521, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(351, Short.MAX_VALUE))
         );
 
         pack();
@@ -154,7 +158,7 @@ public class ManageMenu extends javax.swing.JDialog implements FrameOption {
 
         this.controller = controller;
         this.setTitle(title);
-        searching.setBounds(54, 160, 786, 474);
+        searching.setBounds(54, 90, 786, 474);
         add(searching);
         setListener();
         showFrame();

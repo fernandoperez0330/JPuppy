@@ -144,67 +144,72 @@ public class ManageBreeds extends JDialog  implements FrameOption{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnButtons.setLayout(new java.awt.GridLayout(1, 0, 6, 8));
+        pnButtons.setLayout(null);
 
         btnAdd.setIcon(new javax.swing.ImageIcon("./src/itla/jpuppy/resources/add.png"));
         btnAdd.setFocusable(false);
         btnAdd.setMaximumSize(new java.awt.Dimension(50, 50));
         btnAdd.setName("add"); // NOI18N
         pnButtons.add(btnAdd);
+        btnAdd.setBounds(50, 0, 110, 50);
 
         btnUpdate.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/edit.png"));
         btnUpdate.setFocusable(false);
         btnUpdate.setName("update"); // NOI18N
         pnButtons.add(btnUpdate);
+        btnUpdate.setBounds(170, 0, 110, 50);
 
         btnSearch.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/find.png"));
         btnSearch.setFocusable(false);
         btnSearch.setName("search"); // NOI18N
         pnButtons.add(btnSearch);
+        btnSearch.setBounds(292, 0, 110, 50);
 
         btnSave.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/save.png"));
         btnSave.setFocusable(false);
         btnSave.setName("save"); // NOI18N
         pnButtons.add(btnSave);
+        btnSave.setBounds(420, 0, 110, 50);
 
         btnRemove.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/remove.png"));
         btnRemove.setFocusable(false);
         btnRemove.setName("remove"); // NOI18N
         pnButtons.add(btnRemove);
+        btnRemove.setBounds(550, 0, 110, 50);
 
         btnCancel.setIcon(new javax.swing.ImageIcon("src/itla/jpuppy/resources/cancel.png"));
         btnCancel.setFocusable(false);
         btnCancel.setName("cancel"); // NOI18N
         pnButtons.add(btnCancel);
+        btnCancel.setBounds(680, 0, 110, 50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(pnButtons, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
-                            .addContainerGap())
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(144, 144, 144)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(87, 87, 87))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
