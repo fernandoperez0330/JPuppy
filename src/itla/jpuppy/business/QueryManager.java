@@ -129,7 +129,7 @@ public class QueryManager {
         }
         return listCustomers;
     }
-    
+
     //Retorna la lista completa de todos los clientes
     public List<Customers> searchCustomer() {
         List<Customers> listCustomers = null;
@@ -138,7 +138,7 @@ public class QueryManager {
         } catch (Exception e) {
         }
         return listCustomers;
-    }   
+    }
 
     public List<Persons> searchPersonByCedula(String cedula) {
         List<Persons> listPersons = null;
@@ -164,8 +164,8 @@ public class QueryManager {
 
         return listPatients;
     }
-    
-            public List<Patients> searchAllPatient() {
+
+    public List<Patients> searchAllPatient() {
         List<Patients> listPatients = null;
         try {
             listPatients = entityManager.createQuery("SELECT a FROM Patients a").getResultList();
@@ -174,7 +174,6 @@ public class QueryManager {
 
         return listPatients;
     }
-
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
     public List<Species> searchSpecie(String name) {
@@ -230,6 +229,16 @@ public class QueryManager {
     }
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+    public Consultations searchConsultationsByID(long id) {
+        Consultations consultation = null;
+        try {
+            consultation = (Consultations) entityManager.createQuery("SELECT a FROM Consultations a WHERE a.id = :idToFind").setParameter("idToFind", id).getSingleResult();
+        } catch (Exception e) {
+        }
+        return consultation;
+    }
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
     public List<Consultations> searchConsultations(String name) {
         List<Consultations> listConsultations = null;
         try {
@@ -249,14 +258,14 @@ public class QueryManager {
         return listConsultations;
 
     }
-        public List<Doctor> searchAllDoctor(){
-        List<Doctor>  listResult = null;
-        try{
-            
-            listResult =  entityManager.createQuery( "SELECT e FROM Doctor e" ).getResultList();
-                     
-        }catch( Exception e ){
-            
+
+    public List<Doctor> searchAllDoctor() {
+        List<Doctor> listResult = null;
+        try {
+
+            listResult = entityManager.createQuery("SELECT e FROM Doctor e").getResultList();
+
+        } catch (Exception e) {
         }
         return listResult;
     }
@@ -277,9 +286,10 @@ public class QueryManager {
         return listBreeds;
 
     }
-        public List<Appointments> searchAllAppointments(){
-        return entityManager.createQuery( "SELECT e  FROM Appointments e" ).getResultList();
-    }       
+
+    public List<Appointments> searchAllAppointments() {
+        return entityManager.createQuery("SELECT e  FROM Appointments e").getResultList();
+    }
 
     @Override
     protected void finalize() {

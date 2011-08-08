@@ -1,6 +1,7 @@
 package itla.jpuppy.business;
 
 import itla.jpuppy.datalayer.Consultations;
+import java.util.List;
 
 public class ModelConsultations implements GeneralModel {
 
@@ -11,13 +12,19 @@ public class ModelConsultations implements GeneralModel {
         queryManager = new QueryManager();
         consultations = new Consultations();
     }
-    
+
     public Consultations getSpecies() {
         return consultations;
-    }  
-    
-    
-    
+    }
+
+    public Consultations getConsultationsByID(long id) {
+        return queryManager.searchConsultationsByID(id);
+    }
+
+    public List<Consultations> getConsultations() {
+        return queryManager.searchConsultations();
+    }
+
     @Override
     public boolean insertObject(Object object) {
         Consultations g = (Consultations) object;
