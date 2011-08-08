@@ -47,7 +47,7 @@ public class ManageEmployeesEdit extends javax.swing.JDialog implements FrameOpt
         TxtFieldName.setDocument(new RestrictionSLength(TxtFieldName, 30));
         TxtFieldSpeciality.setDocument(new RestrictionSLength(TxtFieldSpeciality, 40));
 
-
+        this.btnPerson.setVisible(false);
         this.jRadioButtonNormal.setSelected(true);
         this.TxtFieldSpeciality.setVisible(false);
         this.lblSpeciality.setVisible(false);

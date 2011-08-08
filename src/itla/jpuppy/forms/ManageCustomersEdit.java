@@ -37,7 +37,7 @@ public class ManageCustomersEdit extends javax.swing.JDialog implements FrameOpt
         TxtFieldMail.setDocument(new RestrictionSLength(TxtFieldMail, 100));
         TxtFieldName.setDocument(new RestrictionSLength(TxtFieldName, 30));
         jTextAreaNote.setDocument(new RestrictionSLength(jTextAreaNote, 200));
-
+        this.btnPerson.setVisible(false);
         setListener();
 
         pack();

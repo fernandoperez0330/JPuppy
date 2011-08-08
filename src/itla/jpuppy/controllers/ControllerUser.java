@@ -124,10 +124,12 @@ public class ControllerUser extends Controller {
                 return;
             }
 
-            if (e.getSource().equals(manageEdit.getBtnPerson())) {
+            /*if (e.getSource().equals(manageEdit.getBtnPerson())) {
                 btnPersonData();
                 return;
             }
+             * 
+             */
         } catch (java.lang.NullPointerException err) {
         }
     }
@@ -165,7 +167,6 @@ public class ControllerUser extends Controller {
     public void btnAdd() {
         edicion = 0;
         manageEdit = new ManageUsersEdit(null, true, this);
-        manageEdit.getBtnPerson().setVisible(true);
         manageEdit.showFrame();
     }
 
@@ -173,7 +174,6 @@ public class ControllerUser extends Controller {
     public void btnUpdate() {
         if (edicion != 0) {
             manageEdit = new ManageUsersEdit(null, true, this);
-            manageEdit.getBtnPerson().setVisible(false);
             tempUser = mdlUsers.searchUser(edicion);
             manageEdit.setFieldsValue(tempUser.getLastName(), tempUser.getCellphone(), tempUser.getName(), tempUser.getUsername(), tempUser.getPassword(), tempUser.getTelephone(), tempUser.getTypeUser());
             manageEdit.showFrame();

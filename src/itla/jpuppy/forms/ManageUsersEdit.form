@@ -85,9 +85,7 @@
                       <Component id="TxtFieldNameUser" alignment="0" pref="326" max="32767" attributes="1"/>
                       <Component id="TxtFieldCellPhone" alignment="0" max="32767" attributes="1"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnPerson" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="46" max="32767" attributes="0"/>
+                  <EmptySpace pref="129" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -98,7 +96,6 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="TxtFieldNameUser" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="btnPerson" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -237,11 +234,6 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(new MaskFormatter(&quot; ###-###-####&quot;))"/>
           </AuxValues>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnPerson">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Search"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>
