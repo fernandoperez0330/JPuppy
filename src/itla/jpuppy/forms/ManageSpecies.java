@@ -158,6 +158,12 @@ public class ManageSpecies extends JDialog implements FrameOption {
 
     @Override
     public void closeFrame() {
-        this.dispose();
+        dispose();
+    }
+    
+    @Override
+    public void dispose() {
+        itla.jpuppy.business.EntityManagerCreator.close();
+        super.dispose();
     }
 }

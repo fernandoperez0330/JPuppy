@@ -10,14 +10,19 @@ public class ManageAppointmentsMenu extends javax.swing.JDialog implements Frame
 
     private JSearching searching;
     private ControllerAppointments ctrlAppointments;
+    private JButton btnExit;
 
     public ManageAppointmentsMenu(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
+        btnExit = new JButton();
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancel.png")));
+        btnExit.setFocusable(false);
+        pnButtons.add(btnExit);
         this.setLocationRelativeTo(null);
         this.setTitle("Administracion de Citas");
         this.setResizable(false);
-        
+
         ctrlAppointments = new ControllerAppointments(this);
         this.addWindowFocusListener(ctrlAppointments);
         searching.setBounds(54, 160, 786, 474);
@@ -25,10 +30,13 @@ public class ManageAppointmentsMenu extends javax.swing.JDialog implements Frame
         this.add(searching);
     }
 
+    public JButton getBtnExit() {
+        return btnExit;
+    }
+
     public void setSearching(JSearching searching) {
         this.searching = searching;
     }
-    
 
     public JSearching getSearching() {
         return searching;
@@ -40,13 +48,14 @@ public class ManageAppointmentsMenu extends javax.swing.JDialog implements Frame
         btnAdd.setActionCommand("add");
         btnRemove.setActionCommand("remove");
         btnUpdate.setActionCommand("update");
+        btnExit.setActionCommand("exit");
         btnAdd.addActionListener(ctrlAppointments);
         btnRemove.addActionListener(ctrlAppointments);
         btnUpdate.addActionListener(ctrlAppointments);
+        btnExit.addActionListener(ctrlAppointments);
     }
 
     /** Creates new form NewJFrame */
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
@@ -96,15 +105,14 @@ public class ManageAppointmentsMenu extends javax.swing.JDialog implements Frame
         pack();
     }// </editor-fold>                        
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {                                       
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                      
+    }
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                         
+    }
     // Variables declaration - do not modify                     
-    
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnUpdate;
@@ -130,7 +138,7 @@ public class ManageAppointmentsMenu extends javax.swing.JDialog implements Frame
 
     @Override
     public void closeFrame() {
-        this.setVisible(false);
+        dispose();
     }
 
     @Override
@@ -138,5 +146,4 @@ public class ManageAppointmentsMenu extends javax.swing.JDialog implements Frame
         itla.jpuppy.business.EntityManagerCreator.close();
         super.dispose();
     }
- 
 }

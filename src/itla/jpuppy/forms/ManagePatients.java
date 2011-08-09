@@ -17,10 +17,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class ManagePatients extends JDialog implements FrameOption {
-    
+
     private ManagePatients parent;
     private Long patientId = null;
-
     private JPanel pnFields;
     private JLabel jLabel1;
     private JLabel jLabel2;
@@ -33,7 +32,6 @@ public class ManagePatients extends JDialog implements FrameOption {
     private DateChooserCombo TxtFieldCumpleano;
     private JScrollPane jScrollPane1;
     private JTextArea jTextAreNota;
-
     private JLabel jLabel5;
     private JLabel jLabel6;
     private DateChooserCombo TxtFieldUltimaVisita;
@@ -46,12 +44,10 @@ public class ManagePatients extends JDialog implements FrameOption {
     private JButton btnCancel;
     private JButton btnExit;
     private JButton btnSearchCustomer;
-    
     private JTable jTable1;
-
     //controlador
     private ControllerPatients Controller = new ControllerPatients(this);
-    
+
     //constructor cuando es para mostrar el administrador
     public ManagePatients(Frame owner, boolean modal) {
         super(owner, modal);
@@ -74,7 +70,7 @@ public class ManagePatients extends JDialog implements FrameOption {
         this.setResizable(false);
     }
 
-    public ManagePatients(ManagePatients owner, boolean modal, boolean flagManage,Long patientId) {
+    public ManagePatients(ManagePatients owner, boolean modal, boolean flagManage, Long patientId) {
         super(owner, modal);
         this.parent = owner;
         this.patientId = patientId;
@@ -86,7 +82,6 @@ public class ManagePatients extends JDialog implements FrameOption {
         this.setTitle("Modificar paciente");
         this.setResizable(false);
     }
-    
 
     private void initComponents(int state) {
 
@@ -96,7 +91,7 @@ public class ManagePatients extends JDialog implements FrameOption {
                 getContentManage(null);
                 break;
             //cuando es para modificar un paciente
-            case 3:            
+            case 3:
                 getContentManage(this.patientId);
                 break;
             //cuando es para listar los pacientes
@@ -114,7 +109,7 @@ public class ManagePatients extends JDialog implements FrameOption {
                 //asignar la lista de pacientes a la tabla
                 jTable1.setModel(Controller.getTableModelPatients());
                 jTable1.addMouseListener(Controller);
-                
+
                 jTable1.setRowHeight(25);
                 jTable1.setColumnSelectionAllowed(false);
                 jTable1.setName("tablePatients");
@@ -144,7 +139,7 @@ public class ManagePatients extends JDialog implements FrameOption {
                 btnRemove.setFocusable(false);
                 btnRemove.setName("remove"); // NOI18N
                 pnButtons.add(btnRemove);
-                
+
                 btnExit.setIcon(new javax.swing.ImageIcon(FrameOption.dirResources + "cancel.png"));
                 btnExit.setFocusable(false);
                 btnExit.setName("exit"); // NOI18N
@@ -170,7 +165,8 @@ public class ManagePatients extends JDialog implements FrameOption {
         this.btnExit = btnExit;
     }
     /*metodo para */
-    public void getContentManage(Long patientId){
+
+    public void getContentManage(Long patientId) {
         pnFields = new JPanel();
         jLabel1 = new JLabel();
         jLabel2 = new JLabel();
@@ -179,24 +175,24 @@ public class ManagePatients extends JDialog implements FrameOption {
         TxtFieldNombre = new JTextField();
         TxtFieldDueno = new JTextField();
         TxtFieldCumpleano = new DateChooserCombo();
-        TxtFieldCumpleano.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy")); 
-        
+        TxtFieldCumpleano.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));
+
         jScrollPane1 = new JScrollPane();
         jTextAreNota = new JTextArea();
         jLabel5 = new JLabel();
         jLabel6 = new JLabel();
         TxtFieldUltimaVisita = new DateChooserCombo();
         TxtFieldUltimaVisita.setMaxDate(new GregorianCalendar());
-        
-        TxtFieldUltimaVisita.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy")); 
+
+        TxtFieldUltimaVisita.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));
         TxtFieldUltimaVisitaDoctor = new JTextField();
         pnButtons = new JPanel();
         btnSave = new JButton();
         btnCancel = new JButton();
         btnSearchCustomer = new JButton();
-        
+
         //verificar si es un paciente nuevo a agregar o uno existente a modificar
-        if (patientId != null){
+        if (patientId != null) {
             Controller.findPatient(patientId);
         }
 
@@ -256,9 +252,9 @@ public class ManagePatients extends JDialog implements FrameOption {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addComponent(pnButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE).addComponent(pnFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(47, 47, 47)));
 
         pack();
-    
+
     }
-    
+
     public DateChooserCombo getTxtFieldUltimaVisita() {
         return TxtFieldUltimaVisita;
     }
@@ -346,7 +342,7 @@ public class ManagePatients extends JDialog implements FrameOption {
     public void setBtnUpdate(JButton btnUpdate) {
         this.btnUpdate = btnUpdate;
     }
-    
+
     public JTable getjTable1() {
         return jTable1;
     }
@@ -354,7 +350,7 @@ public class ManagePatients extends JDialog implements FrameOption {
     public void setjTable1(JTable jTable1) {
         this.jTable1 = jTable1;
     }
-    
+
     @Override
     public ManagePatients getParent() {
         return parent;
@@ -363,7 +359,7 @@ public class ManagePatients extends JDialog implements FrameOption {
     public void setParent(ManagePatients parent) {
         this.parent = parent;
     }
-    
+
     public Long getPatientId() {
         return patientId;
     }
@@ -371,8 +367,8 @@ public class ManagePatients extends JDialog implements FrameOption {
     public void setPatientId(Long patientId) {
         this.patientId = patientId;
     }
-    
-     public JTextArea getjTextAreNota() {
+
+    public JTextArea getjTextAreNota() {
         return jTextAreNota;
     }
 
@@ -403,7 +399,7 @@ public class ManagePatients extends JDialog implements FrameOption {
                 break;
         }
     }
-    
+
     public ControllerPatients getController() {
         return Controller;
     }
@@ -411,7 +407,6 @@ public class ManagePatients extends JDialog implements FrameOption {
     public void setController(ControllerPatients Controller) {
         this.Controller = Controller;
     }
-    
 
     @Override
     public void showFrame() {
@@ -420,10 +415,13 @@ public class ManagePatients extends JDialog implements FrameOption {
 
     @Override
     public void closeFrame() {
-        this.setVisible(false);
+        dispose();
+        //this.setVisible(false);
     }
+
     @Override
     public void dispose() {
+        itla.jpuppy.business.EntityManagerCreator.close();
         super.dispose();
     }
 }

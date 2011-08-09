@@ -44,7 +44,7 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
         btnUpdateConsultations.addActionListener(controlConsultations);
         btnUpdateConsultations.setEnabled(false);
         btnSearch.addActionListener(controlConsultations);
-        
+
         btnAddConsultations.setActionCommand("addConsultation");
         btnCancelConsultations.setActionCommand("cancelConsultation");
         btnRemoveConsultations.setActionCommand("removeConsultation");
@@ -55,10 +55,10 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
 
         dateChooserBeginConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));
         dateChooserEndConsultations.setDateFormat(new SimpleDateFormat("dd-MMM-yyyy"));
-    
+
         cbTypeConsultations.setModel(new DefaultComboBoxModel(TypeConsultations.values()));
 
-        
+
         try {
             model = new DefaultComboBoxModel(new GeneratorDataCombo().dataCustomers());
             this.setCbCustomerConsultationsModel(model);
@@ -72,18 +72,18 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
 
         cbCustomerConsultations.setSelectedIndex(-1);
         cbPatientConsultations.setSelectedIndex(-1);
-        cbTypeConsultations.setSelectedIndex(-1); 
-        
+        cbTypeConsultations.setSelectedIndex(-1);
+
         //Llena la tabla de las consultas almacenadas
         list = new ModelConsultations().getConsultations();
         for (Consultations value : list) {
             //System.out.println(new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getName());
             DefaultTableModel temp = (DefaultTableModel) this.getTableConsultations().getModel();
-            String user = new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getName() + " "+ new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getLastName();
+            String user = new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getName() + " " + new ModelCustomers().searchCustomer(value.getCustomer().getPersonId()).getLastName();
             Object[] nuevo = {value.getId(), value.getTypeConsultations(), user, new ModelPatients().searchPatient(value.getPatients().getPatientsId()).getName()};
             temp.addRow(nuevo);
         }
-        
+
         //new ModelConsultations().getConsultationID();
         this.setLocationRelativeTo(null);
         this.setTitle("Manejador de consultas");
@@ -474,6 +474,12 @@ public class ManageConsultations extends javax.swing.JDialog implements FrameOpt
 
     @Override
     public void closeFrame() {
-        this.dispose();
+        dispose();
+    }
+
+    @Override
+    public void dispose() {
+        itla.jpuppy.business.EntityManagerCreator.close();
+        super.dispose();
     }
 }

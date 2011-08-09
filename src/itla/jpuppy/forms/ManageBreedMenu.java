@@ -8,10 +8,15 @@ public class ManageBreedMenu extends javax.swing.JDialog implements FrameOption 
 
     private JSearching searching;
     private ControllerBreeds ctrlBreed;
+    private JButton btnExit;
 
     public ManageBreedMenu(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
+        btnExit = new JButton();
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancel.png")));
+        btnExit.setFocusable(false);
+        pnButtons.add(btnExit);
         this.setLocationRelativeTo(null);
         this.setTitle("Administracion de Razas");
         this.setResizable(false);
@@ -32,6 +37,11 @@ public class ManageBreedMenu extends javax.swing.JDialog implements FrameOption 
         return searching;
     }
 
+    public JButton getBtnExit() {
+        return btnExit;
+    }
+    
+
     private void setListener() {
         searching.getTxtSearch().addKeyListener(ctrlBreed);
         searching.getTblResult().addMouseListener(ctrlBreed);
@@ -39,9 +49,11 @@ public class ManageBreedMenu extends javax.swing.JDialog implements FrameOption 
         btnAdd.setActionCommand("add");
         btnRemove.setActionCommand("remove");
         btnUpdate.setActionCommand("update");
+        btnExit.setActionCommand("exit");
         btnAdd.addActionListener(ctrlBreed);
         btnRemove.addActionListener(ctrlBreed);
         btnUpdate.addActionListener(ctrlBreed);
+        btnExit.addActionListener(ctrlBreed);
     }
 
     /** Creates new form NewJFrame */
@@ -129,7 +141,7 @@ public class ManageBreedMenu extends javax.swing.JDialog implements FrameOption 
 
     @Override
     public void closeFrame() {
-        this.setVisible(false);
+        dispose();
     }
 
     @Override

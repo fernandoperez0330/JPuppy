@@ -166,6 +166,8 @@ public class ControllerBreeds implements ActionListener , KeyListener , MouseLis
             }else
                 JOptionPane.showMessageDialog( null, "No Existe Un Registro Seleccionado", "Error", JOptionPane.ERROR_MESSAGE);
             
+        }else if (command.equals("exit")){
+            this.manageBreeds.closeFrame();
         }
         
                 

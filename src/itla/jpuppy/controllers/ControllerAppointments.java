@@ -219,6 +219,8 @@ public class ControllerAppointments implements ActionListener,KeyListener,MouseL
                 specificId=0;
             }
             
+        }else if (command.equals("exit")){
+            this.manageAppointments.closeFrame();
         }
         }
         public void searchByField(String string) {

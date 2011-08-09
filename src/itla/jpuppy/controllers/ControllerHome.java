@@ -87,6 +87,7 @@ public class ControllerHome implements ActionListener, KeyListener, WindowFocusL
         }
 
         if (e.getSource().equals(home.getMnuiBreeds())) {
+            itla.jpuppy.business.EntityManagerCreator.close();
             new ManageBreedMenu(home, true).showFrame();
             return;
         }

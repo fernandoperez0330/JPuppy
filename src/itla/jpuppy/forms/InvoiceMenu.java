@@ -409,6 +409,12 @@ public class InvoiceMenu extends javax.swing.JFrame implements FrameOption {
 
     @Override
     public void closeFrame() {
-        this.setVisible(false);
+        dispose();
+    }
+    
+     @Override
+    public void dispose() {
+        itla.jpuppy.business.EntityManagerCreator.close();
+        super.dispose();
     }
 }
