@@ -60,10 +60,10 @@ public class ControllerPatients implements ActionListener, KeyListener, MouseLis
                 return false;
             }
         };
-        tableModel.addColumn("Id");
-        tableModel.addColumn("Nombre");
-        tableModel.addColumn("Cliente Propietario");
-        tableModel.addColumn("Cumpleaño");
+        tableModel.addColumn("ID");
+        tableModel.addColumn("NOMBRE");
+        tableModel.addColumn("CLIENTE PROPETARIO");
+        tableModel.addColumn("CUMPLEAÑO");
         List<Patients> arrPatients = modelPatients.searchAllPatientByName("%%");
         for (Patients patient : arrPatients) {
             //formato a la fecha para mostrarla

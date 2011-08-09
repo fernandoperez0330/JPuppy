@@ -27,7 +27,7 @@ public class ControllerArticles extends Controller {
     public ControllerArticles(ManageArticlesMenu manageMenu) {
 
         this.manageMenu = manageMenu;
-        modelSearching = new SearchingModel<Articles>(new String[]{"ArticleId", "Nombre", "Cantidad", "Precio"}, new SearchingCtrlArticles());
+        modelSearching = new SearchingModel<Articles>(new String[]{"ID", "NOMBRE", "CANTIDAD", "PRECIO"}, new SearchingCtrlArticles());
         this.manageMenu.setSearching(new JSearching(modelSearching));
         mdlArticles = new ModelArticles();
         searchByField("");

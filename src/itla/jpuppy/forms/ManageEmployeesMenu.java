@@ -27,7 +27,7 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
         super(owner, modal);
         initComponents();
         this.setTitle("Administracion de Empleados");
-        //this.setResizable(false);
+        this.setResizable(false);
         ctrlEmployee = new ControllerEmployee(this);
         this.addWindowFocusListener(ctrlEmployee);
         searching.setBounds(54, 100, 786, 474);
@@ -166,8 +166,6 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
 
     @Override
     public void closeFrame() {
-        System.out.println(this.getWidth());
-        System.out.println(this.getHeight());
         dispose();
     }
 

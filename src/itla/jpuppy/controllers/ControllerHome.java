@@ -42,7 +42,7 @@ public class ControllerHome implements ActionListener, KeyListener, WindowFocusL
 
     public ControllerHome(HomeFrame home) {
         this.home = home;
-        modelSearching = new SearchingModel<Customers>(new String[]{"Id", "Name", "Lastname", "City"}, new SearchingCtrlCustomers());
+        modelSearching = new SearchingModel<Customers>(new String[]{"ID", "NOMBRE", "APELLIDOS", "CIUDAD"}, new SearchingCtrlCustomers());
         mdlCustomers = new ModelCustomers();
         modelSearching.setElements(mdlCustomers.searchAllCustomerByName("%%"));
         home.setSearching(new JSearching(modelSearching));

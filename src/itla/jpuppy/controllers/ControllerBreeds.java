@@ -58,7 +58,7 @@ public class ControllerBreeds implements ActionListener , KeyListener , MouseLis
     public ControllerBreeds( ManageBreedMenu manageBreeds ) {
         modelBreeds = new ModelBreeds();
         this.manageBreeds = manageBreeds;
-        searchingModel = new SearchingModel<Breeds> (new String[]{"ID","Nombre","Especie","Ancho","Alto"},new SearchingCrtlBreeds()); 
+        searchingModel = new SearchingModel<Breeds> (new String[]{"ID","NOMBRE","ESPECIE","ANCHO","ALTO"},new SearchingCrtlBreeds()); 
         this.manageBreeds.setSearching( new JSearching(searchingModel));
         searchByField("");
         id = 0;

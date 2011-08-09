@@ -45,8 +45,8 @@ public class ControllerInvoices implements ActionListener, KeyListener, MouseLis
 
     public ControllerInvoices(InvoiceMenu invoice) {
         this.invoice = invoice;
-        modelSearching = new SearchingModel<Articles>(new String[]{"ArticleId", "Nombre", "Cantidad", "Precio"}, new SearchingCtrlArticles());
-        myInvoice = new SearchingModel<Articles>(new String[]{"ArticleId", "Nombre", "Cantidad", "Precio"}, new SearchingCtrlArticles());
+        modelSearching = new SearchingModel<Articles>(new String[]{"ID", "NOMBRE", "CANTIDAD", "PRECIO"}, new SearchingCtrlArticles());
+        myInvoice = new SearchingModel<Articles>(new String[]{"ID", "NOMBRE", "CANTIDAD", "PRECIO"}, new SearchingCtrlArticles());
         invoice.setSearching(new JSearching(modelSearching));
         invoice.getTblMyArticles().setModel(myInvoice);
         mdlArticles = new ModelArticles();

@@ -30,7 +30,7 @@ public class ControllerUser extends Controller {
 
     public ControllerUser(ManageUsersMenu manageMenu) {
         this.manageMenu = manageMenu;
-        modelSearching = new SearchingModel<Users>(new String[]{"Id", "Name", "Username", "Type User"}, new SearchingCtrlUsers());
+        modelSearching = new SearchingModel<Users>(new String[]{"ID", "NOMBRE", "USUARIO", "TIPO DE USUARIO"}, new SearchingCtrlUsers());
         this.manageMenu.setSearching(new JSearching(modelSearching));
         mdlUsers = new ModelUsers();
         searchByField("");

@@ -28,7 +28,7 @@ public class ControllerSearchPersons implements MouseListener, KeyListener {
 
     public ControllerSearchPersons(SearchPersons searchPerson, QueryManager queryManager, int filter) {
         this.searchPerson = searchPerson;
-        modelSearching = new SearchingModel<Persons>(new String[]{"Id", "Nombre", "Apellido", "Cedula"}, new SearchingCtrlPersons());
+        modelSearching = new SearchingModel<Persons>(new String[]{"ID", "NOMBRE", "APELLIDOS", "CEDULA"}, new SearchingCtrlPersons());
         this.searchPerson.setSearching(new JSearching(modelSearching));
         mdlPersons = new ModelPersons(queryManager);
         mdlPersons.setFilter(filter);

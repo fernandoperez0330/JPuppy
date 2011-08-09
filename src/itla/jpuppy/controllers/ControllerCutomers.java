@@ -28,7 +28,7 @@ public class ControllerCutomers extends Controller {
 
     public ControllerCutomers(ManageCustomersMenu customersMenu) {
         this.customersMenu = customersMenu;
-        modelSearching = new SearchingModel<Customers>(new String[]{"Id", "Name", "Lastname", "City"}, new SearchingCtrlCustomers());
+        modelSearching = new SearchingModel<Customers>(new String[]{"ID", "NOMBRE", "APELLIDOS", "CIUDAD"}, new SearchingCtrlCustomers());
         customersMenu.setSearching(new JSearching(modelSearching));
         mdlCustomers = new ModelCustomers();
         searchByField("");

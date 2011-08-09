@@ -31,7 +31,7 @@ public class ControllerEmployee extends Controller {
 
     public ControllerEmployee(ManageEmployeesMenu manageMenu) {
         this.manageMenu = manageMenu;
-        modelSearching = new SearchingModel<Employees>(new String[]{"Id", "Name", "Cedula", "Cargo"}, new SearchingCtrlEmployees());
+        modelSearching = new SearchingModel<Employees>(new String[]{"ID", "NOMBRE", "CEDULA", "CARGO"}, new SearchingCtrlEmployees());
         this.manageMenu.setSearching(new JSearching(modelSearching));
         mdlEmployees = new ModelEmployees();
         searchByField("");
