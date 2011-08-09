@@ -137,7 +137,4 @@ public class ManageBreedMenu extends javax.swing.JDialog implements FrameOption 
         itla.jpuppy.business.EntityManagerCreator.close();
         super.dispose();
     }
-    public static void main( String...name){
-        new ManageBreedMenu(null, true).showFrame();
-    }
 }
