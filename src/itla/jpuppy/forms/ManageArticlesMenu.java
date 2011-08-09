@@ -26,13 +26,13 @@ public class ManageArticlesMenu extends javax.swing.JDialog implements FrameOpti
     public ManageArticlesMenu(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
-        this.setLocationRelativeTo(null);
         this.setTitle("Administracion de Articulos");
         this.setResizable(false);
-
         ctrlArticles = new ControllerArticles(this);
         this.addWindowFocusListener(ctrlArticles);
-        searching.setBounds(54, 160, 786, 474);
+        searching.setBounds(54, 110, 786, 474);
+        this.setSize(this.getWidth(), (this.getHeight()+45));
+        this.setLocationRelativeTo(null);
         setListener();
         this.add(searching);
     }
@@ -120,6 +120,7 @@ public class ManageArticlesMenu extends javax.swing.JDialog implements FrameOpti
         BtnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancel.png"))); // NOI18N
         BtnExit.setFocusable(false);
         pnButtons.add(BtnExit);
+        BtnExit.setBounds(620, 0, 150, 70);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

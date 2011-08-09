@@ -149,7 +149,7 @@ public class InvoiceMenu extends javax.swing.JFrame implements FrameOption {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblMyArticles = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pnlInvoiceInfo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -415,6 +415,7 @@ public class InvoiceMenu extends javax.swing.JFrame implements FrameOption {
      @Override
     public void dispose() {
         itla.jpuppy.business.EntityManagerCreator.close();
+        new HomeFrame().showFrame();
         super.dispose();
     }
 }

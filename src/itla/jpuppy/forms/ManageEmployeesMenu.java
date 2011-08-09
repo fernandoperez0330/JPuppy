@@ -26,13 +26,13 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
     public ManageEmployeesMenu(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
-        this.setLocationRelativeTo(null);
         this.setTitle("Administracion de Empleados");
-        this.setResizable(false);
-
+        //this.setResizable(false);
         ctrlEmployee = new ControllerEmployee(this);
         this.addWindowFocusListener(ctrlEmployee);
-        searching.setBounds(54, 100, 600, 474);
+        searching.setBounds(54, 100, 786, 474);
+        this.setSize(897, 618);
+        this.setLocationRelativeTo(null);
         setListener();
         this.add(searching);
     }
@@ -99,7 +99,7 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
             }
         });
         pnButtons.add(btnAdd);
-        btnAdd.setBounds(160, 0, 110, 50);
+        btnAdd.setBounds(160, 0, 110, 70);
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/edit.png"))); // NOI18N
         btnUpdate.setFocusable(false);
@@ -109,16 +109,17 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
             }
         });
         pnButtons.add(btnUpdate);
-        btnUpdate.setBounds(280, 0, 110, 50);
+        btnUpdate.setBounds(280, 0, 110, 70);
 
         btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/remove.png"))); // NOI18N
         btnRemove.setFocusable(false);
         pnButtons.add(btnRemove);
-        btnRemove.setBounds(400, 0, 110, 50);
+        btnRemove.setBounds(400, 0, 110, 70);
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancel.png"))); // NOI18N
         btnExit.setFocusable(false);
         pnButtons.add(btnExit);
+        btnExit.setBounds(520, 0, 115, 70);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,6 +166,8 @@ public class ManageEmployeesMenu extends javax.swing.JDialog implements FrameOpt
 
     @Override
     public void closeFrame() {
+        System.out.println(this.getWidth());
+        System.out.println(this.getHeight());
         dispose();
     }
 

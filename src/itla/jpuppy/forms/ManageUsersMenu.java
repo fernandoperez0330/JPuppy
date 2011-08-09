@@ -26,13 +26,14 @@ public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption 
     public ManageUsersMenu(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
-        this.setLocationRelativeTo(null);
         this.setTitle("Administracion de Usuarios");
         this.setResizable(false);
 
         ctrlUser = new ControllerUser(this);
         this.addWindowFocusListener(ctrlUser);
-        searching.setBounds(54, 90, 786, 474);
+        searching.setBounds(54, 100, 786, 474);
+        this.setSize(this.getWidth(), (this.getHeight()+65));
+        this.setLocationRelativeTo(null);
         setListener();
         this.add(searching);
     }
@@ -118,6 +119,7 @@ public class ManageUsersMenu extends javax.swing.JDialog implements FrameOption 
         getBtnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/itla/jpuppy/resources/cancel.png"))); // NOI18N
         getBtnExit.setFocusable(false);
         pnButtons.add(getBtnExit);
+        getBtnExit.setBounds(590, 0, 110, 50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
