@@ -12,9 +12,9 @@ import itla.jpuppy.forms.AboutUsFrame;
 import itla.jpuppy.forms.HomeFrame;
 import itla.jpuppy.forms.InvoiceMenu;
 import itla.jpuppy.forms.JSearching;
-import itla.jpuppy.forms.ManageAppointnments;
+import itla.jpuppy.forms.ManageAppointmentsMenu;
 import itla.jpuppy.forms.ManageArticlesMenu;
-import itla.jpuppy.forms.ManageBreeds;
+import itla.jpuppy.forms.ManageBreedMenu;
 import itla.jpuppy.forms.ManageConsultations;
 import itla.jpuppy.forms.ManageCustomersMenu;
 import itla.jpuppy.forms.ManageEmployeesMenu;
@@ -87,7 +87,7 @@ public class ControllerHome implements ActionListener, KeyListener, WindowFocusL
         }
 
         if (e.getSource().equals(home.getMnuiBreeds())) {
-            new ManageBreeds(home, true).showFrame();
+            new ManageBreedMenu(home, true).showFrame();
             return;
         }
 
@@ -111,7 +111,7 @@ public class ControllerHome implements ActionListener, KeyListener, WindowFocusL
 
         if (e.getSource().equals(home.getMnuiAppointments())) {
             itla.jpuppy.business.EntityManagerCreator.close();
-            new ManageAppointnments(home, true).showFrame();
+            new ManageAppointmentsMenu(home, true).showFrame();
             return;
         }
 
@@ -120,8 +120,8 @@ public class ControllerHome implements ActionListener, KeyListener, WindowFocusL
             new ManageConsultations(home, true).showFrame();
             return;
         }
-        
-        if (e.getSource().equals(home.getMnuiInvoice())){
+
+        if (e.getSource().equals(home.getMnuiInvoice())) {
             itla.jpuppy.business.EntityManagerCreator.close();
             new InvoiceMenu().showFrame();
             return;

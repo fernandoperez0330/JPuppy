@@ -77,6 +77,10 @@ public class QueryManager {
 
     //Metodos Disponibles para autocomplete en busqueda
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+     public  Appointments searchAppointmentsById(Long id) {
+       return ( Appointments )entityManager.find(Appointments.class, id);
+    }
+    
     public Breeds findBreed(long id) {
         Breeds temp = entityManager.find(Breeds.class, id);
         return temp;
@@ -204,12 +208,7 @@ public class QueryManager {
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
 
     public List<Species> searchSpecie() {
-        List<Species> listSpecieses = null;
-        try {
-            listSpecieses = entityManager.createQuery("SELECT a FROM Species a ").getResultList();
-        } catch (Exception e) {
-        }
-        return listSpecieses;
+        return searchSpecie("%%");
     }
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
 

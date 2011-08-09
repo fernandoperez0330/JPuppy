@@ -32,7 +32,10 @@ public class ModelBreeds implements GeneralModel {
     
     public List<Breeds> searchBreedsBySpecie(Species specie) {
         return queryManager.searchBreedsBySpecies(specie);
-    }    
+    }   
+    public Breeds searchBreedById( long id ){
+        return queryManager.findBreed(id);
+    }
 
     //Metodos comunes a todos los modelos , se llama el correspondiente de  queryManager
     

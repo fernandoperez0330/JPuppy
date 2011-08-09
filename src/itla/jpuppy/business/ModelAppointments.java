@@ -22,10 +22,16 @@ public class ModelAppointments implements GeneralModel{
     }
     
     
-    public List<Appointments> serachAllAppointmentsByPattients(){
-        
+    public List<Appointments> serachAllAppointmentsByPattients( String name ){
         return null;
     }
+      public List<Appointments> serachAllAppointments( ){
+        return queryManager.searchAllAppointments();
+    }
+         public Appointments getSpecificAppointments( Long id ){
+        return queryManager.searchAppointmentsById(id);
+    } 
+    
     public Appointments getSpecificAppointments( String PatientName ){
         boolean state = false;
         Appointments temp = null;
