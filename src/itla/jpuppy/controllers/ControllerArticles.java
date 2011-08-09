@@ -120,7 +120,7 @@ public class ControllerArticles extends Controller {
                 btncancelar();
                 return;
             }
-        }catch(java.lang.NullPointerException err){
+        } catch (java.lang.NullPointerException err) {
         }
 
     }
@@ -128,7 +128,11 @@ public class ControllerArticles extends Controller {
     @Override
     public void insert() {
         try {
-            Articles temp = new Articles(manageEdit.getTxtFieldName().getText(), Double.parseDouble(manageEdit.getTxtFieldPrice().getText()), Integer.parseInt(manageEdit.getTxtFieldPrice().getText()), manageEdit.getjTxtAreaDescription().getText());
+            String stemp = manageEdit.getTxtFieldPrice().getText();
+            if (stemp.indexOf(".") == (stemp.length() - 1)) {
+                stemp += "0";
+            }
+            Articles temp = new Articles(manageEdit.getTxtFieldName().getText(), Double.parseDouble(stemp), Integer.parseInt(manageEdit.getTxtFieldAmount().getText()), manageEdit.getjTxtAreaDescription().getText());
             mdlArticles.insertObject(temp);
             JOptionPane.showMessageDialog(manageEdit, "Registro Insertado Exitosamente", "Informacion", JOptionPane.INFORMATION_MESSAGE);
             manageEdit.dispose();
@@ -139,8 +143,12 @@ public class ControllerArticles extends Controller {
 
     @Override
     public void update() {
+        String stemp = manageEdit.getTxtFieldPrice().getText();
+        if (stemp.indexOf(".") == (stemp.length() - 1)) {
+            stemp += "0";
+        }
         tempArticles.setName(manageEdit.getTxtFieldName().getText());
-        tempArticles.setPrice(Double.parseDouble(manageEdit.getTxtFieldPrice().getText()));
+        tempArticles.setPrice(Double.parseDouble(stemp));
         tempArticles.setAmount(Integer.parseInt(manageEdit.getTxtFieldAmount().getText()));
         tempArticles.setDescription(manageEdit.getjTxtAreaDescription().getText());
         int i = JOptionPane.showConfirmDialog(manageEdit, "Realmente desea Sobreescribir Los Datos de Este Cliente?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);

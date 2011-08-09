@@ -44,7 +44,7 @@ public class ManageUsersEdit extends javax.swing.JDialog implements FrameOption 
         TxtFieldName.setDocument(new RestrictionSLength(TxtFieldName, 30));
         TxtFieldNameUser.setDocument(new RestrictionSLength(TxtFieldNameUser, 30));
         TxtFieldPassword.setDocument(new RestrictionSLength(TxtFieldPassword, 255));
-        
+        this.jRadioButtonOperador.setSelected(true);
         this.setLocationRelativeTo(null);
         this.setTitle("Administrando Usuario");
         this.setResizable(false);
