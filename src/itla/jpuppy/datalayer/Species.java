@@ -21,7 +21,7 @@ public class Species implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long speciesId;
-    @Column(length = 30, nullable = false, unique = true)
+    @Column(length = 255, nullable = false, unique = true)
     private String speciesName;
     @OneToMany(mappedBy = "specie")
     private List<Breeds> breeds;
